@@ -1,0 +1,16 @@
+## User settings
+xcuserdata/
+
+## Obj-C/Swift specific
+*.hmap
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+.build/
+*.swp
+*~.nib
+*.DS_Store
+*.Trashes

@@ -1,0 +1,39 @@
+//
+//  RegistrationInteractor.swift
+//  parking-rental-app
+//
+//  Created by Никита Лисунов on 2/14/24.
+//
+
+import UIKit
+
+final class RegistrationInteractor {
+    // MARK: - Private Properties
+    private let presenter: RegistrationPresentationLogic
+    private let worker: RegistrationWorkerLogic
+    
+    // MARK: - Initializers
+    init(presenter: RegistrationPresentationLogic, worker: RegistrationWorkerLogic) {
+        self.presenter = presenter
+        self.worker = worker
+    }
+}
+
+// MARK: - BusinessLogic
+extension RegistrationInteractor: RegistrationBusinessLogic {
+    func loadStart(_ request: Model.Start.Request) {
+        presenter.presentStart(Model.Start.Response())
+    }
+    
+    func loadRegistrationCity(_ request: RegistrationModel.RegistrationCity.Request) {
+        worker.signUp(request) { [weak self] authData, error in
+            if let error = error {
+                print(error)
+                /// TODO: Present failure
+            } else if let authData = authData {
+                self?.worker.saveAuthTokens(refreshToken: authData.refreshToken, accessToken: authData.accessToken)
+                self?.presenter.presentRegistrationCity(Model.RegistrationCity.Response())
+            }
+        }
+    }
+}

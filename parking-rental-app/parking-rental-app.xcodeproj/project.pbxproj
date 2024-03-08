@@ -1,0 +1,881 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		273C90AA2B7BCCB000C73FE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C90A92B7BCCB000C73FE8 /* AppDelegate.swift */; };
+		273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C90AB2B7BCCB000C73FE8 /* SceneDelegate.swift */; };
+		273C90B32B7BCCB200C73FE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273C90B22B7BCCB200C73FE8 /* Assets.xcassets */; };
+		273C90B62B7BCCB200C73FE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273C90B42B7BCCB200C73FE8 /* LaunchScreen.storyboard */; };
+		273C90C52B7BD19900C73FE8 /* UIView+pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C90C42B7BD19900C73FE8 /* UIView+pin.swift */; };
+		273E65D82B848A9500567BD8 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65D72B848A9500567BD8 /* EndPointType.swift */; };
+		273E65DA2B848B2E00567BD8 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65D92B848B2D00567BD8 /* HTTPMethod.swift */; };
+		273E65DC2B848B8300567BD8 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65DB2B848B8300567BD8 /* HTTPTask.swift */; };
+		273E65DE2B848C5C00567BD8 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65DD2B848C5C00567BD8 /* ParameterEncoding.swift */; };
+		273E65E02B848D6100567BD8 /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65DF2B848D6100567BD8 /* URLParameterEncoder.swift */; };
+		273E65E22B848F7E00567BD8 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65E12B848F7E00567BD8 /* JSONParameterEncoder.swift */; };
+		273E65E42B84900800567BD8 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65E32B84900800567BD8 /* NetworkRouter.swift */; };
+		273E65E62B8490F500567BD8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65E52B8490F500567BD8 /* Router.swift */; };
+		273E65E82B84969F00567BD8 /* CarsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65E72B84969F00567BD8 /* CarsEndPoint.swift */; };
+		273E65EB2B8499FE00567BD8 /* CarsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65EA2B8499FE00567BD8 /* CarsModel.swift */; };
+		273E65ED2B849CBB00567BD8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65EC2B849CBB00567BD8 /* NetworkManager.swift */; };
+		273E65F12B86449B00567BD8 /* AuthEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65F02B86449A00567BD8 /* AuthEndPoint.swift */; };
+		273E65F32B86502600567BD8 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65F22B86502600567BD8 /* AuthModel.swift */; };
+		273E65FC2B88C14800567BD8 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65FB2B88C14800567BD8 /* KeychainManager.swift */; };
+		273E65FF2B88E94900567BD8 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E65FE2B88E94900567BD8 /* SplashViewController.swift */; };
+		273E66012B88E95500567BD8 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E66002B88E95500567BD8 /* SplashInteractor.swift */; };
+		273E66032B88E95E00567BD8 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E66022B88E95E00567BD8 /* SplashPresenter.swift */; };
+		273E66052B88E96800567BD8 /* SplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E66042B88E96800567BD8 /* SplashModel.swift */; };
+		273E66072B88E96E00567BD8 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E66062B88E96E00567BD8 /* SplashRouter.swift */; };
+		273E66092B88E97900567BD8 /* SplashWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E66082B88E97900567BD8 /* SplashWorker.swift */; };
+		273E660B2B88E98200567BD8 /* SplashProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E660A2B88E98200567BD8 /* SplashProtocols.swift */; };
+		273E660D2B88E98B00567BD8 /* SplashAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E660C2B88E98B00567BD8 /* SplashAssembly.swift */; };
+		273E660F2B89155000567BD8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E660E2B89155000567BD8 /* AuthManager.swift */; };
+		27754BDD2B99A6200065A14E /* ReservationsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BDC2B99A6200065A14E /* ReservationsEndPoint.swift */; };
+		27754BDF2B99AEF70065A14E /* ReservationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BDE2B99AEF70065A14E /* ReservationsModel.swift */; };
+		27754BE12B99B7880065A14E /* ProfileLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BE02B99B7880065A14E /* ProfileLabelButton.swift */; };
+		27754BE42B99DA740065A14E /* BuildingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BE32B99DA740065A14E /* BuildingsViewController.swift */; };
+		27754BE62B99DA7D0065A14E /* BuildingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BE52B99DA7D0065A14E /* BuildingsInteractor.swift */; };
+		27754BE82B99DA870065A14E /* BuildingsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BE72B99DA870065A14E /* BuildingsWorker.swift */; };
+		27754BEA2B99DA900065A14E /* BuildingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BE92B99DA900065A14E /* BuildingsPresenter.swift */; };
+		27754BEC2B99DA990065A14E /* BuildingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BEB2B99DA990065A14E /* BuildingsModel.swift */; };
+		27754BEE2B99DAA40065A14E /* BuildingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BED2B99DAA40065A14E /* BuildingsRouter.swift */; };
+		27754BF02B99DAAD0065A14E /* BuildingsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BEF2B99DAAD0065A14E /* BuildingsProtocols.swift */; };
+		27754BF22B99DAB60065A14E /* BuildingsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF12B99DAB60065A14E /* BuildingsAssembly.swift */; };
+		27754BF52B99E33D0065A14E /* ReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF42B99E33D0065A14E /* ReservationCell.swift */; };
+		27754BF72B9A21590065A14E /* ReservationsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF62B9A21590065A14E /* ReservationsDataStore.swift */; };
+		27754BF92B9AECE90065A14E /* ParkingSpotsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */; };
+		27754BFB2B9AECFC0065A14E /* ParkingLevelsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BFA2B9AECFC0065A14E /* ParkingLevelsDataStore.swift */; };
+		27754BFD2B9AED0C0065A14E /* BuildingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */; };
+		27754BFF2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BFE2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift */; };
+		27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754C002B9AF0710065A14E /* ParkingSpotsModel.swift */; };
+		27754C032B9AF13C0065A14E /* CanvasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754C022B9AF13C0065A14E /* CanvasModel.swift */; };
+		27848BCC2B8085E500542D8C /* RegistrationCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BCB2B8085E500542D8C /* RegistrationCityViewController.swift */; };
+		27848BCE2B8085F800542D8C /* RegistrationCityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BCD2B8085F800542D8C /* RegistrationCityInteractor.swift */; };
+		27848BD02B80860600542D8C /* RegistrationCityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BCF2B80860600542D8C /* RegistrationCityPresenter.swift */; };
+		27848BD22B80861900542D8C /* RegistrationCityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BD12B80861900542D8C /* RegistrationCityModel.swift */; };
+		27848BD42B80862800542D8C /* RegistrationCityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BD32B80862800542D8C /* RegistrationCityRouter.swift */; };
+		27848BD62B80863700542D8C /* RegistrationCityWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BD52B80863700542D8C /* RegistrationCityWorker.swift */; };
+		27848BD82B80864600542D8C /* RegistrationCityProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BD72B80864600542D8C /* RegistrationCityProtocols.swift */; };
+		27848BDA2B80865500542D8C /* RegistrationCityAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BD92B80865500542D8C /* RegistrationCityAssembly.swift */; };
+		27848BDC2B80A44B00542D8C /* RegistrationCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BDB2B80A44B00542D8C /* RegistrationCarViewController.swift */; };
+		27848BDE2B80A45700542D8C /* RegistrationCarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BDD2B80A45700542D8C /* RegistrationCarInteractor.swift */; };
+		27848BE02B80A46300542D8C /* RegistrationCarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BDF2B80A46300542D8C /* RegistrationCarPresenter.swift */; };
+		27848BE22B80A46E00542D8C /* RegistrationCarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BE12B80A46E00542D8C /* RegistrationCarModel.swift */; };
+		27848BE42B80A47600542D8C /* RegistrationCarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BE32B80A47600542D8C /* RegistrationCarRouter.swift */; };
+		27848BE62B80A47E00542D8C /* RegistrationCarWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BE52B80A47E00542D8C /* RegistrationCarWorker.swift */; };
+		27848BE82B80A48600542D8C /* RegistrationCarProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BE72B80A48600542D8C /* RegistrationCarProtocols.swift */; };
+		27848BEA2B80A48E00542D8C /* RegistrationCarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BE92B80A48E00542D8C /* RegistrationCarAssembly.swift */; };
+		27848BED2B80A6F200542D8C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BEC2B80A6F200542D8C /* HomeViewController.swift */; };
+		27848BEF2B80A70300542D8C /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BEE2B80A70300542D8C /* HomeInteractor.swift */; };
+		27848BF12B80A71100542D8C /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BF02B80A71100542D8C /* HomePresenter.swift */; };
+		27848BF32B80A71A00542D8C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BF22B80A71A00542D8C /* HomeModel.swift */; };
+		27848BF52B80A72A00542D8C /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BF42B80A72A00542D8C /* HomeRouter.swift */; };
+		27848BF72B80A73400542D8C /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BF62B80A73400542D8C /* HomeWorker.swift */; };
+		27848BF92B80A73D00542D8C /* HomeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BF82B80A73D00542D8C /* HomeProtocols.swift */; };
+		27848BFB2B80A74600542D8C /* HomeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BFA2B80A74600542D8C /* HomeAssembly.swift */; };
+		2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD962B8D2C9A00C02FF3 /* TabBar.swift */; };
+		2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */; };
+		27C6243D2B7C8B17002FFF48 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6243C2B7C8B17002FFF48 /* LoginViewController.swift */; };
+		27C6243F2B7C8B50002FFF48 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6243E2B7C8B50002FFF48 /* LoginInteractor.swift */; };
+		27C624412B7C8B59002FFF48 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624402B7C8B59002FFF48 /* LoginPresenter.swift */; };
+		27C624432B7C8B63002FFF48 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624422B7C8B63002FFF48 /* LoginModel.swift */; };
+		27C624452B7C8B6F002FFF48 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624442B7C8B6F002FFF48 /* LoginRouter.swift */; };
+		27C624472B7C8B7E002FFF48 /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624462B7C8B7E002FFF48 /* LoginProtocols.swift */; };
+		27C624492B7C8B88002FFF48 /* LoginAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624482B7C8B88002FFF48 /* LoginAssembly.swift */; };
+		27C6244B2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6244A2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift */; };
+		27C6244D2B7C8E94002FFF48 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6244C2B7C8E94002FFF48 /* LoginWorker.swift */; };
+		27C624522B7D01EB002FFF48 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624512B7D01EB002FFF48 /* RegistrationViewController.swift */; };
+		27C624542B7D020C002FFF48 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624532B7D020C002FFF48 /* RegistrationInteractor.swift */; };
+		27C624562B7D0217002FFF48 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624552B7D0217002FFF48 /* RegistrationPresenter.swift */; };
+		27C624582B7D0223002FFF48 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624572B7D0223002FFF48 /* RegistrationModel.swift */; };
+		27C6245A2B7D022E002FFF48 /* RegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624592B7D022E002FFF48 /* RegistrationRouter.swift */; };
+		27C6245C2B7D0239002FFF48 /* RegistrationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6245B2B7D0239002FFF48 /* RegistrationWorker.swift */; };
+		27C6245E2B7D0246002FFF48 /* RegistrationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6245D2B7D0246002FFF48 /* RegistrationProtocols.swift */; };
+		27C624602B7D0251002FFF48 /* RegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6245F2B7D0251002FFF48 /* RegistrationAssembly.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		273C90A62B7BCCB000C73FE8 /* parking-rental-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "parking-rental-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		273C90A92B7BCCB000C73FE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		273C90AB2B7BCCB000C73FE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		273C90B22B7BCCB200C73FE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		273C90B52B7BCCB200C73FE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		273C90B72B7BCCB200C73FE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		273C90C42B7BD19900C73FE8 /* UIView+pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+pin.swift"; sourceTree = "<group>"; };
+		273E65D72B848A9500567BD8 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		273E65D92B848B2D00567BD8 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		273E65DB2B848B8300567BD8 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		273E65DD2B848C5C00567BD8 /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		273E65DF2B848D6100567BD8 /* URLParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
+		273E65E12B848F7E00567BD8 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
+		273E65E32B84900800567BD8 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
+		273E65E52B8490F500567BD8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		273E65E72B84969F00567BD8 /* CarsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsEndPoint.swift; sourceTree = "<group>"; };
+		273E65EA2B8499FE00567BD8 /* CarsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsModel.swift; sourceTree = "<group>"; };
+		273E65EC2B849CBB00567BD8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		273E65F02B86449A00567BD8 /* AuthEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndPoint.swift; sourceTree = "<group>"; };
+		273E65F22B86502600567BD8 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
+		273E65FB2B88C14800567BD8 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		273E65FE2B88E94900567BD8 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		273E66002B88E95500567BD8 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
+		273E66022B88E95E00567BD8 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		273E66042B88E96800567BD8 /* SplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModel.swift; sourceTree = "<group>"; };
+		273E66062B88E96E00567BD8 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
+		273E66082B88E97900567BD8 /* SplashWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashWorker.swift; sourceTree = "<group>"; };
+		273E660A2B88E98200567BD8 /* SplashProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashProtocols.swift; sourceTree = "<group>"; };
+		273E660C2B88E98B00567BD8 /* SplashAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashAssembly.swift; sourceTree = "<group>"; };
+		273E660E2B89155000567BD8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		27754BDC2B99A6200065A14E /* ReservationsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsEndPoint.swift; sourceTree = "<group>"; };
+		27754BDE2B99AEF70065A14E /* ReservationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsModel.swift; sourceTree = "<group>"; };
+		27754BE02B99B7880065A14E /* ProfileLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLabelButton.swift; sourceTree = "<group>"; };
+		27754BE32B99DA740065A14E /* BuildingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsViewController.swift; sourceTree = "<group>"; };
+		27754BE52B99DA7D0065A14E /* BuildingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsInteractor.swift; sourceTree = "<group>"; };
+		27754BE72B99DA870065A14E /* BuildingsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsWorker.swift; sourceTree = "<group>"; };
+		27754BE92B99DA900065A14E /* BuildingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsPresenter.swift; sourceTree = "<group>"; };
+		27754BEB2B99DA990065A14E /* BuildingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsModel.swift; sourceTree = "<group>"; };
+		27754BED2B99DAA40065A14E /* BuildingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsRouter.swift; sourceTree = "<group>"; };
+		27754BEF2B99DAAD0065A14E /* BuildingsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsProtocols.swift; sourceTree = "<group>"; };
+		27754BF12B99DAB60065A14E /* BuildingsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsAssembly.swift; sourceTree = "<group>"; };
+		27754BF42B99E33D0065A14E /* ReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCell.swift; sourceTree = "<group>"; };
+		27754BF62B9A21590065A14E /* ReservationsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsDataStore.swift; sourceTree = "<group>"; };
+		27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsDataStore.swift; sourceTree = "<group>"; };
+		27754BFA2B9AECFC0065A14E /* ParkingLevelsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLevelsDataStore.swift; sourceTree = "<group>"; };
+		27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsDataStore.swift; sourceTree = "<group>"; };
+		27754BFE2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsEndPoint.swift; sourceTree = "<group>"; };
+		27754C002B9AF0710065A14E /* ParkingSpotsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsModel.swift; sourceTree = "<group>"; };
+		27754C022B9AF13C0065A14E /* CanvasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasModel.swift; sourceTree = "<group>"; };
+		27848BCB2B8085E500542D8C /* RegistrationCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCityViewController.swift; sourceTree = "<group>"; };
+		27848BCD2B8085F800542D8C /* RegistrationCityInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCityInteractor.swift; sourceTree = "<group>"; };
+		27848BCF2B80860600542D8C /* RegistrationCityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCityPresenter.swift; sourceTree = "<group>"; };
+		27848BD12B80861900542D8C /* RegistrationCityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCityModel.swift; sourceTree = "<group>"; };
+		27848BD32B80862800542D8C /* RegistrationCityRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCityRouter.swift; sourceTree = "<group>"; };
+		27848BD52B80863700542D8C /* RegistrationCityWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCityWorker.swift; sourceTree = "<group>"; };
+		27848BD72B80864600542D8C /* RegistrationCityProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCityProtocols.swift; sourceTree = "<group>"; };
+		27848BD92B80865500542D8C /* RegistrationCityAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCityAssembly.swift; sourceTree = "<group>"; };
+		27848BDB2B80A44B00542D8C /* RegistrationCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarViewController.swift; sourceTree = "<group>"; };
+		27848BDD2B80A45700542D8C /* RegistrationCarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarInteractor.swift; sourceTree = "<group>"; };
+		27848BDF2B80A46300542D8C /* RegistrationCarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarPresenter.swift; sourceTree = "<group>"; };
+		27848BE12B80A46E00542D8C /* RegistrationCarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarModel.swift; sourceTree = "<group>"; };
+		27848BE32B80A47600542D8C /* RegistrationCarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarRouter.swift; sourceTree = "<group>"; };
+		27848BE52B80A47E00542D8C /* RegistrationCarWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarWorker.swift; sourceTree = "<group>"; };
+		27848BE72B80A48600542D8C /* RegistrationCarProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarProtocols.swift; sourceTree = "<group>"; };
+		27848BE92B80A48E00542D8C /* RegistrationCarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarAssembly.swift; sourceTree = "<group>"; };
+		27848BEC2B80A6F200542D8C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		27848BEE2B80A70300542D8C /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		27848BF02B80A71100542D8C /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		27848BF22B80A71A00542D8C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		27848BF42B80A72A00542D8C /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		27848BF62B80A73400542D8C /* HomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
+		27848BF82B80A73D00542D8C /* HomeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProtocols.swift; sourceTree = "<group>"; };
+		27848BFA2B80A74600542D8C /* HomeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAssembly.swift; sourceTree = "<group>"; };
+		2795FD962B8D2C9A00C02FF3 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
+		27C6243C2B7C8B17002FFF48 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		27C6243E2B7C8B50002FFF48 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		27C624402B7C8B59002FFF48 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		27C624422B7C8B63002FFF48 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		27C624442B7C8B6F002FFF48 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		27C624462B7C8B7E002FFF48 /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
+		27C624482B7C8B88002FFF48 /* LoginAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembly.swift; sourceTree = "<group>"; };
+		27C6244A2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+hideKeyboardOnTapAround.swift"; sourceTree = "<group>"; };
+		27C6244C2B7C8E94002FFF48 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		27C624512B7D01EB002FFF48 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		27C624532B7D020C002FFF48 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
+		27C624552B7D0217002FFF48 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
+		27C624572B7D0223002FFF48 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
+		27C624592B7D022E002FFF48 /* RegistrationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRouter.swift; sourceTree = "<group>"; };
+		27C6245B2B7D0239002FFF48 /* RegistrationWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationWorker.swift; sourceTree = "<group>"; };
+		27C6245D2B7D0246002FFF48 /* RegistrationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProtocols.swift; sourceTree = "<group>"; };
+		27C6245F2B7D0251002FFF48 /* RegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAssembly.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		273C90A32B7BCCB000C73FE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		273C909D2B7BCCB000C73FE8 = {
+			isa = PBXGroup;
+			children = (
+				273C90A82B7BCCB000C73FE8 /* parking-rental-app */,
+				273C90A72B7BCCB000C73FE8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		273C90A72B7BCCB000C73FE8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				273C90A62B7BCCB000C73FE8 /* parking-rental-app.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		273C90A82B7BCCB000C73FE8 /* parking-rental-app */ = {
+			isa = PBXGroup;
+			children = (
+				273C90BD2B7BD0F300C73FE8 /* src */,
+				273C90BE2B7BD10A00C73FE8 /* res */,
+				273C90B72B7BCCB200C73FE8 /* Info.plist */,
+			);
+			path = "parking-rental-app";
+			sourceTree = "<group>";
+		};
+		273C90BD2B7BD0F300C73FE8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				273C90BF2B7BD11F00C73FE8 /* Scenes */,
+				27754BF32B99E1DC0065A14E /* DataStores */,
+				273E65E92B8499BF00567BD8 /* Model */,
+				273E65F42B88B3E400567BD8 /* Keychain */,
+				273E65D22B8489DE00567BD8 /* Networking */,
+				273C90C12B7BD14500C73FE8 /* Delegates */,
+				273C90C32B7BD17900C73FE8 /* Extensions */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		273C90BE2B7BD10A00C73FE8 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				273C90B22B7BCCB200C73FE8 /* Assets.xcassets */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		273C90BF2B7BD11F00C73FE8 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				273C90C02B7BD13600C73FE8 /* Launch */,
+				273E65FD2B88E91900567BD8 /* Splash */,
+				273C90C22B7BD16400C73FE8 /* Login */,
+				27C624502B7D01D2002FFF48 /* Registration */,
+				27C624612B7D0518002FFF48 /* RegistrationCity */,
+				27C624622B7D0532002FFF48 /* RegistrationCar */,
+				27848BEB2B80A68B00542D8C /* Home */,
+				27754BE22B99DA420065A14E /* Buildings */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		273C90C02B7BD13600C73FE8 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				273C90B42B7BCCB200C73FE8 /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		273C90C12B7BD14500C73FE8 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				273C90A92B7BCCB000C73FE8 /* AppDelegate.swift */,
+				273C90AB2B7BCCB000C73FE8 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		273C90C22B7BD16400C73FE8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				27C6243C2B7C8B17002FFF48 /* LoginViewController.swift */,
+				27C6243E2B7C8B50002FFF48 /* LoginInteractor.swift */,
+				27C6244C2B7C8E94002FFF48 /* LoginWorker.swift */,
+				27C624402B7C8B59002FFF48 /* LoginPresenter.swift */,
+				27C624422B7C8B63002FFF48 /* LoginModel.swift */,
+				27C624442B7C8B6F002FFF48 /* LoginRouter.swift */,
+				27C624462B7C8B7E002FFF48 /* LoginProtocols.swift */,
+				27C624482B7C8B88002FFF48 /* LoginAssembly.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		273C90C32B7BD17900C73FE8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				273C90C42B7BD19900C73FE8 /* UIView+pin.swift */,
+				27C6244A2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		273E65D22B8489DE00567BD8 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				273E65D32B848A0C00567BD8 /* EndPoint */,
+				273E65D42B848A1600567BD8 /* Manager */,
+				273E65D52B848A1C00567BD8 /* Service */,
+				273E65D62B848A2200567BD8 /* Encoding */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		273E65D32B848A0C00567BD8 /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				273E65F02B86449A00567BD8 /* AuthEndPoint.swift */,
+				273E65E72B84969F00567BD8 /* CarsEndPoint.swift */,
+				27754BDC2B99A6200065A14E /* ReservationsEndPoint.swift */,
+				27754BFE2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		273E65D42B848A1600567BD8 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				273E65EC2B849CBB00567BD8 /* NetworkManager.swift */,
+				273E660E2B89155000567BD8 /* AuthManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		273E65D52B848A1C00567BD8 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				273E65D72B848A9500567BD8 /* EndPointType.swift */,
+				273E65D92B848B2D00567BD8 /* HTTPMethod.swift */,
+				273E65DB2B848B8300567BD8 /* HTTPTask.swift */,
+				273E65E32B84900800567BD8 /* NetworkRouter.swift */,
+				273E65E52B8490F500567BD8 /* Router.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		273E65D62B848A2200567BD8 /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				273E65DD2B848C5C00567BD8 /* ParameterEncoding.swift */,
+				273E65DF2B848D6100567BD8 /* URLParameterEncoder.swift */,
+				273E65E12B848F7E00567BD8 /* JSONParameterEncoder.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
+		273E65E92B8499BF00567BD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				273E65F22B86502600567BD8 /* AuthModel.swift */,
+				273E65EA2B8499FE00567BD8 /* CarsModel.swift */,
+				27754BDE2B99AEF70065A14E /* ReservationsModel.swift */,
+				27754C002B9AF0710065A14E /* ParkingSpotsModel.swift */,
+				27754C022B9AF13C0065A14E /* CanvasModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		273E65F42B88B3E400567BD8 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				273E65FB2B88C14800567BD8 /* KeychainManager.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		273E65FD2B88E91900567BD8 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				273E65FE2B88E94900567BD8 /* SplashViewController.swift */,
+				273E66002B88E95500567BD8 /* SplashInteractor.swift */,
+				273E66082B88E97900567BD8 /* SplashWorker.swift */,
+				273E66022B88E95E00567BD8 /* SplashPresenter.swift */,
+				273E66042B88E96800567BD8 /* SplashModel.swift */,
+				273E66062B88E96E00567BD8 /* SplashRouter.swift */,
+				273E660A2B88E98200567BD8 /* SplashProtocols.swift */,
+				273E660C2B88E98B00567BD8 /* SplashAssembly.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		27754BE22B99DA420065A14E /* Buildings */ = {
+			isa = PBXGroup;
+			children = (
+				27754BE32B99DA740065A14E /* BuildingsViewController.swift */,
+				27754BE52B99DA7D0065A14E /* BuildingsInteractor.swift */,
+				27754BE72B99DA870065A14E /* BuildingsWorker.swift */,
+				27754BE92B99DA900065A14E /* BuildingsPresenter.swift */,
+				27754BEB2B99DA990065A14E /* BuildingsModel.swift */,
+				27754BED2B99DAA40065A14E /* BuildingsRouter.swift */,
+				27754BEF2B99DAAD0065A14E /* BuildingsProtocols.swift */,
+				27754BF12B99DAB60065A14E /* BuildingsAssembly.swift */,
+			);
+			path = Buildings;
+			sourceTree = "<group>";
+		};
+		27754BF32B99E1DC0065A14E /* DataStores */ = {
+			isa = PBXGroup;
+			children = (
+				27754BF62B9A21590065A14E /* ReservationsDataStore.swift */,
+				27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */,
+				27754BFA2B9AECFC0065A14E /* ParkingLevelsDataStore.swift */,
+				27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */,
+			);
+			path = DataStores;
+			sourceTree = "<group>";
+		};
+		27848BEB2B80A68B00542D8C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2795FD952B8D2C7000C02FF3 /* Views */,
+				27848BEC2B80A6F200542D8C /* HomeViewController.swift */,
+				27848BEE2B80A70300542D8C /* HomeInteractor.swift */,
+				27848BF62B80A73400542D8C /* HomeWorker.swift */,
+				27848BF02B80A71100542D8C /* HomePresenter.swift */,
+				27848BF22B80A71A00542D8C /* HomeModel.swift */,
+				27848BF42B80A72A00542D8C /* HomeRouter.swift */,
+				27848BF82B80A73D00542D8C /* HomeProtocols.swift */,
+				27848BFA2B80A74600542D8C /* HomeAssembly.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2795FD952B8D2C7000C02FF3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2795FD982B8DA9B100C02FF3 /* Buttons */,
+				2795FD962B8D2C9A00C02FF3 /* TabBar.swift */,
+				27754BF42B99E33D0065A14E /* ReservationCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2795FD982B8DA9B100C02FF3 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */,
+				27754BE02B99B7880065A14E /* ProfileLabelButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		27C624502B7D01D2002FFF48 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				27C624512B7D01EB002FFF48 /* RegistrationViewController.swift */,
+				27C624532B7D020C002FFF48 /* RegistrationInteractor.swift */,
+				27C6245B2B7D0239002FFF48 /* RegistrationWorker.swift */,
+				27C624552B7D0217002FFF48 /* RegistrationPresenter.swift */,
+				27C624572B7D0223002FFF48 /* RegistrationModel.swift */,
+				27C624592B7D022E002FFF48 /* RegistrationRouter.swift */,
+				27C6245D2B7D0246002FFF48 /* RegistrationProtocols.swift */,
+				27C6245F2B7D0251002FFF48 /* RegistrationAssembly.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		27C624612B7D0518002FFF48 /* RegistrationCity */ = {
+			isa = PBXGroup;
+			children = (
+				27848BCB2B8085E500542D8C /* RegistrationCityViewController.swift */,
+				27848BCD2B8085F800542D8C /* RegistrationCityInteractor.swift */,
+				27848BD52B80863700542D8C /* RegistrationCityWorker.swift */,
+				27848BCF2B80860600542D8C /* RegistrationCityPresenter.swift */,
+				27848BD12B80861900542D8C /* RegistrationCityModel.swift */,
+				27848BD32B80862800542D8C /* RegistrationCityRouter.swift */,
+				27848BD72B80864600542D8C /* RegistrationCityProtocols.swift */,
+				27848BD92B80865500542D8C /* RegistrationCityAssembly.swift */,
+			);
+			path = RegistrationCity;
+			sourceTree = "<group>";
+		};
+		27C624622B7D0532002FFF48 /* RegistrationCar */ = {
+			isa = PBXGroup;
+			children = (
+				27848BDB2B80A44B00542D8C /* RegistrationCarViewController.swift */,
+				27848BDD2B80A45700542D8C /* RegistrationCarInteractor.swift */,
+				27848BE52B80A47E00542D8C /* RegistrationCarWorker.swift */,
+				27848BDF2B80A46300542D8C /* RegistrationCarPresenter.swift */,
+				27848BE12B80A46E00542D8C /* RegistrationCarModel.swift */,
+				27848BE32B80A47600542D8C /* RegistrationCarRouter.swift */,
+				27848BE72B80A48600542D8C /* RegistrationCarProtocols.swift */,
+				27848BE92B80A48E00542D8C /* RegistrationCarAssembly.swift */,
+			);
+			path = RegistrationCar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		273C90A52B7BCCB000C73FE8 /* parking-rental-app */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 273C90BA2B7BCCB200C73FE8 /* Build configuration list for PBXNativeTarget "parking-rental-app" */;
+			buildPhases = (
+				273C90A22B7BCCB000C73FE8 /* Sources */,
+				273C90A32B7BCCB000C73FE8 /* Frameworks */,
+				273C90A42B7BCCB000C73FE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "parking-rental-app";
+			productName = "parking-rental-app";
+			productReference = 273C90A62B7BCCB000C73FE8 /* parking-rental-app.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		273C909E2B7BCCB000C73FE8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					273C90A52B7BCCB000C73FE8 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 273C90A12B7BCCB000C73FE8 /* Build configuration list for PBXProject "parking-rental-app" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 273C909D2B7BCCB000C73FE8;
+			productRefGroup = 273C90A72B7BCCB000C73FE8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				273C90A52B7BCCB000C73FE8 /* parking-rental-app */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		273C90A42B7BCCB000C73FE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				273C90B62B7BCCB200C73FE8 /* LaunchScreen.storyboard in Resources */,
+				273C90B32B7BCCB200C73FE8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		273C90A22B7BCCB000C73FE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27C624602B7D0251002FFF48 /* RegistrationAssembly.swift in Sources */,
+				27754C032B9AF13C0065A14E /* CanvasModel.swift in Sources */,
+				27848BEF2B80A70300542D8C /* HomeInteractor.swift in Sources */,
+				2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */,
+				27754BE12B99B7880065A14E /* ProfileLabelButton.swift in Sources */,
+				27C6245E2B7D0246002FFF48 /* RegistrationProtocols.swift in Sources */,
+				27C624472B7C8B7E002FFF48 /* LoginProtocols.swift in Sources */,
+				273E65E82B84969F00567BD8 /* CarsEndPoint.swift in Sources */,
+				273E660B2B88E98200567BD8 /* SplashProtocols.swift in Sources */,
+				27754BF92B9AECE90065A14E /* ParkingSpotsDataStore.swift in Sources */,
+				27754BE82B99DA870065A14E /* BuildingsWorker.swift in Sources */,
+				27848BED2B80A6F200542D8C /* HomeViewController.swift in Sources */,
+				2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */,
+				273E65FF2B88E94900567BD8 /* SplashViewController.swift in Sources */,
+				273E66012B88E95500567BD8 /* SplashInteractor.swift in Sources */,
+				27C624562B7D0217002FFF48 /* RegistrationPresenter.swift in Sources */,
+				27848BCC2B8085E500542D8C /* RegistrationCityViewController.swift in Sources */,
+				273E660F2B89155000567BD8 /* AuthManager.swift in Sources */,
+				273E65F32B86502600567BD8 /* AuthModel.swift in Sources */,
+				27754BEC2B99DA990065A14E /* BuildingsModel.swift in Sources */,
+				27754BE42B99DA740065A14E /* BuildingsViewController.swift in Sources */,
+				27C6245A2B7D022E002FFF48 /* RegistrationRouter.swift in Sources */,
+				27C624492B7C8B88002FFF48 /* LoginAssembly.swift in Sources */,
+				27754BEA2B99DA900065A14E /* BuildingsPresenter.swift in Sources */,
+				27848BF12B80A71100542D8C /* HomePresenter.swift in Sources */,
+				27C624412B7C8B59002FFF48 /* LoginPresenter.swift in Sources */,
+				273E65FC2B88C14800567BD8 /* KeychainManager.swift in Sources */,
+				273E66072B88E96E00567BD8 /* SplashRouter.swift in Sources */,
+				27754BF72B9A21590065A14E /* ReservationsDataStore.swift in Sources */,
+				27C624432B7C8B63002FFF48 /* LoginModel.swift in Sources */,
+				273E66092B88E97900567BD8 /* SplashWorker.swift in Sources */,
+				273E65E62B8490F500567BD8 /* Router.swift in Sources */,
+				27C624522B7D01EB002FFF48 /* RegistrationViewController.swift in Sources */,
+				27C6243D2B7C8B17002FFF48 /* LoginViewController.swift in Sources */,
+				273E65E42B84900800567BD8 /* NetworkRouter.swift in Sources */,
+				27754BFD2B9AED0C0065A14E /* BuildingsDataStore.swift in Sources */,
+				273E65DC2B848B8300567BD8 /* HTTPTask.swift in Sources */,
+				27848BFB2B80A74600542D8C /* HomeAssembly.swift in Sources */,
+				27848BD22B80861900542D8C /* RegistrationCityModel.swift in Sources */,
+				27848BE42B80A47600542D8C /* RegistrationCarRouter.swift in Sources */,
+				27848BD02B80860600542D8C /* RegistrationCityPresenter.swift in Sources */,
+				273E66032B88E95E00567BD8 /* SplashPresenter.swift in Sources */,
+				27848BE82B80A48600542D8C /* RegistrationCarProtocols.swift in Sources */,
+				27754BFB2B9AECFC0065A14E /* ParkingLevelsDataStore.swift in Sources */,
+				27C6245C2B7D0239002FFF48 /* RegistrationWorker.swift in Sources */,
+				273E65DA2B848B2E00567BD8 /* HTTPMethod.swift in Sources */,
+				27848BE62B80A47E00542D8C /* RegistrationCarWorker.swift in Sources */,
+				27848BEA2B80A48E00542D8C /* RegistrationCarAssembly.swift in Sources */,
+				273C90C52B7BD19900C73FE8 /* UIView+pin.swift in Sources */,
+				273E65E02B848D6100567BD8 /* URLParameterEncoder.swift in Sources */,
+				27848BF72B80A73400542D8C /* HomeWorker.swift in Sources */,
+				273E65EB2B8499FE00567BD8 /* CarsModel.swift in Sources */,
+				273C90AA2B7BCCB000C73FE8 /* AppDelegate.swift in Sources */,
+				273E65F12B86449B00567BD8 /* AuthEndPoint.swift in Sources */,
+				27C6243F2B7C8B50002FFF48 /* LoginInteractor.swift in Sources */,
+				27848BF52B80A72A00542D8C /* HomeRouter.swift in Sources */,
+				27C624452B7C8B6F002FFF48 /* LoginRouter.swift in Sources */,
+				27848BE02B80A46300542D8C /* RegistrationCarPresenter.swift in Sources */,
+				273E66052B88E96800567BD8 /* SplashModel.swift in Sources */,
+				273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */,
+				273E65ED2B849CBB00567BD8 /* NetworkManager.swift in Sources */,
+				27C624542B7D020C002FFF48 /* RegistrationInteractor.swift in Sources */,
+				27848BF32B80A71A00542D8C /* HomeModel.swift in Sources */,
+				27754BF02B99DAAD0065A14E /* BuildingsProtocols.swift in Sources */,
+				27848BD42B80862800542D8C /* RegistrationCityRouter.swift in Sources */,
+				27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */,
+				27848BCE2B8085F800542D8C /* RegistrationCityInteractor.swift in Sources */,
+				27848BE22B80A46E00542D8C /* RegistrationCarModel.swift in Sources */,
+				27848BDC2B80A44B00542D8C /* RegistrationCarViewController.swift in Sources */,
+				27754BFF2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift in Sources */,
+				27C6244B2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift in Sources */,
+				273E65E22B848F7E00567BD8 /* JSONParameterEncoder.swift in Sources */,
+				27848BD82B80864600542D8C /* RegistrationCityProtocols.swift in Sources */,
+				273E65D82B848A9500567BD8 /* EndPointType.swift in Sources */,
+				27754BF22B99DAB60065A14E /* BuildingsAssembly.swift in Sources */,
+				273E660D2B88E98B00567BD8 /* SplashAssembly.swift in Sources */,
+				27C624582B7D0223002FFF48 /* RegistrationModel.swift in Sources */,
+				273E65DE2B848C5C00567BD8 /* ParameterEncoding.swift in Sources */,
+				27754BE62B99DA7D0065A14E /* BuildingsInteractor.swift in Sources */,
+				27754BF52B99E33D0065A14E /* ReservationCell.swift in Sources */,
+				27754BEE2B99DAA40065A14E /* BuildingsRouter.swift in Sources */,
+				27848BF92B80A73D00542D8C /* HomeProtocols.swift in Sources */,
+				27754BDF2B99AEF70065A14E /* ReservationsModel.swift in Sources */,
+				27848BDE2B80A45700542D8C /* RegistrationCarInteractor.swift in Sources */,
+				27848BDA2B80865500542D8C /* RegistrationCityAssembly.swift in Sources */,
+				27C6244D2B7C8E94002FFF48 /* LoginWorker.swift in Sources */,
+				27848BD62B80863700542D8C /* RegistrationCityWorker.swift in Sources */,
+				27754BDD2B99A6200065A14E /* ReservationsEndPoint.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		273C90B42B7BCCB200C73FE8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				273C90B52B7BCCB200C73FE8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		273C90B82B7BCCB200C73FE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		273C90B92B7BCCB200C73FE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		273C90BB2B7BCCB200C73FE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "parking-rental-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Parking;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.foxfromfuture.parking-rental-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		273C90BC2B7BCCB200C73FE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "parking-rental-app/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Parking;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.foxfromfuture.parking-rental-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		273C90A12B7BCCB000C73FE8 /* Build configuration list for PBXProject "parking-rental-app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				273C90B82B7BCCB200C73FE8 /* Debug */,
+				273C90B92B7BCCB200C73FE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		273C90BA2B7BCCB200C73FE8 /* Build configuration list for PBXNativeTarget "parking-rental-app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				273C90BB2B7BCCB200C73FE8 /* Debug */,
+				273C90BC2B7BCCB200C73FE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 273C909E2B7BCCB000C73FE8 /* Project object */;
+}
