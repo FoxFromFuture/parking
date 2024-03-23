@@ -27,5 +27,6 @@ extension LoginWorker: LoginWorkerLogic {
     
     func saveAuthTokens(refreshToken: String, accessToken: String) {
         authManager.saveTokens(refreshToken: refreshToken, accessToken: accessToken)
+        self.authManager.setRefreshTokenLastUpdateDate(date: Date.now)
     }
 }

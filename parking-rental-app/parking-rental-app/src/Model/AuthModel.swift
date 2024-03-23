@@ -28,6 +28,27 @@ extension AuthApiResponse: Decodable {
     }
 }
 
+struct AuthApiAccessTokenResponse {
+    let type: String
+    let accessToken: String
+    let refreshToken: String?
+}
+
+extension AuthApiAccessTokenResponse: Decodable {
+    enum AuthApiAccessTokenCodingKeys: String, CodingKey {
+        case type
+        case accessToken
+        case refreshToken
+    }
+    
+    init(from decoder: Decoder) throws {
+        let authContainer = try decoder.container(keyedBy: AuthApiAccessTokenCodingKeys.self)
+        type = try authContainer.decode(String.self, forKey: .type)
+        accessToken = try authContainer.decode(String.self, forKey: .accessToken)
+        refreshToken = nil
+    }
+}
+
 struct AuthWhoamiApiResponse {
     let id: String
     let email: String

@@ -16,7 +16,11 @@ extension RegistrationPresenter: RegistrationPresentationLogic {
         view?.displayStart(Model.Start.ViewModel())
     }
     
-    func presentRegistrationCity(_ response: RegistrationModel.RegistrationCity.Response) {
-        view?.displayRegistrationCity(Model.RegistrationCity.ViewModel())
+    func presentRegistrationCar(_ response: RegistrationModel.RegistrationCar.Response) {
+        view?.displayRegistrationCar(Model.RegistrationCar.ViewModel())
+    }
+    
+    func presentLogin(_ response: RegistrationModel.Login.Response) {
+        view?.displayLogin(Model.Login.ViewModel())
     }
 }

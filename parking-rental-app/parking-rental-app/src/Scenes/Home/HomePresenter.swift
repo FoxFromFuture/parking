@@ -17,7 +17,22 @@ extension HomePresenter: HomePresentationLogic {
     }
     
     func presentReservations(_ response: Model.GetReservations.Response) {
-        
-        view?.displayReservations(Model.GetReservations.ViewModel())
+        view?.displayReservations(Model.GetReservations.ViewModel(spotNumbers: response.spotNumbers, levelNumbers: response.levelNumbers, buildingNames: response.buildingNames))
+    }
+    
+    func presentBuildings(_ response: Model.Buildings.Response) {
+        view?.displayBuildings(Model.Buildings.ViewModel())
+    }
+    
+    func presentMap(_ response: Model.Map.Response) {
+        view?.displayMap(Model.Map.ViewModel())
+    }
+    
+    func presentProfile(_ response: Model.Profile.Response) {
+        view?.displayProfile(Model.Profile.ViewModel())
+    }
+    
+    func presentMore(_ response: Model.More.Response) {
+        view?.displayMore(Model.More.ViewModel())
     }
 }

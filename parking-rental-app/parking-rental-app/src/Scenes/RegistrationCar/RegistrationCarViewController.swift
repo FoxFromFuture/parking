@@ -39,34 +39,26 @@ final class RegistrationCarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = false
         interactor.loadStart(Model.Start.Request())
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Configuration
     private func configureUI() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        configureNavigationBar()
         configureTitleLabel()
         configureSubTitleLabel()
         configureCarRegistryNumberTextFieldTextField()
         configureContinueButton()
     }
     
-    private func configureNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.left"),
-            style: .plain,
-            target: self,
-            action: #selector(goBack)
-        )
-        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-    }
-    
     private func configureTitleLabel() {
         self.view.addSubview(titleLabel)
-        titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 35)
+        titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 40)
         titleLabel.pinLeft(to: self.view.leadingAnchor, 38)
         titleLabel.pinRight(to: self.view.trailingAnchor, 38)
         titleLabel.text = "Set your car\nregistry number"
@@ -115,12 +107,6 @@ final class RegistrationCarViewController: UIViewController {
     
     // MARK: - Actions
     @objc
-    public func goBack() {
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.impactOccurred()
-    }
-    
-    @objc
     private func continueButtonWasTapped() {
         if let carRegistryNumber = carRegistryNumberTextField.text {
             interactor.loadHome(Model.Home.Request(carRegistryNumber: carRegistryNumber))
@@ -135,7 +121,9 @@ extension RegistrationCarViewController: RegistrationCarDisplayLogic {
     }
     
     func displayHome(_ viewModel: RegistrationCarModel.Home.ViewModel) {
-        router.routeToHome()
+        DispatchQueue.main.async { [weak self] in
+            self?.router.routeToHome()
+        }
     }
 }
 

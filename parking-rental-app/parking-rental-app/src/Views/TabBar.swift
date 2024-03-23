@@ -54,6 +54,24 @@ final class TabBar: UIView {
         moreButton.pressAction = action
     }
     
+    public func setHomeButtonActive() {
+        var image = UIImage(systemName: "house.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
+        homeButton.setText("Home", #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
+        homeButton.setIcon(image, #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1))
+        image = UIImage(systemName: "ellipsis.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
+        moreButton.setText("More", #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
+        moreButton.setIcon(image, #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1))
+    }
+    
+    public func setMoreButtonActive() {
+        var image = UIImage(systemName: "house.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
+        homeButton.setText("Home", #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
+        homeButton.setIcon(image, #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1))
+        image = UIImage(systemName: "ellipsis.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
+        moreButton.setText("More", #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
+        moreButton.setIcon(image, #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1))
+    }
+    
     private func configureImageViewsStack() {
         addSubview(imageViewsStack)
         imageViewsStack.alignment = .center

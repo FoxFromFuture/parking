@@ -14,5 +14,15 @@ final class BuildingsRouter {
 
 // MARK: - RoutingLogic
 extension BuildingsRouter: BuildingsRoutingLogic {
+    func routeToMore() {
+        view?.navigationController?.pushViewController(MoreAssembly.build(), animated: false)
+    }
     
+    func routeToHome() {
+        view?.navigationController?.popViewController(animated: true)
+    }
+    
+    func routeToMap() {
+        view?.navigationController?.pushViewController(MapAssembly.build(), animated: true)
+    }
 }

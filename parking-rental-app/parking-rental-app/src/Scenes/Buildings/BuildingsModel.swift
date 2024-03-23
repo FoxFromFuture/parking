@@ -14,4 +14,24 @@ enum BuildingsModel {
         struct Response { }
         struct ViewModel { }
     }
+    
+    enum More {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum Home {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum Map {
+        struct Request {
+            let selectedBuilding: Building
+        }
+        struct Response { }
+        struct ViewModel { }
+    }
 }

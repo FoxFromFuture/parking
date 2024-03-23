@@ -38,4 +38,5 @@ protocol SplashRoutingLogic {
 protocol SplashWorkerLogic {
     typealias Model = SplashModel
     func wasUserLogined() -> Bool
+    func tryUpdateRefreshToken(completion: @escaping (AuthApiResponse?, String?) -> ())
 }

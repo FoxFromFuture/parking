@@ -1,13 +1,13 @@
 //
-//  RegistrationCityModel.swift
+//  MoreModel.swift
 //  parking-rental-app
 //
-//  Created by Никита Лисунов on 2/17/24.
+//  Created by Никита Лисунов on 3/9/24.
 //
 
 import UIKit
 
-enum RegistrationCityModel {
+enum MoreModel {
     
     enum Start {
         struct Request { }
@@ -15,10 +15,8 @@ enum RegistrationCityModel {
         struct ViewModel { }
     }
     
-    enum RegistrationCar {
-        struct Request {
-            let city: String
-        }
+    enum Home {
+        struct Request { }
         struct Response { }
         struct ViewModel { }
     }

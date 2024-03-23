@@ -9,31 +9,35 @@
 protocol RegistrationDisplayLogic: AnyObject {
     typealias Model = RegistrationModel
     func displayStart(_ viewModel: RegistrationModel.Start.ViewModel)
-    func displayRegistrationCity(_ viewModel: RegistrationModel.RegistrationCity.ViewModel)
+    func displayRegistrationCar(_ viewModel: RegistrationModel.RegistrationCar.ViewModel)
+    func displayLogin(_ viewModel: RegistrationModel.Login.ViewModel)
 }
 
 // MARK: - BusinessLogic
 protocol RegistrationBusinessLogic {
     typealias Model = RegistrationModel
     func loadStart(_ request: RegistrationModel.Start.Request)
-    func loadRegistrationCity(_ request: RegistrationModel.RegistrationCity.Request)
+    func loadRegistrationCar(_ request: RegistrationModel.RegistrationCar.Request)
+    func loadLogin(_ request: RegistrationModel.Login.Request)
 }
 
 // MARK: - PresentationLogic
 protocol RegistrationPresentationLogic {
     typealias Model = RegistrationModel
     func presentStart(_ response: RegistrationModel.Start.Response)
-    func presentRegistrationCity(_ response: RegistrationModel.RegistrationCity.Response)
+    func presentRegistrationCar(_ response: RegistrationModel.RegistrationCar.Response)
+    func presentLogin(_ response: RegistrationModel.Login.Response)
 }
 
 // MARK: - RoutingLogic
 protocol RegistrationRoutingLogic {
-    func routeToRegistrationCity()
+    func routeToRegistrationCar()
+    func routeToLogin()
 }
 
 // MARK: - WorkerLogic
 protocol RegistrationWorkerLogic {
     typealias Model = RegistrationModel
-    func signUp(_ request: RegistrationModel.RegistrationCity.Request, completion: @escaping (_ authData: AuthApiResponse?, _ error: String?) -> ())
+    func signUp(_ request: RegistrationModel.RegistrationCar.Request, completion: @escaping (_ authData: AuthApiResponse?, _ error: String?) -> ())
     func saveAuthTokens(refreshToken: String, accessToken: String)
 }

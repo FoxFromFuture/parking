@@ -19,6 +19,8 @@ final class NetworkManager {
     private let authRouter = Router<AuthApi>()
     private let reservationsRouter = Router<ReservationsApi>()
     private let parkingSpotsRouter = Router<ParkingSpotsApi>()
+    private let parkingLevelsRouter = Router<ParkingLevelsApi>()
+    private let buildingsRouter = Router<BuildingsApi>()
     
     private init() { }
     
@@ -47,6 +49,7 @@ final class NetworkManager {
         }
     }
     
+    // MARK: - Generic Functions
     private func responseDecoder<T: Decodable>(data: Data?, dataType: T.Type, response: URLResponse?, error: Error?) -> (data: T?, error: String?) {
         if error != nil {
             return (nil, "Please check your network connection.")
@@ -67,11 +70,13 @@ final class NetworkManager {
             case .failure(let networkFailureError):
                 return (nil, networkFailureError)
             }
+        } else {
+            return (nil, "No response")
         }
-        return (nil, nil)
     }
     
     func authRequest<TRouter: NetworkRouter, TResponse: Decodable>(router: TRouter, task: TRouter.EndPoint, responseType: TResponse.Type, completion: @escaping (_ data: TResponse?, _ error: String?) -> ()) {
+        print(task)
         router.request(task) { [weak self] data, response, error in
             let responseDecoder = self?.responseDecoder(data: data, dataType: responseType, response: response, error: error)
             if responseDecoder?.error == nil {
@@ -79,15 +84,15 @@ final class NetworkManager {
             }
             if responseDecoder?.error == NetworkResponse.authenticationError.rawValue {
                 self?.updateAccessToken(completion: { [weak self] authData, error in
-                    // RETURN NORMAL ERROR FROM UPDATEACCESSTOKEN FUNC, NOT JUST RETURN MOTHERFUCKER
+                    print("new access token!")
                     if error != nil {
-                        completion(nil, responseDecoder?.error)
+                        completion(nil, error)
                     } else {
-                        guard let newRefreshToken = authData?.accessToken else {
+                        guard let newAccessToken = authData?.accessToken else {
                             completion(nil, "Get Token Error")
                             return
                         }
-                        if !(self?.authManager.updateToken(token: newRefreshToken, tokenType: .refresh) ?? true) {
+                        if !(self?.authManager.updateToken(token: newAccessToken, tokenType: .access) ?? false) {
                             completion(nil, "Update Token Error")
                         }
                         router.request(task) { [weak self] data, response, error in
@@ -102,44 +107,33 @@ final class NetworkManager {
         }
     }
     
-    // MARK: - Tokens Processing
-    private func updateRefreshToken(completion: @escaping (_ authData: AuthApiResponse?, _ error: String?) -> ()) {
-        guard let oldRefreshToken = authManager.getRefreshToken() else {
-            return
-        }
-        authRouter.request(.updateRefreshToken(refreshToken: oldRefreshToken)) { [weak self] data, response, error in
-            let responseDecoder = self?.responseDecoder(data: data, dataType: AuthApiResponse.self, response: response, error: error)
-            completion(responseDecoder?.data as? AuthApiResponse, responseDecoder?.error)
+    func authRequestCompletion<TResponse: Decodable>(_ data: TResponse?, _ error: String?, _ completion: @escaping (_ data: TResponse?, _ error: String?) -> ()) {
+        if let error = error {
+            completion(nil, error)
+        } else if let data = data {
+            completion(data, nil)
         }
     }
     
-    private func updateAccessToken(completion: @escaping (_ authData: AuthApiResponse?, _ error: String?) -> ()) {
+    // MARK: - Tokens Processing
+    public func updateRefreshToken(completion: @escaping (_ authData: AuthApiResponse?, _ error: String?) -> ()) {
+        guard let oldRefreshToken = authManager.getRefreshToken() else {
+            completion(nil, "Refresh token doesn't exist.")
+            return
+        }
+        authRequest(router: authRouter, task: .updateRefreshToken(refreshToken: oldRefreshToken), responseType: AuthApiResponse.self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
+    private func updateAccessToken(completion: @escaping (_ authData: AuthApiAccessTokenResponse?, _ error: String?) -> ()) {
         guard let refreshToken = authManager.getRefreshToken() else {
+            completion(nil, "Refresh token doesn't exist.")
             return
         }
         authRouter.request(.updateAccessToken(refreshToken: refreshToken)) { [weak self] data, response, error in
-            let responseDecoder = self?.responseDecoder(data: data, dataType: AuthApiResponse.self, response: response, error: error)
-            if responseDecoder?.error == nil {
-                completion(responseDecoder?.data as? AuthApiResponse, nil)
-            }
-            if responseDecoder?.error == NetworkResponse.authenticationError.rawValue {
-                self?.updateRefreshToken(completion: { [weak self] authData, error in
-                    if error != nil {
-                        return
-                    } else {
-                        guard let newRefreshToken = authData?.refreshToken else { return }
-                        if !(self?.authManager.updateToken(token: newRefreshToken, tokenType: .refresh) ?? true) {
-                            return
-                        }
-                        self?.authRouter.request(.updateAccessToken(refreshToken: refreshToken)) { [weak self] data, response, error in
-                            let responseDecoder = self?.responseDecoder(data: data, dataType: AuthApiResponse.self, response: response, error: error)
-                            completion(responseDecoder?.data as? AuthApiResponse, responseDecoder?.error)
-                        }
-                    }
-                })
-            } else {
-                completion(nil, responseDecoder?.error)
-            }
+            let responseDecoder = self?.responseDecoder(data: data, dataType: AuthApiAccessTokenResponse.self, response: response, error: error)
+            completion(responseDecoder?.data as? AuthApiAccessTokenResponse, responseDecoder?.error)
         }
     }
     
@@ -158,46 +152,62 @@ final class NetworkManager {
         }
     }
     
-    /// TODO: rewrite with generic func usage
     func whoami(completion: @escaping (_ authData: AuthWhoamiApiResponse?, _ error: String?) -> ()) {
-        authRouter.request(.whoami) { [weak self] data, response, error in
-            let responseDecoder = self?.responseDecoder(data: data, dataType: AuthWhoamiApiResponse.self, response: response, error: error)
-            if responseDecoder?.error == NetworkResponse.authenticationError.rawValue {
-                self?.updateAccessToken(completion: { [weak self] authData, error in
-                    if error != nil {
-                        return
-                    } else {
-                        guard let newRefreshToken = authData?.accessToken else { return }
-                        if !(self?.authManager.updateToken(token: newRefreshToken, tokenType: .refresh) ?? true) {
-                            return
-                        }
-                        self?.authRouter.request(.whoami) { [weak self] data, response, error in
-                            let responseDecoder = self?.responseDecoder(data: data, dataType: AuthWhoamiApiResponse.self, response: response, error: error)
-                            completion(responseDecoder?.data as? AuthWhoamiApiResponse, responseDecoder?.error)
-                        }
-                    }
-                })
-            }
+        authRequest(router: authRouter, task: .whoami, responseType: AuthWhoamiApiResponse.self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
         }
     }
     
     // MARK: - Reservations API
     func getAllReservations(completion: @escaping (_ reservationsData: [Reservation]?, _ error: String?) -> ()) {
-        authRequest(router: reservationsRouter, task: .getAllReservations, responseType: [Reservation].self) { data, error in
-            if let error = error {
-                completion(nil, error)
-            } else if let data = data {
-                completion(data, nil)
-            }
+        authRequest(router: reservationsRouter, task: .getAllReservations, responseType: [Reservation].self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
         }
     }
     
     // MARK: - ParkingSpots API
-    func getParkingSpotInfo(id: String, completion: @escaping (_ parkingSpotData: [Reservation]?, _ error: String?) -> ()) {
-        authRequest(router: parkingSpotsRouter, task: .getParkingSpotInfo(id: id), responseType: <#T##Decodable.Protocol#>, completion: <#T##(Decodable?, String?) -> ()##(Decodable?, String?) -> ()##(_ data: Decodable?, _ error: String?) -> ()#>)
+    func getParkingSpotInfo(id: UUID, completion: @escaping (_ parkingSpotData: ParkingSpot?, _ error: String?) -> ()) {
+        authRequest(router: parkingSpotsRouter, task: .getParkingSpotInfo(id: id), responseType: ParkingSpot.self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
+    func getAllParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ()) {
+        authRequest(router: parkingSpotsRouter, task: .getAllParkingSpots, responseType: [ParkingSpot].self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
     }
     
     // MARK: - ParkingLevels API
+    func getAllParkingLevels(completion: @escaping (_ parkingLevelsData: [ParkingLevel]?, _ error: String?) -> ()) {
+        authRequest(router: parkingLevelsRouter, task: .getAllParkingLevels, responseType: [ParkingLevel].self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
     
-    // MARK: - ParkingBuildings API
+    // MARK: - Buildings API
+    func getAllBuildings(completion: @escaping (_ buildingsData: [Building]?, _ error: String?) -> ()) {
+        authRequest(router: buildingsRouter, task: .getAllBuildings, responseType: [Building].self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
+    // MARK: - Cars API
+    func addNewCar(registryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
+        authRequest(router: carsRouter, task: .addNewCar(model: "Test", lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber), responseType: Car.self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
+    func updateCar(id: String, registryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
+        authRequest(router: carsRouter, task: .updateCar(id: id, model: "Test", lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber), responseType: Car.self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
+    func getAllCars(completion: @escaping (_ carData: [Car]?, _ error: String?) -> ()) {
+        authRequest(router: carsRouter, task: .getAllCars, responseType: [Car].self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
 }

@@ -23,4 +23,44 @@ extension HomeWorker: HomeWorkerLogic {
             }
         }
     }
+    
+    func getParkingSpotsInfo(id: String, completion: @escaping (_ parkingSpotInfo: ParkingSpot?, _ error: String?) -> ()) {
+        networkManager.getParkingSpotInfo(id: UUID(uuidString: id) ?? UUID()) { parkingSpotData, error in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = parkingSpotData {
+                completion(data, nil)
+            }
+        }
+    }
+    
+    func getParkingSpots(completion: @escaping ([ParkingSpot]?, String?) -> ()) {
+        networkManager.getAllParkingSpots { parkingSpotsData, error in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = parkingSpotsData {
+                completion(data, nil)
+            }
+        }
+    }
+    
+    func getAllParkingLevels(completion: @escaping ([ParkingLevel]?, String?) -> ()) {
+        networkManager.getAllParkingLevels { parkingLevelsData, error in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = parkingLevelsData {
+                completion(data, nil)
+            }
+        }
+    }
+    
+    func getAllBuildings(completion: @escaping ([Building]?, String?) -> ()) {
+        networkManager.getAllBuildings { buildingsData, error in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = buildingsData {
+                completion(data, nil)
+            }
+        }
+    }
 }

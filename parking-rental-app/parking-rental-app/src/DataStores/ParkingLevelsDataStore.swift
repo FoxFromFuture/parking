@@ -5,4 +5,10 @@
 //  Created by Никита Лисунов on 3/8/24.
 //
 
-import Foundation
+final class ParkingLevelsDataStore {
+    
+    static let shared = ParkingLevelsDataStore()
+    var parkingLevels: [ParkingLevel]?
+    
+    private init() { }
+}

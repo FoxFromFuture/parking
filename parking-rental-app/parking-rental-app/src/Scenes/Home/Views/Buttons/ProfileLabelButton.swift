@@ -49,6 +49,9 @@ class ProfileLabelButton: UIView {
     }
     
     func configureUI() {
+        self.backgroundColor = .clear
+        self.setHeight(40)
+        self.setWidth(160)
         self.addSubview(leftIconView)
         leftIconView.pinLeft(to: self.leadingAnchor)
         leftIconView.pinCenterY(to: self.centerYAnchor)
@@ -56,13 +59,13 @@ class ProfileLabelButton: UIView {
         textLabel.pinLeft(to: self.leftIconView.trailingAnchor, 12)
         textLabel.pinCenterY(to: self.centerYAnchor)
         self.addSubview(rightIconView)
-        rightIconView.pinLeft(to: self.textLabel.trailingAnchor, 20)
+        rightIconView.pinLeft(to: self.textLabel.trailingAnchor, 12)
         rightIconView.pinCenterY(to: self.centerYAnchor)
         let tapRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(self.TabBarButtonWasPressed(_:))
         )
-        addGestureRecognizer(tapRecognizer)
+        self.addGestureRecognizer(tapRecognizer)
     }
     
     @objc

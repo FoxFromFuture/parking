@@ -36,8 +36,8 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        AuthManager.shared.deleteToken(token: "refresh-token", tokenType: .refresh)
-//        AuthManager.shared.deleteToken(token: "access-token", tokenType: .access)
+        AuthManager.shared.deleteToken(tokenType: .refresh)
+        AuthManager.shared.deleteToken(tokenType: .access)
         interactor.loadStart(Model.Start.Request())
         interactor.loadLogin(Model.Login.Request())
     }
@@ -54,7 +54,7 @@ final class SplashViewController: UIViewController {
     
     private func configureTitleLabel() {
         self.view.addSubview(titleLabel)
-        titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 35)
+        titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 40)
         titleLabel.pinLeft(to: self.view.leadingAnchor, 38)
         titleLabel.pinRight(to: self.view.trailingAnchor, 38)
         titleLabel.text = "Parking\nit's never been\nso easy"
@@ -63,8 +63,6 @@ final class SplashViewController: UIViewController {
         titleLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
     }
-    
-    // MARK: - Actions
 }
 
 // MARK: - DisplayLogic

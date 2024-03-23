@@ -14,7 +14,11 @@ final class RegistrationRouter {
 
 // MARK: - RoutingLogic
 extension RegistrationRouter: RegistrationRoutingLogic {
-    func routeToRegistrationCity() {
-        //
+    func routeToRegistrationCar() {
+        view?.navigationController?.pushViewController(RegistrationCarAssembly.build(), animated: true)
+    }
+    
+    func routeToLogin() {
+        view?.navigationController?.popViewController(animated: true)
     }
 }

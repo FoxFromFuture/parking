@@ -44,6 +44,10 @@ final class LoginViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     // MARK: - Configuration
     private func configureUI() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -56,10 +60,9 @@ final class LoginViewController: UIViewController {
     
     private func configureLoginLabel() {
         self.view.addSubview(loginLabel)
-        loginLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 35)
+        loginLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 40)
         loginLabel.pinLeft(to: self.view.leadingAnchor, 38)
         loginLabel.pinRight(to: self.view.trailingAnchor, 38)
-//        loginLabel.setHeight(43)
         loginLabel.text = "Login"
         loginLabel.textAlignment = .left
         loginLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
@@ -75,7 +78,6 @@ final class LoginViewController: UIViewController {
         emailTextField.pinTop(to: self.loginLabel.bottomAnchor, 80)
         emailTextField.pinLeft(to: self.view, 38)
         emailTextField.pinRight(to: self.view, 38)
-//        emailTextField.setHeight(45)
         emailTextField.backgroundColor = .white
         emailTextField.borderStyle = .line
     }
@@ -89,7 +91,6 @@ final class LoginViewController: UIViewController {
         passwordTextField.pinTop(to: self.emailTextField.bottomAnchor, 33)
         passwordTextField.pinLeft(to: self.view, 38)
         passwordTextField.pinRight(to: self.view, 38)
-//        passwordTextField.setHeight(45)
         passwordTextField.backgroundColor = .white
         passwordTextField.borderStyle = .line
     }

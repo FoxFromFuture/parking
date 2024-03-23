@@ -9,8 +9,8 @@ import Foundation
 
 public enum CarsApi {
     case getAllCars
-    case addNewCar(parameters: Parameters)
-    case updateCar(id: String, parameters: Parameters)
+    case addNewCar(model: String, lengthMeters: Double, weightTons: Double, registryNumber: String)
+    case updateCar(id: String, model: String, lengthMeters: Double, weightTons: Double, registryNumber: String)
     case deleteCar(id: String)
 }
 
@@ -32,7 +32,7 @@ extension CarsApi: EndPointType {
             return "employee"
         case .addNewCar:
             return "employee"
-        case .updateCar(let id, _):
+        case .updateCar(let id, _, _, _, _):
             return "\(id)/employee"
         case .deleteCar(let id):
             return "\(id)/employee"
@@ -56,10 +56,10 @@ extension CarsApi: EndPointType {
         switch self {
         case .getAllCars:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
-        case .addNewCar(let parameters):
-            return .requestParametersAndHeaders(bodyParameters: parameters, urlParameters: nil, additionHeaders: self.headers)
-        case .updateCar(_, let parameters):
-            return .requestParametersAndHeaders(bodyParameters: parameters, urlParameters: nil, additionHeaders: self.headers)
+        case .addNewCar(let model, let lengthMeters, let weightTons, let registryNumber):
+            return .requestParametersAndHeaders(bodyParameters: ["model": model, "lengthMeters": lengthMeters, "weightTons": weightTons, "registryNumber": registryNumber], urlParameters: nil, additionHeaders: self.headers)
+        case .updateCar(_, let model, let lengthMeters, let weightTons, let registryNumber):
+            return .requestParametersAndHeaders(bodyParameters: ["model": model, "lengthMeters": lengthMeters, "weightTons": weightTons, "registryNumber": registryNumber], urlParameters: nil, additionHeaders: self.headers)
         case .deleteCar:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         }

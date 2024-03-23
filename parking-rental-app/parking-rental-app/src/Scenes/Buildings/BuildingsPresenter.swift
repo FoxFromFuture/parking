@@ -15,4 +15,16 @@ extension BuildingsPresenter: BuildingsPresentationLogic {
     func presentStart(_ response: Model.Start.Response) {
         view?.displayStart(Model.Start.ViewModel())
     }
+    
+    func presentMore(_ response: Model.More.Response) {
+        view?.displayMore(Model.More.ViewModel())
+    }
+    
+    func presentHome(_ response: Model.Home.Response) {
+        view?.displayHome(Model.Home.ViewModel())
+    }
+    
+    func presentMap(_ response: Model.Map.Response) {
+        view?.displayMap(Model.Map.ViewModel())
+    }
 }

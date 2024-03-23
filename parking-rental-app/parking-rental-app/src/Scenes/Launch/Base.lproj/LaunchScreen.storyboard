@@ -3,7 +3,9 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,13 +16,68 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Da4-SP-JTF">
+                                <rect key="frame" x="38" y="236" width="222" height="76"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="76" id="Cag-eo-MUP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="64"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's never been" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIu-aY-vSV">
+                                <rect key="frame" x="38.000000000000014" y="322" width="200.33333333333337" height="38.333333333333314"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38.329999999999998" id="Rzr-3X-UrM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="so easy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Q1-1M-9JM">
+                                <rect key="frame" x="38" y="360.33333333333331" width="105" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="IpT-Wj-xV2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="lAL-N6-4eV">
+                                <rect key="frame" x="270" y="240" width="81" height="67.999999999999972"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61.329999999999998" id="1Tb-HY-iUH"/>
+                                    <constraint firstAttribute="width" constant="81" id="tpW-lL-aIZ"/>
+                                </constraints>
+                                <imageReference key="image" image="parkingsign.circle" catalog="system" symbolScale="large"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="heavy"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.96548897030000003" green="0.84776073689999998" blue="0.10692387070000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="9Q1-1M-9JM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="I7A-CY-a7u"/>
+                            <constraint firstItem="oIu-aY-vSV" firstAttribute="top" secondItem="Da4-SP-JTF" secondAttribute="bottom" constant="10" id="MWx-Z5-j8H"/>
+                            <constraint firstItem="Da4-SP-JTF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="Q3N-7I-ffb"/>
+                            <constraint firstItem="lAL-N6-4eV" firstAttribute="leading" secondItem="Da4-SP-JTF" secondAttribute="trailing" constant="10" id="a4f-Em-vAf"/>
+                            <constraint firstItem="oIu-aY-vSV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="aRU-cN-GMk"/>
+                            <constraint firstItem="lAL-N6-4eV" firstAttribute="centerY" secondItem="Da4-SP-JTF" secondAttribute="centerY" id="gj2-xI-urR"/>
+                            <constraint firstItem="Da4-SP-JTF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="177" id="hGD-OS-gPb"/>
+                            <constraint firstItem="9Q1-1M-9JM" firstAttribute="top" secondItem="oIu-aY-vSV" secondAttribute="bottom" id="zUb-fe-GJz"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="parkingsign.circle" catalog="system" width="128" height="123"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

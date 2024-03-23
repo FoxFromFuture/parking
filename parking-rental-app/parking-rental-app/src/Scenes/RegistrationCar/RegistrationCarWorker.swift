@@ -9,12 +9,20 @@ import UIKit
 
 final class RegistrationCarWorker {
     // MARK: - Private Properties
-    let defaults = UserDefaults.standard
+    private let networkManager = NetworkManager.shared
+    private let defaults = UserDefaults.standard
 }
 
 // MARK: - WorkerLogic
 extension RegistrationCarWorker: RegistrationCarWorkerLogic {
-    func saveCarRegistryNumber(registryNumber: String) {
-        defaults.set(registryNumber, forKey: "carRegistryNumber")
+    func saveCarRegistryNumber(registryNumber: String, completion: @escaping (Car?, String?) -> ()) {
+        self.networkManager.addNewCar(registryNumber: registryNumber) { [weak self] carData, error in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = carData {
+                completion(data, nil)
+//                self?.defaults.set(registryNumber, forKey: "carRegistryNumber")
+            }
+        }
     }
 }

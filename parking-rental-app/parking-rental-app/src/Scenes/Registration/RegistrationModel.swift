@@ -15,12 +15,18 @@ enum RegistrationModel {
         struct ViewModel { }
     }
     
-    enum RegistrationCity {
+    enum RegistrationCar {
         struct Request {
             let name: String
             let email: String
             let password: String
         }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum Login {
+        struct Request { }
         struct Response { }
         struct ViewModel { }
     }

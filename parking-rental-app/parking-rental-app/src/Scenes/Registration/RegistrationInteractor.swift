@@ -25,15 +25,19 @@ extension RegistrationInteractor: RegistrationBusinessLogic {
         presenter.presentStart(Model.Start.Response())
     }
     
-    func loadRegistrationCity(_ request: RegistrationModel.RegistrationCity.Request) {
+    func loadRegistrationCar(_ request: RegistrationModel.RegistrationCar.Request) {
         worker.signUp(request) { [weak self] authData, error in
             if let error = error {
                 print(error)
                 /// TODO: Present failure
             } else if let authData = authData {
                 self?.worker.saveAuthTokens(refreshToken: authData.refreshToken, accessToken: authData.accessToken)
-                self?.presenter.presentRegistrationCity(Model.RegistrationCity.Response())
+                self?.presenter.presentRegistrationCar(Model.RegistrationCar.Response())
             }
         }
+    }
+    
+    func loadLogin(_ request: RegistrationModel.Login.Request) {
+        presenter.presentLogin(Model.Login.Response())
     }
 }

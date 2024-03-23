@@ -66,9 +66,9 @@ extension AuthApi: EndPointType {
         case .signUp(let name, let email, let password):
             return .requestParameters(bodyParameters: ["name": name, "email": email, "password": password, "roles": ["APP_USER"]], urlParameters: nil)
         case .updateAccessToken(let refreshToken):
-            return .requestParameters(bodyParameters: ["refershToken": refreshToken], urlParameters: nil)
+            return .requestParameters(bodyParameters: ["refreshToken": refreshToken], urlParameters: nil)
         case .updateRefreshToken(let refreshToken):
-            return .requestParameters(bodyParameters: ["refershToken": refreshToken], urlParameters: nil)
+            return .requestParametersAndHeaders(bodyParameters: ["refreshToken": refreshToken], urlParameters: nil, additionHeaders: self.headers)
         }
     }
     

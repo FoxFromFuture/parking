@@ -52,7 +52,7 @@ extension ReservationsApi: EndPointType {
         case .getAllReservations:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         case .addNewReservation(let carId, let employeeId, let parkingSpotId, let startTime, let endTime):
-            return .requestParametersAndHeaders(bodyParameters: ["id": "", "carId": carId, "employeeId": employeeId, "parkingSpotId": parkingSpotId, "startTime": startTime, "endTime": endTime], urlParameters: nil, additionHeaders: self.headers)
+            return .requestParametersAndHeaders(bodyParameters: ["carId": carId, "employeeId": employeeId, "parkingSpotId": parkingSpotId, "startTime": startTime, "endTime": endTime], urlParameters: nil, additionHeaders: self.headers)
         case .deleteReservation:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         }

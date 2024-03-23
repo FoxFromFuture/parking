@@ -22,8 +22,8 @@ struct Car {
     let id: String
     let ownerId: String
     let model: String
-    let lengthMeters: Int
-    let weightTons: Int
+    let lengthMeters: Double
+    let weightTons: Double
     let registryNumber: String
 }
 
@@ -42,8 +42,8 @@ extension Car: Decodable {
         id = try carContainer.decode(String.self, forKey: .id)
         ownerId = try carContainer.decode(String.self, forKey: .ownerId)
         model = try carContainer.decode(String.self, forKey: .model)
-        lengthMeters = try carContainer.decode(Int.self, forKey: .lengthMeters)
-        weightTons = try carContainer.decode(Int.self, forKey: .weightTons)
+        lengthMeters = try carContainer.decode(Double.self, forKey: .lengthMeters)
+        weightTons = try carContainer.decode(Double.self, forKey: .weightTons)
         registryNumber = try carContainer.decode(String.self, forKey: .registryNumber)
     }
 }

@@ -68,10 +68,9 @@ final class RegistrationViewController: UIViewController {
     
     private func configureRegistrationLabel() {
         self.view.addSubview(registrationLabel)
-        registrationLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 35)
+        registrationLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 5)
         registrationLabel.pinLeft(to: self.view.leadingAnchor, 38)
         registrationLabel.pinRight(to: self.view.trailingAnchor, 38)
-//        registrationLabel.setHeight(43)
         registrationLabel.text = "Registration"
         registrationLabel.textAlignment = .left
         registrationLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
@@ -87,7 +86,6 @@ final class RegistrationViewController: UIViewController {
         nameTextField.pinTop(to: self.registrationLabel.bottomAnchor, 80)
         nameTextField.pinLeft(to: self.view, 38)
         nameTextField.pinRight(to: self.view, 38)
-//        nameTextField.setHeight(45)
         nameTextField.backgroundColor = .white
         nameTextField.borderStyle = .line
     }
@@ -101,7 +99,6 @@ final class RegistrationViewController: UIViewController {
         emailTextField.pinTop(to: self.nameTextField.bottomAnchor, 33)
         emailTextField.pinLeft(to: self.view, 38)
         emailTextField.pinRight(to: self.view, 38)
-//        emailTextField.setHeight(45)
         emailTextField.backgroundColor = .white
         emailTextField.borderStyle = .line
     }
@@ -115,7 +112,6 @@ final class RegistrationViewController: UIViewController {
         passwordTextField.pinTop(to: self.emailTextField.bottomAnchor, 33)
         passwordTextField.pinLeft(to: self.view, 38)
         passwordTextField.pinRight(to: self.view, 38)
-//        passwordTextField.setHeight(45)
         passwordTextField.backgroundColor = .white
         passwordTextField.borderStyle = .line
     }
@@ -138,13 +134,14 @@ final class RegistrationViewController: UIViewController {
     public func goBack() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
+        self.interactor.loadLogin(Model.Login.Request())
     }
     
     @objc
     private func registerButtonWasTapped() {
-        /// TODO: Check is textFields contain characters
+        /// TODO: Check if textFields contains characters
         if let name = nameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
-            interactor.loadRegistrationCity(Model.RegistrationCity.Request(name: name, email: email, password: password))
+            interactor.loadRegistrationCar(Model.RegistrationCar.Request(name: name, email: email, password: password))
         }
     }
 }
@@ -155,9 +152,13 @@ extension RegistrationViewController: RegistrationDisplayLogic {
         self.configureUI()
     }
     
-    func displayRegistrationCity(_ viewModel: RegistrationModel.RegistrationCity.ViewModel) {
+    func displayRegistrationCar(_ viewModel: RegistrationModel.RegistrationCar.ViewModel) {
         DispatchQueue.main.async { [weak self] in
-            self?.router.routeToRegistrationCity()
+            self?.router.routeToRegistrationCar()
         }
+    }
+    
+    func displayLogin(_ viewModel: RegistrationModel.Login.ViewModel) {
+        self.router.routeToLogin()
     }
 }

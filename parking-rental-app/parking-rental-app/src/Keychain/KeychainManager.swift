@@ -48,12 +48,11 @@ final class KeychainManager {
         return result as? Data
     }
     
-    static func delete(key: String, data: Data) throws {
+    static func delete(key: String) throws {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
-            kSecAttrAccount: key,
-            kSecValueData: data
+            kSecAttrAccount: key
         ]
         
         let status = SecItemDelete(query as CFDictionary)

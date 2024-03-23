@@ -25,6 +25,10 @@ final class HomeViewController: UIViewController {
         collectionViewLayout: UICollectionViewFlowLayout()
     )
     private let reservationsDataStore = ReservationsDataStore.shared
+    private let parkingSpotsDataStore = ParkingSpotsDataStore.shared
+    private var spotNumbers: [String]?
+    private var levelNumbers: [String]?
+    private var buildingNames: [String]?
     
     // MARK: - LifeCycle
     init(
@@ -57,7 +61,7 @@ final class HomeViewController: UIViewController {
         configureTabBar()
         configureProfileLabelButton()
         configureReservationsCollectionView()
-        configureRegisterButton()
+        configureReserveLotButton()
     }
     
     private func configureTabBar() {
@@ -66,18 +70,23 @@ final class HomeViewController: UIViewController {
         tabBar.pinLeft(to: self.view.leadingAnchor)
         tabBar.pinRight(to: self.view.trailingAnchor)
         tabBar.setHeight(92)
+        tabBar.setMoreButtonAction { [weak self] in
+            self?.interactor.loadMore(Model.More.Request())
+        }
     }
     
     private func configureProfileLabelButton() {
         view.addSubview(profileLabelButton)
-        profileLabelButton.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 60)
+        profileLabelButton.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 40)
         profileLabelButton.pinLeft(to: self.view.leadingAnchor, 17)
-        profileLabelButton.setHeight(40)
         let leftIconImage = UIImage(systemName: "person.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
         profileLabelButton.setLeftIcon(leftIconImage, #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1))
-        let rightIconImage = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
+        let rightIconImage = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .medium)) ?? UIImage()
         profileLabelButton.setRightIcon(rightIconImage, #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1))
         profileLabelButton.setText("Profile", #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1), .systemFont(ofSize: 32, weight: .bold))
+        profileLabelButton.pressAction = { [weak self] in
+            self?.interactor.loadProfile(Model.Profile.Request())
+        }
     }
     
     private func configureReservationsCollectionView() {
@@ -96,14 +105,14 @@ final class HomeViewController: UIViewController {
         reservationsCollectionView.register(ReservationCell.self, forCellWithReuseIdentifier: "ReservationCell")
     }
     
-    private func configureRegisterButton() {
+    private func configureReserveLotButton() {
         self.view.addSubview(reserveLotButton)
         reserveLotButton.pinBottom(to: self.tabBar.topAnchor, 25)
         reserveLotButton.setHeight(70)
         reserveLotButton.pinHorizontal(to: self.view, 17)
         reserveLotButton.backgroundColor = #colorLiteral(red: 0.9647058824, green: 0.8470588235, blue: 0.1058823529, alpha: 1)
         reserveLotButton.layer.cornerRadius = 20
-        reserveLotButton.setTitle("Register", for: .normal)
+        reserveLotButton.setTitle("Reserve Lot", for: .normal)
         reserveLotButton.setTitleColor(#colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1), for: .normal)
         reserveLotButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
         reserveLotButton.addTarget(self, action: #selector(reserveLotButtonWasTapped), for: .touchDown)
@@ -112,7 +121,7 @@ final class HomeViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func reserveLotButtonWasTapped() {
-//        interactor.
+        interactor.loadBuildings(Model.Buildings.Request())
     }
 }
 
@@ -123,7 +132,26 @@ extension HomeViewController: HomeDisplayLogic {
     }
     
     func displayReservations(_ viewModel: Model.GetReservations.ViewModel) {
+        self.spotNumbers = viewModel.spotNumbers
+        self.levelNumbers = viewModel.levelNumbers
+        self.buildingNames = viewModel.buildingNames
         self.reloadCollectionViewData()
+    }
+    
+    func displayBuildings(_ viewModel: Model.Buildings.ViewModel) {
+        self.router.routeToBuildings()
+    }
+    
+    func displayMap(_ viewModel: Model.Map.ViewModel) {
+        self.router.routeToMap()
+    }
+    
+    func displayProfile(_ viewModel: Model.Profile.ViewModel) {
+        self.router.routeToProfile()
+    }
+    
+    func displayMore(_ viewModel: Model.More.ViewModel) {
+        self.router.routeToMore()
     }
 }
 
@@ -138,10 +166,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         cell.configure(
-            lotNumber: "AAA",
-            date: "\(reservationsDataStore.reservations?[indexPath.row].startTime.prefix(10) ?? ""): \(reservationsDataStore.reservations?[indexPath.row].startTime.suffix(8).prefix(5) ?? "") - \(reservationsDataStore.reservations?[indexPath.row].endTime.suffix(8).prefix(5) ?? "")",
-            floor: "AAA",
-            building: "AAA"
+            lotNumber: "\(self.spotNumbers?[indexPath.row] ?? "-")",
+            date: "\(reservationsDataStore.reservations?[indexPath.row].startTime.prefix(10) ?? "-"): \(reservationsDataStore.reservations?[indexPath.row].startTime.suffix(8).prefix(5) ?? "-") - \(reservationsDataStore.reservations?[indexPath.row].endTime.suffix(8).prefix(5) ?? "-")",
+            floor: "Floor: \(self.levelNumbers?[indexPath.row] ?? "-")",
+            building: "\(self.buildingNames?[indexPath.row] ?? "-")"
         )
         
         return cell
@@ -152,7 +180,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        interactor.
+        // TODO: - fetch spot id to view on map
+//        interactor.loadMap(Model.Map.Request(lotID: <#T##String#>))
     }
     
     private func reloadCollectionViewData() {

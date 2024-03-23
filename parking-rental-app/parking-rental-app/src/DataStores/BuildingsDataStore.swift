@@ -5,4 +5,11 @@
 //  Created by Никита Лисунов on 3/8/24.
 //
 
-import Foundation
+final class BuildingsDataStore {
+    
+    static let shared = BuildingsDataStore()
+    var buildings: [Building]?
+    var selectedBuilding: Building?
+    
+    private init() { }
+}
