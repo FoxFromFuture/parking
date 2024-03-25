@@ -177,9 +177,21 @@ final class NetworkManager {
         }
     }
     
+    func getAllLevelSpots(parkingLevelID: String, completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ()) {
+        authRequest(router: parkingLevelsRouter, task: .getAllLevelSpots(parkingLevelID: parkingLevelID), responseType: [ParkingSpot].self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
     // MARK: - Buildings API
     func getAllBuildings(completion: @escaping (_ buildingsData: [Building]?, _ error: String?) -> ()) {
         authRequest(router: buildingsRouter, task: .getAllBuildings, responseType: [Building].self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
+    func getAllBuildingLevels(buildingID: String, completion: @escaping (_ levelsData: [ParkingLevel]?, _ error: String?) -> ()) {
+        authRequest(router: buildingsRouter, task: .getAllBuildingLevels(buildingID: buildingID), responseType: [ParkingLevel].self) { [weak self] data, error in
             self?.authRequestCompletion(data, error, completion)
         }
     }

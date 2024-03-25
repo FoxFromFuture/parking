@@ -32,4 +32,17 @@ enum MapModel {
         struct Response { }
         struct ViewModel { }
     }
+    
+    enum ParkingMap {
+        struct Request { }
+        struct Response {
+            let parkingSpots: [ParkingSpot]
+            let parkingLevelCanvas: Canvas
+        }
+        struct ViewModel {
+            let parkingSpotsCoords: [OnCanvasCoords]
+            let parkingSpotsCanvases: [Canvas]
+            let parkingLevelCanvas: Canvas
+        }
+    }
 }

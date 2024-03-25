@@ -9,6 +9,7 @@ import Foundation
 
 public enum BuildingsApi {
     case getAllBuildings
+    case getAllBuildingLevels(buildingID: String)
 }
 
 extension BuildingsApi: EndPointType {
@@ -27,6 +28,8 @@ extension BuildingsApi: EndPointType {
         switch self {
         case .getAllBuildings:
             return ""
+        case .getAllBuildingLevels(let buildingID):
+            return "\(buildingID)/levels"
         }
     }
     
@@ -34,12 +37,16 @@ extension BuildingsApi: EndPointType {
         switch self {
         case .getAllBuildings:
             return .get
+        case .getAllBuildingLevels:
+            return .get
         }
     }
     
     var task: HTTPTask {
         switch self {
         case .getAllBuildings:
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+        case .getAllBuildingLevels:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         }
     }

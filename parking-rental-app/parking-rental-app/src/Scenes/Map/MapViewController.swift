@@ -19,7 +19,7 @@ final class MapViewController: UIViewController {
     private let router: MapRoutingLogic
     private let tabBar = TabBar()
     private let mapScrollView = UIScrollView()
-    private let mapView = MapView()
+    private var mapView: MapView?
     
     // MARK: - LifeCycle
     init(
@@ -40,6 +40,7 @@ final class MapViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         interactor.loadStart(Model.Start.Request())
+        interactor.loadParkingMap(MapModel.ParkingMap.Request())
     }
     
     // MARK: - Configuration
@@ -48,7 +49,6 @@ final class MapViewController: UIViewController {
         configureNavigationBar()
         configureTabBar()
         configureMapScrollView()
-        configureMapView()
     }
     
     private func configureNavigationBar() {
@@ -76,17 +76,21 @@ final class MapViewController: UIViewController {
     }
     
     private func configureMapScrollView() {
-        view.addSubview(mapScrollView)
         mapScrollView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         mapScrollView.isScrollEnabled = true
         mapScrollView.isMultipleTouchEnabled = true
-        mapScrollView.minimumZoomScale = 1.0
-        mapScrollView.maximumZoomScale = 6.0
+        mapScrollView.minimumZoomScale = 0.5
+        mapScrollView.maximumZoomScale = 2.0
         mapScrollView.delegate = self
     }
     
-    private func configureMapView() {
-        mapScrollView.addSubview(mapView)
+    private func configureMapView(parkingSpotsCoords: [OnCanvasCoords], parkingSpotsCanvases: [Canvas], mapCanvas: Canvas) {
+        // TODO: - Send level canvas as frame
+        let mapFrame = CGRect(x: 0, y: 0, width: mapCanvas.width, height: mapCanvas.height)
+        self.mapView = MapView(parkingSpotsCoords: parkingSpotsCoords, parkingSpotsCanvases: parkingSpotsCanvases, frame: mapFrame)
+        if let mapView = self.mapView {
+            self.mapScrollView.addSubview(mapView)
+        }
     }
     
     // MARK: - Actions
@@ -96,12 +100,26 @@ final class MapViewController: UIViewController {
         generator.impactOccurred()
         self.interactor.loadPreviousScene(Model.PreviousScene.Request())
     }
+    
+    private func showMapScrollView() {
+        view.addSubview(mapScrollView)
+        mapScrollView.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor)
+        mapScrollView.pinBottom(to: self.tabBar.topAnchor)
+        mapScrollView.pinHorizontal(to: self.view)
+    }
 }
 
 // MARK: - DisplayLogic
 extension MapViewController: MapDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
         self.configureUI()
+    }
+    
+    func displayParkingMap(_ viewModel: Model.ParkingMap.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.showMapScrollView()
+            self?.configureMapView(parkingSpotsCoords: viewModel.parkingSpotsCoords, parkingSpotsCanvases: viewModel.parkingSpotsCanvases, mapCanvas: viewModel.parkingLevelCanvas)
+        }
     }
     
     func displayHome(_ viewModel: Model.Home.ViewModel) {

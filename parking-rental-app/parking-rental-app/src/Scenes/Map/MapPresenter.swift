@@ -16,6 +16,18 @@ extension MapPresenter: MapPresentationLogic {
         view?.displayStart(Model.Start.ViewModel())
     }
     
+    func presentParkingMap(_ response: Model.ParkingMap.Response) {
+        var parkingSpotsCoords: [OnCanvasCoords] = []
+        var parkingSpotsCanvases: [Canvas] = []
+        
+        for parkingSpot in response.parkingSpots {
+            parkingSpotsCoords.append(parkingSpot.onCanvasCoords)
+            parkingSpotsCanvases.append(parkingSpot.canvas)
+        }
+        
+        view?.displayParkingMap(MapModel.ParkingMap.ViewModel(parkingSpotsCoords: parkingSpotsCoords, parkingSpotsCanvases: parkingSpotsCanvases, parkingLevelCanvas: response.parkingLevelCanvas))
+    }
+    
     func presentHome(_ response: Model.Home.Response) {
         view?.displayHome(MapModel.Home.ViewModel()     )
     }

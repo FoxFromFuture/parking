@@ -9,6 +9,7 @@ import Foundation
 
 public enum ParkingLevelsApi {
     case getAllParkingLevels
+    case getAllLevelSpots(parkingLevelID: String)
 }
 
 extension ParkingLevelsApi: EndPointType {
@@ -27,6 +28,8 @@ extension ParkingLevelsApi: EndPointType {
         switch self {
         case .getAllParkingLevels:
             return ""
+        case .getAllLevelSpots(let parkingLevelID):
+            return "\(parkingLevelID)/spots"
         }
     }
     
@@ -34,12 +37,16 @@ extension ParkingLevelsApi: EndPointType {
         switch self {
         case .getAllParkingLevels:
             return .get
+        case .getAllLevelSpots:
+            return .get
         }
     }
     
     var task: HTTPTask {
         switch self {
         case .getAllParkingLevels:
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+        case .getAllLevelSpots:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         }
     }

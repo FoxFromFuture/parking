@@ -36,6 +36,9 @@ extension HomeInteractor: HomeBusinessLogic {
         self.parkingLevels = nil
         self.buildings = nil
         
+        /// Create group for multiple async tasks
+        let group = DispatchGroup()
+        
         /// Fetch user's reservations data
         self.worker.getAllReservations() { [weak self] reservationsData, error in
             if let error = error {
@@ -52,6 +55,7 @@ extension HomeInteractor: HomeBusinessLogic {
                 }
                 
                 /// Fetch all parking spots data
+                group.enter()
                 self?.worker.getAllParkingSpots(completion: { [weak self] parkingSpotsData, error in
                     if let error = error {
                         print(error)
@@ -60,12 +64,11 @@ extension HomeInteractor: HomeBusinessLogic {
                         /// Save fetched parking spots
                         self?.parkingSpots = parkingSpots
                     }
+                    group.leave()
                 })
                 
-                /// Check if there was no fetching error
-                guard let _ = self?.parkingSpots else { return }
-                
                 /// Fetch all parking levels data
+                group.enter()
                 self?.worker.getAllParkingLevels(completion: { [weak self] parkingLevelsData, error in
                     if let error = error {
                         print(error)
@@ -74,12 +77,11 @@ extension HomeInteractor: HomeBusinessLogic {
                         /// Save fetched parking levels
                         self?.parkingLevels = parkingLevels
                     }
+                    group.leave()
                 })
                 
-                /// Check if there was no fetching error
-                guard let _ = self?.parkingLevels else { return }
-                
                 /// Fetch all buildings data
+                group.enter()
                 self?.worker.getAllBuildings(completion: { [weak self] buildingsData, error in
                     if let error = error {
                         print(error)
@@ -88,9 +90,12 @@ extension HomeInteractor: HomeBusinessLogic {
                         /// Save fetched buildings
                         self?.buildings = buildings
                     }
+                    group.leave()
                 })
             }
         }
+        group.wait()
+        
         /// Present reservations if all data was retrieved from server & if there were some reservations
         if let reservations = self.reservations, !reservations.isEmpty, let parkingSpots = self.parkingSpots, let parkingLevels = self.parkingLevels, let buildings = self.buildings {
             self.presenter.presentReservations(Model.GetReservations.Response(reservations: reservations, parkingSpots: parkingSpots, parkingLevels: parkingLevels, buildings: buildings))
