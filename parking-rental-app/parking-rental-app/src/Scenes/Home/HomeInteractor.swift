@@ -11,6 +11,10 @@ final class HomeInteractor {
     // MARK: - Private Properties
     private let presenter: HomePresentationLogic
     private let worker: HomeWorkerLogic
+    private var reservations: [Reservation]?
+    private var parkingSpots: [ParkingSpot]?
+    private var parkingLevels: [ParkingLevel]?
+    private var buildings: [Building]?
     
     // MARK: - Initializers
     init(presenter: HomePresentationLogic, worker: HomeWorkerLogic) {
@@ -26,73 +30,71 @@ extension HomeInteractor: HomeBusinessLogic {
     }
     
     func loadReservations(_ request: Model.GetReservations.Request) {
-        self.worker.getReservations() { reservationsData, error in
+        /// Clear old data
+        self.reservations = nil
+        self.parkingSpots = nil
+        self.parkingLevels = nil
+        self.buildings = nil
+        
+        /// Fetch user's reservations data
+        self.worker.getAllReservations() { [weak self] reservationsData, error in
             if let error = error {
                 print(error)
-                /// TODO: Present failure
-            } else if let data = reservationsData {
-                ReservationsDataStore.shared.reservations = data
+                self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
+            } else if let reservations = reservationsData {
+                /// Save fetched reservations
+                self?.reservations = reservations
+                
+                /// Check if there was no fetching error
+                if reservations.isEmpty {
+                    self?.presenter.presentNoData(HomeModel.NoData.Response())
+                    return
+                }
+                
+                /// Fetch all parking spots data
+                self?.worker.getAllParkingSpots(completion: { [weak self] parkingSpotsData, error in
+                    if let error = error {
+                        print(error)
+                        self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
+                    } else if let parkingSpots = parkingSpotsData {
+                        /// Save fetched parking spots
+                        self?.parkingSpots = parkingSpots
+                    }
+                })
+                
+                /// Check if there was no fetching error
+                guard let _ = self?.parkingSpots else { return }
+                
+                /// Fetch all parking levels data
+                self?.worker.getAllParkingLevels(completion: { [weak self] parkingLevelsData, error in
+                    if let error = error {
+                        print(error)
+                        self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
+                    } else if let parkingLevels = parkingLevelsData {
+                        /// Save fetched parking levels
+                        self?.parkingLevels = parkingLevels
+                    }
+                })
+                
+                /// Check if there was no fetching error
+                guard let _ = self?.parkingLevels else { return }
+                
+                /// Fetch all buildings data
+                self?.worker.getAllBuildings(completion: { [weak self] buildingsData, error in
+                    if let error = error {
+                        print(error)
+                        self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
+                    } else if let buildings = buildingsData {
+                        /// Save fetched buildings
+                        self?.buildings = buildings
+                    }
+                })
             }
         }
-        self.worker.getParkingSpots(completion: { parkingSpotsData, error in
-            if let error = error {
-                print(error)
-            } else if let data = parkingSpotsData {
-                ParkingSpotsDataStore.shared.parkingSpots = data
-            }
-        })
-        self.worker.getAllParkingLevels(completion: { parkingLevelsData, error in
-            if let error = error {
-                print(error)
-            } else if let data = parkingLevelsData {
-                ParkingLevelsDataStore.shared.parkingLevels = data
-            }
-        })
-        self.worker.getAllBuildings(completion: { buildingsData, error in
-            if let error = error {
-                print(error)
-            } else if let data = buildingsData {
-                BuildingsDataStore.shared.buildings = data
-            }
-        })
-        
-        var spotNumbers: [String]?
-        var levelNumbers: [String]?
-        var buildingNames: [String]?
-        
-        if let reservs = ReservationsDataStore.shared.reservations {
-            if let spots = ParkingSpotsDataStore.shared.parkingSpots {
-                spotNumbers = []
-                for reserv in reservs {
-                    for spot in spots {
-                        if reserv.parkingSpotId == spot.id {
-                            spotNumbers?.append(spot.parkingNumber)
-                        }
-                    }
-                }
-                if let levels = ParkingLevelsDataStore.shared.parkingLevels {
-                    levelNumbers = []
-                    for spot in spots {
-                        for level in levels {
-                            if spot.levelId == level.id {
-                                levelNumbers?.append("\(level.levelNumber)")
-                            }
-                        }
-                    }
-                }
-                if let buildings = BuildingsDataStore.shared.buildings {
-                    buildingNames = []
-                    for spot in spots {
-                        for building in buildings {
-                            if spot.buildingId == building.id {
-                                buildingNames?.append(building.name)
-                            }
-                        }
-                    }
-                }
-            }
+        /// Present reservations if all data was retrieved from server & if there were some reservations
+        if let reservations = self.reservations, !reservations.isEmpty, let parkingSpots = self.parkingSpots, let parkingLevels = self.parkingLevels, let buildings = self.buildings {
+            self.presenter.presentReservations(Model.GetReservations.Response(reservations: reservations, parkingSpots: parkingSpots, parkingLevels: parkingLevels, buildings: buildings))
         }
-        self.presenter.presentReservations(Model.GetReservations.Response(spotNumbers: spotNumbers, levelNumbers: levelNumbers, buildingNames: buildingNames))
     }
     
     func loadBuildings(_ request: Model.Buildings.Request) {

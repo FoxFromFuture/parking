@@ -23,6 +23,18 @@ final class BuildingsViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
+    private var buildingsCount: Int?
+    private var buildingNames: [String]?
+    private var buildingAddresses: [String]?
+    private var buildingsIDx: [String]?
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
+    private let loadingFailureLabel = UILabel()
+    private let reloadButton = UIButton()
+    private var currentState: BuildingsState = .loading {
+        didSet {
+            updateUIForState(currentState)
+        }
+    }
     
     // MARK: - LifeCycle
     init(
@@ -45,6 +57,16 @@ final class BuildingsViewController: UIViewController {
         interactor.loadStart(Model.Start.Request())
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if currentState == .error {
+            loadingFailureLabel.removeFromSuperview()
+            reloadButton.removeFromSuperview()
+        }
+        currentState = .loading
+        interactor.loadBuildings(Model.GetBuildings.Request())
+    }
+    
     // MARK: - Configuration
     private func configureUI() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -52,6 +74,9 @@ final class BuildingsViewController: UIViewController {
         configureAvailableBuildingsLabel()
         configureTabBar()
         configureBuildingsCollectionView()
+        configureLoadingIndicator()
+        configureLoadingFailureLabel()
+        configureReloadButton()
     }
     
     private func configureNavigationBar() {
@@ -105,6 +130,26 @@ final class BuildingsViewController: UIViewController {
         buildingsCollectionView.register(BuildingCell.self, forCellWithReuseIdentifier: "BuildingCell")
     }
     
+    private func configureLoadingIndicator() {
+        self.view.addSubview(loadingIndicator)
+        loadingIndicator.pinCenter(to: self.view)
+        loadingIndicator.color = .gray
+    }
+    
+    private func configureLoadingFailureLabel() {
+        loadingFailureLabel.text = "Connection Error"
+        loadingFailureLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        loadingFailureLabel.textColor = .black
+    }
+    
+    private func configureReloadButton() {
+        reloadButton.setTitle("Reload", for: .normal)
+        reloadButton.setTitleColor(.systemBlue, for: .normal)
+        reloadButton.setTitleColor(.gray, for: .highlighted)
+        reloadButton.backgroundColor = UIColor.clear
+        reloadButton.addTarget(self, action: #selector(reloadButtonWasPressed), for: .touchUpInside)
+    }
+    
     // MARK: - Actions
     @objc
     public func goBack() {
@@ -112,12 +157,46 @@ final class BuildingsViewController: UIViewController {
         generator.impactOccurred()
         self.interactor.loadHome(Model.Home.Request())
     }
+    
+    @objc
+    public func reloadButtonWasPressed() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        loadingFailureLabel.removeFromSuperview()
+        reloadButton.removeFromSuperview()
+        currentState = .loading
+        interactor.loadBuildings(Model.GetBuildings.Request())
+    }
+    
+    private func showLoadingFailure() {
+        view.addSubview(loadingFailureLabel)
+        loadingFailureLabel.pinCenterX(to: self.view.centerXAnchor)
+        loadingFailureLabel.pinTop(to: self.view, self.view.frame.height / 2.0 - 15)
+        
+        view.addSubview(reloadButton)
+        reloadButton.pinTop(to: self.view, self.view.frame.height / 2.0 + 15)
+        reloadButton.pinCenterX(to: self.view.centerXAnchor)
+    }
 }
 
 // MARK: - DisplayLogic
 extension BuildingsViewController: BuildingsDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
         self.configureUI()
+    }
+    
+    func displayBuildings(_ viewModel: Model.GetBuildings.ViewModel) {
+        /// Retrieve data for reservationsCollectionView
+        self.buildingsCount = viewModel.buildingsCount
+        self.buildingNames = viewModel.buildingNames
+        self.buildingAddresses = viewModel.buildingAddresses
+        self.buildingsIDx = viewModel.buildingsIDx
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.currentState = .loaded
+        }
+        
+        self.reloadCollectionViewData()
     }
     
     func displayMore(_ viewModel: Model.More.ViewModel) {
@@ -131,12 +210,18 @@ extension BuildingsViewController: BuildingsDisplayLogic {
     func displayMap(_ viewModel: Model.Map.ViewModel) {
         self.router.routeToMap()
     }
+    
+    func displayLoadingFailure(_ viewModel: Model.LoadingFailure.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.currentState = .error
+        }
+    }
 }
 
 // MARK: - CollectionView
 extension BuildingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return BuildingsDataStore.shared.buildings?.count ?? 0
+        return self.buildingsCount ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -144,9 +229,9 @@ extension BuildingsViewController: UICollectionViewDataSource, UICollectionViewD
             return UICollectionViewCell()
         }
         cell.configure(
-            buildingName: BuildingsDataStore.shared.buildings?[indexPath.row].name ?? "-",
+            buildingName: buildingNames?[indexPath.row] ?? "-",
             workHours: "08:00 - 22:00",
-            address: BuildingsDataStore.shared.buildings?[indexPath.row].address ?? "-"
+            address: buildingAddresses?[indexPath.row] ?? "-"
         )
         
         return cell
@@ -157,7 +242,7 @@ extension BuildingsViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        interactor.loadMap(Model.Map.Request(selectedBuilding: BuildingsDataStore.shared.buildings![indexPath.row]))
+        interactor.loadMap(Model.Map.Request(buildingID: self.buildingsIDx?[indexPath.row]))
     }
     
     private func reloadCollectionViewData() {
@@ -167,3 +252,17 @@ extension BuildingsViewController: UICollectionViewDataSource, UICollectionViewD
     }
 }
 
+// MARK: - UpdateUIForState
+extension BuildingsViewController {
+    func updateUIForState(_ state: BuildingsState) {
+        switch state {
+        case .loading:
+            loadingIndicator.startAnimating()
+        case .loaded:
+            loadingIndicator.stopAnimating()
+        case .error:
+            loadingIndicator.stopAnimating()
+            showLoadingFailure()
+        }
+    }
+}

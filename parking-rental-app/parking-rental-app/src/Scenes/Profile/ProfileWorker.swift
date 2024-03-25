@@ -14,11 +14,8 @@ final class ProfileWorker {
 // MARK: - WorkerLogic
 extension ProfileWorker: ProfileWorkerLogic {
     func clearUserData() {
-        print("before \(AuthManager.shared.getRefreshToken())")
         AuthManager.shared.deleteRefreshTokenLastUpdateDate()
         AuthManager.shared.deleteToken(tokenType: .access)
         AuthManager.shared.deleteToken(tokenType: .refresh)
-//        UserDefaults.standard.removeObject(forKey: "carRegistryNumber")
-        print("after: \(AuthManager.shared.getRefreshToken())")
     }
 }

@@ -15,6 +15,19 @@ enum BuildingsModel {
         struct ViewModel { }
     }
     
+    enum GetBuildings {
+        struct Request { }
+        struct Response {
+            let buildings: [Building]
+        }
+        struct ViewModel {
+            let buildingsCount: Int
+            let buildingNames: [String]
+            let buildingAddresses: [String]
+            let buildingsIDx: [String]
+        }
+    }
+    
     enum More {
         struct Request { }
         struct Response { }
@@ -29,8 +42,14 @@ enum BuildingsModel {
     
     enum Map {
         struct Request {
-            let selectedBuilding: Building
+            let buildingID: String?
         }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum LoadingFailure {
+        struct Request { }
         struct Response { }
         struct ViewModel { }
     }

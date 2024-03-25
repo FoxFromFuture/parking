@@ -18,14 +18,20 @@ enum HomeModel {
     enum GetReservations {
         struct Request { }
         struct Response {
-            let spotNumbers: [String]?
-            let levelNumbers: [String]?
-            let buildingNames: [String]?
+            let reservations: [Reservation]
+            let parkingSpots: [ParkingSpot]
+            let parkingLevels: [ParkingLevel]
+            let buildings: [Building]
         }
         struct ViewModel {
-            let spotNumbers: [String]?
-            let levelNumbers: [String]?
-            let buildingNames: [String]?
+            let reservationsCount: Int
+            let dates: [String]
+            let startTimes: [String]
+            let endTimes: [String]
+            let lotNumbets: [String]
+            let levelNumbers: [String]
+            let buildingNames: [String]
+            let parkingSpotsIDx: [String]
         }
     }
     
@@ -37,7 +43,7 @@ enum HomeModel {
     
     enum Map {
         struct Request {
-            let lotID: String
+            let lotID: String?
         }
         struct Response { }
         struct ViewModel { }
@@ -50,6 +56,18 @@ enum HomeModel {
     }
     
     enum More {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum LoadingFailure {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum NoData {
         struct Request { }
         struct Response { }
         struct ViewModel { }

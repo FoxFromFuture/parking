@@ -8,7 +8,6 @@
 final class ReservationsDataStore {
     
     static let shared = ReservationsDataStore()
-    var reservations: [Reservation]?
     
     private init() { }
 }

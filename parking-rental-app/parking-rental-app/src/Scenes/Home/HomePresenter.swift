@@ -17,7 +17,45 @@ extension HomePresenter: HomePresentationLogic {
     }
     
     func presentReservations(_ response: Model.GetReservations.Response) {
-        view?.displayReservations(Model.GetReservations.ViewModel(spotNumbers: response.spotNumbers, levelNumbers: response.levelNumbers, buildingNames: response.buildingNames))
+        /// Prepare datastores
+        var dates: [String] = []
+        var startTimes: [String] = []
+        var endTimes: [String] = []
+        var lotNumbers: [String] = []
+        var levelNumbers: [String] = []
+        var buildingNames: [String] = []
+        var parkingSpotsIDx: [String] = []
+    
+        /// Retrieve "dates", "start times" and "end times" from reservations
+        for reservation in response.reservations {
+            dates.append("\(reservation.startTime.prefix(10))")
+            startTimes.append("\(reservation.startTime.suffix(8).prefix(5))")
+            endTimes.append("\(reservation.endTime.suffix(8).prefix(5))")
+        }
+        
+        /// Retrieve "lotNumbers" and "parkingSpotsIDx" from parking spots & retrieve "levelNumbers" and "buildingNames" from corresponding parking levels and buildings
+        for parkingSpot in response.parkingSpots {
+            lotNumbers.append(parkingSpot.parkingNumber)
+            parkingSpotsIDx.append(parkingSpot.id)
+            
+            /// Find corresponding parking level
+            for parkingLevel in response.parkingLevels {
+                if parkingSpot.levelId == parkingLevel.id {
+                    levelNumbers.append("\(parkingLevel.levelNumber)")
+                    return
+                }
+            }
+            
+            /// Find corresponding building
+            for building in response.buildings {
+                if parkingSpot.buildingId == building.id {
+                    buildingNames.append(building.name)
+                    return
+                }
+            }
+        }
+        
+        view?.displayReservations(Model.GetReservations.ViewModel(reservationsCount: response.reservations.count, dates: dates, startTimes: startTimes, endTimes: endTimes, lotNumbets: lotNumbers, levelNumbers: levelNumbers, buildingNames: buildingNames, parkingSpotsIDx: parkingSpotsIDx))
     }
     
     func presentBuildings(_ response: Model.Buildings.Response) {
@@ -34,5 +72,13 @@ extension HomePresenter: HomePresentationLogic {
     
     func presentMore(_ response: Model.More.Response) {
         view?.displayMore(Model.More.ViewModel())
+    }
+    
+    func presentLoadingFailure(_ response: Model.LoadingFailure.Response) {
+        view?.displayLoadingFailure(Model.LoadingFailure.ViewModel())
+    }
+    
+    func presentNoData(_ response: Model.NoData.Response) {
+        view?.displayNoData(HomeModel.NoData.ViewModel())
     }
 }

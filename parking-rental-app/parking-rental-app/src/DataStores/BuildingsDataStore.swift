@@ -8,8 +8,7 @@
 final class BuildingsDataStore {
     
     static let shared = BuildingsDataStore()
-    var buildings: [Building]?
-    var selectedBuilding: Building?
+    var buildingForMapID: String?
     
     private init() { }
 }

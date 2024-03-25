@@ -24,11 +24,23 @@ final class HomeViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
-    private let reservationsDataStore = ReservationsDataStore.shared
-    private let parkingSpotsDataStore = ParkingSpotsDataStore.shared
-    private var spotNumbers: [String]?
+    private var reservationsCount: Int?
+    private var dates: [String]?
+    private var startTimes: [String]?
+    private var endTimes: [String]?
+    private var lotNumbers: [String]?
     private var levelNumbers: [String]?
     private var buildingNames: [String]?
+    private var parkingSpotsIDx: [String]?
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
+    private let loadingFailureLabel = UILabel()
+    private let reloadButton = UIButton()
+    private let noDataLabel = UILabel()
+    private var currentState: HomeState = .loading {
+        didSet {
+            updateUIForState(currentState)
+        }
+    }
     
     // MARK: - LifeCycle
     init(
@@ -48,10 +60,18 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor.loadStart(Model.Start.Request())
-        interactor.loadReservations(Model.GetReservations.Request())
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if currentState == .noData {
+            noDataLabel.removeFromSuperview()
+        } else if currentState == .error {
+            loadingFailureLabel.removeFromSuperview()
+            reloadButton.removeFromSuperview()
+        }
+        currentState = .loading
+        interactor.loadReservations(Model.GetReservations.Request())
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -62,6 +82,10 @@ final class HomeViewController: UIViewController {
         configureProfileLabelButton()
         configureReservationsCollectionView()
         configureReserveLotButton()
+        configureLoadingIndicator()
+        configureLoadingFailureLabel()
+        configureReloadButton()
+        configureNoDataLabel()
     }
     
     private func configureTabBar() {
@@ -118,10 +142,61 @@ final class HomeViewController: UIViewController {
         reserveLotButton.addTarget(self, action: #selector(reserveLotButtonWasTapped), for: .touchDown)
     }
     
+    private func configureLoadingIndicator() {
+        self.view.addSubview(loadingIndicator)
+        loadingIndicator.pinCenter(to: self.view)
+        loadingIndicator.color = .gray
+    }
+    
+    private func configureLoadingFailureLabel() {
+        loadingFailureLabel.text = "Connection Error"
+        loadingFailureLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        loadingFailureLabel.textColor = .black
+    }
+    
+    private func configureReloadButton() {
+        reloadButton.setTitle("Reload", for: .normal)
+        reloadButton.setTitleColor(.systemBlue, for: .normal)
+        reloadButton.setTitleColor(.gray, for: .highlighted)
+        reloadButton.backgroundColor = UIColor.clear
+        reloadButton.addTarget(self, action: #selector(reloadButtonWasPressed), for: .touchUpInside)
+    }
+    
+    private func configureNoDataLabel() {
+        noDataLabel.text = "You don't have any reservations yet."
+        loadingFailureLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        loadingFailureLabel.textColor = .black
+    }
+    
     // MARK: - Actions
     @objc
     private func reserveLotButtonWasTapped() {
         interactor.loadBuildings(Model.Buildings.Request())
+    }
+    
+    @objc
+    public func reloadButtonWasPressed() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        loadingFailureLabel.removeFromSuperview()
+        reloadButton.removeFromSuperview()
+        currentState = .loading
+        interactor.loadReservations(Model.GetReservations.Request())
+    }
+    
+    private func showLoadingFailure() {
+        view.addSubview(loadingFailureLabel)
+        loadingFailureLabel.pinCenterX(to: self.view.centerXAnchor)
+        loadingFailureLabel.pinTop(to: self.view, self.view.frame.height / 2.0 - 15)
+        
+        view.addSubview(reloadButton)
+        reloadButton.pinTop(to: self.view, self.view.frame.height / 2.0 + 15)
+        reloadButton.pinCenterX(to: self.view.centerXAnchor)
+    }
+    
+    private func showNoDataLabel() {
+        view.addSubview(noDataLabel)
+        noDataLabel.pinCenter(to: self.view)
     }
 }
 
@@ -132,9 +207,20 @@ extension HomeViewController: HomeDisplayLogic {
     }
     
     func displayReservations(_ viewModel: Model.GetReservations.ViewModel) {
-        self.spotNumbers = viewModel.spotNumbers
+        /// Retrieve data for reservationsCollectionView
+        self.reservationsCount = viewModel.reservationsCount
+        self.dates = viewModel.dates
+        self.startTimes = viewModel.startTimes
+        self.endTimes = viewModel.endTimes
+        self.lotNumbers = viewModel.lotNumbets
         self.levelNumbers = viewModel.levelNumbers
         self.buildingNames = viewModel.buildingNames
+        self.parkingSpotsIDx = viewModel.parkingSpotsIDx
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.currentState = .loaded
+        }
+        
         self.reloadCollectionViewData()
     }
     
@@ -153,12 +239,24 @@ extension HomeViewController: HomeDisplayLogic {
     func displayMore(_ viewModel: Model.More.ViewModel) {
         self.router.routeToMore()
     }
+    
+    func displayLoadingFailure(_ viewModel: Model.LoadingFailure.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.currentState = .error
+        }
+    }
+    
+    func displayNoData(_ viewModel: Model.NoData.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.currentState = .noData
+        }
+    }
 }
 
 // MARK: - CollectionView
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return reservationsDataStore.reservations?.count ?? 0
+        return self.reservationsCount ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -166,8 +264,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         cell.configure(
-            lotNumber: "\(self.spotNumbers?[indexPath.row] ?? "-")",
-            date: "\(reservationsDataStore.reservations?[indexPath.row].startTime.prefix(10) ?? "-"): \(reservationsDataStore.reservations?[indexPath.row].startTime.suffix(8).prefix(5) ?? "-") - \(reservationsDataStore.reservations?[indexPath.row].endTime.suffix(8).prefix(5) ?? "-")",
+            lotNumber: self.lotNumbers?[indexPath.row] ?? "-",
+            date: "\(self.dates?[indexPath.row] ?? "-"): \(self.startTimes?[indexPath.row] ?? "-") - \(self.endTimes?[indexPath.row] ?? "-")",
             floor: "Floor: \(self.levelNumbers?[indexPath.row] ?? "-")",
             building: "\(self.buildingNames?[indexPath.row] ?? "-")"
         )
@@ -180,13 +278,30 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: - fetch spot id to view on map
-//        interactor.loadMap(Model.Map.Request(lotID: <#T##String#>))
+        interactor.loadMap(Model.Map.Request(lotID: self.parkingSpotsIDx?[indexPath.row]))
     }
     
     private func reloadCollectionViewData() {
         DispatchQueue.main.async { [weak self] in
             self?.reservationsCollectionView.reloadData()
+        }
+    }
+}
+
+// MARK: - UpdateUIForState
+extension HomeViewController {
+    func updateUIForState(_ state: HomeState) {
+        switch state {
+        case .loading:
+            loadingIndicator.startAnimating()
+        case .loaded:
+            loadingIndicator.stopAnimating()
+        case .error:
+            loadingIndicator.stopAnimating()
+            showLoadingFailure()
+        case .noData:
+            loadingIndicator.stopAnimating()
+            showNoDataLabel()
         }
     }
 }

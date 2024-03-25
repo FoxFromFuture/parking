@@ -16,12 +16,11 @@ final class RegistrationCarWorker {
 // MARK: - WorkerLogic
 extension RegistrationCarWorker: RegistrationCarWorkerLogic {
     func saveCarRegistryNumber(registryNumber: String, completion: @escaping (Car?, String?) -> ()) {
-        self.networkManager.addNewCar(registryNumber: registryNumber) { [weak self] carData, error in
+        self.networkManager.addNewCar(registryNumber: registryNumber) { carData, error in
             if let error = error {
                 completion(nil, error)
             } else if let data = carData {
                 completion(data, nil)
-//                self?.defaults.set(registryNumber, forKey: "carRegistryNumber")
             }
         }
     }

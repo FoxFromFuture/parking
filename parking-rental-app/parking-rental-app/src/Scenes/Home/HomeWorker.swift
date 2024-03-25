@@ -14,7 +14,7 @@ final class HomeWorker {
 
 // MARK: - WorkerLogic
 extension HomeWorker: HomeWorkerLogic {
-    func getReservations(completion: @escaping ([Reservation]?, String?) -> ()) {
+    func getAllReservations(completion: @escaping ([Reservation]?, String?) -> ()) {
         networkManager.getAllReservations { reservationsData, error in
             if let error = error {
                 completion(nil, error)
@@ -24,17 +24,7 @@ extension HomeWorker: HomeWorkerLogic {
         }
     }
     
-    func getParkingSpotsInfo(id: String, completion: @escaping (_ parkingSpotInfo: ParkingSpot?, _ error: String?) -> ()) {
-        networkManager.getParkingSpotInfo(id: UUID(uuidString: id) ?? UUID()) { parkingSpotData, error in
-            if let error = error {
-                completion(nil, error)
-            } else if let data = parkingSpotData {
-                completion(data, nil)
-            }
-        }
-    }
-    
-    func getParkingSpots(completion: @escaping ([ParkingSpot]?, String?) -> ()) {
+    func getAllParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ()) {
         networkManager.getAllParkingSpots { parkingSpotsData, error in
             if let error = error {
                 completion(nil, error)
@@ -44,7 +34,7 @@ extension HomeWorker: HomeWorkerLogic {
         }
     }
     
-    func getAllParkingLevels(completion: @escaping ([ParkingLevel]?, String?) -> ()) {
+    func getAllParkingLevels(completion: @escaping (_ parkingLevelsData: [ParkingLevel]?, _ error: String?) -> ()) {
         networkManager.getAllParkingLevels { parkingLevelsData, error in
             if let error = error {
                 completion(nil, error)
@@ -54,7 +44,7 @@ extension HomeWorker: HomeWorkerLogic {
         }
     }
     
-    func getAllBuildings(completion: @escaping ([Building]?, String?) -> ()) {
+    func getAllBuildings(completion: @escaping (_ buildingsData: [Building]?, _ error: String?) -> ()) {
         networkManager.getAllBuildings { buildingsData, error in
             if let error = error {
                 completion(nil, error)

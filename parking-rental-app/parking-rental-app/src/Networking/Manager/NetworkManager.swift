@@ -76,7 +76,6 @@ final class NetworkManager {
     }
     
     func authRequest<TRouter: NetworkRouter, TResponse: Decodable>(router: TRouter, task: TRouter.EndPoint, responseType: TResponse.Type, completion: @escaping (_ data: TResponse?, _ error: String?) -> ()) {
-        print(task)
         router.request(task) { [weak self] data, response, error in
             let responseDecoder = self?.responseDecoder(data: data, dataType: responseType, response: response, error: error)
             if responseDecoder?.error == nil {
@@ -84,7 +83,6 @@ final class NetworkManager {
             }
             if responseDecoder?.error == NetworkResponse.authenticationError.rawValue {
                 self?.updateAccessToken(completion: { [weak self] authData, error in
-                    print("new access token!")
                     if error != nil {
                         completion(nil, error)
                     } else {
@@ -166,12 +164,6 @@ final class NetworkManager {
     }
     
     // MARK: - ParkingSpots API
-    func getParkingSpotInfo(id: UUID, completion: @escaping (_ parkingSpotData: ParkingSpot?, _ error: String?) -> ()) {
-        authRequest(router: parkingSpotsRouter, task: .getParkingSpotInfo(id: id), responseType: ParkingSpot.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
-        }
-    }
-    
     func getAllParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ()) {
         authRequest(router: parkingSpotsRouter, task: .getAllParkingSpots, responseType: [ParkingSpot].self) { [weak self] data, error in
             self?.authRequestCompletion(data, error, completion)

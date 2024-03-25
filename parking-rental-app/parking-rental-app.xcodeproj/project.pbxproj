@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272A22F82BB06A750025880E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22F72BB06A750025880E /* MapView.swift */; };
+		272A22FB2BB1A3380025880E /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22FA2BB1A3380025880E /* HomeState.swift */; };
+		272A22FE2BB1AABE0025880E /* BuildingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22FD2BB1AABE0025880E /* BuildingsState.swift */; };
 		272B51F62B9C4FD8008F428E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B51F52B9C4FD8008F428E /* ProfileViewController.swift */; };
 		272B51F82B9C5006008F428E /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B51F72B9C5006008F428E /* ProfileInteractor.swift */; };
 		272B51FA2B9C5021008F428E /* ProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B51F92B9C5021008F428E /* ProfileWorker.swift */; };
@@ -134,6 +137,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		272A22F72BB06A750025880E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		272A22FA2BB1A3380025880E /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
+		272A22FD2BB1AABE0025880E /* BuildingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsState.swift; sourceTree = "<group>"; };
 		272B51F52B9C4FD8008F428E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		272B51F72B9C5006008F428E /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		272B51F92B9C5021008F428E /* ProfileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWorker.swift; sourceTree = "<group>"; };
@@ -273,6 +279,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		272A22F62BB067490025880E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				272A22F72BB06A750025880E /* MapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		272A22F92BB1A31C0025880E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				272A22FA2BB1A3380025880E /* HomeState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		272A22FC2BB1AAB20025880E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				272A22FD2BB1AABE0025880E /* BuildingsState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		272B51F42B9C4FB5008F428E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +336,7 @@
 		272B52162B9C5341008F428E /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				272A22F62BB067490025880E /* Views */,
 				272B52172B9C539B008F428E /* MapViewController.swift */,
 				272B52192B9C53C5008F428E /* MapInteractor.swift */,
 				272B521B2B9C53D9008F428E /* MapWorker.swift */,
@@ -565,6 +596,7 @@
 		27754BE22B99DA420065A14E /* Buildings */ = {
 			isa = PBXGroup;
 			children = (
+				272A22FC2BB1AAB20025880E /* Enums */,
 				27535C622BA2DD5D000E48E6 /* Views */,
 				27754BE32B99DA740065A14E /* BuildingsViewController.swift */,
 				27754BE52B99DA7D0065A14E /* BuildingsInteractor.swift */,
@@ -593,6 +625,7 @@
 		27848BEB2B80A68B00542D8C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				272A22F92BB1A31C0025880E /* Enums */,
 				2795FD952B8D2C7000C02FF3 /* Views */,
 				27848BEC2B80A6F200542D8C /* HomeViewController.swift */,
 				27848BEE2B80A70300542D8C /* HomeInteractor.swift */,
@@ -741,9 +774,11 @@
 				27535C862BA4854E000E48E6 /* UpdateCarRouter.swift in Sources */,
 				27754BF92B9AECE90065A14E /* ParkingSpotsDataStore.swift in Sources */,
 				27535C802BA4852E000E48E6 /* UpdateCarWorker.swift in Sources */,
+				272A22FB2BB1A3380025880E /* HomeState.swift in Sources */,
 				27754BE82B99DA870065A14E /* BuildingsWorker.swift in Sources */,
 				27848BED2B80A6F200542D8C /* HomeViewController.swift in Sources */,
 				2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */,
+				272A22FE2BB1AABE0025880E /* BuildingsState.swift in Sources */,
 				273E65FF2B88E94900567BD8 /* SplashViewController.swift in Sources */,
 				273E66012B88E95500567BD8 /* SplashInteractor.swift in Sources */,
 				27C624562B7D0217002FFF48 /* RegistrationPresenter.swift in Sources */,
@@ -823,6 +858,7 @@
 				27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */,
 				272B520F2B9C517A008F428E /* MoreModel.swift in Sources */,
 				27848BE22B80A46E00542D8C /* RegistrationCarModel.swift in Sources */,
+				272A22F82BB06A750025880E /* MapView.swift in Sources */,
 				27848BDC2B80A44B00542D8C /* RegistrationCarViewController.swift in Sources */,
 				27754BFF2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift in Sources */,
 				272B52022B9C5099008F428E /* ProfileProtocols.swift in Sources */,

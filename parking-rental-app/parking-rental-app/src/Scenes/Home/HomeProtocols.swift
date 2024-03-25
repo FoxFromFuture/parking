@@ -14,6 +14,8 @@ protocol HomeDisplayLogic: AnyObject {
     func displayMap(_ viewModel: Model.Map.ViewModel)
     func displayProfile(_ viewModel: Model.Profile.ViewModel)
     func displayMore(_ viewModel: Model.More.ViewModel)
+    func displayLoadingFailure(_ viewModel: Model.LoadingFailure.ViewModel)
+    func displayNoData(_ viewModel: Model.NoData.ViewModel)
 }
 
 // MARK: - BusinessLogic
@@ -36,6 +38,8 @@ protocol HomePresentationLogic {
     func presentMap(_ response: Model.Map.Response)
     func presentProfile(_ response: Model.Profile.Response)
     func presentMore(_ response: Model.More.Response)
+    func presentLoadingFailure(_ response: Model.LoadingFailure.Response)
+    func presentNoData(_ response: Model.NoData.Response)
 }
 
 // MARK: - RoutingLogic
@@ -49,9 +53,8 @@ protocol HomeRoutingLogic {
 // MARK: - WorkerLogic
 protocol HomeWorkerLogic {
     typealias Model = HomeModel
-    func getReservations(completion: @escaping (_ reservationsData: [Reservation]?, _ error: String?) -> ())
-    func getParkingSpotsInfo(id: String, completion: @escaping (_ parkingSpotInfo: ParkingSpot?, _ error: String?) -> ())
-    func getParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ())
+    func getAllReservations(completion: @escaping (_ reservationsData: [Reservation]?, _ error: String?) -> ())
+    func getAllParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ())
     func getAllParkingLevels(completion: @escaping (_ parkingLevelsData: [ParkingLevel]?, _ error: String?) -> ())
     func getAllBuildings(completion: @escaping (_ buildingsData: [Building]?, _ error: String?) -> ())
 }

@@ -16,6 +16,22 @@ extension BuildingsPresenter: BuildingsPresentationLogic {
         view?.displayStart(Model.Start.ViewModel())
     }
     
+    func presentBuildings(_ response: Model.GetBuildings.Response) {
+        /// Prepare datastores
+        var buildingNames: [String] = []
+        var buildingAddresses: [String] = []
+        var buildingsIDx: [String] = []
+        
+        /// Retrieve "buildingNames" and "buildingAddresses" from buildings
+        for building in response.buildings {
+            buildingNames.append(building.name)
+            buildingAddresses.append(building.address)
+            buildingsIDx.append(building.id)
+        }
+        
+        view?.displayBuildings(BuildingsModel.GetBuildings.ViewModel(buildingsCount: response.buildings.count, buildingNames: buildingNames, buildingAddresses: buildingAddresses, buildingsIDx: buildingsIDx))
+    }
+    
     func presentMore(_ response: Model.More.Response) {
         view?.displayMore(Model.More.ViewModel())
     }
@@ -26,5 +42,9 @@ extension BuildingsPresenter: BuildingsPresentationLogic {
     
     func presentMap(_ response: Model.Map.Response) {
         view?.displayMap(Model.Map.ViewModel())
+    }
+    
+    func presentLoadingFailure(_ response: Model.LoadingFailure.Response) {
+        view?.displayLoadingFailure(BuildingsModel.LoadingFailure.ViewModel())
     }
 }

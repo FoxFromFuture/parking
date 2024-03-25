@@ -22,6 +22,7 @@ final class MapInteractor {
 // MARK: - BusinessLogic
 extension MapInteractor: MapBusinessLogic {
     func loadStart(_ request: Model.Start.Request) {
+        // TODO: - Get parking spots' coords for the chosen building floor 0 and send 'em to the MapViewComtroller.
         presenter.presentStart(Model.Start.Response())
     }
     

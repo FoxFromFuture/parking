@@ -25,6 +25,18 @@ extension BuildingsInteractor: BuildingsBusinessLogic {
         presenter.presentStart(Model.Start.Response())
     }
     
+    func loadBuildings(_ request: Model.GetBuildings.Request) {
+        /// Fetch all buildings data
+        self.worker.getAllBuildings(completion: { [weak self] buildingsData, error in
+            if let error = error {
+                print(error)
+                self?.presenter.presentLoadingFailure(BuildingsModel.LoadingFailure.Response())
+            } else if let buildings = buildingsData, !buildings.isEmpty {
+                self?.presenter.presentBuildings(BuildingsModel.GetBuildings.Response(buildings: buildings))
+            }
+        })
+    }
+    
     func loadMore(_ request: Model.More.Request) {
         presenter.presentMore(Model.More.Response())
     }
@@ -34,7 +46,7 @@ extension BuildingsInteractor: BuildingsBusinessLogic {
     }
     
     func loadMap(_ request: Model.Map.Request) {
-        BuildingsDataStore.shared.selectedBuilding = request.selectedBuilding
+        BuildingsDataStore.shared.buildingForMapID = request.buildingID
         presenter.presentMap(Model.Map.Response())
     }
 }

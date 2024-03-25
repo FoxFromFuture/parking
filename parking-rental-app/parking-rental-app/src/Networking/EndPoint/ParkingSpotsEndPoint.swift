@@ -8,7 +8,6 @@
 import Foundation
 
 public enum ParkingSpotsApi {
-    case getParkingSpotInfo(id: UUID)
     case getAllParkingSpots
 }
 
@@ -26,8 +25,6 @@ extension ParkingSpotsApi: EndPointType {
     
     var path: String {
         switch self {
-        case .getParkingSpotInfo(let id):
-            return "\(id)"
         case .getAllParkingSpots:
             return ""
         }
@@ -35,8 +32,6 @@ extension ParkingSpotsApi: EndPointType {
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .getParkingSpotInfo:
-            return .get
         case .getAllParkingSpots:
             return .get
         }
@@ -44,8 +39,6 @@ extension ParkingSpotsApi: EndPointType {
     
     var task: HTTPTask {
         switch self {
-        case .getParkingSpotInfo:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         case .getAllParkingSpots:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         }

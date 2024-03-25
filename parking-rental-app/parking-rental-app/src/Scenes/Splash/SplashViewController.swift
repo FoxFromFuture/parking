@@ -36,8 +36,8 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        AuthManager.shared.deleteToken(tokenType: .refresh)
-        AuthManager.shared.deleteToken(tokenType: .access)
+//        AuthManager.shared.deleteToken(tokenType: .refresh)
+//        AuthManager.shared.deleteToken(tokenType: .access)
         interactor.loadStart(Model.Start.Request())
         interactor.loadLogin(Model.Login.Request())
     }

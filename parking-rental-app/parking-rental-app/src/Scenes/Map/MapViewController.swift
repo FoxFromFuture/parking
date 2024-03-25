@@ -19,7 +19,7 @@ final class MapViewController: UIViewController {
     private let router: MapRoutingLogic
     private let tabBar = TabBar()
     private let mapScrollView = UIScrollView()
-    private let mapView = UIView()
+    private let mapView = MapView()
     
     // MARK: - LifeCycle
     init(
