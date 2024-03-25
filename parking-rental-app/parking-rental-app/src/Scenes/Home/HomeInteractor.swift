@@ -59,7 +59,6 @@ extension HomeInteractor: HomeBusinessLogic {
                 self?.worker.getAllParkingSpots(completion: { [weak self] parkingSpotsData, error in
                     if let error = error {
                         print(error)
-                        self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
                     } else if let parkingSpots = parkingSpotsData {
                         /// Save fetched parking spots
                         self?.parkingSpots = parkingSpots
@@ -72,7 +71,6 @@ extension HomeInteractor: HomeBusinessLogic {
                 self?.worker.getAllParkingLevels(completion: { [weak self] parkingLevelsData, error in
                     if let error = error {
                         print(error)
-                        self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
                     } else if let parkingLevels = parkingLevelsData {
                         /// Save fetched parking levels
                         self?.parkingLevels = parkingLevels
@@ -85,7 +83,6 @@ extension HomeInteractor: HomeBusinessLogic {
                 self?.worker.getAllBuildings(completion: { [weak self] buildingsData, error in
                     if let error = error {
                         print(error)
-                        self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
                     } else if let buildings = buildingsData {
                         /// Save fetched buildings
                         self?.buildings = buildings
@@ -99,6 +96,8 @@ extension HomeInteractor: HomeBusinessLogic {
         /// Present reservations if all data was retrieved from server & if there were some reservations
         if let reservations = self.reservations, !reservations.isEmpty, let parkingSpots = self.parkingSpots, let parkingLevels = self.parkingLevels, let buildings = self.buildings {
             self.presenter.presentReservations(Model.GetReservations.Response(reservations: reservations, parkingSpots: parkingSpots, parkingLevels: parkingLevels, buildings: buildings))
+        } else {
+            self.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
         }
     }
     
