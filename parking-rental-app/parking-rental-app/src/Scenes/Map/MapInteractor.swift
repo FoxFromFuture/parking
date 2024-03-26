@@ -28,6 +28,19 @@ extension MapInteractor: MapBusinessLogic {
     }
     
     func loadParkingMap(_ request: Model.ParkingMap.Request) {
+        /// Check if Map was opened for displaying initial building level or for displaying reservation
+        if let buildingForMapID = BuildingsDataStore.shared.buildingForMapID {
+            /// Clear one-time building data
+            BuildingsDataStore.shared.buildingForMapID = nil
+            
+            
+        } else if let reservatiomForMapID = ReservationsDataStore.shared.reservationForMapID {
+            /// Clear one-time reservation data
+            ReservationsDataStore.shared.reservationForMapID = nil
+            
+            
+        }
+        
         guard let buildingForMapID = BuildingsDataStore.shared.buildingForMapID else { return }
     
         self.worker.getAllBuildingLevels(buildingID: buildingForMapID) { [weak self] levelsData, error in

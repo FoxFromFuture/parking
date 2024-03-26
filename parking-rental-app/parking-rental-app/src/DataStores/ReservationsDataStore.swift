@@ -8,6 +8,7 @@
 final class ReservationsDataStore {
     
     static let shared = ReservationsDataStore()
+    var reservationForMapID: String?
     
     private init() { }
 }

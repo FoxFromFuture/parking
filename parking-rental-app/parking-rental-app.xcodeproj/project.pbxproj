@@ -88,7 +88,6 @@
 		27754BF52B99E33D0065A14E /* ReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF42B99E33D0065A14E /* ReservationCell.swift */; };
 		27754BF72B9A21590065A14E /* ReservationsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF62B9A21590065A14E /* ReservationsDataStore.swift */; };
 		27754BF92B9AECE90065A14E /* ParkingSpotsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */; };
-		27754BFB2B9AECFC0065A14E /* ParkingLevelsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BFA2B9AECFC0065A14E /* ParkingLevelsDataStore.swift */; };
 		27754BFD2B9AED0C0065A14E /* BuildingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */; };
 		27754BFF2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BFE2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift */; };
 		27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754C002B9AF0710065A14E /* ParkingSpotsModel.swift */; };
@@ -112,7 +111,6 @@
 		27848BFB2B80A74600542D8C /* HomeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BFA2B80A74600542D8C /* HomeAssembly.swift */; };
 		2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD962B8D2C9A00C02FF3 /* TabBar.swift */; };
 		2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */; };
-		27A5E5622BADCF2300226DBC /* CarsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5E5612BADCF2300226DBC /* CarsDataStore.swift */; };
 		27C0B7A62B9C38B600977074 /* ParkingLevelsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B7A52B9C38B600977074 /* ParkingLevelsEndPoint.swift */; };
 		27C0B7A82B9C3AEC00977074 /* ParkingLevelsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B7A72B9C3AEC00977074 /* ParkingLevelsModel.swift */; };
 		27C0B7AC2B9C448400977074 /* BuildingsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B7AB2B9C448400977074 /* BuildingsEndPoint.swift */; };
@@ -220,7 +218,6 @@
 		27754BF42B99E33D0065A14E /* ReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCell.swift; sourceTree = "<group>"; };
 		27754BF62B9A21590065A14E /* ReservationsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsDataStore.swift; sourceTree = "<group>"; };
 		27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsDataStore.swift; sourceTree = "<group>"; };
-		27754BFA2B9AECFC0065A14E /* ParkingLevelsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLevelsDataStore.swift; sourceTree = "<group>"; };
 		27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsDataStore.swift; sourceTree = "<group>"; };
 		27754BFE2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsEndPoint.swift; sourceTree = "<group>"; };
 		27754C002B9AF0710065A14E /* ParkingSpotsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsModel.swift; sourceTree = "<group>"; };
@@ -244,7 +241,6 @@
 		27848BFA2B80A74600542D8C /* HomeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAssembly.swift; sourceTree = "<group>"; };
 		2795FD962B8D2C9A00C02FF3 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
-		27A5E5612BADCF2300226DBC /* CarsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsDataStore.swift; sourceTree = "<group>"; };
 		27C0B7A52B9C38B600977074 /* ParkingLevelsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLevelsEndPoint.swift; sourceTree = "<group>"; };
 		27C0B7A72B9C3AEC00977074 /* ParkingLevelsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLevelsModel.swift; sourceTree = "<group>"; };
 		27C0B7AB2B9C448400977074 /* BuildingsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsEndPoint.swift; sourceTree = "<group>"; };
@@ -615,9 +611,7 @@
 			children = (
 				27754BF62B9A21590065A14E /* ReservationsDataStore.swift */,
 				27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */,
-				27754BFA2B9AECFC0065A14E /* ParkingLevelsDataStore.swift */,
 				27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */,
-				27A5E5612BADCF2300226DBC /* CarsDataStore.swift */,
 			);
 			path = DataStores;
 			sourceTree = "<group>";
@@ -822,7 +816,6 @@
 				27C0B7AE2B9C44F900977074 /* BuildingModel.swift in Sources */,
 				27848BE82B80A48600542D8C /* RegistrationCarProtocols.swift in Sources */,
 				272B51F82B9C5006008F428E /* ProfileInteractor.swift in Sources */,
-				27754BFB2B9AECFC0065A14E /* ParkingLevelsDataStore.swift in Sources */,
 				272B521A2B9C53C5008F428E /* MapInteractor.swift in Sources */,
 				27C6245C2B7D0239002FFF48 /* RegistrationWorker.swift in Sources */,
 				273E65DA2B848B2E00567BD8 /* HTTPMethod.swift in Sources */,
@@ -850,7 +843,6 @@
 				273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */,
 				272B52152B9C51B9008F428E /* MoreAssembly.swift in Sources */,
 				273E65ED2B849CBB00567BD8 /* NetworkManager.swift in Sources */,
-				27A5E5622BADCF2300226DBC /* CarsDataStore.swift in Sources */,
 				27C624542B7D020C002FFF48 /* RegistrationInteractor.swift in Sources */,
 				272B52202B9C5418008F428E /* MapModel.swift in Sources */,
 				27848BF32B80A71A00542D8C /* HomeModel.swift in Sources */,

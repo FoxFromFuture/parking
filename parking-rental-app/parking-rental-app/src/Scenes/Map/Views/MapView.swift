@@ -19,7 +19,7 @@ class MapView: UIView {
         super.init(frame: frame)
         self.parkingSpotsCoords = parkingSpotsCoords
         self.parkingSpotsCanvases = parkingSpotsCanvases
-        self.backgroundColor = .yellow
+        self.backgroundColor = .white
         configureUI()
     }
     

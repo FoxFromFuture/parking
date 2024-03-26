@@ -43,10 +43,8 @@ extension UpdateCarInteractor: UpdateCarBusinessLogic {
                 // TODO: Present failure
                 print(error)
             } else if let cars = carsData {
-                CarsDataStore.shared.cars = cars
-                if let id = CarsDataStore.shared.cars?[0].id {
-                    print("ok")
-                    self.worker.updateCar(id: id, newRegistryNumber: request.newRegistryNumber) { [weak self] carData, error in
+                if !cars.isEmpty {
+                    self.worker.updateCar(id: cars[0].id, newRegistryNumber: request.newRegistryNumber) { [weak self] carData, error in
                         if let error = error {
                             // TODO: Present failure
                             print(error)

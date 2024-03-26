@@ -85,7 +85,6 @@ final class MapViewController: UIViewController {
     }
     
     private func configureMapView(parkingSpotsCoords: [OnCanvasCoords], parkingSpotsCanvases: [Canvas], mapCanvas: Canvas) {
-        // TODO: - Send level canvas as frame
         let mapFrame = CGRect(x: 0, y: 0, width: mapCanvas.width, height: mapCanvas.height)
         self.mapView = MapView(parkingSpotsCoords: parkingSpotsCoords, parkingSpotsCanvases: parkingSpotsCanvases, frame: mapFrame)
         if let mapView = self.mapView {
