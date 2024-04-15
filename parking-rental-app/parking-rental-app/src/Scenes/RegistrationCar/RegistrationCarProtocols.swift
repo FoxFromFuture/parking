@@ -10,6 +10,7 @@ protocol RegistrationCarDisplayLogic: AnyObject {
     typealias Model = RegistrationCarModel
     func displayStart(_ viewModel: RegistrationCarModel.Start.ViewModel)
     func displayHome(_ viewModel: RegistrationCarModel.Home.ViewModel)
+    func displayCarSetupFailure(_ viewModel: RegistrationCarModel.CarSetupFailure.ViewModel)
 }
 
 // MARK: - BusinessLogic
@@ -24,6 +25,7 @@ protocol RegistrationCarPresentationLogic {
     typealias Model = RegistrationCarModel
     func presentStart(_ response: RegistrationCarModel.Start.Response)
     func presentHome(_ response: RegistrationCarModel.Home.Response)
+    func presentCarSetupFailure(_ response: RegistrationCarModel.CarSetupFailure.Response)
 }
 
 // MARK: - RoutingLogic

@@ -46,7 +46,6 @@ extension BuildingsInteractor: BuildingsBusinessLogic {
     }
     
     func loadMap(_ request: Model.Map.Request) {
-        BuildingsDataStore.shared.buildingForMapID = request.buildingID
-        presenter.presentMap(Model.Map.Response())
+        presenter.presentMap(Model.Map.Response(buildingID: request.buildingID))
     }
 }

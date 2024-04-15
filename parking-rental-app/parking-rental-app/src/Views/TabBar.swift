@@ -14,6 +14,7 @@ final class TabBar: UIView {
     private let imageViewsStack = UIStackView()
     private let homeButton = TabBarButton()
     private let moreButton = TabBarButton()
+    private let topBorderView = UIView()
     
     // MARK: - Initializers
     init() {
@@ -28,22 +29,32 @@ final class TabBar: UIView {
     
     // MARK: - Private Methods
     private func configureTabBar() {
-        self.layer.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        backgroundColor = Colors.tabBar.uiColor
+        configureTopBorderView()
         configureHomeButton()
         configureMoreButton()
         configureImageViewsStack()
     }
     
+    private func configureTopBorderView() {
+        self.addSubview(topBorderView)
+        topBorderView.pinTop(to: self.topAnchor)
+        topBorderView.pinLeft(to: self.leadingAnchor)
+        topBorderView.pinRight(to: self.trailingAnchor)
+        topBorderView.setHeight(0.5)
+        topBorderView.backgroundColor = Colors.tabBarTopBorder.uiColor
+    }
+    
     private func configureHomeButton() {
         let image = UIImage(systemName: "house.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        homeButton.setText("Home", #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
-        homeButton.setIcon(image, #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1))
+        homeButton.setText("home".localize(), UIColor(named: "Active") ?? .blue, .systemFont(ofSize: 12, weight: .medium))
+        homeButton.setIcon(image, UIColor(named: "Active") ?? .blue)
     }
     
     private func configureMoreButton() {
         let image = UIImage(systemName: "ellipsis.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        moreButton.setText("More", #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
-        moreButton.setIcon(image, #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1))
+        moreButton.setText("more".localize(), UIColor(named: "Icon") ?? .gray, .systemFont(ofSize: 12, weight: .medium))
+        moreButton.setIcon(image, UIColor(named: "Icon") ?? .gray)
     }
     
     public func setHomeButtonAction(action: @escaping (() -> Void)) {
@@ -56,20 +67,20 @@ final class TabBar: UIView {
     
     public func setHomeButtonActive() {
         var image = UIImage(systemName: "house.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        homeButton.setText("Home", #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
-        homeButton.setIcon(image, #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1))
+        homeButton.setText("home".localize(), UIColor(named: "Active") ?? .blue, .systemFont(ofSize: 12, weight: .medium))
+        homeButton.setIcon(image, UIColor(named: "Active") ?? .blue)
         image = UIImage(systemName: "ellipsis.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        moreButton.setText("More", #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
-        moreButton.setIcon(image, #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1))
+        moreButton.setText("more".localize(), UIColor(named: "Icon") ?? .gray, .systemFont(ofSize: 12, weight: .medium))
+        moreButton.setIcon(image, UIColor(named: "Icon") ?? .gray)
     }
     
     public func setMoreButtonActive() {
         var image = UIImage(systemName: "house.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        homeButton.setText("Home", #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
-        homeButton.setIcon(image, #colorLiteral(red: 0.2705882353, green: 0.2705882353, blue: 0.2705882353, alpha: 1))
+        homeButton.setText("home".localize(), UIColor(named: "Icon") ?? .gray, .systemFont(ofSize: 12, weight: .medium))
+        homeButton.setIcon(image, UIColor(named: "Icon") ?? .gray)
         image = UIImage(systemName: "ellipsis.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        moreButton.setText("More", #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), .systemFont(ofSize: 12, weight: .medium))
-        moreButton.setIcon(image, #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1))
+        moreButton.setText("more".localize(), UIColor(named: "Active") ?? .blue, .systemFont(ofSize: 12, weight: .medium))
+        moreButton.setIcon(image, UIColor(named: "Active") ?? .blue)
     }
     
     private func configureImageViewsStack() {

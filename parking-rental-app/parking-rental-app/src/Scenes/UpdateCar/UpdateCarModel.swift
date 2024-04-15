@@ -40,4 +40,10 @@ enum UpdateCarModel {
         struct Response { }
         struct ViewModel { }
     }
+    
+    enum CarUpdateFailure {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
 }

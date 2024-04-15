@@ -7,20 +7,7 @@
 
 import Foundation
 
-struct Canvas {
+struct Canvas: Decodable {
     let width: Int
     let height: Int
-}
-
-extension Canvas: Decodable {
-    enum CanvasCodingKeys: String, CodingKey {
-        case width
-        case height
-    }
-
-    init(from decoder: Decoder) throws {
-        let canvasContainer = try decoder.container(keyedBy: CanvasCodingKeys.self)
-        width = try canvasContainer.decode(Int.self, forKey: .width)
-        height = try canvasContainer.decode(Int.self, forKey: .height)
-    }
 }

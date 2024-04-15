@@ -30,7 +30,11 @@ final class ReservationCell: UICollectionViewCell {
     
     // MARK: - Private Methods
     private func configureUI() {
-        backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        self.backgroundColor = Colors.cardView.uiColor
+        self.layer.shadowColor = Colors.cardViewShadow.uiColor.cgColor
+        self.layer.shadowOpacity = 0.15
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 20
         self.layer.cornerRadius = 30
         configureLotNumberLabel()
         configureDateLabel()
@@ -44,7 +48,7 @@ final class ReservationCell: UICollectionViewCell {
         lotNumberLabel.pinTop(to: self.topAnchor, 25)
         lotNumberLabel.pinLeft(to: self.leadingAnchor, 30)
         lotNumberLabel.numberOfLines = 0
-        lotNumberLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        lotNumberLabel.textColor = Colors.mainText.uiColor
         lotNumberLabel.font = .systemFont(ofSize: 28, weight: .semibold)
     }
     
@@ -53,7 +57,7 @@ final class ReservationCell: UICollectionViewCell {
         dateLabel.pinTop(to: self.lotNumberLabel.bottomAnchor, 10)
         dateLabel.pinLeft(to: self.leadingAnchor, 30)
         dateLabel.numberOfLines = 0
-        dateLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        dateLabel.textColor = Colors.mainText.uiColor
         dateLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
@@ -62,7 +66,7 @@ final class ReservationCell: UICollectionViewCell {
         floorLabel.pinTop(to: self.dateLabel.bottomAnchor, 10)
         floorLabel.pinLeft(to: self.leadingAnchor, 30)
         floorLabel.numberOfLines = 0
-        floorLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+        floorLabel.textColor = Colors.secondaryText.uiColor
         floorLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
@@ -72,7 +76,7 @@ final class ReservationCell: UICollectionViewCell {
         buildingLabel.pinLeft(to: self.leadingAnchor, 30)
         buildingLabel.pinBottom(to: self.bottomAnchor, 25)
         buildingLabel.numberOfLines = 0
-        buildingLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+        buildingLabel.textColor = Colors.secondaryText.uiColor
         buildingLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
@@ -80,9 +84,9 @@ final class ReservationCell: UICollectionViewCell {
         self.addSubview(iconImageView)
         iconImageView.pinCenterY(to: self.centerYAnchor)
         iconImageView.pinRight(to: self.trailingAnchor, 30)
-        iconImageView.image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        iconImageView.tintColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
-        iconImageView.backgroundColor = UIColor.clear
+        iconImageView.image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .medium)) ?? UIImage()
+        iconImageView.tintColor = Colors.icon.uiColor
+        iconImageView.backgroundColor = .clear
     }
     
     // MARK: - Override Methods

@@ -23,4 +23,8 @@ extension LoginPresenter: LoginPresentationLogic {
     func presentRegistration(_ response: Model.Registration.Response) {
         view?.displayRegistration(Model.Registration.ViewModel())
     }
+    
+    func presentLoginFailure(_ response: LoginModel.LoginFailure.Response) {
+        view?.displayLoginFailure(LoginModel.LoginFailure.ViewModel())
+    }
 }

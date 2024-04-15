@@ -11,6 +11,7 @@ public enum ReservationsApi {
     case getAllReservations
     case addNewReservation(carId: String, employeeId: String, parkingSpotId: String, startTime: String, endTime: String)
     case deleteReservation(id: String)
+    case getReservation(reservationID: String)
 }
 
 extension ReservationsApi: EndPointType {
@@ -33,6 +34,8 @@ extension ReservationsApi: EndPointType {
             return "employee"
         case .deleteReservation(let id):
             return "\(id)/employee"
+        case .getReservation(let reservationID):
+            return "\(reservationID)"
         }
     }
     
@@ -44,6 +47,8 @@ extension ReservationsApi: EndPointType {
             return .post
         case .deleteReservation:
             return .delete
+        case .getReservation:
+            return .get
         }
     }
     
@@ -55,10 +60,12 @@ extension ReservationsApi: EndPointType {
             return .requestParametersAndHeaders(bodyParameters: ["carId": carId, "employeeId": employeeId, "parkingSpotId": parkingSpotId, "startTime": startTime, "endTime": endTime], urlParameters: nil, additionHeaders: self.headers)
         case .deleteReservation:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+        case .getReservation:
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         }
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager.shared.getAccessToken() ?? "")"]
+        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
     }
 }

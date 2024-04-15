@@ -31,7 +31,7 @@ final class HomeViewController: UIViewController {
     private var lotNumbers: [String]?
     private var levelNumbers: [String]?
     private var buildingNames: [String]?
-    private var parkingSpotsIDx: [String]?
+    private var reservationsIDx: [String]?
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     private let loadingFailureLabel = UILabel()
     private let reloadButton = UIButton()
@@ -70,6 +70,8 @@ final class HomeViewController: UIViewController {
             loadingFailureLabel.removeFromSuperview()
             reloadButton.removeFromSuperview()
         }
+        self.reservationsCount = nil
+        self.reloadCollectionViewData()
         currentState = .loading
         interactor.loadReservations(Model.GetReservations.Request())
         self.navigationController?.isNavigationBarHidden = true
@@ -77,7 +79,7 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Configuration
     private func configureUI() {
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = Colors.background.uiColor
         configureTabBar()
         configureProfileLabelButton()
         configureReservationsCollectionView()
@@ -104,10 +106,10 @@ final class HomeViewController: UIViewController {
         profileLabelButton.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 40)
         profileLabelButton.pinLeft(to: self.view.leadingAnchor, 17)
         let leftIconImage = UIImage(systemName: "person.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        profileLabelButton.setLeftIcon(leftIconImage, #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1))
+        profileLabelButton.setLeftIcon(leftIconImage, Colors.mainText.uiColor)
         let rightIconImage = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .medium)) ?? UIImage()
-        profileLabelButton.setRightIcon(rightIconImage, #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1))
-        profileLabelButton.setText("Profile", #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1), .systemFont(ofSize: 32, weight: .bold))
+        profileLabelButton.setRightIcon(rightIconImage, Colors.icon.uiColor)
+        profileLabelButton.setText("profile".localize(), Colors.mainText.uiColor, .systemFont(ofSize: 32, weight: .bold))
         profileLabelButton.pressAction = { [weak self] in
             self?.interactor.loadProfile(Model.Profile.Request())
         }
@@ -115,14 +117,15 @@ final class HomeViewController: UIViewController {
     
     private func configureReservationsCollectionView() {
         self.view.addSubview(reservationsCollectionView)
-        reservationsCollectionView.pinLeft(to: self.view.leadingAnchor, 17)
-        reservationsCollectionView.pinRight(to: self.view.trailingAnchor, 17)
-        reservationsCollectionView.pinTop(to: self.profileLabelButton.bottomAnchor, 35)
+        reservationsCollectionView.pinLeft(to: self.view.leadingAnchor)
+        reservationsCollectionView.pinRight(to: self.view.trailingAnchor)
+        reservationsCollectionView.pinTop(to: self.profileLabelButton.bottomAnchor)
         reservationsCollectionView.pinBottom(to: self.tabBar.topAnchor)
         reservationsCollectionView.dataSource = self
         reservationsCollectionView.delegate = self
         reservationsCollectionView.backgroundColor = .clear
         reservationsCollectionView.contentInset.bottom = 120
+        reservationsCollectionView.contentInset.top = 35
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 15
         reservationsCollectionView.collectionViewLayout = layout
@@ -134,10 +137,10 @@ final class HomeViewController: UIViewController {
         reserveLotButton.pinBottom(to: self.tabBar.topAnchor, 25)
         reserveLotButton.setHeight(70)
         reserveLotButton.pinHorizontal(to: self.view, 17)
-        reserveLotButton.backgroundColor = #colorLiteral(red: 0.9647058824, green: 0.8470588235, blue: 0.1058823529, alpha: 1)
+        reserveLotButton.backgroundColor = Colors.accent.uiColor
         reserveLotButton.layer.cornerRadius = 20
-        reserveLotButton.setTitle("Reserve Lot", for: .normal)
-        reserveLotButton.setTitleColor(#colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1), for: .normal)
+        reserveLotButton.setTitle("reserveLot".localize(), for: .normal)
+        reserveLotButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
         reserveLotButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
         reserveLotButton.addTarget(self, action: #selector(reserveLotButtonWasTapped), for: .touchDown)
     }
@@ -145,27 +148,27 @@ final class HomeViewController: UIViewController {
     private func configureLoadingIndicator() {
         self.view.addSubview(loadingIndicator)
         loadingIndicator.pinCenter(to: self.view)
-        loadingIndicator.color = .gray
+        loadingIndicator.color = Colors.secondaryText.uiColor
     }
     
     private func configureLoadingFailureLabel() {
-        loadingFailureLabel.text = "Connection Error"
+        loadingFailureLabel.text = "connectionError".localize()
         loadingFailureLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        loadingFailureLabel.textColor = .black
+        loadingFailureLabel.textColor = Colors.mainText.uiColor
     }
     
     private func configureReloadButton() {
-        reloadButton.setTitle("Reload", for: .normal)
-        reloadButton.setTitleColor(.systemBlue, for: .normal)
-        reloadButton.setTitleColor(.gray, for: .highlighted)
-        reloadButton.backgroundColor = UIColor.clear
+        reloadButton.setTitle("reload".localize(), for: .normal)
+        reloadButton.setTitleColor(Colors.active.uiColor, for: .normal)
+        reloadButton.setTitleColor(Colors.secondaryText.uiColor, for: .highlighted)
+        reloadButton.backgroundColor = .clear
         reloadButton.addTarget(self, action: #selector(reloadButtonWasPressed), for: .touchUpInside)
     }
     
     private func configureNoDataLabel() {
-        noDataLabel.text = "You don't have any reservations yet."
+        noDataLabel.text = "noReservations".localize()
         loadingFailureLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        loadingFailureLabel.textColor = .black
+        loadingFailureLabel.textColor = Colors.mainText.uiColor
     }
     
     // MARK: - Actions
@@ -175,7 +178,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc
-    public func reloadButtonWasPressed() {
+    private func reloadButtonWasPressed() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         loadingFailureLabel.removeFromSuperview()
@@ -198,6 +201,14 @@ final class HomeViewController: UIViewController {
         view.addSubview(noDataLabel)
         noDataLabel.pinCenter(to: self.view)
     }
+    
+    private func showReservationsLimit() {
+        reserveLotButton.backgroundColor = Colors.secondaryButton.uiColor
+        reserveLotButton.setTitleColor(Colors.secondaryText.uiColor.light, for: .normal)
+        reserveLotButton.setTitle("reservationsLimit".localize(), for: .normal)
+        reserveLotButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
+        reserveLotButton.removeTarget(nil, action: nil, for: .allEvents)
+    }
 }
 
 // MARK: - DisplayLogic
@@ -215,10 +226,13 @@ extension HomeViewController: HomeDisplayLogic {
         self.lotNumbers = viewModel.lotNumbets
         self.levelNumbers = viewModel.levelNumbers
         self.buildingNames = viewModel.buildingNames
-        self.parkingSpotsIDx = viewModel.parkingSpotsIDx
+        self.reservationsIDx = viewModel.reservationsIDx
         
         DispatchQueue.main.async { [weak self] in
             self?.currentState = .loaded
+            if viewModel.isReservationsLimit {
+                self?.currentState = .reservationsLimit
+            }
         }
         
         self.reloadCollectionViewData()
@@ -229,7 +243,7 @@ extension HomeViewController: HomeDisplayLogic {
     }
     
     func displayMap(_ viewModel: Model.Map.ViewModel) {
-        self.router.routeToMap()
+        self.router.routeToMap(Model.Map.RouteData(reservationID: viewModel.reservationID))
     }
     
     func displayProfile(_ viewModel: Model.Profile.ViewModel) {
@@ -266,7 +280,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.configure(
             lotNumber: self.lotNumbers?[indexPath.row] ?? "-",
             date: "\(self.dates?[indexPath.row] ?? "-"): \(self.startTimes?[indexPath.row] ?? "-") - \(self.endTimes?[indexPath.row] ?? "-")",
-            floor: "Floor: \(self.levelNumbers?[indexPath.row] ?? "-")",
+            floor: "\("floor".localize()): \(self.levelNumbers?[indexPath.row] ?? "-")",
             building: "\(self.buildingNames?[indexPath.row] ?? "-")"
         )
         
@@ -278,7 +292,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        interactor.loadMap(Model.Map.Request(lotID: self.parkingSpotsIDx?[indexPath.row]))
+        if let reservationID = self.reservationsIDx?[indexPath.row] {
+            interactor.loadMap(Model.Map.Request(reservationID: reservationID))
+        }
     }
     
     private func reloadCollectionViewData() {
@@ -301,7 +317,9 @@ extension HomeViewController {
             showLoadingFailure()
         case .noData:
             loadingIndicator.stopAnimating()
-            showNoDataLabel()
+            self.showNoDataLabel()
+        case .reservationsLimit:
+            self.showReservationsLimit()
         }
     }
 }

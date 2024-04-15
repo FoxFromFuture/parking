@@ -25,4 +25,12 @@ extension MapRouter: MapRoutingLogic {
     func routeToPreviousScene() {
         view?.navigationController?.popViewController(animated: true)
     }
+    
+    func routeToReservationCard(_ routeData: Model.ReservationCard.RouteData) {
+        let vc = ReservationCardAssembly.build(parkingSpotID: routeData.parkingSpotID, date: routeData.date, startTime: routeData.startTime, endTime: routeData.endTime, spotState: routeData.spotState, onUpdateAction: routeData.onUpdateAction)
+        if let presentationController = vc.presentationController as? UISheetPresentationController {
+            presentationController.detents = [.medium()]
+        }
+        view?.navigationController?.present(vc, animated: true)
+    }
 }

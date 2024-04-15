@@ -30,7 +30,11 @@ final class SingleCardButton: UIView {
     
     // MARK: - Private Methods
     private func configureUI() {
-        backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        self.backgroundColor = Colors.cardView.uiColor
+        self.layer.shadowColor = Colors.cardViewShadow.uiColor.cgColor
+        self.layer.shadowOpacity = 0.15
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 20
         self.layer.cornerRadius = 30
         self.setHeight(110)
         configureTitleLabel()
@@ -44,16 +48,16 @@ final class SingleCardButton: UIView {
         titleLabel.pinTop(to: self.topAnchor, 25)
         titleLabel.pinLeft(to: self.leadingAnchor, 30)
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        titleLabel.textColor = Colors.mainText.uiColor
         titleLabel.font = .systemFont(ofSize: 28, weight: .semibold)
     }
     
     private func configureSubtitleLabel() {
         self.addSubview(subtitleLabel)
-        subtitleLabel.pinTop(to: self.titleLabel.bottomAnchor, 10)
+        subtitleLabel.pinTop(to: self.titleLabel.bottomAnchor, 5)
         subtitleLabel.pinLeft(to: self.leadingAnchor, 30)
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+        subtitleLabel.textColor = Colors.secondaryText.uiColor
         subtitleLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
@@ -61,8 +65,8 @@ final class SingleCardButton: UIView {
         self.addSubview(arrowIconImageView)
         arrowIconImageView.pinCenterY(to: self.centerYAnchor)
         arrowIconImageView.pinRight(to: self.trailingAnchor, 30)
-        arrowIconImageView.image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
-        arrowIconImageView.tintColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+        arrowIconImageView.image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .medium)) ?? UIImage()
+        arrowIconImageView.tintColor = Colors.icon.uiColor
         arrowIconImageView.backgroundColor = UIColor.clear
     }
     

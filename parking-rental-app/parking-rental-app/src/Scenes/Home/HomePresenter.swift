@@ -24,38 +24,43 @@ extension HomePresenter: HomePresentationLogic {
         var lotNumbers: [String] = []
         var levelNumbers: [String] = []
         var buildingNames: [String] = []
-        var parkingSpotsIDx: [String] = []
+        var reservationsIDx: [String] = []
+        var isReservationsLimit: Bool = false
     
         /// Retrieve "dates", "start times" and "end times" from reservations
         for reservation in response.reservations {
             dates.append("\(reservation.startTime.prefix(10))")
             startTimes.append("\(reservation.startTime.suffix(8).prefix(5))")
             endTimes.append("\(reservation.endTime.suffix(8).prefix(5))")
-        }
-        
-        /// Retrieve "lotNumbers" and "parkingSpotsIDx" from parking spots & retrieve "levelNumbers" and "buildingNames" from corresponding parking levels and buildings
-        for parkingSpot in response.parkingSpots {
-            lotNumbers.append(parkingSpot.parkingNumber)
-            parkingSpotsIDx.append(parkingSpot.id)
-            
-            /// Find corresponding parking level
-            for parkingLevel in response.parkingLevels {
-                if parkingSpot.levelId == parkingLevel.id {
-                    levelNumbers.append("\(parkingLevel.levelNumber)")
-                    return
+            reservationsIDx.append(reservation.id)
+            for parkingSpot in response.parkingSpots {
+                if parkingSpot.id == reservation.parkingSpotId {
+                    lotNumbers.append(parkingSpot.parkingNumber)
+                    
+                    /// Find corresponding parking level
+                    for parkingLevel in response.parkingLevels {
+                        if parkingSpot.levelId == parkingLevel.id {
+                            levelNumbers.append("\(parkingLevel.levelNumber)")
+                            break
+                        }
+                    }
+                    
+                    /// Find corresponding building
+                    for building in response.buildings {
+                        if parkingSpot.buildingId == building.id {
+                            buildingNames.append(building.name)
+                            break
+                        }
+                    }
                 }
             }
-            
-            /// Find corresponding building
-            for building in response.buildings {
-                if parkingSpot.buildingId == building.id {
-                    buildingNames.append(building.name)
-                    return
-                }
-            }
         }
         
-        view?.displayReservations(Model.GetReservations.ViewModel(reservationsCount: response.reservations.count, dates: dates, startTimes: startTimes, endTimes: endTimes, lotNumbets: lotNumbers, levelNumbers: levelNumbers, buildingNames: buildingNames, parkingSpotsIDx: parkingSpotsIDx))
+        if reservationsIDx.count == 5 {
+            isReservationsLimit = true
+        }
+        
+        view?.displayReservations(Model.GetReservations.ViewModel(reservationsCount: response.reservations.count, dates: dates, startTimes: startTimes, endTimes: endTimes, lotNumbets: lotNumbers, levelNumbers: levelNumbers, buildingNames: buildingNames, reservationsIDx: reservationsIDx, isReservationsLimit: isReservationsLimit))
     }
     
     func presentBuildings(_ response: Model.Buildings.Response) {
@@ -63,7 +68,7 @@ extension HomePresenter: HomePresentationLogic {
     }
     
     func presentMap(_ response: Model.Map.Response) {
-        view?.displayMap(Model.Map.ViewModel())
+        view?.displayMap(Model.Map.ViewModel(reservationID: response.reservationID))
     }
     
     func presentProfile(_ response: Model.Profile.Response) {

@@ -23,6 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewController = navigationController
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
+        
+        let themeManager = ThemeManager()
+        window?.overrideUserInterfaceStyle = themeManager.theme.getUserInterfaceStyle()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -11,6 +11,7 @@ protocol RegistrationDisplayLogic: AnyObject {
     func displayStart(_ viewModel: RegistrationModel.Start.ViewModel)
     func displayRegistrationCar(_ viewModel: RegistrationModel.RegistrationCar.ViewModel)
     func displayLogin(_ viewModel: RegistrationModel.Login.ViewModel)
+    func displayRegistrationFailure(_ viewModel: RegistrationModel.RegistrationFailure.ViewModel)
 }
 
 // MARK: - BusinessLogic
@@ -27,6 +28,7 @@ protocol RegistrationPresentationLogic {
     func presentStart(_ response: RegistrationModel.Start.Response)
     func presentRegistrationCar(_ response: RegistrationModel.RegistrationCar.Response)
     func presentLogin(_ response: RegistrationModel.Login.Response)
+    func presentRegistrationFailure(_ response: RegistrationModel.RegistrationFailure.Response)
 }
 
 // MARK: - RoutingLogic

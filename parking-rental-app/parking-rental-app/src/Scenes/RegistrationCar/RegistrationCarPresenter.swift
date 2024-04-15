@@ -19,4 +19,8 @@ extension RegistrationCarPresenter: RegistrationCarPresentationLogic {
     func presentHome(_ response: RegistrationCarModel.Home.Response) {
         view?.displayHome(Model.Home.ViewModel())
     }
+    
+    func presentCarSetupFailure(_ response: RegistrationCarModel.CarSetupFailure.Response) {
+        view?.displayCarSetupFailure(RegistrationCarModel.CarSetupFailure.ViewModel())
+    }
 }

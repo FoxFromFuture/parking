@@ -31,4 +31,8 @@ extension UpdateCarPresenter: UpdateCarPresentationLogic {
     func presentUpdateCarRequest(_ response: Model.UpdateCarRequest.Response) {
         view?.displayUpdateCarRequest(UpdateCarModel.UpdateCarRequest.ViewModel())
     }
+    
+    func presentUpdateCarFailure(_ response: Model.CarUpdateFailure.Response) {
+        view?.displayUpdateCarFailure(UpdateCarModel.CarUpdateFailure.ViewModel())
+    }
 }

@@ -13,6 +13,7 @@ protocol UpdateCarDisplayLogic: AnyObject {
     func displayMore(_ viewModel: Model.More.ViewModel)
     func displayHome(_ viewModel: Model.Home.ViewModel)
     func displayUpdateCarRequest(_ viewModel: Model.UpdateCarRequest.ViewModel)
+    func displayUpdateCarFailure(_ viewModel: Model.CarUpdateFailure.ViewModel)
 }
 
 // MARK: - BusinessLogic
@@ -33,6 +34,7 @@ protocol UpdateCarPresentationLogic {
     func presentMore(_ response: Model.More.Response)
     func presentHome(_ response: Model.Home.Response)
     func presentUpdateCarRequest(_ response: Model.UpdateCarRequest.Response)
+    func presentUpdateCarFailure(_ response: Model.CarUpdateFailure.Response)
 }
 
 // MARK: - RoutingLogic

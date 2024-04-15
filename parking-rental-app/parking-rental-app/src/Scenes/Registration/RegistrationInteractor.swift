@@ -29,7 +29,7 @@ extension RegistrationInteractor: RegistrationBusinessLogic {
         worker.signUp(request) { [weak self] authData, error in
             if let error = error {
                 print(error)
-                /// TODO: Present failure
+                self?.presenter.presentRegistrationFailure(RegistrationModel.RegistrationFailure.Response())
             } else if let authData = authData {
                 self?.worker.saveAuthTokens(refreshToken: authData.refreshToken, accessToken: authData.accessToken)
                 self?.presenter.presentRegistrationCar(Model.RegistrationCar.Response())

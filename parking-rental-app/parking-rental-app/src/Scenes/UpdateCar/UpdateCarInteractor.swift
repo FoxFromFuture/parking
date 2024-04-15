@@ -38,16 +38,16 @@ extension UpdateCarInteractor: UpdateCarBusinessLogic {
     }
     
     func loadUpdateCarRequest(_ request: Model.UpdateCarRequest.Request) {
-        self.worker.getAllCars { carsData, error in
+        self.worker.getAllCars { [weak self] carsData, error in
             if let error = error {
-                // TODO: Present failure
                 print(error)
+                self?.presenter.presentUpdateCarFailure(UpdateCarModel.CarUpdateFailure.Response())
             } else if let cars = carsData {
                 if !cars.isEmpty {
-                    self.worker.updateCar(id: cars[0].id, newRegistryNumber: request.newRegistryNumber) { [weak self] carData, error in
+                    self?.worker.updateCar(id: cars[0].id, newRegistryNumber: request.newRegistryNumber) { [weak self] carData, error in
                         if let error = error {
-                            // TODO: Present failure
                             print(error)
+                            self?.presenter.presentUpdateCarFailure(UpdateCarModel.CarUpdateFailure.Response())
                         } else if let _ = carData {
                             self?.presenter.presentUpdateCarRequest(UpdateCarModel.UpdateCarRequest.Response())
                         }

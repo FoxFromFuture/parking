@@ -41,7 +41,7 @@ extension BuildingsPresenter: BuildingsPresentationLogic {
     }
     
     func presentMap(_ response: Model.Map.Response) {
-        view?.displayMap(Model.Map.ViewModel())
+        view?.displayMap(Model.Map.ViewModel(buildingID: response.buildingID))
     }
     
     func presentLoadingFailure(_ response: Model.LoadingFailure.Response) {

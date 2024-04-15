@@ -46,7 +46,7 @@ final class ProfileViewController: UIViewController {
     
     // MARK: - Configuration
     private func configureUI() {
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
         configureTabBar()
         configureTitleLabel()
@@ -62,7 +62,7 @@ final class ProfileViewController: UIViewController {
             target: self,
             action: #selector(goBack)
         )
-        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
     }
     
     private func configureTabBar() {
@@ -84,9 +84,9 @@ final class ProfileViewController: UIViewController {
         titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 5)
         titleLabel.pinLeft(to: self.view.leadingAnchor, 17)
         titleLabel.setHeight(45)
-        titleLabel.text = "Profile"
+        titleLabel.text = "profile".localize()
         titleLabel.textAlignment = .left
-        titleLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        titleLabel.textColor = Colors.mainText.uiColor
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
     }
     
@@ -94,7 +94,7 @@ final class ProfileViewController: UIViewController {
         self.view.addSubview(carSingleCardButton)
         carSingleCardButton.pinTop(to: self.titleLabel.bottomAnchor, 30)
         carSingleCardButton.pinHorizontal(to: self.view, 17)
-        carSingleCardButton.configure(title: "Car", subtitle: "Change car registry number")
+        carSingleCardButton.configure(title: "car".localize(), subtitle: "yourCarDetails".localize())
         carSingleCardButton.setAction { [weak self] in
             self?.interactor.loadUpdateCar(Model.UpdateCar.Request())
         }
@@ -105,25 +105,25 @@ final class ProfileViewController: UIViewController {
         logOutButton.pinBottom(to: self.tabBar.topAnchor, 25)
         logOutButton.setHeight(70)
         logOutButton.pinHorizontal(to: self.view, 17)
-        logOutButton.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        logOutButton.backgroundColor = Colors.secondaryButton.uiColor
         logOutButton.layer.cornerRadius = 20
-        logOutButton.setTitle("Log Out", for: .normal)
-        logOutButton.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: .normal)
+        logOutButton.setTitle("logOut".localize(), for: .normal)
+        logOutButton.setTitleColor(Colors.danger.uiColor, for: .normal)
         logOutButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
         logOutButton.addTarget(self, action: #selector(logOutButtonWasTapped), for: .touchDown)
     }
     
     private func configureLogOutAlert() {
-        logOutAlert.message = "Are you sure you want to log out?"
-        logOutAlert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
+        logOutAlert.message = "logOutQuestion".localize()
+        logOutAlert.addAction(UIAlertAction(title: "logOut".localize(), style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
             self?.interactor.loadLogin(Model.Login.Request())
         }))
-        logOutAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        logOutAlert.addAction(UIAlertAction(title: "cancel".localize(), style: .cancel))
     }
     
     // MARK: - Actions
     @objc
-    public func goBack() {
+    private func goBack() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         self.interactor.loadHome(Model.Home.Request())

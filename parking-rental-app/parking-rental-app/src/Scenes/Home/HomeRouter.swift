@@ -18,8 +18,8 @@ extension HomeRouter: HomeRoutingLogic {
         view?.navigationController?.pushViewController(BuildingsAssembly.build(), animated: true)
     }
     
-    func routeToMap() {
-        view?.navigationController?.pushViewController(MapAssembly.build(), animated: true)
+    func routeToMap(_ routeData: Model.Map.RouteData) {
+        view?.navigationController?.pushViewController(MapAssembly.build(reservationID: routeData.reservationID, buildingID: nil), animated: true)
     }
     
     func routeToProfile() {

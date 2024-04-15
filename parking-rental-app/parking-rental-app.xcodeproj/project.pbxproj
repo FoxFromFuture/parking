@@ -74,6 +74,8 @@
 		27535C8A2BA4855D000E48E6 /* UpdateCarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27535C892BA4855D000E48E6 /* UpdateCarAssembly.swift */; };
 		27535C8C2BA48C77000E48E6 /* MultipleButtonsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27535C8B2BA48C77000E48E6 /* MultipleButtonsCard.swift */; };
 		27535C8E2BA48E94000E48E6 /* MultipleButtonsCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27535C8D2BA48E94000E48E6 /* MultipleButtonsCardButton.swift */; };
+		275E0F0B2BC686B200B6E1B3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E0F0A2BC686B200B6E1B3 /* Theme.swift */; };
+		275E0F0D2BC6872300B6E1B3 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E0F0C2BC6872300B6E1B3 /* ThemeManager.swift */; };
 		27754BDD2B99A6200065A14E /* ReservationsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BDC2B99A6200065A14E /* ReservationsEndPoint.swift */; };
 		27754BDF2B99AEF70065A14E /* ReservationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BDE2B99AEF70065A14E /* ReservationsModel.swift */; };
 		27754BE12B99B7880065A14E /* ProfileLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BE02B99B7880065A14E /* ProfileLabelButton.swift */; };
@@ -86,12 +88,14 @@
 		27754BF02B99DAAD0065A14E /* BuildingsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BEF2B99DAAD0065A14E /* BuildingsProtocols.swift */; };
 		27754BF22B99DAB60065A14E /* BuildingsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF12B99DAB60065A14E /* BuildingsAssembly.swift */; };
 		27754BF52B99E33D0065A14E /* ReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF42B99E33D0065A14E /* ReservationCell.swift */; };
-		27754BF72B9A21590065A14E /* ReservationsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF62B9A21590065A14E /* ReservationsDataStore.swift */; };
-		27754BF92B9AECE90065A14E /* ParkingSpotsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */; };
-		27754BFD2B9AED0C0065A14E /* BuildingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */; };
 		27754BFF2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BFE2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift */; };
 		27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754C002B9AF0710065A14E /* ParkingSpotsModel.swift */; };
 		27754C032B9AF13C0065A14E /* CanvasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754C022B9AF13C0065A14E /* CanvasModel.swift */; };
+		277B37B32BCA98D300B2A412 /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277B37B22BCA98D300B2A412 /* LoginState.swift */; };
+		277B37B62BCAA3F500B2A412 /* RegistrationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277B37B52BCAA3F500B2A412 /* RegistrationState.swift */; };
+		277B37B92BCAAA3A00B2A412 /* RegistrationCarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277B37B82BCAAA3A00B2A412 /* RegistrationCarState.swift */; };
+		277B37BC2BCAAED700B2A412 /* UpdateCarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277B37BB2BCAAED700B2A412 /* UpdateCarState.swift */; };
+		277B37BE2BCAB88500B2A412 /* MapState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277B37BD2BCAB88500B2A412 /* MapState.swift */; };
 		277D6C392B9B0477000B36F9 /* OnCanvasCoordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D6C382B9B0477000B36F9 /* OnCanvasCoordsModel.swift */; };
 		27848BDC2B80A44B00542D8C /* RegistrationCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BDB2B80A44B00542D8C /* RegistrationCarViewController.swift */; };
 		27848BDE2B80A45700542D8C /* RegistrationCarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BDD2B80A45700542D8C /* RegistrationCarInteractor.swift */; };
@@ -111,6 +115,22 @@
 		27848BFB2B80A74600542D8C /* HomeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BFA2B80A74600542D8C /* HomeAssembly.swift */; };
 		2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD962B8D2C9A00C02FF3 /* TabBar.swift */; };
 		2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */; };
+		2795FF3F2BC04CEB0031CEE8 /* ReservationCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF3E2BC04CEB0031CEE8 /* ReservationCardViewController.swift */; };
+		2795FF412BC04D3E0031CEE8 /* ReservationCardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF402BC04D3E0031CEE8 /* ReservationCardInteractor.swift */; };
+		2795FF432BC04D4C0031CEE8 /* ReservationCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF422BC04D4C0031CEE8 /* ReservationCardPresenter.swift */; };
+		2795FF452BC04D560031CEE8 /* ReservationCardWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF442BC04D560031CEE8 /* ReservationCardWorker.swift */; };
+		2795FF472BC04D620031CEE8 /* ReservationCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF462BC04D620031CEE8 /* ReservationCardModel.swift */; };
+		2795FF492BC04D6E0031CEE8 /* ReservationCardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF482BC04D6E0031CEE8 /* ReservationCardRouter.swift */; };
+		2795FF4B2BC04D7A0031CEE8 /* ReservationCardProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF4A2BC04D7A0031CEE8 /* ReservationCardProtocols.swift */; };
+		2795FF4D2BC04D850031CEE8 /* ReservationCardAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF4C2BC04D850031CEE8 /* ReservationCardAssembly.swift */; };
+		2795FF522BC3EDF80031CEE8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2795FF542BC3EDF80031CEE8 /* Localizable.strings */; };
+		2795FF582BC3F68B0031CEE8 /* String+localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF572BC3F68B0031CEE8 /* String+localize.swift */; };
+		2795FF5B2BC3F7A30031CEE8 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF5A2BC3F7A30031CEE8 /* Language.swift */; };
+		279C53382BCD0FE900AF6EF5 /* ReservationCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C53372BCD0FE900AF6EF5 /* ReservationCardState.swift */; };
+		279C533A2BCD2A3100AF6EF5 /* ReservationCardSpotState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C53392BCD2A3100AF6EF5 /* ReservationCardSpotState.swift */; };
+		27BA27D82BC7F66D008F3519 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA27D72BC7F66D008F3519 /* Colors.swift */; };
+		27BA27DA2BC7FDE8008F3519 /* UIColor+themeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA27D92BC7FDE8008F3519 /* UIColor+themeColors.swift */; };
+		27BA27DC2BC80952008F3519 /* UITextField+borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA27DB2BC80952008F3519 /* UITextField+borders.swift */; };
 		27C0B7A62B9C38B600977074 /* ParkingLevelsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B7A52B9C38B600977074 /* ParkingLevelsEndPoint.swift */; };
 		27C0B7A82B9C3AEC00977074 /* ParkingLevelsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B7A72B9C3AEC00977074 /* ParkingLevelsModel.swift */; };
 		27C0B7AC2B9C448400977074 /* BuildingsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B7AB2B9C448400977074 /* BuildingsEndPoint.swift */; };
@@ -123,7 +143,6 @@
 		27C624472B7C8B7E002FFF48 /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624462B7C8B7E002FFF48 /* LoginProtocols.swift */; };
 		27C624492B7C8B88002FFF48 /* LoginAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624482B7C8B88002FFF48 /* LoginAssembly.swift */; };
 		27C6244B2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6244A2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift */; };
-		27C6244D2B7C8E94002FFF48 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6244C2B7C8E94002FFF48 /* LoginWorker.swift */; };
 		27C624522B7D01EB002FFF48 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624512B7D01EB002FFF48 /* RegistrationViewController.swift */; };
 		27C624542B7D020C002FFF48 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624532B7D020C002FFF48 /* RegistrationInteractor.swift */; };
 		27C624562B7D0217002FFF48 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C624552B7D0217002FFF48 /* RegistrationPresenter.swift */; };
@@ -204,6 +223,9 @@
 		27535C892BA4855D000E48E6 /* UpdateCarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCarAssembly.swift; sourceTree = "<group>"; };
 		27535C8B2BA48C77000E48E6 /* MultipleButtonsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleButtonsCard.swift; sourceTree = "<group>"; };
 		27535C8D2BA48E94000E48E6 /* MultipleButtonsCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleButtonsCardButton.swift; sourceTree = "<group>"; };
+		275E0F082BC6846700B6E1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		275E0F0A2BC686B200B6E1B3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		275E0F0C2BC6872300B6E1B3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		27754BDC2B99A6200065A14E /* ReservationsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsEndPoint.swift; sourceTree = "<group>"; };
 		27754BDE2B99AEF70065A14E /* ReservationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsModel.swift; sourceTree = "<group>"; };
 		27754BE02B99B7880065A14E /* ProfileLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLabelButton.swift; sourceTree = "<group>"; };
@@ -216,12 +238,14 @@
 		27754BEF2B99DAAD0065A14E /* BuildingsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsProtocols.swift; sourceTree = "<group>"; };
 		27754BF12B99DAB60065A14E /* BuildingsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsAssembly.swift; sourceTree = "<group>"; };
 		27754BF42B99E33D0065A14E /* ReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCell.swift; sourceTree = "<group>"; };
-		27754BF62B9A21590065A14E /* ReservationsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsDataStore.swift; sourceTree = "<group>"; };
-		27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsDataStore.swift; sourceTree = "<group>"; };
-		27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsDataStore.swift; sourceTree = "<group>"; };
 		27754BFE2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsEndPoint.swift; sourceTree = "<group>"; };
 		27754C002B9AF0710065A14E /* ParkingSpotsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpotsModel.swift; sourceTree = "<group>"; };
 		27754C022B9AF13C0065A14E /* CanvasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasModel.swift; sourceTree = "<group>"; };
+		277B37B22BCA98D300B2A412 /* LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginState.swift; sourceTree = "<group>"; };
+		277B37B52BCAA3F500B2A412 /* RegistrationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationState.swift; sourceTree = "<group>"; };
+		277B37B82BCAAA3A00B2A412 /* RegistrationCarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarState.swift; sourceTree = "<group>"; };
+		277B37BB2BCAAED700B2A412 /* UpdateCarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCarState.swift; sourceTree = "<group>"; };
+		277B37BD2BCAB88500B2A412 /* MapState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapState.swift; sourceTree = "<group>"; };
 		277D6C382B9B0477000B36F9 /* OnCanvasCoordsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnCanvasCoordsModel.swift; sourceTree = "<group>"; };
 		27848BDB2B80A44B00542D8C /* RegistrationCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarViewController.swift; sourceTree = "<group>"; };
 		27848BDD2B80A45700542D8C /* RegistrationCarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCarInteractor.swift; sourceTree = "<group>"; };
@@ -241,6 +265,24 @@
 		27848BFA2B80A74600542D8C /* HomeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAssembly.swift; sourceTree = "<group>"; };
 		2795FD962B8D2C9A00C02FF3 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
+		2795FF3E2BC04CEB0031CEE8 /* ReservationCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardViewController.swift; sourceTree = "<group>"; };
+		2795FF402BC04D3E0031CEE8 /* ReservationCardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardInteractor.swift; sourceTree = "<group>"; };
+		2795FF422BC04D4C0031CEE8 /* ReservationCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardPresenter.swift; sourceTree = "<group>"; };
+		2795FF442BC04D560031CEE8 /* ReservationCardWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardWorker.swift; sourceTree = "<group>"; };
+		2795FF462BC04D620031CEE8 /* ReservationCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardModel.swift; sourceTree = "<group>"; };
+		2795FF482BC04D6E0031CEE8 /* ReservationCardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardRouter.swift; sourceTree = "<group>"; };
+		2795FF4A2BC04D7A0031CEE8 /* ReservationCardProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardProtocols.swift; sourceTree = "<group>"; };
+		2795FF4C2BC04D850031CEE8 /* ReservationCardAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardAssembly.swift; sourceTree = "<group>"; };
+		2795FF532BC3EDF80031CEE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2795FF552BC3EE990031CEE8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2795FF562BC3EE9A0031CEE8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2795FF572BC3F68B0031CEE8 /* String+localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localize.swift"; sourceTree = "<group>"; };
+		2795FF5A2BC3F7A30031CEE8 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		279C53372BCD0FE900AF6EF5 /* ReservationCardState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardState.swift; sourceTree = "<group>"; };
+		279C53392BCD2A3100AF6EF5 /* ReservationCardSpotState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardSpotState.swift; sourceTree = "<group>"; };
+		27BA27D72BC7F66D008F3519 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		27BA27D92BC7FDE8008F3519 /* UIColor+themeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+themeColors.swift"; sourceTree = "<group>"; };
+		27BA27DB2BC80952008F3519 /* UITextField+borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+borders.swift"; sourceTree = "<group>"; };
 		27C0B7A52B9C38B600977074 /* ParkingLevelsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLevelsEndPoint.swift; sourceTree = "<group>"; };
 		27C0B7A72B9C3AEC00977074 /* ParkingLevelsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLevelsModel.swift; sourceTree = "<group>"; };
 		27C0B7AB2B9C448400977074 /* BuildingsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsEndPoint.swift; sourceTree = "<group>"; };
@@ -253,7 +295,6 @@
 		27C624462B7C8B7E002FFF48 /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
 		27C624482B7C8B88002FFF48 /* LoginAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembly.swift; sourceTree = "<group>"; };
 		27C6244A2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+hideKeyboardOnTapAround.swift"; sourceTree = "<group>"; };
-		27C6244C2B7C8E94002FFF48 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
 		27C624512B7D01EB002FFF48 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		27C624532B7D020C002FFF48 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
 		27C624552B7D0217002FFF48 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
@@ -275,6 +316,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2714138A2BB2ED2A00496D24 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				277B37BD2BCAB88500B2A412 /* MapState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		272A22F62BB067490025880E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +381,7 @@
 		272B52162B9C5341008F428E /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				2714138A2BB2ED2A00496D24 /* Enums */,
 				272A22F62BB067490025880E /* Views */,
 				272B52172B9C539B008F428E /* MapViewController.swift */,
 				272B52192B9C53C5008F428E /* MapInteractor.swift */,
@@ -376,9 +426,11 @@
 			children = (
 				273C90BF2B7BD11F00C73FE8 /* Scenes */,
 				27535C772BA47BF7000E48E6 /* Views */,
-				27754BF32B99E1DC0065A14E /* DataStores */,
-				273E65E92B8499BF00567BD8 /* Model */,
 				273E65F42B88B3E400567BD8 /* Keychain */,
+				275E0F062BC6796B00B6E1B3 /* Language */,
+				275E0F092BC6869D00B6E1B3 /* Theme */,
+				273E65E92B8499BF00567BD8 /* Model */,
+				27BA27D62BC7F65A008F3519 /* Colors */,
 				273E65D22B8489DE00567BD8 /* Networking */,
 				273C90C12B7BD14500C73FE8 /* Delegates */,
 				273C90C32B7BD17900C73FE8 /* Extensions */,
@@ -390,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				273C90B22B7BCCB200C73FE8 /* Assets.xcassets */,
+				2795FF542BC3EDF80031CEE8 /* Localizable.strings */,
 			);
 			path = res;
 			sourceTree = "<group>";
@@ -405,6 +458,7 @@
 				27848BEB2B80A68B00542D8C /* Home */,
 				27754BE22B99DA420065A14E /* Buildings */,
 				272B52162B9C5341008F428E /* Map */,
+				2795FF3D2BC04CCC0031CEE8 /* ReservationCard */,
 				272B51F42B9C4FB5008F428E /* Profile */,
 				27535C762BA33F85000E48E6 /* UpdateCar */,
 				272B52052B9C5102008F428E /* More */,
@@ -432,9 +486,9 @@
 		273C90C22B7BD16400C73FE8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				277B37B12BCA98C100B2A412 /* Enums */,
 				27C6243C2B7C8B17002FFF48 /* LoginViewController.swift */,
 				27C6243E2B7C8B50002FFF48 /* LoginInteractor.swift */,
-				27C6244C2B7C8E94002FFF48 /* LoginWorker.swift */,
 				27C624402B7C8B59002FFF48 /* LoginPresenter.swift */,
 				27C624422B7C8B63002FFF48 /* LoginModel.swift */,
 				27C624442B7C8B6F002FFF48 /* LoginRouter.swift */,
@@ -449,6 +503,9 @@
 			children = (
 				273C90C42B7BD19900C73FE8 /* UIView+pin.swift */,
 				27C6244A2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift */,
+				2795FF572BC3F68B0031CEE8 /* String+localize.swift */,
+				27BA27D92BC7FDE8008F3519 /* UIColor+themeColors.swift */,
+				27BA27DB2BC80952008F3519 /* UITextField+borders.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -557,6 +614,7 @@
 		27535C762BA33F85000E48E6 /* UpdateCar */ = {
 			isa = PBXGroup;
 			children = (
+				277B37BA2BCAAEC600B2A412 /* Enums */,
 				27535C7B2BA48515000E48E6 /* UpdateCarViewController.swift */,
 				27535C7D2BA48525000E48E6 /* UpdateCarInteractor.swift */,
 				27535C7F2BA4852E000E48E6 /* UpdateCarWorker.swift */,
@@ -589,6 +647,23 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		275E0F062BC6796B00B6E1B3 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				2795FF5A2BC3F7A30031CEE8 /* Language.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		275E0F092BC6869D00B6E1B3 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				275E0F0A2BC686B200B6E1B3 /* Theme.swift */,
+				275E0F0C2BC6872300B6E1B3 /* ThemeManager.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		27754BE22B99DA420065A14E /* Buildings */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,14 +681,36 @@
 			path = Buildings;
 			sourceTree = "<group>";
 		};
-		27754BF32B99E1DC0065A14E /* DataStores */ = {
+		277B37B12BCA98C100B2A412 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				27754BF62B9A21590065A14E /* ReservationsDataStore.swift */,
-				27754BF82B9AECE90065A14E /* ParkingSpotsDataStore.swift */,
-				27754BFC2B9AED0C0065A14E /* BuildingsDataStore.swift */,
+				277B37B22BCA98D300B2A412 /* LoginState.swift */,
 			);
-			path = DataStores;
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		277B37B42BCAA3E000B2A412 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				277B37B52BCAA3F500B2A412 /* RegistrationState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		277B37B72BCAAA0500B2A412 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				277B37B82BCAAA3A00B2A412 /* RegistrationCarState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		277B37BA2BCAAEC600B2A412 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				277B37BB2BCAAED700B2A412 /* UpdateCarState.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		27848BEB2B80A68B00542D8C /* Home */ = {
@@ -650,9 +747,43 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		2795FF3D2BC04CCC0031CEE8 /* ReservationCard */ = {
+			isa = PBXGroup;
+			children = (
+				279C53362BCD0FC300AF6EF5 /* Enums */,
+				2795FF3E2BC04CEB0031CEE8 /* ReservationCardViewController.swift */,
+				2795FF402BC04D3E0031CEE8 /* ReservationCardInteractor.swift */,
+				2795FF442BC04D560031CEE8 /* ReservationCardWorker.swift */,
+				2795FF422BC04D4C0031CEE8 /* ReservationCardPresenter.swift */,
+				2795FF462BC04D620031CEE8 /* ReservationCardModel.swift */,
+				2795FF482BC04D6E0031CEE8 /* ReservationCardRouter.swift */,
+				2795FF4A2BC04D7A0031CEE8 /* ReservationCardProtocols.swift */,
+				2795FF4C2BC04D850031CEE8 /* ReservationCardAssembly.swift */,
+			);
+			path = ReservationCard;
+			sourceTree = "<group>";
+		};
+		279C53362BCD0FC300AF6EF5 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				279C53372BCD0FE900AF6EF5 /* ReservationCardState.swift */,
+				279C53392BCD2A3100AF6EF5 /* ReservationCardSpotState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		27BA27D62BC7F65A008F3519 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				27BA27D72BC7F66D008F3519 /* Colors.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
 		27C624502B7D01D2002FFF48 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				277B37B42BCAA3E000B2A412 /* Enums */,
 				27C624512B7D01EB002FFF48 /* RegistrationViewController.swift */,
 				27C624532B7D020C002FFF48 /* RegistrationInteractor.swift */,
 				27C6245B2B7D0239002FFF48 /* RegistrationWorker.swift */,
@@ -668,6 +799,7 @@
 		27C624622B7D0532002FFF48 /* RegistrationCar */ = {
 			isa = PBXGroup;
 			children = (
+				277B37B72BCAAA0500B2A412 /* Enums */,
 				27848BDB2B80A44B00542D8C /* RegistrationCarViewController.swift */,
 				27848BDD2B80A45700542D8C /* RegistrationCarInteractor.swift */,
 				27848BE52B80A47E00542D8C /* RegistrationCarWorker.swift */,
@@ -722,6 +854,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 273C909D2B7BCCB000C73FE8;
 			productRefGroup = 273C90A72B7BCCB000C73FE8 /* Products */;
@@ -739,6 +872,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				273C90B62B7BCCB200C73FE8 /* LaunchScreen.storyboard in Resources */,
+				2795FF522BC3EDF80031CEE8 /* Localizable.strings in Resources */,
 				273C90B32B7BCCB200C73FE8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -753,22 +887,29 @@
 				27535C7C2BA48515000E48E6 /* UpdateCarViewController.swift in Sources */,
 				277D6C392B9B0477000B36F9 /* OnCanvasCoordsModel.swift in Sources */,
 				27C624602B7D0251002FFF48 /* RegistrationAssembly.swift in Sources */,
+				277B37B32BCA98D300B2A412 /* LoginState.swift in Sources */,
 				272B521C2B9C53D9008F428E /* MapWorker.swift in Sources */,
+				2795FF5B2BC3F7A30031CEE8 /* Language.swift in Sources */,
 				27754C032B9AF13C0065A14E /* CanvasModel.swift in Sources */,
+				277B37B92BCAAA3A00B2A412 /* RegistrationCarState.swift in Sources */,
 				27535C7A2BA47D5C000E48E6 /* SingleCardButton.swift in Sources */,
 				27848BEF2B80A70300542D8C /* HomeInteractor.swift in Sources */,
 				2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */,
 				27754BE12B99B7880065A14E /* ProfileLabelButton.swift in Sources */,
 				27535C882BA48555000E48E6 /* UpdateCarProtocols.swift in Sources */,
 				27C6245E2B7D0246002FFF48 /* RegistrationProtocols.swift in Sources */,
+				2795FF472BC04D620031CEE8 /* ReservationCardModel.swift in Sources */,
 				27C624472B7C8B7E002FFF48 /* LoginProtocols.swift in Sources */,
 				272B51F62B9C4FD8008F428E /* ProfileViewController.swift in Sources */,
 				273E65E82B84969F00567BD8 /* CarsEndPoint.swift in Sources */,
+				2795FF492BC04D6E0031CEE8 /* ReservationCardRouter.swift in Sources */,
 				273E660B2B88E98200567BD8 /* SplashProtocols.swift in Sources */,
 				27535C862BA4854E000E48E6 /* UpdateCarRouter.swift in Sources */,
-				27754BF92B9AECE90065A14E /* ParkingSpotsDataStore.swift in Sources */,
+				2795FF4B2BC04D7A0031CEE8 /* ReservationCardProtocols.swift in Sources */,
 				27535C802BA4852E000E48E6 /* UpdateCarWorker.swift in Sources */,
 				272A22FB2BB1A3380025880E /* HomeState.swift in Sources */,
+				277B37B62BCAA3F500B2A412 /* RegistrationState.swift in Sources */,
+				275E0F0D2BC6872300B6E1B3 /* ThemeManager.swift in Sources */,
 				27754BE82B99DA870065A14E /* BuildingsWorker.swift in Sources */,
 				27848BED2B80A6F200542D8C /* HomeViewController.swift in Sources */,
 				2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */,
@@ -782,30 +923,34 @@
 				27754BEC2B99DA990065A14E /* BuildingsModel.swift in Sources */,
 				272B520D2B9C5162008F428E /* MorePresenter.swift in Sources */,
 				27754BE42B99DA740065A14E /* BuildingsViewController.swift in Sources */,
+				2795FF412BC04D3E0031CEE8 /* ReservationCardInteractor.swift in Sources */,
 				27C6245A2B7D022E002FFF48 /* RegistrationRouter.swift in Sources */,
 				272B52222B9C542A008F428E /* MapRouter.swift in Sources */,
 				27C624492B7C8B88002FFF48 /* LoginAssembly.swift in Sources */,
+				27BA27D82BC7F66D008F3519 /* Colors.swift in Sources */,
 				272B51FA2B9C5021008F428E /* ProfileWorker.swift in Sources */,
 				272B52112B9C518C008F428E /* MoreRouter.swift in Sources */,
 				272B52092B9C513F008F428E /* MoreInteractor.swift in Sources */,
 				27754BEA2B99DA900065A14E /* BuildingsPresenter.swift in Sources */,
+				2795FF582BC3F68B0031CEE8 /* String+localize.swift in Sources */,
 				27535C8C2BA48C77000E48E6 /* MultipleButtonsCard.swift in Sources */,
 				27848BF12B80A71100542D8C /* HomePresenter.swift in Sources */,
 				27C624412B7C8B59002FFF48 /* LoginPresenter.swift in Sources */,
 				272B52182B9C539B008F428E /* MapViewController.swift in Sources */,
 				273E65FC2B88C14800567BD8 /* KeychainManager.swift in Sources */,
 				273E66072B88E96E00567BD8 /* SplashRouter.swift in Sources */,
-				27754BF72B9A21590065A14E /* ReservationsDataStore.swift in Sources */,
+				277B37BE2BCAB88500B2A412 /* MapState.swift in Sources */,
 				27C624432B7C8B63002FFF48 /* LoginModel.swift in Sources */,
 				273E66092B88E97900567BD8 /* SplashWorker.swift in Sources */,
 				27535C642BA2DD6E000E48E6 /* BuildingCell.swift in Sources */,
+				2795FF432BC04D4C0031CEE8 /* ReservationCardPresenter.swift in Sources */,
 				27C0B7A62B9C38B600977074 /* ParkingLevelsEndPoint.swift in Sources */,
 				273E65E62B8490F500567BD8 /* Router.swift in Sources */,
 				27C624522B7D01EB002FFF48 /* RegistrationViewController.swift in Sources */,
 				27C6243D2B7C8B17002FFF48 /* LoginViewController.swift in Sources */,
 				27535C822BA48538000E48E6 /* UpdateCarPresenter.swift in Sources */,
+				27BA27DC2BC80952008F3519 /* UITextField+borders.swift in Sources */,
 				273E65E42B84900800567BD8 /* NetworkRouter.swift in Sources */,
-				27754BFD2B9AED0C0065A14E /* BuildingsDataStore.swift in Sources */,
 				273E65DC2B848B8300567BD8 /* HTTPTask.swift in Sources */,
 				272B52242B9C5440008F428E /* MapProtocols.swift in Sources */,
 				27848BFB2B80A74600542D8C /* HomeAssembly.swift in Sources */,
@@ -841,21 +986,27 @@
 				27848BE02B80A46300542D8C /* RegistrationCarPresenter.swift in Sources */,
 				273E66052B88E96800567BD8 /* SplashModel.swift in Sources */,
 				273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */,
+				2795FF3F2BC04CEB0031CEE8 /* ReservationCardViewController.swift in Sources */,
 				272B52152B9C51B9008F428E /* MoreAssembly.swift in Sources */,
 				273E65ED2B849CBB00567BD8 /* NetworkManager.swift in Sources */,
 				27C624542B7D020C002FFF48 /* RegistrationInteractor.swift in Sources */,
 				272B52202B9C5418008F428E /* MapModel.swift in Sources */,
+				2795FF452BC04D560031CEE8 /* ReservationCardWorker.swift in Sources */,
 				27848BF32B80A71A00542D8C /* HomeModel.swift in Sources */,
 				27754BF02B99DAAD0065A14E /* BuildingsProtocols.swift in Sources */,
 				27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */,
 				272B520F2B9C517A008F428E /* MoreModel.swift in Sources */,
 				27848BE22B80A46E00542D8C /* RegistrationCarModel.swift in Sources */,
 				272A22F82BB06A750025880E /* MapView.swift in Sources */,
+				279C53382BCD0FE900AF6EF5 /* ReservationCardState.swift in Sources */,
 				27848BDC2B80A44B00542D8C /* RegistrationCarViewController.swift in Sources */,
 				27754BFF2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift in Sources */,
+				279C533A2BCD2A3100AF6EF5 /* ReservationCardSpotState.swift in Sources */,
+				277B37BC2BCAAED700B2A412 /* UpdateCarState.swift in Sources */,
 				272B52022B9C5099008F428E /* ProfileProtocols.swift in Sources */,
 				27C6244B2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift in Sources */,
 				273E65E22B848F7E00567BD8 /* JSONParameterEncoder.swift in Sources */,
+				2795FF4D2BC04D850031CEE8 /* ReservationCardAssembly.swift in Sources */,
 				273E65D82B848A9500567BD8 /* EndPointType.swift in Sources */,
 				27C0B7A82B9C3AEC00977074 /* ParkingLevelsModel.swift in Sources */,
 				27754BF22B99DAB60065A14E /* BuildingsAssembly.swift in Sources */,
@@ -868,10 +1019,11 @@
 				27754BF52B99E33D0065A14E /* ReservationCell.swift in Sources */,
 				27754BEE2B99DAA40065A14E /* BuildingsRouter.swift in Sources */,
 				27848BF92B80A73D00542D8C /* HomeProtocols.swift in Sources */,
+				27BA27DA2BC7FDE8008F3519 /* UIColor+themeColors.swift in Sources */,
 				27754BDF2B99AEF70065A14E /* ReservationsModel.swift in Sources */,
 				27848BDE2B80A45700542D8C /* RegistrationCarInteractor.swift in Sources */,
+				275E0F0B2BC686B200B6E1B3 /* Theme.swift in Sources */,
 				272B521E2B9C5408008F428E /* MapPresenter.swift in Sources */,
-				27C6244D2B7C8E94002FFF48 /* LoginWorker.swift in Sources */,
 				27754BDD2B99A6200065A14E /* ReservationsEndPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -883,8 +1035,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				273C90B52B7BCCB200C73FE8 /* Base */,
+				2795FF552BC3EE990031CEE8 /* ru */,
+				275E0F082BC6846700B6E1B3 /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2795FF542BC3EDF80031CEE8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2795FF532BC3EDF80031CEE8 /* en */,
+				2795FF562BC3EE9A0031CEE8 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -894,6 +1057,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -954,6 +1118,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

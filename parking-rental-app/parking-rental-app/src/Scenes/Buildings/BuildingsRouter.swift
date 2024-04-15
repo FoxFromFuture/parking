@@ -22,7 +22,7 @@ extension BuildingsRouter: BuildingsRoutingLogic {
         view?.navigationController?.popViewController(animated: true)
     }
     
-    func routeToMap() {
-        view?.navigationController?.pushViewController(MapAssembly.build(), animated: true)
+    func routeToMap(_ routeData: Model.Map.RouteData) {
+        view?.navigationController?.pushViewController(MapAssembly.build(reservationID: nil, buildingID: routeData.buildingID), animated: true)
     }
 }

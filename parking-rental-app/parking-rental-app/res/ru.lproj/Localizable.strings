@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  parking-rental-app
+
+  Created by Никита Лисунов on 4/8/24.
+  
+*/
+
+"launchSubtitle" = "Впервые\nтак просто";
+"login" = "Вход";
+"password" = "Пароль";
+"enter" = "Вход";
+"registration" = "Регистрация";
+"name" = "Имя";
+"register" = "Вход";
+"registrationCarTitle" = "Укажите гос. номер\nвашей машины";
+"registrationCarSubtitle" = "Чтобы резервировать места на него";
+"continue" = "Продолжить";
+"profile" = "Профиль";
+"floor" = "Этаж";
+"reserveLot" = "Арендовать место";
+"home" = "Дом";
+"more" = "Еще";
+"availableBuildings" = "Доступные Здания";
+"date" = "Дата";
+"startTime" = "Начало";
+"endTime" = "Конец";
+"reservationCardFreeFirstLineTitle" = "Арендуйте новое";
+"reservationCardReservedFirstLineTitle" = "Ваше паровочное";
+"reservationCardSecondLineTitle" = "Место";
+"zone" = "Лот";
+"car" = "Машина";
+"timeSlot" = "Временной слот";
+"cancelReservation" = "Отменить резервацию";
+"logOut" = "Выйти";
+"yourCarDetails" = "Изменить рег. номер";
+"updateCarTitle" = "Укажите новый гос. номер\nвашей машины";
+"updateCarSubtitle" = "Чтобы обновить его";
+"save" = "Сохранить";
+"language" = "Язык";
+"theme" = "Тема";
+"cancel" = "Отмена";
+"lightTheme" = "Всегда светлая тема";
+"darkTheme" = "Всегде темная тема";
+"systemTheme" = "Как в системе";
+"logOutQuestion" = "Вы уверены, что хотите выйти из профиля?";
+"changeLanguageAlert" = "Перейдите в настройки устройства, чтобы изменить язык приложения";
+"settings" = "Настройки";
+"connectionError" = "Ошибка Соединения";
+"reload" = "Перезагрузить";
+"noReservations" = "У вас нет актуальных резерваций.";
+"registrationCardLoadingFirstLineTitle" = "Загружаем";
+"english" = "Английский";
+"russian" = "Русский";
+"light" = "Светлая";
+"dark" = "Темная";
+"device" = "Системная";
+"loginFailure" = "Неправильный e-mail или пароль";
+"registrationFailure" = "Ошибка, попробуйте еще раз";
+"registrationCarSetupFailure" = "Ошибка, попробуйте еще раз";
+"updateCarFailure" = "Ошибка, попробуйте еще раз";
+"reservationsLimit" = "Достигнут лимит (5 броней)";
+"reservationsLimitForTime" = "У вас уже есть бронь\nна это время";
+"reservationCardWeekendLimit" = "Вы не можете сделать бронь на выходной";

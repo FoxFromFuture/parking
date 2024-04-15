@@ -8,6 +8,7 @@
 import Foundation
 
 public enum ParkingSpotsApi {
+    case getParkingSpot(parkingSpotID: String)
     case getAllParkingSpots
 }
 
@@ -25,6 +26,8 @@ extension ParkingSpotsApi: EndPointType {
     
     var path: String {
         switch self {
+        case .getParkingSpot(let parkingSpotID):
+            return "\(parkingSpotID)"
         case .getAllParkingSpots:
             return ""
         }
@@ -32,6 +35,8 @@ extension ParkingSpotsApi: EndPointType {
     
     var httpMethod: HTTPMethod {
         switch self {
+        case .getParkingSpot:
+            return .get
         case .getAllParkingSpots:
             return .get
         }
@@ -39,12 +44,14 @@ extension ParkingSpotsApi: EndPointType {
     
     var task: HTTPTask {
         switch self {
+        case .getParkingSpot:
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         case .getAllParkingSpots:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         }
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager.shared.getAccessToken() ?? "")"]
+        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
     }
 }

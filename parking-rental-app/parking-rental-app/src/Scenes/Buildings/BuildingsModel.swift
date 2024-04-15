@@ -42,10 +42,17 @@ enum BuildingsModel {
     
     enum Map {
         struct Request {
-            let buildingID: String?
+            let buildingID: String
         }
-        struct Response { }
-        struct ViewModel { }
+        struct Response {
+            let buildingID: String
+        }
+        struct ViewModel {
+            let buildingID: String
+        }
+        struct RouteData {
+            let buildingID: String
+        }
     }
     
     enum LoadingFailure {

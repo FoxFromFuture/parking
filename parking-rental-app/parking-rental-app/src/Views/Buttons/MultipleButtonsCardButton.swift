@@ -30,7 +30,7 @@ final class MultipleButtonsCardButton: UIView {
     
     // MARK: - Private Methods
     private func configureUI() {
-        backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        backgroundColor = Colors.multipleButtonsCardView.uiColor
         self.layer.cornerRadius = 30
         self.setHeight(80)
         configureTitleLabel()
@@ -44,7 +44,7 @@ final class MultipleButtonsCardButton: UIView {
         titleLabel.pinCenterY(to: self.centerYAnchor)
         titleLabel.pinLeft(to: self.leadingAnchor, 30)
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        titleLabel.textColor = Colors.mainText.uiColor
         titleLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
@@ -53,7 +53,7 @@ final class MultipleButtonsCardButton: UIView {
         arrowIconImageView.pinCenterY(to: self.centerYAnchor)
         arrowIconImageView.pinRight(to: self.trailingAnchor, 30)
         arrowIconImageView.image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .small)) ?? UIImage()
-        arrowIconImageView.tintColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+        arrowIconImageView.tintColor = Colors.icon.uiColor
         arrowIconImageView.backgroundColor = UIColor.clear
     }
     
@@ -62,7 +62,7 @@ final class MultipleButtonsCardButton: UIView {
         activeValueLabel.pinCenterY(to: self.centerYAnchor)
         activeValueLabel.pinRight(to: self.arrowIconImageView.leadingAnchor, 20)
         activeValueLabel.numberOfLines = 0
-        activeValueLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+        activeValueLabel.textColor = Colors.secondaryText.uiColor
         activeValueLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
@@ -79,6 +79,10 @@ final class MultipleButtonsCardButton: UIView {
         titleLabel.text = title
         activeValueLabel.text = activeValue
         self.tapAction = action
+    }
+    
+    func setActiveValue(activeValue: String) {
+        activeValueLabel.text = activeValue
     }
     
     // MARK: - Actions

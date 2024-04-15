@@ -30,4 +30,10 @@ enum RegistrationModel {
         struct Response { }
         struct ViewModel { }
     }
+    
+    enum RegistrationFailure {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
 }

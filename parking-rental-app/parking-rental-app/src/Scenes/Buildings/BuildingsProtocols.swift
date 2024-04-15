@@ -39,9 +39,10 @@ protocol BuildingsPresentationLogic {
 
 // MARK: - RoutingLogic
 protocol BuildingsRoutingLogic {
+    typealias Model = BuildingsModel
     func routeToMore()
     func routeToHome()
-    func routeToMap()
+    func routeToMap(_ routeData: Model.Map.RouteData)
 }
 
 // MARK: - WorkerLogic

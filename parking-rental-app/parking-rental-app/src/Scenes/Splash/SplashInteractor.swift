@@ -12,7 +12,7 @@ final class SplashInteractor {
     private let presenter: SplashPresentationLogic
     private let worker: SplashWorkerLogic
     private let twoWeeksInSec: Double = 1209600.0
-    private let authManager = AuthManager.shared
+    private let authManager = AuthManager()
     
     // MARK: - Initializers
     init(presenter: SplashPresentationLogic, worker: SplashWorkerLogic) {

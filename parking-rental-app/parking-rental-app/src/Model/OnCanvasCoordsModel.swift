@@ -7,20 +7,7 @@
 
 import Foundation
 
-struct OnCanvasCoords {
+struct OnCanvasCoords: Decodable {
     let x: Int
     let y: Int
-}
-
-extension OnCanvasCoords: Decodable {
-    enum OnCanvasCoordsCodingKeys: String, CodingKey {
-        case x
-        case y
-    }
-    
-    init(from decoder: Decoder) throws {
-        let onCanvasCoordsContainer = try decoder.container(keyedBy: OnCanvasCoordsCodingKeys.self)
-        x = try onCanvasCoordsContainer.decode(Int.self, forKey: .x)
-        y = try onCanvasCoordsContainer.decode(Int.self, forKey: .y)
-    }
 }

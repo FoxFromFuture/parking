@@ -12,6 +12,7 @@ final class MultipleButtonsCard: UIView {
     
     // MARK: - Private Properties
     private let buttonsStackView = UIStackView()
+    private var buttons: [MultipleButtonsCardButton] = []
     
     public var tapAction: (() -> Void)?
     
@@ -28,7 +29,7 @@ final class MultipleButtonsCard: UIView {
     
     // MARK: - Private Methods
     private func configureUI() {
-        backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        backgroundColor = Colors.multipleButtonsCardView.uiColor
         self.layer.cornerRadius = 30
         configureButtonsStackView()
     }
@@ -45,8 +46,13 @@ final class MultipleButtonsCard: UIView {
     // MARK: - Internal Methods
     func addButton(title: String, activeValue: String, action: @escaping (() -> Void)) {
         let button = MultipleButtonsCardButton()
+        self.buttons.append(button)
         button.configure(title: title, activeValue: activeValue, action: action)
         buttonsStackView.addArrangedSubview(button)
         button.pinHorizontal(to: self.buttonsStackView)
+    }
+    
+    func setActiveValue(_ buttonIdx: Int, activeValue: String) {
+        buttons[buttonIdx].setActiveValue(activeValue: activeValue)
     }
 }

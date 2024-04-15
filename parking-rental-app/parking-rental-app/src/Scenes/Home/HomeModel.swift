@@ -31,7 +31,8 @@ enum HomeModel {
             let lotNumbets: [String]
             let levelNumbers: [String]
             let buildingNames: [String]
-            let parkingSpotsIDx: [String]
+            let reservationsIDx: [String]
+            let isReservationsLimit: Bool
         }
     }
     
@@ -43,10 +44,17 @@ enum HomeModel {
     
     enum Map {
         struct Request {
-            let lotID: String?
+            let reservationID: String
         }
-        struct Response { }
-        struct ViewModel { }
+        struct Response {
+            let reservationID: String
+        }
+        struct ViewModel {
+            let reservationID: String
+        }
+        struct RouteData {
+            let reservationID: String
+        }
     }
     
     enum Profile {

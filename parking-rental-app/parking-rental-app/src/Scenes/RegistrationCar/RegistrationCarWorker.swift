@@ -9,8 +9,7 @@ import UIKit
 
 final class RegistrationCarWorker {
     // MARK: - Private Properties
-    private let networkManager = NetworkManager.shared
-    private let defaults = UserDefaults.standard
+    private let networkManager = NetworkManager()
 }
 
 // MARK: - WorkerLogic

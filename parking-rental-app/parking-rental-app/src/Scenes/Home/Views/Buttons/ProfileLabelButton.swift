@@ -40,6 +40,8 @@ class ProfileLabelButton: UIView {
         leftIconView.image = image
         leftIconView.tintColor = tintColor
         leftIconView.backgroundColor = UIColor.clear
+        leftIconView.setHeight(34)
+        leftIconView.setWidth(38)
     }
     
     func setRightIcon(_ image: UIImage, _ tintColor: UIColor) {

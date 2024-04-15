@@ -18,6 +18,8 @@ final class SplashViewController: UIViewController {
     private let interactor: SplashBusinessLogic
     private let router: SplashRoutingLogic
     private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    private let iconImageView = UIImageView()
     
     // MARK: - LifeCycle
     init(
@@ -36,8 +38,6 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        AuthManager.shared.deleteToken(tokenType: .refresh)
-//        AuthManager.shared.deleteToken(tokenType: .access)
         interactor.loadStart(Model.Start.Request())
         interactor.loadLogin(Model.Login.Request())
     }
@@ -48,20 +48,41 @@ final class SplashViewController: UIViewController {
     
     // MARK: - Configuration
     private func configureUI() {
-        view.backgroundColor = #colorLiteral(red: 0.9647058824, green: 0.8470588235, blue: 0.1058823529, alpha: 1)
+        view.backgroundColor = Colors.accent.uiColor
         configureTitleLabel()
+        configureSubtitleLabel()
+        configureIconImageView()
     }
     
     private func configureTitleLabel() {
         self.view.addSubview(titleLabel)
-        titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 40)
+        titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 177)
         titleLabel.pinLeft(to: self.view.leadingAnchor, 38)
-        titleLabel.pinRight(to: self.view.trailingAnchor, 38)
-        titleLabel.text = "Parking\nit's never been\nso easy"
-        titleLabel.numberOfLines = 0
+        titleLabel.text = "Parking"
         titleLabel.textAlignment = .left
-        titleLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
-        titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
+        titleLabel.textColor = Colors.mainText.uiColor.light
+        titleLabel.font = .systemFont(ofSize: 64, weight: .bold)
+    }
+    
+    private func configureSubtitleLabel() {
+        self.view.addSubview(subtitleLabel)
+        subtitleLabel.pinTop(to: self.titleLabel.bottomAnchor, 10)
+        subtitleLabel.pinLeft(to: self.view.leadingAnchor, 38)
+        subtitleLabel.text = "launchSubtitle".localize()
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.textAlignment = .left
+        subtitleLabel.textColor = Colors.mainText.uiColor.light
+        subtitleLabel.font = .systemFont(ofSize: 32, weight: .regular)
+    }
+    
+    private func configureIconImageView() {
+        self.view.addSubview(iconImageView)
+        iconImageView.pinLeft(to: self.titleLabel.trailingAnchor, 10)
+        iconImageView.pinCenterY(to: self.titleLabel.centerYAnchor)
+        iconImageView.setHeight(80)
+        iconImageView.setWidth(80)
+        iconImageView.tintColor = Colors.mainText.uiColor.light
+        iconImageView.image = UIImage(systemName: "parkingsign.circle", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
     }
 }
 

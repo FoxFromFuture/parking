@@ -7,19 +7,37 @@
 
 import UIKit
 
+enum ParkingSpotType {
+    case notAvailable
+    case notFree
+    case free
+    case reserved
+}
+
 class MapView: UIView {
     // MARK: - Properties
-    private var parkingSpotsCoords: [OnCanvasCoords]?
-    private var parkingSpotsCanvases: [Canvas]?
-    private var parkingSpotsPaths: [UIBezierPath]?
-    private var parkingSpotsLayers: [CAShapeLayer]?
+    private var notAvailableParkingSpots: [ParkingSpot]?
+    private var notFreeParkingSpots: [ParkingSpot]?
+    private var freeParkingSpots: [ParkingSpot]?
+    private var reservedParkingSpot: ParkingSpot?
+    
+    private var notAvailableParkingSpotsLayers: [CAShapeLayer]?
+    private var notFreeParkingSpotsLayers: [CAShapeLayer]?
+    private var freeParkingSpotsLayers: [CAShapeLayer]?
+    private var reservedParkingSpotLayer: CAShapeLayer?
+    
+    private var position: CGPoint?
+    private var freeSpotPressAction: ((String) -> Void)?
+    private var reservedSpotPressAction: ((String) -> Void)?
     
     // MARK: - LifeCycle
-    init(parkingSpotsCoords: [OnCanvasCoords], parkingSpotsCanvases: [Canvas], frame: CGRect) {
+    init(notAvailableParkingSpots: [ParkingSpot]?, notFreeParkingSpots: [ParkingSpot]?, freeParkingSpots: [ParkingSpot]?, reservedParkingSpot: ParkingSpot?, frame: CGRect) {
         super.init(frame: frame)
-        self.parkingSpotsCoords = parkingSpotsCoords
-        self.parkingSpotsCanvases = parkingSpotsCanvases
-        self.backgroundColor = .white
+        self.notAvailableParkingSpots = notAvailableParkingSpots
+        self.notFreeParkingSpots = notFreeParkingSpots
+        self.freeParkingSpots = freeParkingSpots
+        self.reservedParkingSpot = reservedParkingSpot
+        self.backgroundColor = Colors.background.uiColor
         configureUI()
     }
     
@@ -30,48 +48,121 @@ class MapView: UIView {
     
     // MARK: - Configuration
     private func configureUI() {
-        self.parkingSpotsPaths = Array(repeating: UIBezierPath(), count: self.parkingSpotsCoords?.count ?? 0)
-        self.parkingSpotsLayers = Array(repeating: CAShapeLayer(), count: self.parkingSpotsCoords?.count ?? 0)
-        
-        if let parkingSpotsLayers = self.parkingSpotsLayers {
-            for layer in parkingSpotsLayers {
-                self.layer.addSublayer(layer)
+        if let freeParkingSpots = self.freeParkingSpots {
+            self.freeParkingSpotsLayers = []
+            for _ in freeParkingSpots {
+                self.freeParkingSpotsLayers?.append(CAShapeLayer())
             }
         }
         
-        let tapRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.parkingSpotButtonWasPressed(_:))
-        )
-        addGestureRecognizer(tapRecognizer)
+        if let notAvailableParkingSpots = self.notAvailableParkingSpots {
+            self.notAvailableParkingSpotsLayers = []
+            for _ in notAvailableParkingSpots {
+                self.notAvailableParkingSpotsLayers?.append(CAShapeLayer())
+            }
+        }
+        
+        if let notFreeParkingSpots = self.notFreeParkingSpots {
+            self.notFreeParkingSpotsLayers = []
+            for _ in notFreeParkingSpots {
+                self.notFreeParkingSpotsLayers?.append(CAShapeLayer())
+            }
+        }
+        
+        if let _ = self.reservedParkingSpot {
+            self.reservedParkingSpotLayer = CAShapeLayer()
+        }
     }
     
-    func createParkingSpot(coords: OnCanvasCoords, canvas: Canvas, path: UIBezierPath, layer: CAShapeLayer) {
+    func configureFreeSpotPressAction(pressAction: @escaping (String) -> Void) {
+        self.freeSpotPressAction = pressAction
+    }
+    
+    func configureReservedSpotPressAction(pressAction: @escaping (String) -> Void) {
+        self.reservedSpotPressAction = pressAction
+    }
+    
+    private func createParkingSpot(parkingSpotNumber: String, parkingSpotType: ParkingSpotType, coords: OnCanvasCoords, canvas: Canvas, layer: CAShapeLayer) {
+        let path = UIBezierPath()
         path.move(to: CGPoint(x: coords.x, y: coords.y))
         path.addLine(to: CGPoint(x: coords.x + canvas.width, y: coords.y))
         path.addLine(to: CGPoint(x: coords.x + canvas.width, y: coords.y + canvas.height))
         path.addLine(to: CGPoint(x: coords.x, y: coords.y + canvas.height))
         path.addLine(to: CGPoint(x: coords.x, y: coords.y))
         path.close()
-        layer.frame = bounds
+
         layer.path = path.cgPath
-        layer.lineWidth = 3
-        layer.strokeColor = UIColor.green.cgColor
-        layer.fillColor = UIColor.gray.cgColor
+        
+        switch parkingSpotType {
+        case .notAvailable:
+            layer.fillColor = Colors.notAvailableSpot.uiColor.cgColor
+        case .notFree:
+            layer.fillColor = Colors.notFreeSpot.uiColor.cgColor
+        case .free:
+            layer.fillColor = Colors.freeSpot.uiColor.cgColor
+        case .reserved:
+            layer.fillColor = Colors.accent.uiColor.cgColor
+        }
+        
+        self.layer.addSublayer(layer)
+        
+        let label = CATextLayer()
+        label.fontSize = 24.0
+        label.frame = CGRect(x: coords.x + 5, y: coords.y + 5, width: canvas.width, height: canvas.height)
+        label.string = parkingSpotNumber
+        label.foregroundColor = Colors.mainText.uiColor.light.cgColor
+        self.layer.addSublayer(label)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if let parkingSpotsPaths = self.parkingSpotsPaths, let parkingSpotsLayers = self.parkingSpotsLayers, let parkingSpotsCoords = self.parkingSpotsCoords, let parkingSpotsCanvases = self.parkingSpotsCanvases {
-            for idx in 0..<parkingSpotsCoords.count {
-                self.createParkingSpot(coords: parkingSpotsCoords[idx], canvas: parkingSpotsCanvases[idx], path: parkingSpotsPaths[idx], layer: parkingSpotsLayers[idx])
+        
+        if let notAvailableParkingSpots = self.notAvailableParkingSpots, let notAvailableParkingSpotsLayers = self.notAvailableParkingSpotsLayers {
+            for idx in 0..<notAvailableParkingSpots.count {
+                self.createParkingSpot(parkingSpotNumber: notAvailableParkingSpots[idx].parkingNumber, parkingSpotType: .notAvailable, coords: notAvailableParkingSpots[idx].onCanvasCoords, canvas: notAvailableParkingSpots[idx].canvas, layer: notAvailableParkingSpotsLayers[idx])
             }
+        }
+        
+        if let notFreeParkingSpots = self.notFreeParkingSpots, let notFreeParkingSpotsLayers = self.notFreeParkingSpotsLayers {
+            for idx in 0..<notFreeParkingSpots.count {
+                self.createParkingSpot(parkingSpotNumber: notFreeParkingSpots[idx].parkingNumber, parkingSpotType: .notFree, coords: notFreeParkingSpots[idx].onCanvasCoords, canvas: notFreeParkingSpots[idx].canvas, layer: notFreeParkingSpotsLayers[idx])
+            }
+        }
+        
+        if let freeParkingSpots = self.freeParkingSpots, let freeParkingSpotsLayers = self.freeParkingSpotsLayers {
+            for idx in 0..<freeParkingSpots.count {
+                self.createParkingSpot(parkingSpotNumber: freeParkingSpots[idx].parkingNumber, parkingSpotType: .free, coords: freeParkingSpots[idx].onCanvasCoords, canvas: freeParkingSpots[idx].canvas, layer: freeParkingSpotsLayers[idx])
+            }
+        }
+        
+        if let reservedParkingSpot = self.reservedParkingSpot, let reservedParkingSpotLayer = self.reservedParkingSpotLayer {
+            self.createParkingSpot(parkingSpotNumber: reservedParkingSpot.parkingNumber, parkingSpotType: .reserved, coords: reservedParkingSpot.onCanvasCoords, canvas: reservedParkingSpot.canvas, layer: reservedParkingSpotLayer)
         }
     }
     
     // MARK: - Actions
-    @objc
-    private func parkingSpotButtonWasPressed(_ sender: UITapGestureRecognizer? = nil) {
-        // TODO: - Show parking spot reservation subview
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            position = touch.location(in: self)
+            if let freeParkingSpotsLayers = self.freeParkingSpotsLayers, let position = self.position {
+                for idx in 0..<freeParkingSpotsLayers.count {
+                    if let path = freeParkingSpotsLayers[idx].path, path.contains(position) {
+                        if let id = freeParkingSpots?[idx].id {
+                            self.freeSpotPressAction?(id)
+                        }
+                        print("freeSpot: \(self.freeParkingSpots?[idx].parkingNumber ?? "-")")
+                        break
+                    }
+                }
+            }
+            if let reservedParkingSpotLayer = self.reservedParkingSpotLayer, let position = self.position {
+                if let path = reservedParkingSpotLayer.path, path.contains(position) {
+                    if let id = reservedParkingSpot?.id {
+                        self.reservedSpotPressAction?(id)
+                    }
+                    print("reservedSpot: \(self.reservedParkingSpot?.parkingNumber ?? "-")")
+                }
+            }
+        }
     }
 }

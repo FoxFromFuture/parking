@@ -9,7 +9,7 @@ import UIKit
 
 final class UpdateCarWorker {
     // MARK: - Private Properties
-    private let networkManager = NetworkManager.shared
+    private let networkManager = NetworkManager()
 }
 
 // MARK: - WorkerLogic

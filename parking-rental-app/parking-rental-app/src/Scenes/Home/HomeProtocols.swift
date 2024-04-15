@@ -44,8 +44,9 @@ protocol HomePresentationLogic {
 
 // MARK: - RoutingLogic
 protocol HomeRoutingLogic {
+    typealias Model = HomeModel
     func routeToBuildings()
-    func routeToMap()
+    func routeToMap(_ routeData: Model.Map.RouteData)
     func routeToProfile()
     func routeToMore()
 }

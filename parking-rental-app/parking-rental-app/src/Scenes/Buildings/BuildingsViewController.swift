@@ -69,7 +69,7 @@ final class BuildingsViewController: UIViewController {
     
     // MARK: - Configuration
     private func configureUI() {
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
         configureAvailableBuildingsLabel()
         configureTabBar()
@@ -86,7 +86,7 @@ final class BuildingsViewController: UIViewController {
             target: self,
             action: #selector(goBack)
         )
-        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
     }
     
     private func configureAvailableBuildingsLabel() {
@@ -94,9 +94,9 @@ final class BuildingsViewController: UIViewController {
         availableBuildingsLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 5)
         availableBuildingsLabel.pinLeft(to: self.view.leadingAnchor, 17)
         availableBuildingsLabel.setHeight(45)
-        availableBuildingsLabel.text = "Available Buildings"
+        availableBuildingsLabel.text = "availableBuildings".localize()
         availableBuildingsLabel.textAlignment = .left
-        availableBuildingsLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        availableBuildingsLabel.textColor = Colors.mainText.uiColor
         availableBuildingsLabel.font = .systemFont(ofSize: 36, weight: .bold)
     }
     
@@ -116,14 +116,15 @@ final class BuildingsViewController: UIViewController {
     
     private func configureBuildingsCollectionView() {
         self.view.addSubview(buildingsCollectionView)
-        buildingsCollectionView.pinLeft(to: self.view.leadingAnchor, 17)
-        buildingsCollectionView.pinRight(to: self.view.trailingAnchor, 17)
-        buildingsCollectionView.pinTop(to: self.availableBuildingsLabel.bottomAnchor, 35)
+        buildingsCollectionView.pinLeft(to: self.view.leadingAnchor)
+        buildingsCollectionView.pinRight(to: self.view.trailingAnchor)
+        buildingsCollectionView.pinTop(to: self.availableBuildingsLabel.bottomAnchor)
         buildingsCollectionView.pinBottom(to: self.tabBar.topAnchor)
         buildingsCollectionView.dataSource = self
         buildingsCollectionView.delegate = self
         buildingsCollectionView.backgroundColor = .clear
         buildingsCollectionView.contentInset.bottom = 120
+        buildingsCollectionView.contentInset.top = 35
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 15
         buildingsCollectionView.collectionViewLayout = layout
@@ -133,33 +134,33 @@ final class BuildingsViewController: UIViewController {
     private func configureLoadingIndicator() {
         self.view.addSubview(loadingIndicator)
         loadingIndicator.pinCenter(to: self.view)
-        loadingIndicator.color = .gray
+        loadingIndicator.color = Colors.secondaryText.uiColor
     }
     
     private func configureLoadingFailureLabel() {
-        loadingFailureLabel.text = "Connection Error"
+        loadingFailureLabel.text = "connectionError".localize()
         loadingFailureLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        loadingFailureLabel.textColor = .black
+        loadingFailureLabel.textColor = Colors.mainText.uiColor
     }
     
     private func configureReloadButton() {
-        reloadButton.setTitle("Reload", for: .normal)
-        reloadButton.setTitleColor(.systemBlue, for: .normal)
-        reloadButton.setTitleColor(.gray, for: .highlighted)
-        reloadButton.backgroundColor = UIColor.clear
+        reloadButton.setTitle("reload".localize(), for: .normal)
+        reloadButton.setTitleColor(Colors.active.uiColor, for: .normal)
+        reloadButton.setTitleColor(Colors.secondaryText.uiColor, for: .highlighted)
+        reloadButton.backgroundColor = .clear
         reloadButton.addTarget(self, action: #selector(reloadButtonWasPressed), for: .touchUpInside)
     }
     
     // MARK: - Actions
     @objc
-    public func goBack() {
+    private func goBack() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         self.interactor.loadHome(Model.Home.Request())
     }
     
     @objc
-    public func reloadButtonWasPressed() {
+    private func reloadButtonWasPressed() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         loadingFailureLabel.removeFromSuperview()
@@ -208,7 +209,7 @@ extension BuildingsViewController: BuildingsDisplayLogic {
     }
     
     func displayMap(_ viewModel: Model.Map.ViewModel) {
-        self.router.routeToMap()
+        self.router.routeToMap(Model.Map.RouteData(buildingID: viewModel.buildingID))
     }
     
     func displayLoadingFailure(_ viewModel: Model.LoadingFailure.ViewModel) {
@@ -242,7 +243,9 @@ extension BuildingsViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        interactor.loadMap(Model.Map.Request(buildingID: self.buildingsIDx?[indexPath.row]))
+        if let buildingID = self.buildingsIDx?[indexPath.row] {
+            interactor.loadMap(Model.Map.Request(buildingID: buildingID))
+        }
     }
     
     private func reloadCollectionViewData() {

@@ -9,8 +9,8 @@ import UIKit
 
 final class RegistrationWorker {
     // MARK: - Private Properties
-    private let networkManager = NetworkManager.shared
-    private let authManager = AuthManager.shared
+    private let networkManager = NetworkManager()
+    private let authManager = AuthManager()
 }
 
 // MARK: - WorkerLogic
@@ -26,7 +26,7 @@ extension RegistrationWorker: RegistrationWorkerLogic {
     }
     
     func saveAuthTokens(refreshToken: String, accessToken: String) {
-        authManager.saveTokens(refreshToken: refreshToken, accessToken: accessToken)
+        self.authManager.saveTokens(refreshToken: refreshToken, accessToken: accessToken)
         self.authManager.setRefreshTokenLastUpdateDate(date: Date.now)
     }
 }

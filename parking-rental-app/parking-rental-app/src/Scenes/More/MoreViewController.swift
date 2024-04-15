@@ -20,8 +20,13 @@ final class MoreViewController: UIViewController {
     private let tabBar = TabBar()
     private let titleLabel = UILabel()
     private let multipleButtonsCard = MultipleButtonsCard()
-    private let languageChoiceAlert = UIAlertController()
+    private let languageChoiceAlert = UIAlertController(
+        title: "changeLanguageAlert".localize(),
+        message: nil,
+        preferredStyle: .alert
+    )
     private let themeChoiceAlert = UIAlertController()
+    private var curTheme: Theme = .light
     
     // MARK: - LifeCycle
     init(
@@ -49,7 +54,7 @@ final class MoreViewController: UIViewController {
     
     // MARK: - Configuration
     private func configureUI() {
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = Colors.background.uiColor
         configureTabBar()
         configureTitleLabel()
         configureMultipleButtonsCard()
@@ -74,43 +79,42 @@ final class MoreViewController: UIViewController {
         titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 40)
         titleLabel.pinLeft(to: self.view.leadingAnchor, 17)
         titleLabel.setHeight(45)
-        titleLabel.text = "More"
+        titleLabel.text = "more".localize()
         titleLabel.textAlignment = .left
-        titleLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        titleLabel.textColor = Colors.mainText.uiColor
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
     }
     
     private func configureLanguageChoiceAlert() {
-        languageChoiceAlert.addAction(UIAlertAction(title: "English", style: .default, handler: { [weak self] (action: UIAlertAction!) in
-            
+        languageChoiceAlert.addAction(UIAlertAction(title: "settings".localize(), style: .default, handler: { (action: UIAlertAction!) in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
         }))
-        languageChoiceAlert.addAction(UIAlertAction(title: "Russian", style: .default, handler: { [weak self] (action: UIAlertAction!) in
-            
-        }))
-        languageChoiceAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        languageChoiceAlert.addAction(UIAlertAction(title: "cancel".localize(), style: .cancel))
     }
     
     private func configureThemeChoiceAlert() {
-        themeChoiceAlert.addAction(UIAlertAction(title: "Always light mode", style: .default, handler: { [weak self] (action: UIAlertAction!) in
-            
+        themeChoiceAlert.addAction(UIAlertAction(title: "lightTheme".localize(), style: .default, handler: { [weak self] (action: UIAlertAction!) in
+            self?.interactor.loadNewTheme(MoreModel.NewTheme.Request(theme: .light))
         }))
-        themeChoiceAlert.addAction(UIAlertAction(title: "Always dark mode", style: .default, handler: { [weak self] (action: UIAlertAction!) in
-            
+        themeChoiceAlert.addAction(UIAlertAction(title: "darkTheme".localize(), style: .default, handler: { [weak self] (action: UIAlertAction!) in
+            self?.interactor.loadNewTheme(MoreModel.NewTheme.Request(theme: .dark))
         }))
-        themeChoiceAlert.addAction(UIAlertAction(title: "Use system settings", style: .default, handler: { [weak self] (action: UIAlertAction!) in
-            
+        themeChoiceAlert.addAction(UIAlertAction(title: "systemTheme".localize(), style: .default, handler: { [weak self] (action: UIAlertAction!) in
+            self?.interactor.loadNewTheme(MoreModel.NewTheme.Request(theme: .device))
         }))
-        themeChoiceAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        themeChoiceAlert.addAction(UIAlertAction(title: "cancel".localize(), style: .cancel))
     }
     
     private func configureMultipleButtonsCard() {
         self.view.addSubview(multipleButtonsCard)
         multipleButtonsCard.pinHorizontal(to: self.view, 17)
         multipleButtonsCard.pinTop(to: self.titleLabel.bottomAnchor, 30)
-        multipleButtonsCard.addButton(title: "Language", activeValue: "English") { [weak self] in
+        multipleButtonsCard.addButton(title: "language".localize(), activeValue: "\(Language(rawValue: NSLocale.preferredLanguages.first ?? "en")?.expandedStr ?? "")") { [weak self] in
             self?.navigationController?.present(self?.languageChoiceAlert ?? UIAlertController(), animated: true)
         }
-        multipleButtonsCard.addButton(title: "Theme", activeValue: "Light") { [weak self] in
+        multipleButtonsCard.addButton(title: "theme".localize(), activeValue: self.curTheme.str()) { [weak self] in
             self?.navigationController?.present(self?.themeChoiceAlert ?? UIAlertController(), animated: true)
         }
     }
@@ -121,10 +125,16 @@ final class MoreViewController: UIViewController {
 // MARK: - DisplayLogic
 extension MoreViewController: MoreDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
+        self.curTheme = viewModel.curTheme
         self.configureUI()
     }
     
     func displayHome(_ viewModel: Model.Home.ViewModel) {
         self.router.routeToHome()
+    }
+    
+    func displayNewTheme(_ viewModel: Model.NewTheme.ViewModel) {
+        self.view.window?.overrideUserInterfaceStyle = viewModel.theme.getUserInterfaceStyle()
+        self.multipleButtonsCard.setActiveValue(1, activeValue: viewModel.theme.str())
     }
 }

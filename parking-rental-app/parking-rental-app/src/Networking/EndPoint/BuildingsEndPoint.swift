@@ -8,6 +8,7 @@
 import Foundation
 
 public enum BuildingsApi {
+    case getBuilding(buildingID: String)
     case getAllBuildings
     case getAllBuildingLevels(buildingID: String)
 }
@@ -26,6 +27,8 @@ extension BuildingsApi: EndPointType {
     
     var path: String {
         switch self {
+        case .getBuilding(let buildingID):
+            return "\(buildingID)"
         case .getAllBuildings:
             return ""
         case .getAllBuildingLevels(let buildingID):
@@ -35,6 +38,8 @@ extension BuildingsApi: EndPointType {
     
     var httpMethod: HTTPMethod {
         switch self {
+        case .getBuilding:
+            return .get
         case .getAllBuildings:
             return .get
         case .getAllBuildingLevels:
@@ -44,6 +49,8 @@ extension BuildingsApi: EndPointType {
     
     var task: HTTPTask {
         switch self {
+        case .getBuilding:
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         case .getAllBuildings:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         case .getAllBuildingLevels:
@@ -52,6 +59,6 @@ extension BuildingsApi: EndPointType {
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager.shared.getAccessToken() ?? "")"]
+        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
     }
 }

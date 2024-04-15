@@ -22,4 +22,10 @@ enum RegistrationCarModel {
         struct Response { }
         struct ViewModel { }
     }
+    
+    enum CarSetupFailure {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
 }

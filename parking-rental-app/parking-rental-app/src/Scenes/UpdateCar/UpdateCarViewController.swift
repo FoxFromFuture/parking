@@ -22,6 +22,13 @@ final class UpdateCarViewController: UIViewController {
     private let subTitleLabel = UILabel()
     private let carRegistryNumberTextField = UITextField()
     private let saveButton = UIButton()
+    private let carUpdateFailureLabel = UILabel()
+    private var regNumTextFieldBottomBorder = UIView()
+    private var currentState: UpdateCarState = .stable {
+        didSet {
+            updateUIForState(currentState)
+        }
+    }
     
     // MARK: - LifeCycle
     init(
@@ -46,13 +53,14 @@ final class UpdateCarViewController: UIViewController {
     
     // MARK: - Configuration
     private func configureUI() {
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
         configureTabBar()
         configureTitleLabel()
         configureSubTitleLabel()
         configureCarRegistryNumberTextFieldTextField()
         configureSaveButton()
+        configureCarUpdateFailureLabel()
     }
     
     private func configureNavigationBar() {
@@ -62,7 +70,7 @@ final class UpdateCarViewController: UIViewController {
             target: self,
             action: #selector(goBack)
         )
-        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
     }
     
     private func configureTabBar() {
@@ -84,65 +92,84 @@ final class UpdateCarViewController: UIViewController {
         titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 5)
         titleLabel.pinLeft(to: self.view.leadingAnchor, 38)
         titleLabel.pinRight(to: self.view.trailingAnchor, 38)
-        titleLabel.text = "Set new car\nregistry number"
+        titleLabel.text = "updateCarTitle".localize()
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .left
-        titleLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        titleLabel.textColor = Colors.mainText.uiColor
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
     }
     
     private func configureSubTitleLabel() {
         self.view.addSubview(subTitleLabel)
-        subTitleLabel.pinTop(to: self.titleLabel.bottomAnchor, 20)
+        subTitleLabel.pinTop(to: self.titleLabel.bottomAnchor, 15)
         subTitleLabel.pinLeft(to: self.view.leadingAnchor, 38)
         subTitleLabel.pinRight(to: self.view.trailingAnchor, 38)
-        subTitleLabel.text = "To update your car details"
+        subTitleLabel.text = "updateCarSubtitle".localize()
         subTitleLabel.textAlignment = .left
-        subTitleLabel.textColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)
+        subTitleLabel.textColor = Colors.secondaryText.uiColor
         subTitleLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
     private func configureCarRegistryNumberTextFieldTextField() {
         self.view.addSubview(carRegistryNumberTextField)
-        carRegistryNumberTextField.attributedPlaceholder = NSAttributedString(string: "X000XX000", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)])
+        carRegistryNumberTextField.attributedPlaceholder = NSAttributedString(string: "X000XX000", attributes: [NSAttributedString.Key.foregroundColor: Colors.secondaryText.uiColor])
         carRegistryNumberTextField.font = .systemFont(ofSize: 24, weight: .regular)
-        carRegistryNumberTextField.textColor = .black
+        carRegistryNumberTextField.textColor = Colors.mainText.uiColor
         carRegistryNumberTextField.textAlignment = .left
         carRegistryNumberTextField.pinTop(to: self.subTitleLabel.bottomAnchor, 60)
         carRegistryNumberTextField.pinLeft(to: self.view, 38)
         carRegistryNumberTextField.pinRight(to: self.view, 38)
-        carRegistryNumberTextField.backgroundColor = .white
-        carRegistryNumberTextField.borderStyle = .line
+        carRegistryNumberTextField.backgroundColor = .clear
+        self.regNumTextFieldBottomBorder = carRegistryNumberTextField.addBottomBorder(color: Colors.secondaryText.uiColor, thickness: 2)
     }
     
     private func configureSaveButton() {
         self.view.addSubview(saveButton)
-        saveButton.pinTop(to: self.carRegistryNumberTextField.bottomAnchor, 40)
+        saveButton.pinTop(to: self.carRegistryNumberTextField.bottomAnchor, 70)
         saveButton.setHeight(70)
         saveButton.pinHorizontal(to: self.view, 38)
-        saveButton.backgroundColor = #colorLiteral(red: 0.9647058824, green: 0.8470588235, blue: 0.1058823529, alpha: 1)
+        saveButton.backgroundColor = Colors.accent.uiColor
         saveButton.layer.cornerRadius = 20
-        saveButton.setTitle("Save", for: .normal)
-        saveButton.setTitleColor(#colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1), for: .normal)
+        saveButton.setTitle("save".localize(), for: .normal)
+        saveButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
         saveButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
         saveButton.addTarget(self, action: #selector(saveButtonWasTapped), for: .touchDown)
     }
     
+    private func configureCarUpdateFailureLabel() {
+        carUpdateFailureLabel.text = "updateCarFailure".localize()
+        carUpdateFailureLabel.textColor = Colors.danger.uiColor
+        carUpdateFailureLabel.font = .systemFont(ofSize: 16, weight: .medium)
+    }
+    
     // MARK: - Actions
     @objc
-    public func goBack() {
+    private func goBack() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         self.interactor.loadProfile(Model.Profile.Request())
     }
     
     @objc
-    public func saveButtonWasTapped() {
+    private func saveButtonWasTapped() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         if let newRegistryNumber = carRegistryNumberTextField.text {
             self.interactor.loadUpdateCarRequest(Model.UpdateCarRequest.Request(newRegistryNumber: newRegistryNumber))
         }
+    }
+    
+    private func showStableState() {
+        carUpdateFailureLabel.removeFromSuperview()
+        regNumTextFieldBottomBorder.backgroundColor = Colors.secondaryText.uiColor
+    }
+    
+    private func showCarUpdateFailure() {
+        self.view.addSubview(carUpdateFailureLabel)
+        carUpdateFailureLabel.pinTop(to: self.carRegistryNumberTextField.bottomAnchor, 30)
+        carUpdateFailureLabel.pinLeft(to: self.view.leadingAnchor, 38)
+        
+        regNumTextFieldBottomBorder.backgroundColor = Colors.danger.uiColor
     }
 }
 
@@ -167,6 +194,24 @@ extension UpdateCarViewController: UpdateCarDisplayLogic {
     func displayUpdateCarRequest(_ viewModel: Model.UpdateCarRequest.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             self?.router.routeToProfile()
+        }
+    }
+    
+    func displayUpdateCarFailure(_ viewModel: Model.CarUpdateFailure.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.currentState = .carUpdateFailure
+        }
+    }
+}
+
+// MARK: - UpdateUIForState
+extension UpdateCarViewController {
+    func updateUIForState(_ state: UpdateCarState) {
+        switch state {
+        case .stable:
+            showStableState()
+        case .carUpdateFailure:
+            showCarUpdateFailure()
         }
     }
 }

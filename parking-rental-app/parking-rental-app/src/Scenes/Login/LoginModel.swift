@@ -29,4 +29,10 @@ enum LoginModel {
         struct Response { }
         struct ViewModel { }
     }
+    
+    enum LoginFailure {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
 }

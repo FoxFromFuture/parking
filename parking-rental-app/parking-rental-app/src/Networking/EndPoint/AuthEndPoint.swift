@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public enum AuthApi {
     case whoami
@@ -73,6 +74,6 @@ extension AuthApi: EndPointType {
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager.shared.getAccessToken() ?? "")"]
+        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
     }
 }

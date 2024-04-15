@@ -16,8 +16,7 @@ final class HomeInteractor {
     private var parkingLevels: [ParkingLevel]?
     private var buildings: [Building]?
     
-    /// Create group for multiple async tasks
-    private let group = DispatchGroup()
+    private let dispatchGroup = DispatchGroup()
     
     // MARK: - Initializers
     init(presenter: HomePresentationLogic, worker: HomeWorkerLogic) {
@@ -39,67 +38,71 @@ extension HomeInteractor: HomeBusinessLogic {
         self.parkingLevels = nil
         self.buildings = nil
         
+        self.dispatchGroup.enter()
         /// Fetch user's reservations data
         self.worker.getAllReservations() { [weak self] reservationsData, error in
             if let error = error {
                 print(error)
-                self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
-            } else if let reservations = reservationsData {
+            } else if let reservations = reservationsData, !reservations.isEmpty {
                 /// Save fetched reservations
-                self?.reservations = reservations
-                
-                /// Check if there were any reservations
-                if reservations.isEmpty {
-                    self?.presenter.presentNoData(HomeModel.NoData.Response())
-                    return
-                }
-                
-                /// Fetch all parking spots data
-                self?.group.enter()
-                self?.worker.getAllParkingSpots(completion: { [weak self] parkingSpotsData, error in
-                    if let error = error {
-                        print(error)
-                    } else if let parkingSpots = parkingSpotsData {
-                        /// Save fetched parking spots
-                        self?.parkingSpots = parkingSpots
+                let timeDateFormatter = DateFormatter()
+                timeDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                self?.reservations = []
+                for reservation in reservations {
+                    if let reservationEndTime = timeDateFormatter.date(from: reservation.endTime), reservationEndTime > Date() {
+                        self?.reservations?.append(reservation)
                     }
-                    self?.group.leave()
-                })
-                
-                /// Fetch all parking levels data
-                self?.group.enter()
-                self?.worker.getAllParkingLevels(completion: { [weak self] parkingLevelsData, error in
-                    if let error = error {
-                        print(error)
-                    } else if let parkingLevels = parkingLevelsData {
-                        /// Save fetched parking levels
-                        self?.parkingLevels = parkingLevels
-                    }
-                    self?.group.leave()
-                })
-                
-                /// Fetch all buildings data
-                self?.group.enter()
-                self?.worker.getAllBuildings(completion: { [weak self] buildingsData, error in
-                    if let error = error {
-                        print(error)
-                    } else if let buildings = buildingsData {
-                        /// Save fetched buildings
-                        self?.buildings = buildings
-                    }
-                    self?.group.leave()
-                })
-                
-                /// Wait for all grouped async tasks completion
-                self?.group.wait()
-                
-                /// Present reservations if all data was retrieved from server
-                if let parkingSpots = self?.parkingSpots, let parkingLevels = self?.parkingLevels, let buildings = self?.buildings {
-                    self?.presenter.presentReservations(Model.GetReservations.Response(reservations: reservations, parkingSpots: parkingSpots, parkingLevels: parkingLevels, buildings: buildings))
-                } else {
-                    self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
                 }
             }
+            self?.dispatchGroup.leave()
+        }
+        
+        self.dispatchGroup.enter()
+        /// Fetch all parking spots data
+        self.worker.getAllParkingSpots(completion: { [weak self] parkingSpotsData, error in
+            if let error = error {
+                print(error)
+            } else if let parkingSpots = parkingSpotsData {
+                /// Save fetched parking spots
+                self?.parkingSpots = parkingSpots
+            }
+            self?.dispatchGroup.leave()
+        })
+        
+        self.dispatchGroup.enter()
+        /// Fetch all parking levels data
+        self.worker.getAllParkingLevels(completion: { [weak self] parkingLevelsData, error in
+            if let error = error {
+                print(error)
+            } else if let parkingLevels = parkingLevelsData {
+                /// Save fetched parking levels
+                self?.parkingLevels = parkingLevels
+            }
+            self?.dispatchGroup.leave()
+        })
+        
+        self.dispatchGroup.enter()
+        /// Fetch all buildings data
+        self.worker.getAllBuildings(completion: { [weak self] buildingsData, error in
+            if let error = error {
+                print(error)
+            } else if let buildings = buildingsData {
+                /// Save fetched buildings
+                self?.buildings = buildings
+            }
+            self?.dispatchGroup.leave()
+        })
+        
+        self.dispatchGroup.wait()
+        /// Present reservations if all data was retrieved from server
+        if let reservations = self.reservations {
+            if let parkingSpots = self.parkingSpots, let parkingLevels = self.parkingLevels, let buildings = self.buildings {
+                self.presenter.presentReservations(Model.GetReservations.Response(reservations: reservations, parkingSpots: parkingSpots, parkingLevels: parkingLevels, buildings: buildings))
+            } else {
+                self.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
+            }
+        } else {
+            self.presenter.presentNoData(HomeModel.NoData.Response())
         }
     }
     
@@ -108,8 +111,7 @@ extension HomeInteractor: HomeBusinessLogic {
     }
     
     func loadMap(_ request: Model.Map.Request) {
-        ParkingSpotsDataStore.shared.parkingSpotForMapID = request.lotID
-        self.presenter.presentMap(Model.Map.Response())
+        self.presenter.presentMap(Model.Map.Response(reservationID: request.reservationID))
     }
     
     func loadProfile(_ request: Model.Profile.Request) {

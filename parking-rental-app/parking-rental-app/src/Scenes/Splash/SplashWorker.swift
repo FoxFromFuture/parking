@@ -9,8 +9,8 @@ import UIKit
 
 final class SplashWorker {
     // MARK: - Private Properties
-    private let authManager = AuthManager.shared
-    private let networkManager = NetworkManager.shared
+    private let authManager = AuthManager()
+    private let networkManager = NetworkManager()
 }
 
 // MARK: - WorkerLogic

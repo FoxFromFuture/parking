@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  parking-rental-app
+
+  Created by Никита Лисунов on 4/8/24.
+  
+*/
+
+"launchSubtitle" = "It's never been\nso easy";
+"login" = "Login";
+"password" = "Password";
+"enter" = "Enter";
+"registration" = "Registration";
+"name" = "Name";
+"register" = "Register";
+"registrationCarTitle" = "Set your car\nregistry number";
+"registrationCarSubtitle" = "To make reservations for it";
+"continue" = "Continue";
+"profile" = "Profile";
+"floor" = "Floor";
+"reserveLot" = "Reserve Lot";
+"home" = "Home";
+"more" = "More";
+"availableBuildings" = "Available Buildings";
+"date" = "Date";
+"startTime" = "Start Time";
+"endTime" = "End Time";
+"reservationCardFreeFirstLineTitle" = "Book your car";
+"reservationCardReservedFirstLineTitle" = "Your reserved car";
+"reservationCardSecondLineTitle" = "Parking";
+"zone" = "Zone";
+"car" = "Car";
+"timeSlot" = "Time Slot";
+"cancelReservation" = "Cansel Reservation";
+"logOut" = "Log Out";
+"yourCarDetails" = "Change car reg. number";
+"updateCarTitle" = "Set new car\nregistry number";
+"updateCarSubtitle" = "To update your car details";
+"save" = "Save";
+"language" = "Language";
+"theme" = "Theme";
+"cancel" = "Cancel";
+"lightTheme" = "Always light mode";
+"darkTheme" = "Always dark mode";
+"systemTheme" = "Use system settings";
+"logOutQuestion" = "Are you sure you want to log out?";
+"connectionError" = "Connection Error";
+"reload" = "Reload";
+"noReservations" = "You don't have any reservations yet.";
+"registrationCardLoadingFirstLineTitle" = "Loading";
+"changeLanguageAlert" = "Go to device settings to change app language";
+"settings" = "Settings";
+"english" = "English";
+"russian" = "Russian";
+"light" = "Light";
+"dark" = "Dark";
+"device" = "Device";
+"loginFailure" = "Incorrect e-mail or password";
+"registrationFailure" = "Registration failure, try again";
+"registrationCarSetupFailure" = "Car setup failure, try again";
+"updateCarFailure" = "Car update failure, try again";
+"reservationsLimit" = "Limit of 5 Lots Reached";
+"reservationsLimitForTime" = "You already have 1 lot\nfor the current time";
+"reservationCardWeekendLimit" = "You can't book on weekends";

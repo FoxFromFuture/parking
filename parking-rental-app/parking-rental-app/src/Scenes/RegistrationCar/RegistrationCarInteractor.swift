@@ -28,8 +28,8 @@ extension RegistrationCarInteractor: RegistrationCarBusinessLogic {
     func loadHome(_ request: RegistrationCarModel.Home.Request) {
         worker.saveCarRegistryNumber(registryNumber: request.carRegistryNumber) { [weak self] carData, error in
             if let error = error {
-                // TODO: - Present failure
                 print(error)
+                self?.presenter.presentCarSetupFailure(RegistrationCarModel.CarSetupFailure.Response())
             } else if let _ = carData {
                 self?.presenter.presentHome(Model.Home.Response())
             }

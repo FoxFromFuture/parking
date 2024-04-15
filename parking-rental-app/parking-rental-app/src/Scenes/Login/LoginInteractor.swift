@@ -10,12 +10,18 @@ import UIKit
 final class LoginInteractor {
     // MARK: - Private Properties
     private let presenter: LoginPresentationLogic
-    private let worker: LoginWorkerLogic
+    private let networkManager = NetworkManager()
+    private let authManager = AuthManager()
     
     // MARK: - Initializers
-    init(presenter: LoginPresentationLogic, worker: LoginWorkerLogic) {
+    init(presenter: LoginPresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
+    }
+    
+    // MARK: - Private Methods
+    private func saveAuthTokens(refreshToken: String, accessToken: String) {
+        self.authManager.saveTokens(refreshToken: refreshToken, accessToken: accessToken)
+        self.authManager.setRefreshTokenLastUpdateDate(date: Date.now)
     }
 }
 
@@ -26,12 +32,12 @@ extension LoginInteractor: LoginBusinessLogic {
     }
     
     func loadHome(_ request: Model.Home.Request) {
-        worker.login(request) { [weak self] authData, error in
+        networkManager.login(email: request.email, password: request.password) { [weak self] authData, error in
             if let error = error {
                 print(error)
-                /// TODO: Present failure
+                self?.presenter.presentLoginFailure(LoginModel.LoginFailure.Response())
             } else if let authData = authData {
-                self?.worker.saveAuthTokens(refreshToken: authData.refreshToken, accessToken: authData.accessToken)
+                self?.saveAuthTokens(refreshToken: authData.refreshToken, accessToken: authData.accessToken)
                 self?.presenter.presentHome(Model.Home.Response())
             }
         }

@@ -14,7 +14,8 @@ final class BuildingCell: UICollectionViewCell {
     private let buildingNameLabel = UILabel()
     private let workHoursLabel = UILabel()
     private let addressLabel = UILabel()
-    private let iconImageView = UIImageView()
+    private let leftIconImageView = UIImageView()
+    private let rightIconImageView = UIImageView()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -29,12 +30,17 @@ final class BuildingCell: UICollectionViewCell {
     
     // MARK: - Private Methods
     private func configureUI() {
-        backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
+        self.backgroundColor = Colors.cardView.uiColor
+        self.layer.shadowColor = Colors.cardViewShadow.uiColor.cgColor
+        self.layer.shadowOpacity = 0.15
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 20
         self.layer.cornerRadius = 30
         configureBuildingNameLabel()
         configureWorkHoursLabel()
         configureAddressLabel()
-        configureIconImageView()
+        configureLeftIconImageView()
+        configureRightIconImageView()
     }
     
     private func configureBuildingNameLabel() {
@@ -42,35 +48,45 @@ final class BuildingCell: UICollectionViewCell {
         buildingNameLabel.pinTop(to: self.topAnchor, 25)
         buildingNameLabel.pinLeft(to: self.leadingAnchor, 65)
         buildingNameLabel.numberOfLines = 0
-        buildingNameLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        buildingNameLabel.textColor = Colors.mainText.uiColor
         buildingNameLabel.font = .systemFont(ofSize: 20, weight: .bold)
     }
     
     private func configureWorkHoursLabel() {
         self.addSubview(workHoursLabel)
-        workHoursLabel.pinTop(to: buildingNameLabel.bottomAnchor, 15)
+        workHoursLabel.pinTop(to: buildingNameLabel.bottomAnchor, 10)
         workHoursLabel.pinLeft(to: self.leadingAnchor, 65)
         workHoursLabel.numberOfLines = 0
-        workHoursLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        workHoursLabel.textColor = Colors.mainText.uiColor
         workHoursLabel.font = .systemFont(ofSize: 18, weight: .medium)
     }
     
     private func configureAddressLabel() {
         self.addSubview(addressLabel)
-        addressLabel.pinTop(to: workHoursLabel.bottomAnchor, 5)
+        addressLabel.pinTop(to: workHoursLabel.bottomAnchor)
         addressLabel.pinLeft(to: self.leadingAnchor, 65)
-        addressLabel.numberOfLines = 0
-        addressLabel.textColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 1)
+        addressLabel.pinRight(to: self.trailingAnchor, 65)
+        addressLabel.numberOfLines = 1
+        addressLabel.textColor = Colors.mainText.uiColor
         addressLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
-    private func configureIconImageView() {
-        self.addSubview(iconImageView)
-        iconImageView.pinCenterY(to: self.buildingNameLabel.centerYAnchor)
-        iconImageView.pinLeft(to: self.leadingAnchor, 20)
-        iconImageView.image = UIImage(systemName: "building.2", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
-        iconImageView.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-        iconImageView.backgroundColor = UIColor.clear
+    private func configureLeftIconImageView() {
+        self.addSubview(leftIconImageView)
+        leftIconImageView.pinCenterY(to: self.buildingNameLabel.centerYAnchor)
+        leftIconImageView.pinLeft(to: self.leadingAnchor, 20)
+        leftIconImageView.image = UIImage(systemName: "building.2", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+        leftIconImageView.tintColor = Colors.active.uiColor
+        leftIconImageView.backgroundColor = .clear
+    }
+    
+    private func configureRightIconImageView() {
+        self.addSubview(rightIconImageView)
+        rightIconImageView.pinCenterY(to: self.centerYAnchor)
+        rightIconImageView.pinRight(to: self.trailingAnchor, 30)
+        rightIconImageView.image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .medium)) ?? UIImage()
+        rightIconImageView.tintColor = Colors.icon.uiColor
+        rightIconImageView.backgroundColor = .clear
     }
     
     // MARK: - Override Methods

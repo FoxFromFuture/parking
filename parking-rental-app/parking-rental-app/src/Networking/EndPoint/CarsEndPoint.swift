@@ -8,6 +8,7 @@
 import Foundation
 
 public enum CarsApi {
+    case getCar(carID: String)
     case getAllCars
     case addNewCar(model: String, lengthMeters: Double, weightTons: Double, registryNumber: String)
     case updateCar(id: String, model: String, lengthMeters: Double, weightTons: Double, registryNumber: String)
@@ -28,6 +29,8 @@ extension CarsApi: EndPointType {
     
     var path: String {
         switch self {
+        case .getCar(let carID):
+            return "\(carID)"
         case .getAllCars:
             return "employee"
         case .addNewCar:
@@ -41,6 +44,8 @@ extension CarsApi: EndPointType {
     
     var httpMethod: HTTPMethod {
         switch self {
+        case .getCar:
+            return .get
         case .getAllCars:
             return .get
         case .addNewCar:
@@ -54,6 +59,8 @@ extension CarsApi: EndPointType {
     
     var task: HTTPTask {
         switch self {
+        case .getCar:
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         case .getAllCars:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
         case .addNewCar(let model, let lengthMeters, let weightTons, let registryNumber):
@@ -66,6 +73,6 @@ extension CarsApi: EndPointType {
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager.shared.getAccessToken() ?? "")"]
+        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
     }
 }

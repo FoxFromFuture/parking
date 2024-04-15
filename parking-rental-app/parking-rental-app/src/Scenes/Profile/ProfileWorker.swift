@@ -9,13 +9,14 @@ import UIKit
 
 final class ProfileWorker {
     // MARK: - Private Properties
+    private let authManager = AuthManager()
 }
 
 // MARK: - WorkerLogic
 extension ProfileWorker: ProfileWorkerLogic {
     func clearUserData() {
-        AuthManager.shared.deleteRefreshTokenLastUpdateDate()
-        AuthManager.shared.deleteToken(tokenType: .access)
-        AuthManager.shared.deleteToken(tokenType: .refresh)
+        self.authManager.deleteRefreshTokenLastUpdateDate()
+        self.authManager.deleteToken(tokenType: .access)
+        self.authManager.deleteToken(tokenType: .refresh)
     }
 }

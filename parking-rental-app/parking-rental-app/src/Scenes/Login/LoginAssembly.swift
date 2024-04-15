@@ -11,8 +11,7 @@ enum LoginAssembly {
     static func build() -> UIViewController {
         let router: LoginRouter = LoginRouter()
         let presenter: LoginPresenter = LoginPresenter()
-        let worker: LoginWorker = LoginWorker()
-        let interactor: LoginInteractor = LoginInteractor(presenter: presenter, worker: worker)
+        let interactor: LoginInteractor = LoginInteractor(presenter: presenter)
         let viewController: LoginViewController = LoginViewController(
             router: router,
             interactor: interactor
