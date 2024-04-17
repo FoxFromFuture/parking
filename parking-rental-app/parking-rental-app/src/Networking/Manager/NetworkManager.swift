@@ -91,7 +91,7 @@ final class NetworkManager {
         }
     }
     
-    func authRequestDataResponse<TRouter: NetworkRouter, TResponse: Decodable>(router: TRouter, task: TRouter.EndPoint, responseType: TResponse.Type, completion: @escaping (_ data: TResponse?, _ error: String?) -> ()) {
+    private func authRequestDataResponse<TRouter: NetworkRouter, TResponse: Decodable>(router: TRouter, task: TRouter.EndPoint, responseType: TResponse.Type, completion: @escaping (_ data: TResponse?, _ error: String?) -> ()) {
         router.request(task) { [weak self] data, response, error in
             let responseDecoder = self?.responseDataDecoder(data: data, dataType: responseType, response: response, error: error)
             if responseDecoder?.error == nil {
@@ -121,7 +121,7 @@ final class NetworkManager {
         }
     }
     
-    func authRequestNoDataResponse<TRouter: NetworkRouter>(router: TRouter, task: TRouter.EndPoint, completion: @escaping (_ error: String?) -> ()) {
+    private func authRequestNoDataResponse<TRouter: NetworkRouter>(router: TRouter, task: TRouter.EndPoint, completion: @escaping (_ error: String?) -> ()) {
         router.request(task) { [weak self] data, response, error in
             let responseDecoder = self?.responseNoDataDecoder(response: response, error: error)
             if responseDecoder == nil {
@@ -151,7 +151,7 @@ final class NetworkManager {
         }
     }
     
-    func authRequestCompletion<TResponse: Decodable>(_ data: TResponse?, _ error: String?, _ completion: @escaping (_ data: TResponse?, _ error: String?) -> ()) {
+    private func authRequestCompletion<TResponse: Decodable>(_ data: TResponse?, _ error: String?, _ completion: @escaping (_ data: TResponse?, _ error: String?) -> ()) {
         if let error = error {
             completion(nil, error)
         } else if let data = data {
@@ -159,7 +159,7 @@ final class NetworkManager {
         }
     }
     
-    func authRequestNoDataCompletion(_ error: String?, _ completion: @escaping (_ error: String?) -> ()) {
+    private func authRequestNoDataCompletion(_ error: String?, _ completion: @escaping (_ error: String?) -> ()) {
         completion(error)
     }
     
@@ -317,6 +317,12 @@ final class NetworkManager {
     func deleteEmployee(completion: @escaping (_ error: String?) -> ()) {
         authRequestNoDataResponse(router: emplyeesRouter, task: .deleteEmployee) { [weak self] error in
             self?.authRequestNoDataCompletion(error, completion)
+        }
+    }
+    
+    func updateEmployee(name: String, email: String, password: String, completion: @escaping (_ authData: AuthApiResponse?, _ error: String?) -> ()) {
+        authRequestDataResponse(router: emplyeesRouter, task: .updateEmployee(name: name, email: email, password: password), responseType: AuthApiResponse.self) { [weak self] data, error in
+            self?.authRequestCompletion(data, error, completion)
         }
     }
 }

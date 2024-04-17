@@ -29,4 +29,8 @@ extension AccountDetailsRouter: AccountDetailsRoutingLogic {
     func routeToLogin() {
         view?.navigationController?.pushViewController(LoginAssembly.build(), animated: false)
     }
+    
+    func routeToUpdateAccount() {
+        view?.navigationController?.pushViewController(UpdateAccountAssembly.build(), animated: true)
+    }
 }

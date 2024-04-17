@@ -14,6 +14,8 @@ protocol AccountDetailsDisplayLogic: AnyObject {
     func displayMore(_ viewModel: Model.More.ViewModel)
     func displayHome(_ viewModel: Model.Home.ViewModel)
     func displayLogin(_ viewModel: Model.Login.ViewModel)
+    func displayUpdateAccount(_ viewModel: Model.UpdateAccount.ViewModel)
+    func displayUpdateAccountFailure(_ viewModel: Model.UpdateAccountFailure.ViewModel)
 }
 
 // MARK: - BusinessLogic
@@ -25,6 +27,7 @@ protocol AccountDetailsBusinessLogic {
     func loadMore(_ request: Model.More.Request)
     func loadHome(_ request: Model.Home.Request)
     func loadLogin(_ request: Model.Login.Request)
+    func loadUpdateAccount(_ request: Model.UpdateAccount.Request)
 }
 
 // MARK: - PresentationLogic
@@ -36,6 +39,8 @@ protocol AccountDetailsPresentationLogic {
     func presentMore(_ response: Model.More.Response)
     func presentHome(_ response: Model.Home.Response)
     func presentLogin(_ response: Model.Login.Response)
+    func presentUpdateAccount(_ response: Model.UpdateAccount.Response)
+    func presentUpdateAccountFailure(_ response: Model.UpdateAccountFailure.Response)
 }
 
 // MARK: - RoutingLogic
@@ -44,4 +49,5 @@ protocol AccountDetailsRoutingLogic {
     func routeToMore()
     func routeToHome()
     func routeToLogin()
+    func routeToUpdateAccount()
 }

@@ -53,6 +53,7 @@ final class AuthManager {
         }
     }
     
+    @discardableResult
     public func updateToken(token: String, tokenType: TokenType) -> Bool {
         do {
             try KeychainManager.update(key: tokenType.rawValue, data: token.data(using: .utf8) ?? Data())

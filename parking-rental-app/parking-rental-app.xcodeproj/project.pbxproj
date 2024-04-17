@@ -16,6 +16,15 @@
 		270020742BCFADA700649D60 /* AccountDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020732BCFADA700649D60 /* AccountDetailsAssembly.swift */; };
 		270020772BCFB48600649D60 /* DetailsCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020762BCFB48600649D60 /* DetailsCardButton.swift */; };
 		270020792BCFC9AC00649D60 /* EmployeesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020782BCFC9AC00649D60 /* EmployeesEndPoint.swift */; };
+		270FDBC02BCFD60700286939 /* UpdateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBBF2BCFD60700286939 /* UpdateAccountViewController.swift */; };
+		270FDBC22BCFD61B00286939 /* UpdateAccountInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBC12BCFD61B00286939 /* UpdateAccountInteractor.swift */; };
+		270FDBC42BCFD62600286939 /* UpdateAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBC32BCFD62600286939 /* UpdateAccountPresenter.swift */; };
+		270FDBC62BCFD63100286939 /* UpdateAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBC52BCFD63100286939 /* UpdateAccountModel.swift */; };
+		270FDBC82BCFD63900286939 /* UpdateAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBC72BCFD63900286939 /* UpdateAccountRouter.swift */; };
+		270FDBCA2BCFD64100286939 /* UpdateAccountProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBC92BCFD64100286939 /* UpdateAccountProtocols.swift */; };
+		270FDBCC2BCFD64A00286939 /* UpdateAccountAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBCB2BCFD64A00286939 /* UpdateAccountAssembly.swift */; };
+		270FDBCF2BCFDA4C00286939 /* AccountDetailsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBCE2BCFDA4C00286939 /* AccountDetailsState.swift */; };
+		270FDBD22BCFEB1600286939 /* UpdateAccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBD12BCFEB1600286939 /* UpdateAccountState.swift */; };
 		272A22F82BB06A750025880E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22F72BB06A750025880E /* MapView.swift */; };
 		272A22FB2BB1A3380025880E /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22FA2BB1A3380025880E /* HomeState.swift */; };
 		272A22FE2BB1AABE0025880E /* BuildingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22FD2BB1AABE0025880E /* BuildingsState.swift */; };
@@ -174,6 +183,15 @@
 		270020732BCFADA700649D60 /* AccountDetailsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsAssembly.swift; sourceTree = "<group>"; };
 		270020762BCFB48600649D60 /* DetailsCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCardButton.swift; sourceTree = "<group>"; };
 		270020782BCFC9AC00649D60 /* EmployeesEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesEndPoint.swift; sourceTree = "<group>"; };
+		270FDBBF2BCFD60700286939 /* UpdateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountViewController.swift; sourceTree = "<group>"; };
+		270FDBC12BCFD61B00286939 /* UpdateAccountInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountInteractor.swift; sourceTree = "<group>"; };
+		270FDBC32BCFD62600286939 /* UpdateAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountPresenter.swift; sourceTree = "<group>"; };
+		270FDBC52BCFD63100286939 /* UpdateAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountModel.swift; sourceTree = "<group>"; };
+		270FDBC72BCFD63900286939 /* UpdateAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountRouter.swift; sourceTree = "<group>"; };
+		270FDBC92BCFD64100286939 /* UpdateAccountProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountProtocols.swift; sourceTree = "<group>"; };
+		270FDBCB2BCFD64A00286939 /* UpdateAccountAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountAssembly.swift; sourceTree = "<group>"; };
+		270FDBCE2BCFDA4C00286939 /* AccountDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsState.swift; sourceTree = "<group>"; };
+		270FDBD12BCFEB1600286939 /* UpdateAccountState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountState.swift; sourceTree = "<group>"; };
 		272A22F72BB06A750025880E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		272A22FA2BB1A3380025880E /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
 		272A22FD2BB1AABE0025880E /* BuildingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsState.swift; sourceTree = "<group>"; };
@@ -341,6 +359,7 @@
 		270020662BCFAA3900649D60 /* AccountDetails */ = {
 			isa = PBXGroup;
 			children = (
+				270FDBCD2BCFDA3E00286939 /* Enums */,
 				270020672BCFAA5800649D60 /* AccountDetailsViewController.swift */,
 				270020692BCFAD4000649D60 /* AccountDetailsInteractor.swift */,
 				2700206B2BCFAD5700649D60 /* AccountDetailsPresenter.swift */,
@@ -350,6 +369,37 @@
 				270020732BCFADA700649D60 /* AccountDetailsAssembly.swift */,
 			);
 			path = AccountDetails;
+			sourceTree = "<group>";
+		};
+		270FDBBE2BCFD5E300286939 /* UpdateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				270FDBD02BCFEB0700286939 /* Enums */,
+				270FDBBF2BCFD60700286939 /* UpdateAccountViewController.swift */,
+				270FDBC12BCFD61B00286939 /* UpdateAccountInteractor.swift */,
+				270FDBC32BCFD62600286939 /* UpdateAccountPresenter.swift */,
+				270FDBC52BCFD63100286939 /* UpdateAccountModel.swift */,
+				270FDBC72BCFD63900286939 /* UpdateAccountRouter.swift */,
+				270FDBC92BCFD64100286939 /* UpdateAccountProtocols.swift */,
+				270FDBCB2BCFD64A00286939 /* UpdateAccountAssembly.swift */,
+			);
+			path = UpdateAccount;
+			sourceTree = "<group>";
+		};
+		270FDBCD2BCFDA3E00286939 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				270FDBCE2BCFDA4C00286939 /* AccountDetailsState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		270FDBD02BCFEB0700286939 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				270FDBD12BCFEB1600286939 /* UpdateAccountState.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		2714138A2BB2ED2A00496D24 /* Enums */ = {
@@ -498,6 +548,7 @@
 				272B51F42B9C4FB5008F428E /* Profile */,
 				27535C762BA33F85000E48E6 /* UpdateCar */,
 				270020662BCFAA3900649D60 /* AccountDetails */,
+				270FDBBE2BCFD5E300286939 /* UpdateAccount */,
 				272B52052B9C5102008F428E /* More */,
 			);
 			path = Scenes;
@@ -939,6 +990,7 @@
 				2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */,
 				27754BE12B99B7880065A14E /* ProfileLabelButton.swift in Sources */,
 				27535C882BA48555000E48E6 /* UpdateCarProtocols.swift in Sources */,
+				270FDBCC2BCFD64A00286939 /* UpdateAccountAssembly.swift in Sources */,
 				27C6245E2B7D0246002FFF48 /* RegistrationProtocols.swift in Sources */,
 				2795FF472BC04D620031CEE8 /* ReservationCardModel.swift in Sources */,
 				27C624472B7C8B7E002FFF48 /* LoginProtocols.swift in Sources */,
@@ -977,6 +1029,7 @@
 				272B52092B9C513F008F428E /* MoreInteractor.swift in Sources */,
 				27754BEA2B99DA900065A14E /* BuildingsPresenter.swift in Sources */,
 				2795FF582BC3F68B0031CEE8 /* String+localize.swift in Sources */,
+				270FDBC62BCFD63100286939 /* UpdateAccountModel.swift in Sources */,
 				27535C8C2BA48C77000E48E6 /* MultipleButtonsCard.swift in Sources */,
 				27848BF12B80A71100542D8C /* HomePresenter.swift in Sources */,
 				27C624412B7C8B59002FFF48 /* LoginPresenter.swift in Sources */,
@@ -984,6 +1037,7 @@
 				273E65FC2B88C14800567BD8 /* KeychainManager.swift in Sources */,
 				273E66072B88E96E00567BD8 /* SplashRouter.swift in Sources */,
 				277B37BE2BCAB88500B2A412 /* MapState.swift in Sources */,
+				270FDBC22BCFD61B00286939 /* UpdateAccountInteractor.swift in Sources */,
 				27C624432B7C8B63002FFF48 /* LoginModel.swift in Sources */,
 				273E66092B88E97900567BD8 /* SplashWorker.swift in Sources */,
 				27535C642BA2DD6E000E48E6 /* BuildingCell.swift in Sources */,
@@ -1007,11 +1061,13 @@
 				27C0B7AE2B9C44F900977074 /* BuildingModel.swift in Sources */,
 				27848BE82B80A48600542D8C /* RegistrationCarProtocols.swift in Sources */,
 				272B51F82B9C5006008F428E /* ProfileInteractor.swift in Sources */,
+				270FDBC82BCFD63900286939 /* UpdateAccountRouter.swift in Sources */,
 				272B521A2B9C53C5008F428E /* MapInteractor.swift in Sources */,
 				27C6245C2B7D0239002FFF48 /* RegistrationWorker.swift in Sources */,
 				273E65DA2B848B2E00567BD8 /* HTTPMethod.swift in Sources */,
 				27848BE62B80A47E00542D8C /* RegistrationCarWorker.swift in Sources */,
 				27848BEA2B80A48E00542D8C /* RegistrationCarAssembly.swift in Sources */,
+				270FDBCA2BCFD64100286939 /* UpdateAccountProtocols.swift in Sources */,
 				273C90C52B7BD19900C73FE8 /* UIView+pin.swift in Sources */,
 				272B52072B9C5127008F428E /* MoreViewController.swift in Sources */,
 				273E65E02B848D6100567BD8 /* URLParameterEncoder.swift in Sources */,
@@ -1024,6 +1080,7 @@
 				272B52262B9C5454008F428E /* MapAssembly.swift in Sources */,
 				273C90AA2B7BCCB000C73FE8 /* AppDelegate.swift in Sources */,
 				272B51FC2B9C503D008F428E /* ProfilePresenter.swift in Sources */,
+				270FDBCF2BCFDA4C00286939 /* AccountDetailsState.swift in Sources */,
 				273E65F12B86449B00567BD8 /* AuthEndPoint.swift in Sources */,
 				27C6243F2B7C8B50002FFF48 /* LoginInteractor.swift in Sources */,
 				27535C8E2BA48E94000E48E6 /* MultipleButtonsCardButton.swift in Sources */,
@@ -1032,6 +1089,7 @@
 				27C624452B7C8B6F002FFF48 /* LoginRouter.swift in Sources */,
 				27848BE02B80A46300542D8C /* RegistrationCarPresenter.swift in Sources */,
 				273E66052B88E96800567BD8 /* SplashModel.swift in Sources */,
+				270FDBC02BCFD60700286939 /* UpdateAccountViewController.swift in Sources */,
 				273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */,
 				2795FF3F2BC04CEB0031CEE8 /* ReservationCardViewController.swift in Sources */,
 				272B52152B9C51B9008F428E /* MoreAssembly.swift in Sources */,
@@ -1046,8 +1104,10 @@
 				272B520F2B9C517A008F428E /* MoreModel.swift in Sources */,
 				27B2C57F2BCE5F7400899713 /* Date+iso8601.swift in Sources */,
 				27848BE22B80A46E00542D8C /* RegistrationCarModel.swift in Sources */,
+				270FDBC42BCFD62600286939 /* UpdateAccountPresenter.swift in Sources */,
 				272A22F82BB06A750025880E /* MapView.swift in Sources */,
 				279C53382BCD0FE900AF6EF5 /* ReservationCardState.swift in Sources */,
+				270FDBD22BCFEB1600286939 /* UpdateAccountState.swift in Sources */,
 				27848BDC2B80A44B00542D8C /* RegistrationCarViewController.swift in Sources */,
 				27754BFF2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift in Sources */,
 				279C533A2BCD2A3100AF6EF5 /* ReservationCardSpotState.swift in Sources */,

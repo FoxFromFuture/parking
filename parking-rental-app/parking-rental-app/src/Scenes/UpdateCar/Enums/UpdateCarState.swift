@@ -8,4 +8,5 @@
 enum UpdateCarState {
     case stable
     case carUpdateFailure
+    case carUpdateSuccess
 }

@@ -1,5 +1,5 @@
 //
-//  AccountDetailsModel.swift
+//  UpdateAccountModel.swift
 //  parking-rental-app
 //
 //  Created by Никита Лисунов on 4/17/24.
@@ -7,29 +7,12 @@
 
 import UIKit
 
-enum AccountDetailsModel {
+enum UpdateAccountModel {
     
     enum Start {
         struct Request { }
         struct Response { }
         struct ViewModel { }
-    }
-    
-    enum Profile {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
-    enum UserDetails {
-        struct Request { }
-        struct Response {
-            let user: AuthWhoamiApiResponse
-        }
-        struct ViewModel {
-            let name: String
-            let email: String
-        }
     }
     
     enum More {
@@ -44,14 +27,18 @@ enum AccountDetailsModel {
         struct ViewModel { }
     }
     
-    enum Login {
+    enum AccountDetails {
         struct Request { }
         struct Response { }
         struct ViewModel { }
     }
     
-    enum UpdateAccount {
-        struct Request { }
+    enum UpdateAccountRequest {
+        struct Request {
+            let name: String
+            let email: String
+            let password: String
+        }
         struct Response { }
         struct ViewModel { }
     }

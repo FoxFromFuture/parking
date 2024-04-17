@@ -35,4 +35,12 @@ extension AccountDetailsPresenter: AccountDetailsPresentationLogic {
     func presentLogin(_ response: Model.Login.Response) {
         view?.displayLogin(AccountDetailsModel.Login.ViewModel())
     }
+    
+    func presentUpdateAccount(_ response: Model.UpdateAccount.Response) {
+        view?.displayUpdateAccount(AccountDetailsModel.UpdateAccount.ViewModel())
+    }
+    
+    func presentUpdateAccountFailure(_ response: Model.UpdateAccountFailure.Response) {
+        view?.displayUpdateAccountFailure(AccountDetailsModel.UpdateAccountFailure.ViewModel())
+    }
 }

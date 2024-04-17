@@ -66,3 +66,9 @@
 "accountDetails" = "Account details";
 "deleteAccount" = "Delete Account";
 "deleteAccountQuestion" = "Are you sure you want to delete your account?";
+"updateAccountDetails" = "Update Details";
+"updateAccountTitle" = "Enter your\nnew details";
+"updateAccountSubtitle" = "To update your account details";
+"updateCarSuccess" = "Data was successfully updated";
+"updateAccountSuccess" = "Data was successfully updated";
+"updateAccountFailure" = "Details update failure, try again";

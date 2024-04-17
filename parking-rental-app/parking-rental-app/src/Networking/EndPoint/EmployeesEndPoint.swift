@@ -9,6 +9,7 @@ import Foundation
 
 public enum EmployeesApi {
     case deleteEmployee
+    case updateEmployee(name: String, email: String, password: String)
 }
 
 extension EmployeesApi: EndPointType {
@@ -27,6 +28,8 @@ extension EmployeesApi: EndPointType {
         switch self {
         case .deleteEmployee:
             return "employee"
+        case .updateEmployee:
+            return "employee"
         }
     }
     
@@ -34,6 +37,8 @@ extension EmployeesApi: EndPointType {
         switch self {
         case .deleteEmployee:
             return .delete
+        case .updateEmployee:
+            return .put
         }
     }
     
@@ -41,6 +46,8 @@ extension EmployeesApi: EndPointType {
         switch self {
         case .deleteEmployee:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+        case .updateEmployee(let name, let email, let password):
+            return .requestParametersAndHeaders(bodyParameters: ["name": name, "email": email, "password": password], urlParameters: nil, additionHeaders: self.headers)
         }
     }
     

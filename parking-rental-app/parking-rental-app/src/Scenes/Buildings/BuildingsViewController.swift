@@ -59,10 +59,6 @@ final class BuildingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if currentState == .error {
-            loadingFailureLabel.removeFromSuperview()
-            reloadButton.removeFromSuperview()
-        }
         currentState = .loading
         interactor.loadBuildings(Model.GetBuildings.Request())
     }

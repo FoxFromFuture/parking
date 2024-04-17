@@ -57,10 +57,15 @@ extension AccountDetailsInteractor: AccountDetailsBusinessLogic {
         self.networkManager.deleteEmployee { [weak self] error in
             if let error = error {
                 print(error)
+                self?.presenter.presentUpdateAccountFailure(AccountDetailsModel.UpdateAccountFailure.Response())
             } else {
                 self?.clearUserData()
                 self?.presenter.presentLogin(AccountDetailsModel.Login.Response())
             }
         }
+    }
+    
+    func loadUpdateAccount(_ request: Model.UpdateAccount.Request) {
+        presenter.presentUpdateAccount(AccountDetailsModel.UpdateAccount.Response())
     }
 }

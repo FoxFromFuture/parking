@@ -23,6 +23,7 @@ final class UpdateCarViewController: UIViewController {
     private let carRegistryNumberTextField = UITextField()
     private let saveButton = UIButton()
     private let carUpdateFailureLabel = UILabel()
+    private let carUpdateSuccessLabel = UILabel()
     private var regNumTextFieldBottomBorder = UIView()
     private var currentState: UpdateCarState = .stable {
         didSet {
@@ -47,6 +48,7 @@ final class UpdateCarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.currentState = .stable
         interactor.loadStart(Model.Start.Request())
         self.hideKeyboardWhenTappedAround()
     }
@@ -61,6 +63,7 @@ final class UpdateCarViewController: UIViewController {
         configureCarRegistryNumberTextFieldTextField()
         configureSaveButton()
         configureCarUpdateFailureLabel()
+        configureCarUpdateSuccessLabel()
     }
     
     private func configureNavigationBar() {
@@ -141,6 +144,11 @@ final class UpdateCarViewController: UIViewController {
         carUpdateFailureLabel.textColor = Colors.danger.uiColor
         carUpdateFailureLabel.font = .systemFont(ofSize: 16, weight: .medium)
     }
+    private func  configureCarUpdateSuccessLabel() {
+        carUpdateFailureLabel.text = "updateCarSuccess".localize()
+        carUpdateFailureLabel.textColor = Colors.success.uiColor
+        carUpdateFailureLabel.font = .systemFont(ofSize: 16, weight: .medium)
+    }
     
     // MARK: - Actions
     @objc
@@ -159,17 +167,20 @@ final class UpdateCarViewController: UIViewController {
         }
     }
     
-    private func showStableState() {
-        carUpdateFailureLabel.removeFromSuperview()
-        regNumTextFieldBottomBorder.backgroundColor = Colors.secondaryText.uiColor
-    }
-    
     private func showCarUpdateFailure() {
         self.view.addSubview(carUpdateFailureLabel)
         carUpdateFailureLabel.pinTop(to: self.carRegistryNumberTextField.bottomAnchor, 30)
         carUpdateFailureLabel.pinLeft(to: self.view.leadingAnchor, 38)
         
         regNumTextFieldBottomBorder.backgroundColor = Colors.danger.uiColor
+    }
+    
+    private func showCarUpdateSuccess() {
+        self.view.addSubview(carUpdateSuccessLabel)
+        carUpdateSuccessLabel.pinTop(to: self.carRegistryNumberTextField.bottomAnchor, 30)
+        carUpdateSuccessLabel.pinLeft(to: self.view.leadingAnchor, 38)
+        
+        regNumTextFieldBottomBorder.backgroundColor = Colors.success.uiColor
     }
 }
 
@@ -193,12 +204,18 @@ extension UpdateCarViewController: UpdateCarDisplayLogic {
     
     func displayUpdateCarRequest(_ viewModel: Model.UpdateCarRequest.ViewModel) {
         DispatchQueue.main.async { [weak self] in
-            self?.router.routeToProfile()
+            if self?.currentState == .carUpdateFailure {
+                self?.carUpdateFailureLabel.removeFromSuperview()
+            }
+            self?.currentState = .carUpdateSuccess
         }
     }
     
     func displayUpdateCarFailure(_ viewModel: Model.CarUpdateFailure.ViewModel) {
         DispatchQueue.main.async { [weak self] in
+            if self?.currentState == .carUpdateSuccess {
+                self?.carUpdateSuccessLabel.removeFromSuperview()
+            }
             self?.currentState = .carUpdateFailure
         }
     }
@@ -209,9 +226,11 @@ extension UpdateCarViewController {
     func updateUIForState(_ state: UpdateCarState) {
         switch state {
         case .stable:
-            showStableState()
+            break
         case .carUpdateFailure:
             showCarUpdateFailure()
+        case .carUpdateSuccess:
+            showCarUpdateSuccess()
         }
     }
 }

@@ -35,7 +35,7 @@
 "logOut" = "Выйти";
 "yourCarDetails" = "Изменить рег. номер";
 "updateCarTitle" = "Укажите новый гос. номер\nвашей машины";
-"updateCarSubtitle" = "Чтобы обновить его";
+"updateCarSubtitle" = "Чтобы изменить гос. номер машины";
 "save" = "Сохранить";
 "language" = "Язык";
 "theme" = "Тема";
@@ -66,3 +66,9 @@
 "accountDetails" = "Об аккаунте";
 "deleteAccount" = "Удалить Аккаунт";
 "deleteAccountQuestion" = "Вы уверены, что хотите удалить ваш аккаунт?";
+"updateAccountDetails" = "Изменить Данные";
+"updateAccountTitle" = "Введите ваши\nновые данные";
+"updateAccountSubtitle" = "Чтобы изменить ваши данные";
+"updateCarSuccess" = "Данные были успешно обновлены";
+"updateAccountSuccess" = "Данные были успешно обновлены";
+"updateAccountFailure" = "Ошибка, попробуйте еще раз";

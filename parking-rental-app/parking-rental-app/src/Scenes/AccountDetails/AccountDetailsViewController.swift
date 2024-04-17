@@ -22,6 +22,15 @@ final class AccountDetailsViewController: UIViewController {
     private let emailDetailsCardButton = DetailsCardButton()
     private let deleteAccountButton = UIButton()
     private let deleteAccountAlert = UIAlertController()
+    private let UpdateDetailsButton = UIButton()
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
+    private let loadingFailureLabel = UILabel()
+    private let reloadButton = UIButton()
+    private var currentState: AccountDetailsState = .loading {
+        didSet {
+            updateUIForState(currentState)
+        }
+    }
     
     // MARK: - LifeCycle
     init(
@@ -41,18 +50,29 @@ final class AccountDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor.loadStart(Model.Start.Request())
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if currentState == .error {
+            loadingFailureLabel.removeFromSuperview()
+            reloadButton.removeFromSuperview()
+        }
+        currentState = .loading
         interactor.loadUserDetails(AccountDetailsModel.UserDetails.Request())
     }
     
     // MARK: - Configuration
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
         configureTabBar()
-        configureNameDetailsCardButton()
-        configureEmailDetailsCardButton()
         configureDeleteAccountButton()
         configureDeleteAccountAlert()
+        configureUpdateDetailsButton()
+        configureLoadingIndicator()
+        configureLoadingFailureLabel()
+        configureReloadButton()
     }
     
     private func configureNavigationBar() {
@@ -80,20 +100,22 @@ final class AccountDetailsViewController: UIViewController {
         }
     }
     
-    private func configureNameDetailsCardButton() {
+    private func configureNameDetailsCardButton(name: String) {
         self.view.addSubview(nameDetailsCardButton)
         nameDetailsCardButton.pinHorizontal(to: self.view, 17)
         nameDetailsCardButton.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 20)
         nameDetailsCardButton.setLeftIcon(icon: "person.fill")
         nameDetailsCardButton.hideRightIcon()
+        nameDetailsCardButton.setTitle(title: name)
     }
     
-    private func configureEmailDetailsCardButton() {
+    private func configureEmailDetailsCardButton(email: String) {
         self.view.addSubview(emailDetailsCardButton)
         emailDetailsCardButton.pinHorizontal(to: self.view, 17)
         emailDetailsCardButton.pinTop(to: self.nameDetailsCardButton.bottomAnchor)
         emailDetailsCardButton.setLeftIcon(icon: "envelope.fill")
         emailDetailsCardButton.hideRightIcon()
+        emailDetailsCardButton.setTitle(title: email)
     }
     
     private func configureDeleteAccountButton() {
@@ -117,6 +139,39 @@ final class AccountDetailsViewController: UIViewController {
         deleteAccountAlert.addAction(UIAlertAction(title: "cancel".localize(), style: .cancel))
     }
     
+    private func configureUpdateDetailsButton() {
+        self.view.addSubview(UpdateDetailsButton)
+        UpdateDetailsButton.pinBottom(to: self.deleteAccountButton.topAnchor, 20)
+        UpdateDetailsButton.setHeight(70)
+        UpdateDetailsButton.pinHorizontal(to: self.view, 17)
+        UpdateDetailsButton.backgroundColor = Colors.secondaryButton.uiColor
+        UpdateDetailsButton.layer.cornerRadius = 20
+        UpdateDetailsButton.setTitle("updateAccountDetails".localize(), for: .normal)
+        UpdateDetailsButton.setTitleColor(Colors.active.uiColor, for: .normal)
+        UpdateDetailsButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
+        UpdateDetailsButton.addTarget(self, action: #selector(UpdateDetailsButtonWasTapped), for: .touchDown)
+    }
+    
+    private func configureLoadingIndicator() {
+        self.view.addSubview(loadingIndicator)
+        loadingIndicator.pinCenter(to: self.view)
+        loadingIndicator.color = Colors.secondaryText.uiColor
+    }
+    
+    private func configureLoadingFailureLabel() {
+        loadingFailureLabel.text = "connectionError".localize()
+        loadingFailureLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        loadingFailureLabel.textColor = Colors.mainText.uiColor
+    }
+    
+    private func configureReloadButton() {
+        reloadButton.setTitle("reload".localize(), for: .normal)
+        reloadButton.setTitleColor(Colors.active.uiColor, for: .normal)
+        reloadButton.setTitleColor(Colors.secondaryText.uiColor, for: .highlighted)
+        reloadButton.backgroundColor = .clear
+        reloadButton.addTarget(self, action: #selector(reloadButtonWasPressed), for: .touchUpInside)
+    }
+    
     // MARK: - Actions
     @objc
     private func goBack() {
@@ -128,6 +183,31 @@ final class AccountDetailsViewController: UIViewController {
     @objc
     private func deleteAccountButtonWasTapped() {
         self.navigationController?.present(deleteAccountAlert, animated: true)
+    }
+    
+    @objc
+    private func UpdateDetailsButtonWasTapped() {
+        self.interactor.loadUpdateAccount(AccountDetailsModel.UpdateAccount.Request())
+    }
+    
+    @objc
+    private func reloadButtonWasPressed() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        loadingFailureLabel.removeFromSuperview()
+        reloadButton.removeFromSuperview()
+        currentState = .loading
+        interactor.loadUserDetails(AccountDetailsModel.UserDetails.Request())
+    }
+    
+    private func showLoadingFailure() {
+        view.addSubview(loadingFailureLabel)
+        loadingFailureLabel.pinCenterX(to: self.view.centerXAnchor)
+        loadingFailureLabel.pinTop(to: self.view, self.view.frame.height / 2.0 - 15)
+        
+        view.addSubview(reloadButton)
+        reloadButton.pinTop(to: self.view, self.view.frame.height / 2.0 + 15)
+        reloadButton.pinCenterX(to: self.view.centerXAnchor)
     }
 }
 
@@ -143,8 +223,9 @@ extension AccountDetailsViewController: AccountDetailsDisplayLogic {
     
     func displayUserDetails(_ viewModel: Model.UserDetails.ViewModel) {
         DispatchQueue.main.async { [weak self] in
-            self?.nameDetailsCardButton.setTitle(title: viewModel.name)
-            self?.emailDetailsCardButton.setTitle(title: viewModel.email)
+            self?.currentState = .loaded
+            self?.configureNameDetailsCardButton(name: viewModel.name)
+            self?.configureEmailDetailsCardButton(email: viewModel.email)
         }
     }
     
@@ -159,6 +240,31 @@ extension AccountDetailsViewController: AccountDetailsDisplayLogic {
     func displayLogin(_ viewModel: Model.Login.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             self?.router.routeToLogin()
+        }
+    }
+    
+    func displayUpdateAccount(_ viewModel: Model.UpdateAccount.ViewModel) {
+        self.router.routeToUpdateAccount()
+    }
+    
+    func displayUpdateAccountFailure(_ viewModel: Model.UpdateAccountFailure.ViewModel) {
+        DispatchQueue.main.async {
+            self.currentState = .error
+        }
+    }
+}
+
+// MARK: - UpdateUIForState
+extension AccountDetailsViewController {
+    func updateUIForState(_ state: AccountDetailsState) {
+        switch state {
+        case .loading:
+            loadingIndicator.startAnimating()
+        case .loaded:
+            loadingIndicator.stopAnimating()
+        case .error:
+            loadingIndicator.stopAnimating()
+            showLoadingFailure()
         }
     }
 }
