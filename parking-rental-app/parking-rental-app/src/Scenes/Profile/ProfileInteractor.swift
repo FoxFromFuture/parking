@@ -41,4 +41,8 @@ extension ProfileInteractor: ProfileBusinessLogic {
         self.worker.clearUserData()
         presenter.presentLogin(Model.Login.Response())
     }
+    
+    func loadAccountDetails(_ request: Model.AccountDetails.Request) {
+        presenter.presentAccountDetails(ProfileModel.AccountDetails.Response())
+    }
 }

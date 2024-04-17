@@ -31,4 +31,8 @@ extension ProfilePresenter: ProfilePresentationLogic {
     func presentLogin(_ response: Model.Login.Response) {
         view?.displayLogin(Model.Login.ViewModel())
     }
+    
+    func presentAccountDetails(_ response: Model.AccountDetails.Response) {
+        view?.displayAccountDetails(ProfileModel.AccountDetails.ViewModel())
+    }
 }

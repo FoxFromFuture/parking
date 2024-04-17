@@ -21,6 +21,7 @@ final class NetworkManager {
     private let parkingSpotsRouter = Router<ParkingSpotsApi>()
     private let parkingLevelsRouter = Router<ParkingLevelsApi>()
     private let buildingsRouter = Router<BuildingsApi>()
+    private let emplyeesRouter = Router<EmployeesApi>()
     
     enum NetworkResponse: String {
         case success
@@ -309,6 +310,13 @@ final class NetworkManager {
     func getCar(carID: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
         authRequestDataResponse(router: carsRouter, task: .getCar(carID: carID), responseType: Car.self) { [weak self] data, error in
             self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
+    // MARK: - Employees API
+    func deleteEmployee(completion: @escaping (_ error: String?) -> ()) {
+        authRequestNoDataResponse(router: emplyeesRouter, task: .deleteEmployee) { [weak self] error in
+            self?.authRequestNoDataCompletion(error, completion)
         }
     }
 }

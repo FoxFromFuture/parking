@@ -13,6 +13,7 @@ protocol ProfileDisplayLogic: AnyObject {
     func displayHome(_ viewModel: Model.Home.ViewModel)
     func displayUpdateCar(_ viewModel: Model.UpdateCar.ViewModel)
     func displayLogin(_ viewModel: Model.Login.ViewModel)
+    func displayAccountDetails(_ viewModel: Model.AccountDetails.ViewModel)
 }
 
 // MARK: - BusinessLogic
@@ -23,6 +24,7 @@ protocol ProfileBusinessLogic {
     func loadHome(_ request: Model.Home.Request)
     func loadUpdateCar(_ request: Model.UpdateCar.Request)
     func loadLogin(_ request: Model.Login.Request)
+    func loadAccountDetails(_ request: Model.AccountDetails.Request)
 }
 
 // MARK: - PresentationLogic
@@ -33,6 +35,7 @@ protocol ProfilePresentationLogic {
     func presentHome(_ response: Model.Home.Response)
     func presentUpdateCar(_ response: Model.UpdateCar.Response)
     func presentLogin(_ response: Model.Login.Response)
+    func presentAccountDetails(_ response: Model.AccountDetails.Response)
 }
 
 // MARK: - RoutingLogic
@@ -41,6 +44,7 @@ protocol ProfileRoutingLogic {
     func routeToHome()
     func routeToUpdateCar()
     func routeToLogin()
+    func routeToAccountDetails()
 }
 
 // MARK: - WorkerLogic

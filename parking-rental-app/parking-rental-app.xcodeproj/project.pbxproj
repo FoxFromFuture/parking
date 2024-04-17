@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270020682BCFAA5800649D60 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020672BCFAA5800649D60 /* AccountDetailsViewController.swift */; };
+		2700206A2BCFAD4000649D60 /* AccountDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020692BCFAD4000649D60 /* AccountDetailsInteractor.swift */; };
+		2700206C2BCFAD5700649D60 /* AccountDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2700206B2BCFAD5700649D60 /* AccountDetailsPresenter.swift */; };
+		2700206E2BCFAD6900649D60 /* AccountDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2700206D2BCFAD6900649D60 /* AccountDetailsModel.swift */; };
+		270020702BCFAD7D00649D60 /* AccountDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2700206F2BCFAD7D00649D60 /* AccountDetailsRouter.swift */; };
+		270020722BCFAD8D00649D60 /* AccountDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020712BCFAD8D00649D60 /* AccountDetailsProtocols.swift */; };
+		270020742BCFADA700649D60 /* AccountDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020732BCFADA700649D60 /* AccountDetailsAssembly.swift */; };
+		270020772BCFB48600649D60 /* DetailsCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020762BCFB48600649D60 /* DetailsCardButton.swift */; };
+		270020792BCFC9AC00649D60 /* EmployeesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270020782BCFC9AC00649D60 /* EmployeesEndPoint.swift */; };
 		272A22F82BB06A750025880E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22F72BB06A750025880E /* MapView.swift */; };
 		272A22FB2BB1A3380025880E /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22FA2BB1A3380025880E /* HomeState.swift */; };
 		272A22FE2BB1AABE0025880E /* BuildingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22FD2BB1AABE0025880E /* BuildingsState.swift */; };
@@ -156,6 +165,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		270020672BCFAA5800649D60 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
+		270020692BCFAD4000649D60 /* AccountDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsInteractor.swift; sourceTree = "<group>"; };
+		2700206B2BCFAD5700649D60 /* AccountDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsPresenter.swift; sourceTree = "<group>"; };
+		2700206D2BCFAD6900649D60 /* AccountDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsModel.swift; sourceTree = "<group>"; };
+		2700206F2BCFAD7D00649D60 /* AccountDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsRouter.swift; sourceTree = "<group>"; };
+		270020712BCFAD8D00649D60 /* AccountDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsProtocols.swift; sourceTree = "<group>"; };
+		270020732BCFADA700649D60 /* AccountDetailsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsAssembly.swift; sourceTree = "<group>"; };
+		270020762BCFB48600649D60 /* DetailsCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCardButton.swift; sourceTree = "<group>"; };
+		270020782BCFC9AC00649D60 /* EmployeesEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesEndPoint.swift; sourceTree = "<group>"; };
 		272A22F72BB06A750025880E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		272A22FA2BB1A3380025880E /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
 		272A22FD2BB1AABE0025880E /* BuildingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsState.swift; sourceTree = "<group>"; };
@@ -320,6 +338,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270020662BCFAA3900649D60 /* AccountDetails */ = {
+			isa = PBXGroup;
+			children = (
+				270020672BCFAA5800649D60 /* AccountDetailsViewController.swift */,
+				270020692BCFAD4000649D60 /* AccountDetailsInteractor.swift */,
+				2700206B2BCFAD5700649D60 /* AccountDetailsPresenter.swift */,
+				2700206D2BCFAD6900649D60 /* AccountDetailsModel.swift */,
+				2700206F2BCFAD7D00649D60 /* AccountDetailsRouter.swift */,
+				270020712BCFAD8D00649D60 /* AccountDetailsProtocols.swift */,
+				270020732BCFADA700649D60 /* AccountDetailsAssembly.swift */,
+			);
+			path = AccountDetails;
+			sourceTree = "<group>";
+		};
 		2714138A2BB2ED2A00496D24 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +497,7 @@
 				2795FF3D2BC04CCC0031CEE8 /* ReservationCard */,
 				272B51F42B9C4FB5008F428E /* Profile */,
 				27535C762BA33F85000E48E6 /* UpdateCar */,
+				270020662BCFAA3900649D60 /* AccountDetails */,
 				272B52052B9C5102008F428E /* More */,
 			);
 			path = Scenes;
@@ -536,6 +569,7 @@
 				27754BFE2B9AEDD40065A14E /* ParkingSpotsEndPoint.swift */,
 				27C0B7A52B9C38B600977074 /* ParkingLevelsEndPoint.swift */,
 				27C0B7AB2B9C448400977074 /* BuildingsEndPoint.swift */,
+				270020782BCFC9AC00649D60 /* EmployeesEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -646,6 +680,7 @@
 		27535C782BA47C0A000E48E6 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				270020762BCFB48600649D60 /* DetailsCardButton.swift */,
 				2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */,
 				27535C792BA47D5C000E48E6 /* SingleCardButton.swift */,
 				27535C8D2BA48E94000E48E6 /* MultipleButtonsCardButton.swift */,
@@ -892,6 +927,7 @@
 			files = (
 				27535C7C2BA48515000E48E6 /* UpdateCarViewController.swift in Sources */,
 				277D6C392B9B0477000B36F9 /* OnCanvasCoordsModel.swift in Sources */,
+				2700206E2BCFAD6900649D60 /* AccountDetailsModel.swift in Sources */,
 				27C624602B7D0251002FFF48 /* RegistrationAssembly.swift in Sources */,
 				277B37B32BCA98D300B2A412 /* LoginState.swift in Sources */,
 				272B521C2B9C53D9008F428E /* MapWorker.swift in Sources */,
@@ -915,6 +951,7 @@
 				27535C802BA4852E000E48E6 /* UpdateCarWorker.swift in Sources */,
 				272A22FB2BB1A3380025880E /* HomeState.swift in Sources */,
 				277B37B62BCAA3F500B2A412 /* RegistrationState.swift in Sources */,
+				2700206C2BCFAD5700649D60 /* AccountDetailsPresenter.swift in Sources */,
 				275E0F0D2BC6872300B6E1B3 /* ThemeManager.swift in Sources */,
 				27754BE82B99DA870065A14E /* BuildingsWorker.swift in Sources */,
 				27848BED2B80A6F200542D8C /* HomeViewController.swift in Sources */,
@@ -936,6 +973,7 @@
 				27BA27D82BC7F66D008F3519 /* Colors.swift in Sources */,
 				272B51FA2B9C5021008F428E /* ProfileWorker.swift in Sources */,
 				272B52112B9C518C008F428E /* MoreRouter.swift in Sources */,
+				2700206A2BCFAD4000649D60 /* AccountDetailsInteractor.swift in Sources */,
 				272B52092B9C513F008F428E /* MoreInteractor.swift in Sources */,
 				27754BEA2B99DA900065A14E /* BuildingsPresenter.swift in Sources */,
 				2795FF582BC3F68B0031CEE8 /* String+localize.swift in Sources */,
@@ -955,11 +993,13 @@
 				27C624522B7D01EB002FFF48 /* RegistrationViewController.swift in Sources */,
 				27C6243D2B7C8B17002FFF48 /* LoginViewController.swift in Sources */,
 				27535C822BA48538000E48E6 /* UpdateCarPresenter.swift in Sources */,
+				270020722BCFAD8D00649D60 /* AccountDetailsProtocols.swift in Sources */,
 				27BA27DC2BC80952008F3519 /* UITextField+borders.swift in Sources */,
 				273E65E42B84900800567BD8 /* NetworkRouter.swift in Sources */,
 				273E65DC2B848B8300567BD8 /* HTTPTask.swift in Sources */,
 				272B52242B9C5440008F428E /* MapProtocols.swift in Sources */,
 				27848BFB2B80A74600542D8C /* HomeAssembly.swift in Sources */,
+				270020772BCFB48600649D60 /* DetailsCardButton.swift in Sources */,
 				27848BE42B80A47600542D8C /* RegistrationCarRouter.swift in Sources */,
 				273E66032B88E95E00567BD8 /* SplashPresenter.swift in Sources */,
 				272B520B2B9C5150008F428E /* MoreWorker.swift in Sources */,
@@ -980,6 +1020,7 @@
 				273E65EB2B8499FE00567BD8 /* CarsModel.swift in Sources */,
 				27535C842BA48542000E48E6 /* UpdateCarModel.swift in Sources */,
 				272B52132B9C51A6008F428E /* MoreProtocols.swift in Sources */,
+				270020702BCFAD7D00649D60 /* AccountDetailsRouter.swift in Sources */,
 				272B52262B9C5454008F428E /* MapAssembly.swift in Sources */,
 				273C90AA2B7BCCB000C73FE8 /* AppDelegate.swift in Sources */,
 				272B51FC2B9C503D008F428E /* ProfilePresenter.swift in Sources */,
@@ -1023,6 +1064,8 @@
 				27C624582B7D0223002FFF48 /* RegistrationModel.swift in Sources */,
 				27535C8A2BA4855D000E48E6 /* UpdateCarAssembly.swift in Sources */,
 				273E65DE2B848C5C00567BD8 /* ParameterEncoding.swift in Sources */,
+				270020742BCFADA700649D60 /* AccountDetailsAssembly.swift in Sources */,
+				270020682BCFAA5800649D60 /* AccountDetailsViewController.swift in Sources */,
 				27754BE62B99DA7D0065A14E /* BuildingsInteractor.swift in Sources */,
 				27754BF52B99E33D0065A14E /* ReservationCell.swift in Sources */,
 				27754BEE2B99DAA40065A14E /* BuildingsRouter.swift in Sources */,
@@ -1032,6 +1075,7 @@
 				27848BDE2B80A45700542D8C /* RegistrationCarInteractor.swift in Sources */,
 				275E0F0B2BC686B200B6E1B3 /* Theme.swift in Sources */,
 				272B521E2B9C5408008F428E /* MapPresenter.swift in Sources */,
+				270020792BCFC9AC00649D60 /* EmployeesEndPoint.swift in Sources */,
 				27754BDD2B99A6200065A14E /* ReservationsEndPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

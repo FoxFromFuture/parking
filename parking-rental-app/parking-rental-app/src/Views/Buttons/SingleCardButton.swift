@@ -15,7 +15,7 @@ final class SingleCardButton: UIView {
     private let subtitleLabel = UILabel()
     private let arrowIconImageView = UIImageView()
     
-    public var tapAction: (() -> Void)?
+    private var tapAction: (() -> Void)?
     
     // MARK: - Initializers
     init() {

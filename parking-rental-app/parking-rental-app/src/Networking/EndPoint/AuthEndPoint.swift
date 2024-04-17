@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 public enum AuthApi {
     case whoami

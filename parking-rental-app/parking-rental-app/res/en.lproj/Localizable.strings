@@ -60,5 +60,9 @@
 "registrationCarSetupFailure" = "Car setup failure, try again";
 "updateCarFailure" = "Car update failure, try again";
 "reservationsLimit" = "Limit of 5 Lots Reached";
-"reservationsLimitForTime" = "You already have 1 lot for the current time";
+"reservationsLimitForTime" = "There's 1 lot for the time";
 "reservationCardWeekendLimit" = "You can't book on weekends";
+"account" = "Account";
+"accountDetails" = "Account details";
+"deleteAccount" = "Delete Account";
+"deleteAccountQuestion" = "Are you sure you want to delete your account?";

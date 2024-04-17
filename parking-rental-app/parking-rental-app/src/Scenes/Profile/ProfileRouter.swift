@@ -29,4 +29,8 @@ extension ProfileRouter: ProfileRoutingLogic {
     func routeToLogin() {
         view?.navigationController?.pushViewController(LoginAssembly.build(), animated: false)
     }
+    
+    func routeToAccountDetails() {
+        view?.navigationController?.pushViewController(AccountDetailsAssembly.build(), animated: true)
+    }
 }

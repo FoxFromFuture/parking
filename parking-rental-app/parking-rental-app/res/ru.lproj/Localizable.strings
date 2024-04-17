@@ -62,3 +62,7 @@
 "reservationsLimit" = "Достигнут лимит (5 броней)";
 "reservationsLimitForTime" = "У вас уже есть бронь на это время";
 "reservationCardWeekendLimit" = "Вы не можете сделать бронь на выходной";
+"account" = "Аккаунт";
+"accountDetails" = "Об аккаунте";
+"deleteAccount" = "Удалить Аккаунт";
+"deleteAccountQuestion" = "Вы уверены, что хотите удалить ваш аккаунт?";

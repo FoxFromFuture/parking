@@ -1,18 +1,35 @@
 //
-//  ProfileModel.swift
+//  AccountDetailsModel.swift
 //  parking-rental-app
 //
-//  Created by Никита Лисунов on 3/9/24.
+//  Created by Никита Лисунов on 4/17/24.
 //
 
 import UIKit
 
-enum ProfileModel {
+enum AccountDetailsModel {
     
     enum Start {
         struct Request { }
         struct Response { }
         struct ViewModel { }
+    }
+    
+    enum Profile {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum UserDetails {
+        struct Request { }
+        struct Response {
+            let user: AuthWhoamiApiResponse
+        }
+        struct ViewModel {
+            let name: String
+            let email: String
+        }
     }
     
     enum More {
@@ -27,19 +44,7 @@ enum ProfileModel {
         struct ViewModel { }
     }
     
-    enum UpdateCar {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum Login {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
-    enum AccountDetails {
         struct Request { }
         struct Response { }
         struct ViewModel { }

@@ -21,6 +21,7 @@ final class ProfileViewController: UIViewController {
     private let titleLabel = UILabel()
     private let logOutButton = UIButton()
     private let carSingleCardButton = SingleCardButton()
+    private let accountSingleCardButton = SingleCardButton()
     private let logOutAlert = UIAlertController()
     
     // MARK: - LifeCycle
@@ -50,6 +51,7 @@ final class ProfileViewController: UIViewController {
         configureNavigationBar()
         configureTabBar()
         configureTitleLabel()
+        configureAccountSingleCardButton()
         configureCarSingleCardButton()
         configureLogOutButton()
         configureLogOutAlert()
@@ -90,9 +92,19 @@ final class ProfileViewController: UIViewController {
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
     }
     
+    private func configureAccountSingleCardButton() {
+        self.view.addSubview(accountSingleCardButton)
+        accountSingleCardButton.pinTop(to: self.titleLabel.bottomAnchor, 30)
+        accountSingleCardButton.pinHorizontal(to: self.view, 17)
+        accountSingleCardButton.configure(title: "account".localize(), subtitle: "accountDetails".localize())
+        accountSingleCardButton.setAction { [weak self] in
+            self?.interactor.loadAccountDetails(ProfileModel.AccountDetails.Request())
+        }
+    }
+    
     private func configureCarSingleCardButton() {
         self.view.addSubview(carSingleCardButton)
-        carSingleCardButton.pinTop(to: self.titleLabel.bottomAnchor, 30)
+        carSingleCardButton.pinTop(to: self.accountSingleCardButton.bottomAnchor, 25)
         carSingleCardButton.pinHorizontal(to: self.view, 17)
         carSingleCardButton.configure(title: "car".localize(), subtitle: "yourCarDetails".localize())
         carSingleCardButton.setAction { [weak self] in
@@ -155,5 +167,9 @@ extension ProfileViewController: ProfileDisplayLogic {
     
     func displayLogin(_ viewModel: Model.Login.ViewModel) {
         self.router.routeToLogin()
+    }
+    
+    func displayAccountDetails(_ viewModel: Model.AccountDetails.ViewModel) {
+        self.router.routeToAccountDetails()
     }
 }
