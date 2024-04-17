@@ -60,5 +60,5 @@
 "registrationCarSetupFailure" = "Car setup failure, try again";
 "updateCarFailure" = "Car update failure, try again";
 "reservationsLimit" = "Limit of 5 Lots Reached";
-"reservationsLimitForTime" = "You already have 1 lot\nfor the current time";
+"reservationsLimitForTime" = "You already have 1 lot for the current time";
 "reservationCardWeekendLimit" = "You can't book on weekends";

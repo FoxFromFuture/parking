@@ -26,9 +26,6 @@ final class MapViewController: UIViewController {
     private let datePicker = UIDatePicker()
     private let startTimeDatePicker = UIDatePicker()
     private let endTimeDatePicker = UIDatePicker()
-    private var curDate: String?
-    private var curStartTime: String?
-    private var curEndTime: String?
     private var curFloorID: String?
     private var hasReservationsForTime: Bool = false
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
@@ -107,6 +104,7 @@ final class MapViewController: UIViewController {
     }
     
     private func configureDatePicker() {
+        datePicker.calendar = Calendar.current
         datePicker.datePickerMode = .date
         datePicker.backgroundColor = Colors.secondaryButton.uiColor
         datePicker.layer.masksToBounds = true
@@ -123,6 +121,7 @@ final class MapViewController: UIViewController {
     }
     
     private func configureStartTimeDatePicker() {
+        startTimeDatePicker.calendar = Calendar.current
         startTimeDatePicker.datePickerMode = .time
         startTimeDatePicker.backgroundColor = Colors.secondaryButton.uiColor
         startTimeDatePicker.minuteInterval = 30
@@ -133,6 +132,7 @@ final class MapViewController: UIViewController {
     }
     
     private func configureEndTimeDatePicker() {
+        endTimeDatePicker.calendar = Calendar.current
         endTimeDatePicker.datePickerMode = .time
         endTimeDatePicker.minuteInterval = 30
         endTimeDatePicker.backgroundColor = Colors.secondaryButton.uiColor
@@ -174,12 +174,12 @@ final class MapViewController: UIViewController {
         let mapFrame = CGRect(x: 0, y: 0, width: mapCanvas.width, height: mapCanvas.height)
         self.mapView = MapView(notAvailableParkingSpots: notAvailableParkingSpots, notFreeParkingSpots: notFreeParkingSpots, freeParkingSpots: freeParkingSpots, reservedParkingSpot: reservedParkingSpot, frame: mapFrame)
         self.mapView?.configureFreeSpotPressAction(pressAction: { [weak self] id in
-            if let date = self?.curDate, let startTime = self?.curStartTime, let endTime = self?.curEndTime, let onUpdateAction = self?.reservationCardOnUpdateAction {
+            if let date = self?.datePicker.date, let startTime = self?.startTimeDatePicker.date, let endTime = self?.endTimeDatePicker.date, let onUpdateAction = self?.reservationCardOnUpdateAction {
                 self?.interactor.loadReservationCard(MapModel.ReservationCard.Request(parkingSpotID: id, date: date, startTime: startTime, endTime: endTime, onUpdateAction: onUpdateAction, spotState: .freeSpot))
             }
         })
         self.mapView?.configureReservedSpotPressAction(pressAction: { [weak self] id in
-            if let date = self?.curDate, let startTime = self?.curStartTime, let endTime = self?.curEndTime, let onUpdateAction = self?.reservationCardOnUpdateAction {
+            if let date = self?.datePicker.date, let startTime = self?.startTimeDatePicker.date, let endTime = self?.endTimeDatePicker.date, let onUpdateAction = self?.reservationCardOnUpdateAction {
                 self?.interactor.loadReservationCard(MapModel.ReservationCard.Request(parkingSpotID: id, date: date, startTime: startTime, endTime: endTime, onUpdateAction: onUpdateAction, spotState: .reservedSpot))
             }
         })
@@ -227,23 +227,9 @@ final class MapViewController: UIViewController {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         
-        let curMonthInt = Calendar.current.component(.month, from: self.datePicker.date)
-        let curDayInt = Calendar.current.component(.day, from: self.datePicker.date)
-        var curMonth = "\(Calendar.current.component(.month, from: self.datePicker.date))"
-        var curDay = "\(Calendar.current.component(.day, from: self.datePicker.date))"
-        
-        if curMonthInt <= 9 {
-            curMonth = "0\(curMonth)"
-        }
-        if curDayInt <= 9 {
-            curDay = "0\(curDay)"
-        }
-        
-        self.curDate = "\(Calendar.current.component(.year, from: self.datePicker.date))-\(curMonth)-\(curDay)"
-        
-        if let curFloorID = self.curFloorID, let curDate = self.curDate, let curStartTime = self.curStartTime, let curEndTime = self.curEndTime {
+        if let curFloorID = self.curFloorID {
             currentState = .loading
-            self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: curDate, startTime: curStartTime, endTime: curEndTime))
+            self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: self.datePicker.date, startTime: self.startTimeDatePicker.date, endTime: self.endTimeDatePicker.date))
         }
     }
     
@@ -252,23 +238,9 @@ final class MapViewController: UIViewController {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         
-        let curHourInt = Calendar.current.component(.hour, from: self.startTimeDatePicker.date)
-        let curMinuteInt = Calendar.current.component(.minute, from: self.startTimeDatePicker.date)
-        var curHour = "\(Calendar.current.component(.hour, from: self.startTimeDatePicker.date))"
-        var curMinute = "\(Calendar.current.component(.minute, from: self.startTimeDatePicker.date))"
-        
-        if curHourInt <= 9 {
-            curHour = "0\(curHour)"
-        }
-        if curMinuteInt <= 9 {
-            curMinute = "0\(curMinute)"
-        }
-        
-        self.curStartTime = "\(curHour):\(curMinute)"
-        
-        if let curFloorID = self.curFloorID, let curDate = self.curDate, let curStartTime = self.curStartTime, let curEndTime = self.curEndTime {
+        if let curFloorID = self.curFloorID {
             currentState = .loading
-            self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: curDate, startTime: curStartTime, endTime: curEndTime))
+            self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: self.datePicker.date, startTime: self.startTimeDatePicker.date, endTime: self.endTimeDatePicker.date))
         }
     }
     
@@ -277,23 +249,9 @@ final class MapViewController: UIViewController {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         
-        let curHourInt = Calendar.current.component(.hour, from: self.endTimeDatePicker.date)
-        let curMinuteInt = Calendar.current.component(.minute, from: self.endTimeDatePicker.date)
-        var curHour = "\(Calendar.current.component(.hour, from: self.endTimeDatePicker.date))"
-        var curMinute = "\(Calendar.current.component(.minute, from: self.endTimeDatePicker.date))"
-        
-        if curHourInt <= 9 {
-            curHour = "0\(curHour)"
-        }
-        if curMinuteInt <= 9 {
-            curMinute = "0\(curMinute)"
-        }
-        
-        self.curEndTime = "\(curHour):\(curMinute)"
-        
-        if let curFloorID = self.curFloorID, let curDate = self.curDate, let curStartTime = self.curStartTime, let curEndTime = self.curEndTime {
+        if let curFloorID = self.curFloorID  {
             currentState = .loading
-            self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: curDate, startTime: curStartTime, endTime: curEndTime))
+            self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: self.datePicker.date, startTime: self.startTimeDatePicker.date, endTime: self.endTimeDatePicker.date))
         }
     }
     
@@ -307,9 +265,9 @@ final class MapViewController: UIViewController {
             currentState = .loading
             self.interactor.loadParkingMap(MapModel.ParkingMap.Request(initBuildingID: self.initBuildingID, initReservationID: self.initReservationID))
         } else if currentState == .reloadingError {
-            if let curFloorID = self.curFloorID, let curDate = self.curDate, let curStartTime = self.curStartTime, let curEndTime = self.curEndTime {
+            if let curFloorID = self.curFloorID {
                 currentState = .loading
-                self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: curDate, startTime: curStartTime, endTime: curEndTime))
+                self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: self.datePicker.date, startTime: self.startTimeDatePicker.date, endTime: self.endTimeDatePicker.date))
             }
         }
     }
@@ -325,8 +283,8 @@ final class MapViewController: UIViewController {
     }
     
     private func reservationCardOnUpdateAction() {
-        if let curFloorID = self.curFloorID, let curDate = self.curDate, let curStartTime = self.curStartTime, let curEndTime = self.curEndTime {
-            self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: curDate, startTime: curStartTime, endTime: curEndTime))
+        if let curFloorID = self.curFloorID {
+            self.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: self.datePicker.date, startTime: self.startTimeDatePicker.date, endTime: self.endTimeDatePicker.date))
         }
     }
 }
@@ -350,7 +308,7 @@ extension MapViewController: MapDisplayLogic {
             self?.datePicker.date = viewModel.curDate
             self?.datePicker.minimumDate = viewModel.minDate
             self?.datePicker.maximumDate = viewModel.maxDate
-
+            
             self?.startTimeDatePicker.date = viewModel.curStartTimeDate
             self?.startTimeDatePicker.minimumDate = viewModel.minStartTimeDate
             self?.startTimeDatePicker.maximumDate = viewModel.maxStartTimeDate
@@ -359,16 +317,13 @@ extension MapViewController: MapDisplayLogic {
             self?.endTimeDatePicker.minimumDate = viewModel.minEndTimeDate
             self?.endTimeDatePicker.maximumDate = viewModel.maxEndTimeDate
             
-            self?.curDate = viewModel.curDateStr
-            self?.curEndTime = viewModel.curEndTimeStr
-            self?.curStartTime = viewModel.curStartTimeStr
             self?.curFloorID = viewModel.levelForDisplay.id
             
             var actions: [UIAction] = []
             
             actions.append(UIAction(title: "\("floor".localize()): \(viewModel.levelForDisplay.levelNumber)", state: .on, handler: { action in
                 self?.curFloorID = viewModel.levelForDisplay.id
-                if let curFloorID = self?.curFloorID, let curDate = self?.curDate, let curStartTime = self?.curStartTime, let curEndTime = self?.curEndTime {
+                if let curFloorID = self?.curFloorID, let curDate = self?.datePicker.date, let curStartTime = self?.startTimeDatePicker.date, let curEndTime = self?.endTimeDatePicker.date {
                     self?.currentState = .loading
                     self?.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: curDate, startTime: curStartTime, endTime: curEndTime))
                 }
@@ -378,7 +333,7 @@ extension MapViewController: MapDisplayLogic {
                 if floor.levelNumber != viewModel.levelForDisplay.levelNumber {
                     actions.append(UIAction(title: "\("floor".localize()): \(floor.levelNumber)", handler: { action in
                         self?.curFloorID = floor.id
-                        if let curFloorID = self?.curFloorID, let curDate = self?.curDate, let curStartTime = self?.curStartTime, let curEndTime = self?.curEndTime {
+                        if let curFloorID = self?.curFloorID, let curDate = self?.datePicker.date, let curStartTime = self?.startTimeDatePicker.date, let curEndTime = self?.endTimeDatePicker.date {
                             self?.currentState = .loading
                             self?.interactor.loadReloadedMap(MapModel.ReloadMap.Request(floorID: curFloorID, date: curDate, startTime: curStartTime, endTime: curEndTime))
                         }
@@ -416,16 +371,15 @@ extension MapViewController: MapDisplayLogic {
             self?.endTimeDatePicker.removeFromSuperview()
             self?.floorButton.removeFromSuperview()
             
-            self?.startTimeDatePicker.minimumDate = viewModel.minStartTimeDate
-            self?.endTimeDatePicker.minimumDate = viewModel.minEndTimeDate
-            
-            if let endTime = viewModel.curEndTimeDate, let endTimeStr = viewModel.curEndTimeStr {
-                self?.endTimeDatePicker.date = endTime
-                self?.curEndTime = endTimeStr
+            if let updatedCurEndTime = viewModel.curEndTimeDate {
+                self?.endTimeDatePicker.date = updatedCurEndTime
             }
             
+            self?.startTimeDatePicker.minimumDate = viewModel.minStartTimeDate
+            self?.endTimeDatePicker.minimumDate = viewModel.minEndTimeDate
+
             self?.hasReservationsForTime = viewModel.hasReservationsForTime
-            
+
             self?.configureMapView(notAvailableParkingSpots: viewModel.notAvailableParkingSpots, notFreeParkingSpots: viewModel.notFreeParkingSpots, freeParkingSpots: viewModel.freeParkingSpots, reservedParkingSpot: viewModel.reservedParkingSpot, mapCanvas: viewModel.parkingLevelCanvas)
         }
     }

@@ -19,9 +19,9 @@ enum ReservationCardModel {
         struct Request {
             let parkingSpotID: String
             let spotState: ReservationCardSpotState
-            let date: String
-            let startTime: String
-            let endTime: String
+            let date: Date
+            let startTime: Date
+            let endTime: Date
         }
         struct Response {
             let parkingSpot: ParkingSpot
@@ -32,6 +32,8 @@ enum ReservationCardModel {
             let reservationsLimitForTime: Bool
             let reservationsLimit: Bool
             let weekendLimit: Bool
+            let startTime: Date
+            let endTime: Date
         }
         struct ViewModel {
             let parkingLotNumber: String
@@ -39,11 +41,12 @@ enum ReservationCardModel {
             let carRegistryNumber: String
             let employeeID: String
             let reservationID: String?
-            let reservationStartTime: String?
-            let reservationEndTime: String?
             let reservationsLimitForTime: Bool
             let reservationsLimit: Bool
             let weekendLimit: Bool
+            let startTime: String
+            let endTime: String
+            let date: String
         }
     }
     
@@ -52,9 +55,9 @@ enum ReservationCardModel {
             let employeeID: String
             let carID: String
             let parkingSpotID: String
-            let date: String
-            let startTime: String
-            let endTime: String
+            let date: Date
+            let startTime: Date
+            let endTime: Date
         }
         struct Response {
             let reservationID: String

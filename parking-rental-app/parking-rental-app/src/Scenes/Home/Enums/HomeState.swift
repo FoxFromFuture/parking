@@ -11,4 +11,5 @@ enum HomeState {
     case error
     case noData
     case reservationsLimit
+    case active
 }

@@ -60,5 +60,5 @@
 "registrationCarSetupFailure" = "Ошибка, попробуйте еще раз";
 "updateCarFailure" = "Ошибка, попробуйте еще раз";
 "reservationsLimit" = "Достигнут лимит (5 броней)";
-"reservationsLimitForTime" = "У вас уже есть бронь\nна это время";
+"reservationsLimitForTime" = "У вас уже есть бронь на это время";
 "reservationCardWeekendLimit" = "Вы не можете сделать бронь на выходной";

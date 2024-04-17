@@ -13,16 +13,17 @@ final class MapInteractor {
     private let worker: MapWorkerLogic
     private var buildingID: String?
     private var reservationID: String?
-    private var startTime: String?
-    private var endTime: String?
-    private var calendar = Calendar.current
+    private var startTime: Date?
+    private var endTime: Date?
+    private var calendar = Calendar(identifier: .gregorian)
     private var parkingLevels: [ParkingLevel]?
     private var building: Building?
     private var reservations: [Reservation]?
     private var freeParkingSpotsForTime: [ParkingSpot]?
     private var reservedParkingSpot: ParkingSpot?
     private var levelForDisplay: ParkingLevel?
-    private var minimumStartTime: String?
+    private var minStartTime: Date?
+    private var minEndTime: Date?
     
     private let dispatchGroup = DispatchGroup()
     
@@ -50,64 +51,31 @@ extension MapInteractor: MapBusinessLogic {
         self.freeParkingSpotsForTime = nil
         self.reservedParkingSpot = nil
         self.levelForDisplay = nil
-        self.minimumStartTime = nil
+        self.minStartTime = nil
         
         if let buildingID = request.initBuildingID {
             self.buildingID = buildingID
             
             /// Set the correct time
             let curTimeHour = self.calendar.component(.hour, from: Date())
-            let curTimeMinute = self.calendar.component(.minute, from: Date())
             
-            if curTimeHour == 21 && curTimeMinute >= 30 || curTimeHour >= 22 {
-                let nextDay = self.calendar.date(byAdding: .day, value: 1, to: Date())
-                let curDayInt = self.calendar.component(.day, from: nextDay ?? Date())
-                var curDay = "\(self.calendar.component(.day, from: nextDay ?? Date()))"
-                let curMonthInt = self.calendar.component(.month, from: nextDay ?? Date())
-                var curMonth = "\(self.calendar.component(.month, from: nextDay ?? Date()))"
-                let curYear = "\(self.calendar.component(.year, from: nextDay ?? Date()))"
-                if curMonthInt <= 9 {
-                    curMonth = "0\(curMonth)"
+            if let bounds = self.calendar.date(bySettingHour: 21, minute: 30, second: 0, of: Date()), Date() > bounds {
+                if let nextDay = self.calendar.date(byAdding: .day, value: 1, to: Date()) {
+                    self.startTime = self.calendar.date(bySettingHour: 8, minute: 0, second: 0, of: nextDay)
+                    self.endTime = self.calendar.date(bySettingHour: 22, minute: 0, second: 0, of: nextDay)
                 }
-                if curDayInt <= 9 {
-                    curDay = "0\(curDay)"
-                }
-                
-                self.startTime = "\(curYear)-\(curMonth)-\(curDay)T08:00:00"
-                self.endTime = "\(curYear)-\(curMonth)-\(curDay)T22:00:00"
             } else {
-                let curDayInt = self.calendar.component(.day, from: Date())
-                var curDay = "\(self.calendar.component(.day, from: Date()))"
-                let curMonthInt = self.calendar.component(.month, from: Date())
-                var curMonth = "\(self.calendar.component(.month, from: Date()))"
-                let curYear = "\(self.calendar.component(.year, from: Date()))"
-                if curMonthInt <= 9 {
-                    curMonth = "0\(curMonth)"
-                }
-                if curDayInt <= 9 {
-                    curDay = "0\(curDay)"
-                }
-                
-                if curTimeMinute > 30 {
-                    if curTimeHour < 9 {
-                        self.startTime = "\(curYear)-\(curMonth)-\(curDay)T0\(curTimeHour + 1):00:00"
-                    } else {
-                        self.startTime = "\(curYear)-\(curMonth)-\(curDay)T\(curTimeHour + 1):00:00"
-                    }
-                    self.endTime = "\(curYear)-\(curMonth)-\(curDay)T22:00:00"
+                if let bounds = self.calendar.date(bySettingHour: 8, minute: 0, second: 0, of: Date()), Date() < bounds {
+                    self.startTime = self.calendar.date(bySettingHour: 8, minute: 0, second: 0, of: Date())
+                } else if let bounds = self.calendar.date(bySettingHour: curTimeHour, minute: 30, second: 0, of: Date()), Date() > bounds {
+                    self.startTime = self.calendar.date(bySettingHour: curTimeHour + 1, minute: 0, second: 0, of: Date())
                 } else {
-                    if curTimeHour <= 9 {
-                        self.startTime = "\(curYear)-\(curMonth)-\(curDay)T0\(curTimeHour):30:00"
-                    } else {
-                        self.startTime = "\(curYear)-\(curMonth)-\(curDay)T\(curTimeHour):30:00"
-                    }
-                    self.endTime = "\(curYear)-\(curMonth)-\(curDay)T22:00:00"
+                    self.startTime = self.calendar.date(bySettingHour: curTimeHour, minute: 30, second: 0, of: Date())
                 }
+                self.endTime = self.calendar.date(bySettingHour: 22, minute: 0, second: 0, of: Date())
             }
             
-            if let startTime = self.startTime {
-                self.minimumStartTime = "\(startTime.suffix(8).prefix(5))"
-            }
+            self.minStartTime = startTime
             
             if let buildingID = self.buildingID {
                 self.dispatchGroup.enter()
@@ -132,7 +100,7 @@ extension MapInteractor: MapBusinessLogic {
                         
                         if let startTime = self?.startTime, let endTime = self?.endTime {
                             self?.dispatchGroup.enter()
-                            self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevels[0].id, startTime: startTime, endTime: endTime, completion: { [weak self] parkingSpotsData, error in
+                            self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevels[0].id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str(), completion: { [weak self] parkingSpotsData, error in
                                 if let error = error {
                                     print(error)
                                     /// failure to get data for that building/level
@@ -156,8 +124,8 @@ extension MapInteractor: MapBusinessLogic {
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
                         for reservation in reservations {
-                            if let startTime = self?.startTime, let endTime = self?.endTime, let dateStartTime = dateFormatter.date(from: startTime), let dateEndTime = dateFormatter.date(from: endTime), let dateReserveStartTime = dateFormatter.date(from: reservation.startTime), let dateReserveEndTime = dateFormatter.date(from: reservation.endTime), dateReserveEndTime > Date() {
-                                if dateStartTime >= dateReserveStartTime && dateStartTime <= dateReserveEndTime || dateEndTime >= dateReserveStartTime && dateEndTime <= dateReserveEndTime || dateStartTime <= dateReserveStartTime && dateEndTime >= dateReserveEndTime || dateStartTime >= dateReserveStartTime && dateEndTime <= dateReserveEndTime {
+                            if let startTime = self?.startTime, let endTime = self?.endTime, let dateReserveStartTime = dateFormatter.date(from: reservation.startTime), let dateReserveEndTime = dateFormatter.date(from: reservation.endTime), dateReserveEndTime > Date() {
+                                if startTime >= dateReserveStartTime && startTime <= dateReserveEndTime || endTime >= dateReserveStartTime && endTime <= dateReserveEndTime || startTime <= dateReserveStartTime && endTime >= dateReserveEndTime || startTime >= dateReserveStartTime && endTime <= dateReserveEndTime {
                                     self?.reservations?.append(reservation)
                                 }
                             }
@@ -172,8 +140,8 @@ extension MapInteractor: MapBusinessLogic {
                 })
                 
                 self.dispatchGroup.wait()
-                if let parkingLevels = self.parkingLevels, let startTime = self.startTime, let endTime = self.endTime, let building = self.building, let levelForDisplay = self.levelForDisplay, let minimumStartTime = self.minimumStartTime, let freeParkingSpotsForTime = self.freeParkingSpotsForTime {
-                    self.presenter.presentParkingMap(MapModel.ParkingMap.Response(freeParkingSpotsForTime: freeParkingSpotsForTime, reservations: self.reservations, parkingLevelCanvas: levelForDisplay.canvas, parkingLevels: parkingLevels, startTime: startTime, endTime: endTime, building: building, levelForDisplay: levelForDisplay, minimumStartTime: minimumStartTime))
+                if let parkingLevels = self.parkingLevels, let startTime = self.startTime, let endTime = self.endTime, let building = self.building, let levelForDisplay = self.levelForDisplay, let minStartTime = self.minStartTime, let freeParkingSpotsForTime = self.freeParkingSpotsForTime {
+                    self.presenter.presentParkingMap(MapModel.ParkingMap.Response(freeParkingSpotsForTime: freeParkingSpotsForTime, reservations: self.reservations, parkingLevelCanvas: levelForDisplay.canvas, parkingLevels: parkingLevels, startTime: startTime, endTime: endTime, building: building, levelForDisplay: levelForDisplay, minStartTime: minStartTime))
                 } else {
                     self.presenter.presentLoadingFailure(MapModel.LoadingFailure.Response())
                 }
@@ -182,20 +150,13 @@ extension MapInteractor: MapBusinessLogic {
             self.reservationID = reservationID
             
             let curTimeHour = self.calendar.component(.hour, from: Date())
-            let curTimeMinute = self.calendar.component(.minute, from: Date())
             
-            if curTimeMinute > 30 {
-                if curTimeHour < 9 {
-                    self.minimumStartTime = "0\(curTimeHour + 1):00"
-                } else {
-                    self.minimumStartTime = "\(curTimeHour + 1):00"
-                }
+            if let bounds = self.calendar.date(bySettingHour: 8, minute: 0, second: 0, of: Date()), Date() < bounds {
+                self.minStartTime = self.calendar.date(bySettingHour: 8, minute: 0, second: 0, of: Date())
+            } else if let bounds = self.calendar.date(bySettingHour: curTimeHour, minute: 30, second: 0, of: Date()), Date() > bounds {
+                self.minStartTime = self.calendar.date(bySettingHour: curTimeHour + 1, minute: 0, second: 0, of: Date())
             } else {
-                if curTimeHour <= 9 {
-                    self.minimumStartTime = "0\(curTimeHour):30"
-                } else {
-                    self.minimumStartTime = "\(curTimeHour):30"
-                }
+                self.minStartTime = self.calendar.date(bySettingHour: curTimeHour, minute: 30, second: 0, of: Date())
             }
             
             if let _ = self.reservationID {
@@ -207,9 +168,13 @@ extension MapInteractor: MapBusinessLogic {
                         for reserve in reservations {
                             if let reservationID = self?.reservationID {
                                 if reserve.id == reservationID {
+                                    
+                                    let dateFormatter = DateFormatter()
+                                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                                    
                                     self?.reservations = [reserve]
-                                    self?.startTime = reserve.startTime
-                                    self?.endTime = reserve.endTime
+                                    self?.startTime = dateFormatter.date(from: reserve.startTime)
+                                    self?.endTime = dateFormatter.date(from: reserve.endTime)
                                 }
                             }
                         }
@@ -264,7 +229,7 @@ extension MapInteractor: MapBusinessLogic {
                                         
                                         if let startTime = self?.startTime, let endTime = self?.endTime {
                                             self?.dispatchGroup.enter()
-                                            self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevel.id, startTime: startTime, endTime: endTime, completion: { [weak self] parkingSpotsData, error in
+                                            self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevel.id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str(), completion: { [weak self] parkingSpotsData, error in
                                                 if let error = error {
                                                     print(error)
                                                     /// failure to get data for that building/level
@@ -285,8 +250,8 @@ extension MapInteractor: MapBusinessLogic {
                 })
                 
                 self.dispatchGroup.wait()
-                if let reservations = self.reservations, let parkingLevels = self.parkingLevels, let startTime = self.startTime, let endTime = self.endTime, let building = self.building, let levelForDisplay = self.levelForDisplay, let minimumStartTime = self.minimumStartTime, let freeParkingSpotsForTime = self.freeParkingSpotsForTime {
-                    self.presenter.presentParkingMap(MapModel.ParkingMap.Response(freeParkingSpotsForTime: freeParkingSpotsForTime, reservations: reservations, parkingLevelCanvas: levelForDisplay.canvas, parkingLevels: parkingLevels, startTime: startTime, endTime: endTime, building: building, levelForDisplay: levelForDisplay, minimumStartTime: minimumStartTime))
+                if let reservations = self.reservations, let parkingLevels = self.parkingLevels, let startTime = self.startTime, let endTime = self.endTime, let building = self.building, let levelForDisplay = self.levelForDisplay, let minStartTime = self.minStartTime, let freeParkingSpotsForTime = self.freeParkingSpotsForTime {
+                    self.presenter.presentParkingMap(MapModel.ParkingMap.Response(freeParkingSpotsForTime: freeParkingSpotsForTime, reservations: reservations, parkingLevelCanvas: levelForDisplay.canvas, parkingLevels: parkingLevels, startTime: startTime, endTime: endTime, building: building, levelForDisplay: levelForDisplay, minStartTime: minStartTime))
                 } else {
                     self.presenter.presentLoadingFailure(MapModel.LoadingFailure.Response())
                 }
@@ -317,53 +282,51 @@ extension MapInteractor: MapBusinessLogic {
         self.freeParkingSpotsForTime = nil
         self.reservedParkingSpot = nil
         self.levelForDisplay = nil
-        self.minimumStartTime = nil
+        self.minStartTime = nil
         
-        self.startTime = "\(request.date)T\(request.startTime):00"
-        self.endTime = "\(request.date)T\(request.endTime):00"
+        let dateComponents = self.calendar.dateComponents([.year, .month, .day], from: request.date)
+        let startTimeComponents = self.calendar.dateComponents([.hour, .minute, .second], from: request.startTime)
+        let endTimeComponents = self.calendar.dateComponents([.hour, .minute, .second], from: request.endTime)
         
-        if request.date == "\(Date())".prefix(10) {
+        var startTimeComponentsForBuild = DateComponents()
+        startTimeComponentsForBuild.year = dateComponents.year
+        startTimeComponentsForBuild.month = dateComponents.month
+        startTimeComponentsForBuild.day = dateComponents.day
+        startTimeComponentsForBuild.hour = startTimeComponents.hour
+        startTimeComponentsForBuild.minute = startTimeComponents.minute
+        startTimeComponentsForBuild.second = startTimeComponents.second
+        
+        var endTimeComponentsForBuild = DateComponents()
+        endTimeComponentsForBuild.year = dateComponents.year
+        endTimeComponentsForBuild.month = dateComponents.month
+        endTimeComponentsForBuild.day = dateComponents.day
+        endTimeComponentsForBuild.hour = endTimeComponents.hour
+        endTimeComponentsForBuild.minute = endTimeComponents.minute
+        endTimeComponentsForBuild.second = endTimeComponents.second
+        
+        self.startTime = self.calendar.date(from: startTimeComponentsForBuild)
+        self.endTime = self.calendar.date(from: endTimeComponentsForBuild)
+        
+        if request.date.extractDate() == Date().extractDate() {
             let curTimeHour = self.calendar.component(.hour, from: Date())
-            let curTimeMinute = self.calendar.component(.minute, from: Date())
             
-            if curTimeMinute > 30 {
-                if curTimeHour < 9 {
-                    self.minimumStartTime = "0\(curTimeHour + 1):00"
-                } else {
-                    self.minimumStartTime = "\(curTimeHour + 1):00"
-                }
+            if let bounds = self.calendar.date(bySettingHour: 8, minute: 0, second: 0, of: Date()), Date() < bounds {
+                self.minStartTime = self.calendar.date(bySettingHour: 8, minute: 0, second: 0, of: Date())
+            } else if let bounds = self.calendar.date(bySettingHour: curTimeHour, minute: 30, second: 0, of: Date()), Date() > bounds {
+                self.minStartTime = self.calendar.date(bySettingHour: curTimeHour + 1, minute: 0, second: 0, of: Date())
             } else {
-                if curTimeHour <= 9 {
-                    self.minimumStartTime = "0\(curTimeHour):30"
-                } else {
-                    self.minimumStartTime = "\(curTimeHour):30"
-                }
+                self.minStartTime = self.calendar.date(bySettingHour: curTimeHour, minute: 30, second: 0, of: Date())
             }
         } else {
-            self.minimumStartTime = "08:00"
+            self.minStartTime = self.calendar.date(bySettingHour: 8, minute: 0, second: 0, of: Date())
         }
         
-        var updatedCurEndTime: String?
+        self.minEndTime = self.calendar.date(byAdding: .minute, value: 30, to: request.startTime)
         
-        if let startHour = Int(request.startTime.prefix(2)), let startMinute = Int(request.startTime.suffix(2)), let endHour = Int(request.endTime.prefix(2)), let endMinute = Int(request.endTime.suffix(2)) {
-            if startHour == endHour && startMinute > endMinute || startHour > endHour {
-                if startMinute == 30 {
-                    if startHour < 9 {
-                        updatedCurEndTime = "0\(startHour):00"
-                    } else {
-                        updatedCurEndTime = "\(startHour + 1):00"
-                    }
-                } else {
-                    if startHour <= 9 {
-                        updatedCurEndTime = "0\(startHour):30"
-                    } else {
-                        updatedCurEndTime = "\(startHour):30"
-                    }
-                }
-                if let updatedCurEndTime = updatedCurEndTime {
-                    self.endTime = "\(request.date)T\(updatedCurEndTime):00"
-                }
-            }
+        var updatedCurEndTime: Date?
+        
+        if request.startTime > request.endTime {
+            updatedCurEndTime = self.minEndTime
         }
         
         self.dispatchGroup.enter()
@@ -376,7 +339,7 @@ extension MapInteractor: MapBusinessLogic {
                 
                 if let startTime = self?.startTime, let endTime = self?.endTime {
                     self?.dispatchGroup.enter()
-                    self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevel.id, startTime: startTime, endTime: endTime, completion: { [weak self] parkingSpotsData, error in
+                    self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevel.id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str(), completion: { [weak self] parkingSpotsData, error in
                         if let error = error {
                             print(error)
                             /// failure to get data for that building/level
@@ -401,8 +364,8 @@ extension MapInteractor: MapBusinessLogic {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
                 for reservation in reservations {
-                    if let startTime = self?.startTime, let endTime = self?.endTime, let dateStartTime = dateFormatter.date(from: startTime), let dateEndTime = dateFormatter.date(from: endTime), let dateReserveStartTime = dateFormatter.date(from: reservation.startTime), let dateReserveEndTime = dateFormatter.date(from: reservation.endTime), dateReserveEndTime > Date() {
-                        if dateStartTime >= dateReserveStartTime && dateStartTime <= dateReserveEndTime || dateEndTime >= dateReserveStartTime && dateEndTime <= dateReserveEndTime || dateStartTime <= dateReserveStartTime && dateEndTime >= dateReserveEndTime || dateStartTime >= dateReserveStartTime && dateEndTime <= dateReserveEndTime {
+                    if let startTime = self?.startTime, let endTime = self?.endTime, let dateReserveStartTime = dateFormatter.date(from: reservation.startTime), let dateReserveEndTime = dateFormatter.date(from: reservation.endTime), dateReserveEndTime > Date() {
+                        if startTime >= dateReserveStartTime && startTime <= dateReserveEndTime || endTime >= dateReserveStartTime && endTime <= dateReserveEndTime || startTime <= dateReserveStartTime && endTime >= dateReserveEndTime || startTime >= dateReserveStartTime && endTime <= dateReserveEndTime {
                             self?.reservations?.append(reservation)
                         }
                     }
@@ -417,8 +380,8 @@ extension MapInteractor: MapBusinessLogic {
         })
         
         self.dispatchGroup.wait()
-        if let freeParkingSpotsForTime = self.freeParkingSpotsForTime, let levelForDisplay = self.levelForDisplay, let minimumStartTime = self.minimumStartTime {
-            self.presenter.presentReloadedMap(MapModel.ReloadMap.Response(freeParkingSpotsForTime: freeParkingSpotsForTime, reservations: self.reservations, parkingLevelCanvas: levelForDisplay.canvas, minimumStartTime: minimumStartTime, updatedCurEndTime: updatedCurEndTime, curStartTime: request.startTime))
+        if let freeParkingSpotsForTime = self.freeParkingSpotsForTime, let levelForDisplay = self.levelForDisplay, let minStartTime = self.minStartTime, let minEndTime = self.minEndTime {
+            self.presenter.presentReloadedMap(MapModel.ReloadMap.Response(freeParkingSpotsForTime: freeParkingSpotsForTime, reservations: self.reservations, parkingLevelCanvas: levelForDisplay.canvas, minStartTime: minStartTime, minEndTime: minEndTime, curEndTime: updatedCurEndTime))
         } else {
             self.presenter.presentReloadingFailure(MapModel.ReloadingFailure.Response())
         }

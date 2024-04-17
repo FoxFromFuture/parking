@@ -128,6 +128,8 @@
 		2795FF5B2BC3F7A30031CEE8 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF5A2BC3F7A30031CEE8 /* Language.swift */; };
 		279C53382BCD0FE900AF6EF5 /* ReservationCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C53372BCD0FE900AF6EF5 /* ReservationCardState.swift */; };
 		279C533A2BCD2A3100AF6EF5 /* ReservationCardSpotState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C53392BCD2A3100AF6EF5 /* ReservationCardSpotState.swift */; };
+		27B2C57F2BCE5F7400899713 /* Date+iso8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2C57E2BCE5F7400899713 /* Date+iso8601.swift */; };
+		27B2C5812BCE630000899713 /* Date+extract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2C5802BCE630000899713 /* Date+extract.swift */; };
 		27BA27D82BC7F66D008F3519 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA27D72BC7F66D008F3519 /* Colors.swift */; };
 		27BA27DA2BC7FDE8008F3519 /* UIColor+themeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA27D92BC7FDE8008F3519 /* UIColor+themeColors.swift */; };
 		27BA27DC2BC80952008F3519 /* UITextField+borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA27DB2BC80952008F3519 /* UITextField+borders.swift */; };
@@ -280,6 +282,8 @@
 		2795FF5A2BC3F7A30031CEE8 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		279C53372BCD0FE900AF6EF5 /* ReservationCardState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardState.swift; sourceTree = "<group>"; };
 		279C53392BCD2A3100AF6EF5 /* ReservationCardSpotState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardSpotState.swift; sourceTree = "<group>"; };
+		27B2C57E2BCE5F7400899713 /* Date+iso8601.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+iso8601.swift"; sourceTree = "<group>"; };
+		27B2C5802BCE630000899713 /* Date+extract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extract.swift"; sourceTree = "<group>"; };
 		27BA27D72BC7F66D008F3519 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		27BA27D92BC7FDE8008F3519 /* UIColor+themeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+themeColors.swift"; sourceTree = "<group>"; };
 		27BA27DB2BC80952008F3519 /* UITextField+borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+borders.swift"; sourceTree = "<group>"; };
@@ -506,6 +510,8 @@
 				2795FF572BC3F68B0031CEE8 /* String+localize.swift */,
 				27BA27D92BC7FDE8008F3519 /* UIColor+themeColors.swift */,
 				27BA27DB2BC80952008F3519 /* UITextField+borders.swift */,
+				27B2C57E2BCE5F7400899713 /* Date+iso8601.swift */,
+				27B2C5802BCE630000899713 /* Date+extract.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -994,8 +1000,10 @@
 				2795FF452BC04D560031CEE8 /* ReservationCardWorker.swift in Sources */,
 				27848BF32B80A71A00542D8C /* HomeModel.swift in Sources */,
 				27754BF02B99DAAD0065A14E /* BuildingsProtocols.swift in Sources */,
+				27B2C5812BCE630000899713 /* Date+extract.swift in Sources */,
 				27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */,
 				272B520F2B9C517A008F428E /* MoreModel.swift in Sources */,
+				27B2C57F2BCE5F7400899713 /* Date+iso8601.swift in Sources */,
 				27848BE22B80A46E00542D8C /* RegistrationCarModel.swift in Sources */,
 				272A22F82BB06A750025880E /* MapView.swift in Sources */,
 				279C53382BCD0FE900AF6EF5 /* ReservationCardState.swift in Sources */,

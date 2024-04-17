@@ -21,10 +21,10 @@ final class ReservationCardInteractor {
     private var reservationsLimitForTime: Bool = false
     private var reservationsLimit: Bool = false
     private var weekendLimit: Bool = false
-    private var date: String?
-    private var startTime: String?
-    private var endTime: String?
+    private var startTime: Date?
+    private var endTime: Date?
     private let dispatchGroup = DispatchGroup()
+    private var calendar = Calendar(identifier: .gregorian)
     
     // MARK: - Initializers
     init(presenter: ReservationCardPresentationLogic, worker: ReservationCardWorkerLogic) {
@@ -41,13 +41,31 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
     
     func loadReservationCardInfo(_ request: Model.ReservationCardInfo.Request) {
         self.spotState = request.spotState
-        self.startTime = "\(request.date)T\(request.startTime):00"
-        self.endTime = "\(request.date)T\(request.endTime):00"
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let dateComponents = self.calendar.dateComponents([.year, .month, .day], from: request.date)
+        let startTimeComponents = self.calendar.dateComponents([.hour, .minute, .second], from: request.startTime)
+        let endTimeComponents = self.calendar.dateComponents([.hour, .minute, .second], from: request.endTime)
         
-        if let startTime = self.startTime, let startTimeDate = dateFormatter.date(from: startTime), let weekday = Calendar.current.dateComponents([.weekday], from: startTimeDate).weekday {
+        var startTimeComponentsForBuild = DateComponents()
+        startTimeComponentsForBuild.year = dateComponents.year
+        startTimeComponentsForBuild.month = dateComponents.month
+        startTimeComponentsForBuild.day = dateComponents.day
+        startTimeComponentsForBuild.hour = startTimeComponents.hour
+        startTimeComponentsForBuild.minute = startTimeComponents.minute
+        startTimeComponentsForBuild.second = startTimeComponents.second
+        
+        var endTimeComponentsForBuild = DateComponents()
+        endTimeComponentsForBuild.year = dateComponents.year
+        endTimeComponentsForBuild.month = dateComponents.month
+        endTimeComponentsForBuild.day = dateComponents.day
+        endTimeComponentsForBuild.hour = endTimeComponents.hour
+        endTimeComponentsForBuild.minute = endTimeComponents.minute
+        endTimeComponentsForBuild.second = endTimeComponents.second
+        
+        self.startTime = self.calendar.date(from: startTimeComponentsForBuild)
+        self.endTime = self.calendar.date(from: endTimeComponentsForBuild)
+        
+        if let startTime = self.startTime, let weekday = self.calendar.dateComponents([.weekday], from: startTime).weekday {
             if weekday == 1 || weekday == 7 {
                 self.weekendLimit = true
             }
@@ -73,8 +91,8 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
                             if let reservationEndTime = dateFormatter.date(from: reservation.endTime), reservationEndTime > Date() {
                                 self?.actualReservations?.append(reservation)
                                 
-                                if let limit = self?.reservationsLimitForTime, limit == false, let startTime = self?.startTime, let endTime = self?.endTime, let dateStartTime = dateFormatter.date(from: startTime), let dateEndTime = dateFormatter.date(from: endTime), let dateReserveStartTime = dateFormatter.date(from: reservation.startTime), let dateReserveEndTime = dateFormatter.date(from: reservation.endTime) {
-                                    if dateStartTime >= dateReserveStartTime && dateStartTime <= dateReserveEndTime || dateEndTime >= dateReserveStartTime && dateEndTime <= dateReserveEndTime || dateStartTime <= dateReserveStartTime && dateEndTime >= dateReserveEndTime || dateStartTime >= dateReserveStartTime && dateEndTime <= dateReserveEndTime {
+                                if let limit = self?.reservationsLimitForTime, limit == false, let startTime = self?.startTime, let endTime = self?.endTime, let dateReserveStartTime = dateFormatter.date(from: reservation.startTime), let dateReserveEndTime = dateFormatter.date(from: reservation.endTime) {
+                                    if startTime >= dateReserveStartTime && startTime <= dateReserveEndTime || endTime >= dateReserveStartTime && endTime <= dateReserveEndTime || startTime <= dateReserveStartTime && endTime >= dateReserveEndTime || startTime >= dateReserveStartTime && endTime <= dateReserveEndTime {
                                         self?.reservationsLimitForTime = true
                                     }
                                 }
@@ -89,8 +107,8 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
                             for reservation in actualReservations {
                                 if reservation.parkingSpotId == parkingSpot.id {
                                     self?.reservationID = reservation.id
-                                    self?.reservationStartTime = "\(reservation.startTime.suffix(8).prefix(5))"
-                                    self?.reservationEndTime = "\(reservation.endTime.suffix(8).prefix(5))"
+                                    self?.reservationStartTime = "\(reservation.startTime)"
+                                    self?.reservationEndTime = "\(reservation.endTime)"
                                     break
                                 }
                             }
@@ -114,24 +132,47 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
         })
         
         self.dispatchGroup.wait()
-        if let parkingSpot = self.parkingSpot, let car = self.car {
-            self.presenter.presentReservationCardInfo(Model.ReservationCardInfo.Response(parkingSpot: parkingSpot, car: car, reservationID: self.reservationID, reservationStartTime: self.reservationStartTime, reservationEndTime: self.reservationEndTime, reservationsLimitForTime: self.reservationsLimitForTime, reservationsLimit: self.reservationsLimit, weekendLimit: self.weekendLimit))
+        if let parkingSpot = self.parkingSpot, let car = self.car, let startTime = self.startTime, let endTime = self.endTime {
+            self.presenter.presentReservationCardInfo(Model.ReservationCardInfo.Response(parkingSpot: parkingSpot, car: car, reservationID: self.reservationID, reservationStartTime: self.reservationStartTime, reservationEndTime: self.reservationEndTime, reservationsLimitForTime: self.reservationsLimitForTime, reservationsLimit: self.reservationsLimit, weekendLimit: self.weekendLimit, startTime: startTime, endTime: endTime))
         } else {
             self.presenter.presentLoadingFailure(ReservationCardModel.LoadingFailure.Response())
         }
     }
     
     func loadCreateReservation(_ request: Model.CreateReservation.Request) {
-        let startDate = "\(request.date)T\(request.startTime):00"
-        let endDate = "\(request.date)T\(request.endTime):00"
         
-        self.worker.addNewReservation(carId: request.carID, employeeId: request.employeeID, parkingSpotId: request.parkingSpotID, startTime: startDate, endTime: endDate) { [weak self] reservationData, error in
-            if let error = error {
-                print(error)
-                /// failure
-                self?.presenter.presentLoadingFailure(ReservationCardModel.LoadingFailure.Response())
-            } else if let reservation = reservationData {
-                self?.presenter.presentCreateReservation(ReservationCardModel.CreateReservation.Response(reservationID: reservation.id))
+        let dateComponents = self.calendar.dateComponents([.year, .month, .day], from: request.date)
+        let startTimeComponents = self.calendar.dateComponents([.hour, .minute, .second], from: request.startTime)
+        let endTimeComponents = self.calendar.dateComponents([.hour, .minute, .second], from: request.endTime)
+        
+        var startTimeComponentsForBuild = DateComponents()
+        startTimeComponentsForBuild.year = dateComponents.year
+        startTimeComponentsForBuild.month = dateComponents.month
+        startTimeComponentsForBuild.day = dateComponents.day
+        startTimeComponentsForBuild.hour = startTimeComponents.hour
+        startTimeComponentsForBuild.minute = startTimeComponents.minute
+        startTimeComponentsForBuild.second = startTimeComponents.second
+        
+        var endTimeComponentsForBuild = DateComponents()
+        endTimeComponentsForBuild.year = dateComponents.year
+        endTimeComponentsForBuild.month = dateComponents.month
+        endTimeComponentsForBuild.day = dateComponents.day
+        endTimeComponentsForBuild.hour = endTimeComponents.hour
+        endTimeComponentsForBuild.minute = endTimeComponents.minute
+        endTimeComponentsForBuild.second = endTimeComponents.second
+        
+        let startDate = self.calendar.date(from: startTimeComponentsForBuild)
+        let endDate = self.calendar.date(from: endTimeComponentsForBuild)
+        
+        if let startDate = startDate, let endDate = endDate {
+            self.worker.addNewReservation(carId: request.carID, employeeId: request.employeeID, parkingSpotId: request.parkingSpotID, startTime: startDate.getISO8601Str(), endTime: endDate.getISO8601Str()) { [weak self] reservationData, error in
+                if let error = error {
+                    print(error)
+                    /// failure
+                    self?.presenter.presentLoadingFailure(ReservationCardModel.LoadingFailure.Response())
+                } else if let reservation = reservationData {
+                    self?.presenter.presentCreateReservation(ReservationCardModel.CreateReservation.Response(reservationID: reservation.id))
+                }
             }
         }
     }

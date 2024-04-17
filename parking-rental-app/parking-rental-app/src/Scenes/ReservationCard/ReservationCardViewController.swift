@@ -18,9 +18,9 @@ final class ReservationCardViewController: UIViewController {
     private let interactor: ReservationCardBusinessLogic
     private let router: ReservationCardRoutingLogic
     private let parkingSpotID: String
-    private let date: String
-    private let startTime: String
-    private let endTime: String
+    private let date: Date
+    private let startTime: Date
+    private let endTime: Date
     private let spotState: ReservationCardSpotState
     private let onUpdateAction: (() -> Void)
     private var employeeID: String?
@@ -52,9 +52,9 @@ final class ReservationCardViewController: UIViewController {
         router: ReservationCardRoutingLogic,
         interactor: ReservationCardBusinessLogic,
         parkingSpotID: String,
-        date: String,
-        startTime: String,
-        endTime: String,
+        date: Date,
+        startTime: Date,
+        endTime: Date,
         spotState: ReservationCardSpotState,
         onUpdateAction: @escaping (() -> Void)
     ) {
@@ -309,10 +309,8 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
             self?.reservationID = viewModel.reservationID
             self?.parkingLotNumberLabel.text = "\(viewModel.parkingLotNumber)"
             self?.carRegistryNumberLabel.text = "\(viewModel.carRegistryNumber)"
-            if let startTime = self?.startTime, let endTime = self?.endTime, let date = self?.date {
-                self?.timeLabel.text = "\(startTime) - \(endTime)"
-                self?.dateLabel.text = "\(date)"
-            }
+            self?.timeLabel.text = "\(viewModel.startTime) - \(viewModel.endTime)"
+            self?.dateLabel.text = "\(viewModel.date)"
             if self?.spotState == .freeSpot {
                 if viewModel.reservationsLimitForTime {
                     self?.currentState = .reservationsLimitForTime
@@ -328,9 +326,7 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
                     self?.reservationCardView.layer.borderColor = Colors.secondaryButton.uiColor.cgColor
                     self?.reservationActionButton.addTarget(self, action: #selector(self?.reserveLotButtonWasTapped), for: .touchDown)
                 }
-            } else if self?.spotState == .reservedSpot, let startTime = viewModel.reservationStartTime, let endTime = viewModel.reservationEndTime, let date = self?.date {
-                self?.timeLabel.text = "\(startTime) - \(endTime)"
-                self?.dateLabel.text = "\(date)"
+            } else if self?.spotState == .reservedSpot {
                 self?.titleFirstLineLabel.text = "reservationCardReservedFirstLineTitle".localize()
                 self?.reservationActionButton.setTitle("cancelReservation".localize(), for: .normal)
                 self?.reservationActionButton.backgroundColor = Colors.secondaryButton.uiColor
@@ -344,12 +340,13 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
     func displayCreateReservation(_ viewModel: Model.CreateReservation.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             self?.currentState = .loaded
-            self?.reservationID =  viewModel.reservationID
+            self?.reservationID = viewModel.reservationID
             self?.titleFirstLineLabel.text = "reservationCardReservedFirstLineTitle".localize()
             self?.reservationActionButton.setTitle("cancelReservation".localize(), for: .normal)
             self?.reservationActionButton.backgroundColor = Colors.secondaryButton.uiColor
             self?.reservationActionButton.setTitleColor(Colors.danger.uiColor, for: .normal)
             self?.reservationCardView.layer.borderColor = Colors.accent.uiColor.cgColor
+            self?.reservationActionButton.removeTarget(nil, action: nil, for: .allEvents)
             self?.reservationActionButton.addTarget(self, action: #selector(self?.cancelReservationButtonWasTapped), for: .touchDown)
             self?.onUpdateAction()
         }
@@ -364,6 +361,7 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
             self?.reservationActionButton.backgroundColor = Colors.accent.uiColor
             self?.reservationActionButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
             self?.reservationCardView.layer.borderColor = Colors.secondaryButton.uiColor.cgColor
+            self?.reservationActionButton.removeTarget(nil, action: nil, for: .allEvents)
             self?.reservationActionButton.addTarget(self, action: #selector(self?.reserveLotButtonWasTapped), for: .touchDown)
             self?.onUpdateAction()
         }

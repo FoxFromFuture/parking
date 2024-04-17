@@ -43,11 +43,11 @@ enum MapModel {
             let reservations: [Reservation]?
             let parkingLevelCanvas: Canvas
             let parkingLevels: [ParkingLevel]
-            let startTime: String
-            let endTime: String
+            let startTime: Date
+            let endTime: Date
             let building: Building
             let levelForDisplay: ParkingLevel
-            let minimumStartTime: String
+            let minStartTime: Date
         }
         struct ViewModel {
             let notAvailableParkingSpots: [ParkingSpot]?
@@ -55,9 +55,6 @@ enum MapModel {
             let freeParkingSpots: [ParkingSpot]?
             let reservedParkingSpot: ParkingSpot?
             let parkingLevelCanvas: Canvas
-            let curDateStr: String
-            let curStartTimeStr: String
-            let curEndTimeStr: String
             let buildingForDisplay: Building
             let levelForDisplay: ParkingLevel
             let parkingLevels: [ParkingLevel]
@@ -77,17 +74,17 @@ enum MapModel {
     enum ReloadMap {
         struct Request {
             let floorID: String
-            let date: String
-            let startTime: String
-            let endTime: String
+            let date: Date
+            let startTime: Date
+            let endTime: Date
         }
         struct Response {
             let freeParkingSpotsForTime: [ParkingSpot]
             let reservations: [Reservation]?
             let parkingLevelCanvas: Canvas
-            let minimumStartTime: String
-            let updatedCurEndTime: String?
-            let curStartTime: String
+            let minStartTime: Date
+            let minEndTime: Date
+            let curEndTime: Date?
         }
         struct ViewModel {
             let notAvailableParkingSpots: [ParkingSpot]?
@@ -98,7 +95,6 @@ enum MapModel {
             let minStartTimeDate: Date
             let minEndTimeDate: Date
             let curEndTimeDate: Date?
-            let curEndTimeStr: String?
             let hasReservationsForTime: Bool
         }
     }
@@ -106,33 +102,33 @@ enum MapModel {
     enum ReservationCard {
         struct Request {
             let parkingSpotID: String
-            let date: String
-            let startTime: String
-            let endTime: String
+            let date: Date
+            let startTime: Date
+            let endTime: Date
             let onUpdateAction: (() -> Void)
             let spotState: ReservationCardSpotState
         }
         struct Response {
             let parkingSpotID: String
-            let date: String
-            let startTime: String
-            let endTime: String
+            let date: Date
+            let startTime: Date
+            let endTime: Date
             let onUpdateAction: (() -> Void)
             let spotState: ReservationCardSpotState
         }
         struct ViewModel {
             let parkingSpotID: String
-            let date: String
-            let startTime: String
-            let endTime: String
+            let date: Date
+            let startTime: Date
+            let endTime: Date
             let onUpdateAction: (() -> Void)
             let spotState: ReservationCardSpotState
         }
         struct RouteData {
             let parkingSpotID: String
-            let date: String
-            let startTime: String
-            let endTime: String
+            let date: Date
+            let startTime: Date
+            let endTime: Date
             let onUpdateAction: (() -> Void)
             let spotState: ReservationCardSpotState
         }

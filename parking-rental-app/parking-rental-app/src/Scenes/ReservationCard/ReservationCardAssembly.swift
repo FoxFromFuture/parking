@@ -8,7 +8,7 @@
 import UIKit
 
 enum ReservationCardAssembly {
-    static func build(parkingSpotID: String, date: String, startTime: String, endTime: String, spotState: ReservationCardSpotState, onUpdateAction: @escaping (() -> Void)) -> UIViewController {
+    static func build(parkingSpotID: String, date: Date, startTime: Date, endTime: Date, spotState: ReservationCardSpotState, onUpdateAction: @escaping (() -> Void)) -> UIViewController {
         let router: ReservationCardRouter = ReservationCardRouter()
         let presenter: ReservationCardPresenter = ReservationCardPresenter()
         let worker: ReservationCardWorker = ReservationCardWorker()

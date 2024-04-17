@@ -209,6 +209,14 @@ final class HomeViewController: UIViewController {
         reserveLotButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
         reserveLotButton.removeTarget(nil, action: nil, for: .allEvents)
     }
+    
+    private func showActiveButton() {
+        reserveLotButton.backgroundColor = Colors.accent.uiColor
+        reserveLotButton.setTitle("reserveLot".localize(), for: .normal)
+        reserveLotButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
+        reserveLotButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
+        reserveLotButton.addTarget(self, action: #selector(reserveLotButtonWasTapped), for: .touchDown)
+    }
 }
 
 // MARK: - DisplayLogic
@@ -230,7 +238,9 @@ extension HomeViewController: HomeDisplayLogic {
         
         DispatchQueue.main.async { [weak self] in
             self?.currentState = .loaded
-            if viewModel.isReservationsLimit {
+            if self?.currentState == .reservationsLimit && !viewModel.isReservationsLimit {
+                self?.currentState = .active
+            } else if viewModel.isReservationsLimit {
                 self?.currentState = .reservationsLimit
             }
         }
@@ -320,6 +330,8 @@ extension HomeViewController {
             self.showNoDataLabel()
         case .reservationsLimit:
             self.showReservationsLimit()
+        case .active:
+            self.showActiveButton()
         }
     }
 }
