@@ -17,13 +17,16 @@ final class UpdateCarViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: UpdateCarBusinessLogic
     private let router: UpdateCarRoutingLogic
+    private let carID: String
     private let tabBar = TabBar()
     private let titleLabel = UILabel()
     private let subTitleLabel = UILabel()
+    private let carModelTextField = UITextField()
     private let carRegistryNumberTextField = UITextField()
     private let saveButton = UIButton()
     private let carUpdateFailureLabel = UILabel()
     private let carUpdateSuccessLabel = UILabel()
+    private var modelTextFieldBottomBorder = UIView()
     private var regNumTextFieldBottomBorder = UIView()
     private var currentState: UpdateCarState = .stable {
         didSet {
@@ -34,10 +37,12 @@ final class UpdateCarViewController: UIViewController {
     // MARK: - LifeCycle
     init(
         router: UpdateCarRoutingLogic,
-        interactor: UpdateCarBusinessLogic
+        interactor: UpdateCarBusinessLogic,
+        carID: String
     ) {
         self.router = router
         self.interactor = interactor
+        self.carID = carID
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -60,6 +65,7 @@ final class UpdateCarViewController: UIViewController {
         configureTabBar()
         configureTitleLabel()
         configureSubTitleLabel()
+        configureCarModelTextField()
         configureCarRegistryNumberTextFieldTextField()
         configureSaveButton()
         configureCarUpdateFailureLabel()
@@ -113,13 +119,26 @@ final class UpdateCarViewController: UIViewController {
         subTitleLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
+    private func configureCarModelTextField() {
+        self.view.addSubview(carModelTextField)
+        carModelTextField.attributedPlaceholder = NSAttributedString(string: "model".localize(), attributes: [NSAttributedString.Key.foregroundColor: Colors.secondaryText.uiColor])
+        carModelTextField.font = .systemFont(ofSize: 24, weight: .regular)
+        carModelTextField.textColor = Colors.mainText.uiColor
+        carModelTextField.textAlignment = .left
+        carModelTextField.pinTop(to: self.subTitleLabel.bottomAnchor, 60)
+        carModelTextField.pinLeft(to: self.view, 38)
+        carModelTextField.pinRight(to: self.view, 38)
+        carModelTextField.backgroundColor = .clear
+        self.modelTextFieldBottomBorder = carModelTextField.addBottomBorder(color: Colors.secondaryText.uiColor, thickness: 2)
+    }
+    
     private func configureCarRegistryNumberTextFieldTextField() {
         self.view.addSubview(carRegistryNumberTextField)
         carRegistryNumberTextField.attributedPlaceholder = NSAttributedString(string: "X000XX000", attributes: [NSAttributedString.Key.foregroundColor: Colors.secondaryText.uiColor])
         carRegistryNumberTextField.font = .systemFont(ofSize: 24, weight: .regular)
         carRegistryNumberTextField.textColor = Colors.mainText.uiColor
         carRegistryNumberTextField.textAlignment = .left
-        carRegistryNumberTextField.pinTop(to: self.subTitleLabel.bottomAnchor, 60)
+        carRegistryNumberTextField.pinTop(to: self.carModelTextField.bottomAnchor, 50)
         carRegistryNumberTextField.pinLeft(to: self.view, 38)
         carRegistryNumberTextField.pinRight(to: self.view, 38)
         carRegistryNumberTextField.backgroundColor = .clear
@@ -145,9 +164,9 @@ final class UpdateCarViewController: UIViewController {
         carUpdateFailureLabel.font = .systemFont(ofSize: 16, weight: .medium)
     }
     private func  configureCarUpdateSuccessLabel() {
-        carUpdateFailureLabel.text = "updateCarSuccess".localize()
-        carUpdateFailureLabel.textColor = Colors.success.uiColor
-        carUpdateFailureLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        carUpdateSuccessLabel.text = "updateCarSuccess".localize()
+        carUpdateSuccessLabel.textColor = Colors.success.uiColor
+        carUpdateSuccessLabel.font = .systemFont(ofSize: 16, weight: .medium)
     }
     
     // MARK: - Actions
@@ -162,8 +181,8 @@ final class UpdateCarViewController: UIViewController {
     private func saveButtonWasTapped() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
-        if let newRegistryNumber = carRegistryNumberTextField.text {
-            self.interactor.loadUpdateCarRequest(Model.UpdateCarRequest.Request(newRegistryNumber: newRegistryNumber))
+        if let newRegistryNumber = carRegistryNumberTextField.text, let newModel = carModelTextField.text {
+            self.interactor.loadUpdateCarRequest(Model.UpdateCarRequest.Request(carID: self.carID, newModel: newModel, newRegistryNumber: newRegistryNumber))
         }
     }
     
@@ -173,6 +192,7 @@ final class UpdateCarViewController: UIViewController {
         carUpdateFailureLabel.pinLeft(to: self.view.leadingAnchor, 38)
         
         regNumTextFieldBottomBorder.backgroundColor = Colors.danger.uiColor
+        modelTextFieldBottomBorder.backgroundColor = Colors.danger.uiColor
     }
     
     private func showCarUpdateSuccess() {
@@ -181,6 +201,7 @@ final class UpdateCarViewController: UIViewController {
         carUpdateSuccessLabel.pinLeft(to: self.view.leadingAnchor, 38)
         
         regNumTextFieldBottomBorder.backgroundColor = Colors.success.uiColor
+        modelTextFieldBottomBorder.backgroundColor = Colors.success.uiColor
     }
 }
 

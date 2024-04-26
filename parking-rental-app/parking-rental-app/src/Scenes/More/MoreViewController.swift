@@ -19,14 +19,8 @@ final class MoreViewController: UIViewController {
     private let router: MoreRoutingLogic
     private let tabBar = TabBar()
     private let titleLabel = UILabel()
-    private let multipleButtonsCard = MultipleButtonsCard()
-    private let languageChoiceAlert = UIAlertController(
-        title: "changeLanguageAlert".localize(),
-        message: nil,
-        preferredStyle: .alert
-    )
-    private let themeChoiceAlert = UIAlertController()
-    private var curTheme: Theme = .light
+    private let settingsSingleCardButton = SingleCardButton()
+    private let FAQSingleCardButton = SingleCardButton()
     
     // MARK: - LifeCycle
     init(
@@ -57,9 +51,8 @@ final class MoreViewController: UIViewController {
         view.backgroundColor = Colors.background.uiColor
         configureTabBar()
         configureTitleLabel()
-        configureMultipleButtonsCard()
-        configureLanguageChoiceAlert()
-        configureThemeChoiceAlert()
+        configureSettingsSingleCardButton()
+        configureFAQSingleCardButton()
     }
     
     private func configureTabBar() {
@@ -85,37 +78,23 @@ final class MoreViewController: UIViewController {
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
     }
     
-    private func configureLanguageChoiceAlert() {
-        languageChoiceAlert.addAction(UIAlertAction(title: "settings".localize(), style: .default, handler: { (action: UIAlertAction!) in
-            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
-            }
-        }))
-        languageChoiceAlert.addAction(UIAlertAction(title: "cancel".localize(), style: .cancel))
-    }
-    
-    private func configureThemeChoiceAlert() {
-        themeChoiceAlert.addAction(UIAlertAction(title: "lightTheme".localize(), style: .default, handler: { [weak self] (action: UIAlertAction!) in
-            self?.interactor.loadNewTheme(MoreModel.NewTheme.Request(theme: .light))
-        }))
-        themeChoiceAlert.addAction(UIAlertAction(title: "darkTheme".localize(), style: .default, handler: { [weak self] (action: UIAlertAction!) in
-            self?.interactor.loadNewTheme(MoreModel.NewTheme.Request(theme: .dark))
-        }))
-        themeChoiceAlert.addAction(UIAlertAction(title: "systemTheme".localize(), style: .default, handler: { [weak self] (action: UIAlertAction!) in
-            self?.interactor.loadNewTheme(MoreModel.NewTheme.Request(theme: .device))
-        }))
-        themeChoiceAlert.addAction(UIAlertAction(title: "cancel".localize(), style: .cancel))
-    }
-    
-    private func configureMultipleButtonsCard() {
-        self.view.addSubview(multipleButtonsCard)
-        multipleButtonsCard.pinHorizontal(to: self.view, 17)
-        multipleButtonsCard.pinTop(to: self.titleLabel.bottomAnchor, 30)
-        multipleButtonsCard.addButton(title: "language".localize(), activeValue: "\(Language(rawValue: NSLocale.preferredLanguages.first ?? "en")?.expandedStr ?? "")") { [weak self] in
-            self?.navigationController?.present(self?.languageChoiceAlert ?? UIAlertController(), animated: true)
+    private func configureSettingsSingleCardButton() {
+        self.view.addSubview(settingsSingleCardButton)
+        settingsSingleCardButton.pinTop(to: self.titleLabel.bottomAnchor, 30)
+        settingsSingleCardButton.pinHorizontal(to: self.view, 17)
+        settingsSingleCardButton.configure(title: "settings".localize(), subtitle: "settingsDetails".localize())
+        settingsSingleCardButton.setAction { [weak self] in
+            self?.interactor.loadSettings(MoreModel.Settings.Request())
         }
-        multipleButtonsCard.addButton(title: "theme".localize(), activeValue: self.curTheme.str()) { [weak self] in
-            self?.navigationController?.present(self?.themeChoiceAlert ?? UIAlertController(), animated: true)
+    }
+    
+    private func configureFAQSingleCardButton() {
+        self.view.addSubview(FAQSingleCardButton)
+        FAQSingleCardButton.pinTop(to: self.settingsSingleCardButton.bottomAnchor, 25)
+        FAQSingleCardButton.pinHorizontal(to: self.view, 17)
+        FAQSingleCardButton.configure(title: "FAQ".localize(), subtitle: "FAQDetails".localize())
+        FAQSingleCardButton.setAction { [weak self] in
+            self?.interactor.loadFAQ(MoreModel.FAQ.Request())
         }
     }
     
@@ -125,7 +104,6 @@ final class MoreViewController: UIViewController {
 // MARK: - DisplayLogic
 extension MoreViewController: MoreDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
-        self.curTheme = viewModel.curTheme
         self.configureUI()
     }
     
@@ -133,8 +111,11 @@ extension MoreViewController: MoreDisplayLogic {
         self.router.routeToHome()
     }
     
-    func displayNewTheme(_ viewModel: Model.NewTheme.ViewModel) {
-        self.view.window?.overrideUserInterfaceStyle = viewModel.theme.getUserInterfaceStyle()
-        self.multipleButtonsCard.setActiveValue(1, activeValue: viewModel.theme.str())
+    func displaySettings(_ viewModel: Model.Settings.ViewModel) {
+        self.router.routeToSettings()
+    }
+    
+    func displayFAQ(_ viewModel: Model.FAQ.ViewModel) {
+        self.router.routeToFAQ()
     }
 }

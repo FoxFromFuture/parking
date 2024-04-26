@@ -96,8 +96,7 @@ final class NetworkManager {
             let responseDecoder = self?.responseDataDecoder(data: data, dataType: responseType, response: response, error: error)
             if responseDecoder?.error == nil {
                 completion(responseDecoder?.data as? TResponse, nil)
-            }
-            if responseDecoder?.error == NetworkResponse.authenticationError.rawValue {
+            } else if responseDecoder?.error == NetworkResponse.authenticationError.rawValue {
                 self?.updateAccessToken(completion: { [weak self] authData, error in
                     if error != nil {
                         completion(nil, error)
@@ -126,8 +125,7 @@ final class NetworkManager {
             let responseDecoder = self?.responseNoDataDecoder(response: response, error: error)
             if responseDecoder == nil {
                 completion(nil)
-            }
-            if responseDecoder == NetworkResponse.authenticationError.rawValue {
+            } else if responseDecoder == NetworkResponse.authenticationError.rawValue {
                 self?.updateAccessToken(completion: { [weak self] authData, error in
                     if error != nil {
                         completion(error)
@@ -289,14 +287,14 @@ final class NetworkManager {
     }
     
     // MARK: - Cars API
-    func addNewCar(registryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
-        authRequestDataResponse(router: carsRouter, task: .addNewCar(model: "Test", lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber), responseType: Car.self) { [weak self] data, error in
+    func addNewCar(model: String, registryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
+        authRequestDataResponse(router: carsRouter, task: .addNewCar(model: model, lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber), responseType: Car.self) { [weak self] data, error in
             self?.authRequestCompletion(data, error, completion)
         }
     }
     
-    func updateCar(id: String, registryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
-        authRequestDataResponse(router: carsRouter, task: .updateCar(id: id, model: "Test", lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber), responseType: Car.self) { [weak self] data, error in
+    func updateCar(id: String, model: String, registryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
+        authRequestDataResponse(router: carsRouter, task: .updateCar(id: id, model: model, lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber), responseType: Car.self) { [weak self] data, error in
             self?.authRequestCompletion(data, error, completion)
         }
     }
@@ -310,6 +308,12 @@ final class NetworkManager {
     func getCar(carID: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
         authRequestDataResponse(router: carsRouter, task: .getCar(carID: carID), responseType: Car.self) { [weak self] data, error in
             self?.authRequestCompletion(data, error, completion)
+        }
+    }
+    
+    func deleteCar(carID: String, completion: @escaping (_ error: String?) -> ()) {
+        authRequestNoDataResponse(router: carsRouter, task: .deleteCar(id: carID)) { [weak self] error in
+            self?.authRequestNoDataCompletion(error, completion)
         }
     }
     

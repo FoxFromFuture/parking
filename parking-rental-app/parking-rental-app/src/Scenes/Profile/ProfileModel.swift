@@ -27,7 +27,7 @@ enum ProfileModel {
         struct ViewModel { }
     }
     
-    enum UpdateCar {
+    enum AccountCars {
         struct Request { }
         struct Response { }
         struct ViewModel { }

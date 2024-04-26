@@ -38,7 +38,6 @@
 		272B52042B9C50AD008F428E /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B52032B9C50AD008F428E /* ProfileAssembly.swift */; };
 		272B52072B9C5127008F428E /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B52062B9C5127008F428E /* MoreViewController.swift */; };
 		272B52092B9C513F008F428E /* MoreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B52082B9C513F008F428E /* MoreInteractor.swift */; };
-		272B520B2B9C5150008F428E /* MoreWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B520A2B9C5150008F428E /* MoreWorker.swift */; };
 		272B520D2B9C5162008F428E /* MorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B520C2B9C5162008F428E /* MorePresenter.swift */; };
 		272B520F2B9C517A008F428E /* MoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B520E2B9C517A008F428E /* MoreModel.swift */; };
 		272B52112B9C518C008F428E /* MoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B52102B9C518C008F428E /* MoreRouter.swift */; };
@@ -52,6 +51,20 @@
 		272B52222B9C542A008F428E /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B52212B9C542A008F428E /* MapRouter.swift */; };
 		272B52242B9C5440008F428E /* MapProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B52232B9C5440008F428E /* MapProtocols.swift */; };
 		272B52262B9C5454008F428E /* MapAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272B52252B9C5454008F428E /* MapAssembly.swift */; };
+		273162982BDA8D3300B47A1F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162972BDA8D3300B47A1F /* SettingsViewController.swift */; };
+		2731629A2BDA8D3E00B47A1F /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162992BDA8D3E00B47A1F /* SettingsInteractor.swift */; };
+		2731629C2BDA8D4600B47A1F /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2731629B2BDA8D4600B47A1F /* SettingsPresenter.swift */; };
+		2731629E2BDA8D4F00B47A1F /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2731629D2BDA8D4F00B47A1F /* SettingsModel.swift */; };
+		273162A02BDA8D5800B47A1F /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2731629F2BDA8D5800B47A1F /* SettingsRouter.swift */; };
+		273162A22BDA8D6200B47A1F /* SettingsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162A12BDA8D6200B47A1F /* SettingsProtocols.swift */; };
+		273162A42BDA8D6C00B47A1F /* SettingsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162A32BDA8D6C00B47A1F /* SettingsAssembly.swift */; };
+		273162A62BDA961700B47A1F /* FAQInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162A52BDA961700B47A1F /* FAQInteractor.swift */; };
+		273162A82BDA962300B47A1F /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162A72BDA962300B47A1F /* FAQViewController.swift */; };
+		273162AA2BDA962D00B47A1F /* FAQPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162A92BDA962D00B47A1F /* FAQPresenter.swift */; };
+		273162AC2BDA963400B47A1F /* FAQModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162AB2BDA963400B47A1F /* FAQModel.swift */; };
+		273162AE2BDA963B00B47A1F /* FAQRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162AD2BDA963B00B47A1F /* FAQRouter.swift */; };
+		273162B02BDA964700B47A1F /* FAQProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162AF2BDA964700B47A1F /* FAQProtocols.swift */; };
+		273162B22BDA965000B47A1F /* FAQAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162B12BDA965000B47A1F /* FAQAssembly.swift */; };
 		273C90AA2B7BCCB000C73FE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C90A92B7BCCB000C73FE8 /* AppDelegate.swift */; };
 		273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C90AB2B7BCCB000C73FE8 /* SceneDelegate.swift */; };
 		273C90B32B7BCCB200C73FE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273C90B22B7BCCB200C73FE8 /* Assets.xcassets */; };
@@ -92,8 +105,18 @@
 		27535C8A2BA4855D000E48E6 /* UpdateCarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27535C892BA4855D000E48E6 /* UpdateCarAssembly.swift */; };
 		27535C8C2BA48C77000E48E6 /* MultipleButtonsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27535C8B2BA48C77000E48E6 /* MultipleButtonsCard.swift */; };
 		27535C8E2BA48E94000E48E6 /* MultipleButtonsCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27535C8D2BA48E94000E48E6 /* MultipleButtonsCardButton.swift */; };
+		2755E2B92BD14BBE00F709E0 /* AccountCarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755E2B82BD14BBE00F709E0 /* AccountCarsViewController.swift */; };
+		2755E2BB2BD14BD200F709E0 /* AccountCarsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755E2BA2BD14BD200F709E0 /* AccountCarsInteractor.swift */; };
+		2755E2BD2BD14BDE00F709E0 /* AccountCarsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755E2BC2BD14BDE00F709E0 /* AccountCarsPresenter.swift */; };
+		2755E2BF2BD14BE900F709E0 /* AccountCarsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755E2BE2BD14BE900F709E0 /* AccountCarsModel.swift */; };
+		2755E2C12BD14BF600F709E0 /* AccountCarsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755E2C02BD14BF600F709E0 /* AccountCarsRouter.swift */; };
+		2755E2C32BD14C0600F709E0 /* AccountCarsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755E2C22BD14C0600F709E0 /* AccountCarsProtocols.swift */; };
+		2755E2C52BD14C1000F709E0 /* AccountCarsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755E2C42BD14C1000F709E0 /* AccountCarsAssembly.swift */; };
+		2755E2C82BD14F1900F709E0 /* AccountCarsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755E2C72BD14F1900F709E0 /* AccountCarsState.swift */; };
 		275E0F0B2BC686B200B6E1B3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E0F0A2BC686B200B6E1B3 /* Theme.swift */; };
 		275E0F0D2BC6872300B6E1B3 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275E0F0C2BC6872300B6E1B3 /* ThemeManager.swift */; };
+		276978532BD3E2E100987360 /* CarDetailsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276978522BD3E2E100987360 /* CarDetailsState.swift */; };
+		2771FE3F2BD175D6004E31D1 /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2771FE3E2BD175D6004E31D1 /* CarCell.swift */; };
 		27754BDD2B99A6200065A14E /* ReservationsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BDC2B99A6200065A14E /* ReservationsEndPoint.swift */; };
 		27754BDF2B99AEF70065A14E /* ReservationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BDE2B99AEF70065A14E /* ReservationsModel.swift */; };
 		27754BE12B99B7880065A14E /* ProfileLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27754BE02B99B7880065A14E /* ProfileLabelButton.swift */; };
@@ -171,6 +194,23 @@
 		27C6245C2B7D0239002FFF48 /* RegistrationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6245B2B7D0239002FFF48 /* RegistrationWorker.swift */; };
 		27C6245E2B7D0246002FFF48 /* RegistrationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6245D2B7D0246002FFF48 /* RegistrationProtocols.swift */; };
 		27C624602B7D0251002FFF48 /* RegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C6245F2B7D0251002FFF48 /* RegistrationAssembly.swift */; };
+		27D11FFD2BD24F030043DAD5 /* CarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D11FFC2BD24F030043DAD5 /* CarDetailsViewController.swift */; };
+		27D11FFF2BD24F100043DAD5 /* CarDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D11FFE2BD24F100043DAD5 /* CarDetailsInteractor.swift */; };
+		27D120012BD24F230043DAD5 /* CarDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120002BD24F230043DAD5 /* CarDetailsPresenter.swift */; };
+		27D120032BD24F2F0043DAD5 /* CarDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120022BD24F2F0043DAD5 /* CarDetailsModel.swift */; };
+		27D120052BD24F480043DAD5 /* CarDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120042BD24F480043DAD5 /* CarDetailsRouter.swift */; };
+		27D120072BD24F520043DAD5 /* CarDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120062BD24F520043DAD5 /* CarDetailsProtocols.swift */; };
+		27D120092BD24F5C0043DAD5 /* CarDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120082BD24F5C0043DAD5 /* CarDetailsAssembly.swift */; };
+		27D1200C2BD27A8B0043DAD5 /* AddCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1200B2BD27A8B0043DAD5 /* AddCarViewController.swift */; };
+		27D1200E2BD27A950043DAD5 /* AddCarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1200D2BD27A950043DAD5 /* AddCarInteractor.swift */; };
+		27D120102BD27A9C0043DAD5 /* AddCarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1200F2BD27A9C0043DAD5 /* AddCarPresenter.swift */; };
+		27D120122BD27AA50043DAD5 /* AddCarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120112BD27AA50043DAD5 /* AddCarModel.swift */; };
+		27D120142BD27AAE0043DAD5 /* AddCarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120132BD27AAE0043DAD5 /* AddCarRouter.swift */; };
+		27D120162BD27AB40043DAD5 /* AddCarProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120152BD27AB40043DAD5 /* AddCarProtocols.swift */; };
+		27D120182BD27ABD0043DAD5 /* AddCarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D120172BD27ABD0043DAD5 /* AddCarAssembly.swift */; };
+		27D1201C2BD27AE50043DAD5 /* AddCarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1201B2BD27AE50043DAD5 /* AddCarState.swift */; };
+		27D7A5962BDBB17F0054BC44 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D7A5952BDBB17F0054BC44 /* QuestionCell.swift */; };
+		27D7A59A2BDBE6330054BC44 /* JumpAvoidingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D7A5992BDBE6330054BC44 /* JumpAvoidingFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -205,7 +245,6 @@
 		272B52032B9C50AD008F428E /* ProfileAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
 		272B52062B9C5127008F428E /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		272B52082B9C513F008F428E /* MoreInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInteractor.swift; sourceTree = "<group>"; };
-		272B520A2B9C5150008F428E /* MoreWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreWorker.swift; sourceTree = "<group>"; };
 		272B520C2B9C5162008F428E /* MorePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePresenter.swift; sourceTree = "<group>"; };
 		272B520E2B9C517A008F428E /* MoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreModel.swift; sourceTree = "<group>"; };
 		272B52102B9C518C008F428E /* MoreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreRouter.swift; sourceTree = "<group>"; };
@@ -219,6 +258,20 @@
 		272B52212B9C542A008F428E /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
 		272B52232B9C5440008F428E /* MapProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapProtocols.swift; sourceTree = "<group>"; };
 		272B52252B9C5454008F428E /* MapAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAssembly.swift; sourceTree = "<group>"; };
+		273162972BDA8D3300B47A1F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		273162992BDA8D3E00B47A1F /* SettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
+		2731629B2BDA8D4600B47A1F /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		2731629D2BDA8D4F00B47A1F /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		2731629F2BDA8D5800B47A1F /* SettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		273162A12BDA8D6200B47A1F /* SettingsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProtocols.swift; sourceTree = "<group>"; };
+		273162A32BDA8D6C00B47A1F /* SettingsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAssembly.swift; sourceTree = "<group>"; };
+		273162A52BDA961700B47A1F /* FAQInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQInteractor.swift; sourceTree = "<group>"; };
+		273162A72BDA962300B47A1F /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
+		273162A92BDA962D00B47A1F /* FAQPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQPresenter.swift; sourceTree = "<group>"; };
+		273162AB2BDA963400B47A1F /* FAQModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQModel.swift; sourceTree = "<group>"; };
+		273162AD2BDA963B00B47A1F /* FAQRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQRouter.swift; sourceTree = "<group>"; };
+		273162AF2BDA964700B47A1F /* FAQProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQProtocols.swift; sourceTree = "<group>"; };
+		273162B12BDA965000B47A1F /* FAQAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQAssembly.swift; sourceTree = "<group>"; };
 		273C90A62B7BCCB000C73FE8 /* parking-rental-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "parking-rental-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		273C90A92B7BCCB000C73FE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		273C90AB2B7BCCB000C73FE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -261,9 +314,19 @@
 		27535C892BA4855D000E48E6 /* UpdateCarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCarAssembly.swift; sourceTree = "<group>"; };
 		27535C8B2BA48C77000E48E6 /* MultipleButtonsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleButtonsCard.swift; sourceTree = "<group>"; };
 		27535C8D2BA48E94000E48E6 /* MultipleButtonsCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleButtonsCardButton.swift; sourceTree = "<group>"; };
+		2755E2B82BD14BBE00F709E0 /* AccountCarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCarsViewController.swift; sourceTree = "<group>"; };
+		2755E2BA2BD14BD200F709E0 /* AccountCarsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCarsInteractor.swift; sourceTree = "<group>"; };
+		2755E2BC2BD14BDE00F709E0 /* AccountCarsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCarsPresenter.swift; sourceTree = "<group>"; };
+		2755E2BE2BD14BE900F709E0 /* AccountCarsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCarsModel.swift; sourceTree = "<group>"; };
+		2755E2C02BD14BF600F709E0 /* AccountCarsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCarsRouter.swift; sourceTree = "<group>"; };
+		2755E2C22BD14C0600F709E0 /* AccountCarsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCarsProtocols.swift; sourceTree = "<group>"; };
+		2755E2C42BD14C1000F709E0 /* AccountCarsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCarsAssembly.swift; sourceTree = "<group>"; };
+		2755E2C72BD14F1900F709E0 /* AccountCarsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCarsState.swift; sourceTree = "<group>"; };
 		275E0F082BC6846700B6E1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		275E0F0A2BC686B200B6E1B3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		275E0F0C2BC6872300B6E1B3 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		276978522BD3E2E100987360 /* CarDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsState.swift; sourceTree = "<group>"; };
+		2771FE3E2BD175D6004E31D1 /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = "<group>"; };
 		27754BDC2B99A6200065A14E /* ReservationsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsEndPoint.swift; sourceTree = "<group>"; };
 		27754BDE2B99AEF70065A14E /* ReservationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsModel.swift; sourceTree = "<group>"; };
 		27754BE02B99B7880065A14E /* ProfileLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLabelButton.swift; sourceTree = "<group>"; };
@@ -343,6 +406,23 @@
 		27C6245B2B7D0239002FFF48 /* RegistrationWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationWorker.swift; sourceTree = "<group>"; };
 		27C6245D2B7D0246002FFF48 /* RegistrationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProtocols.swift; sourceTree = "<group>"; };
 		27C6245F2B7D0251002FFF48 /* RegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAssembly.swift; sourceTree = "<group>"; };
+		27D11FFC2BD24F030043DAD5 /* CarDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsViewController.swift; sourceTree = "<group>"; };
+		27D11FFE2BD24F100043DAD5 /* CarDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsInteractor.swift; sourceTree = "<group>"; };
+		27D120002BD24F230043DAD5 /* CarDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsPresenter.swift; sourceTree = "<group>"; };
+		27D120022BD24F2F0043DAD5 /* CarDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsModel.swift; sourceTree = "<group>"; };
+		27D120042BD24F480043DAD5 /* CarDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsRouter.swift; sourceTree = "<group>"; };
+		27D120062BD24F520043DAD5 /* CarDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsProtocols.swift; sourceTree = "<group>"; };
+		27D120082BD24F5C0043DAD5 /* CarDetailsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsAssembly.swift; sourceTree = "<group>"; };
+		27D1200B2BD27A8B0043DAD5 /* AddCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarViewController.swift; sourceTree = "<group>"; };
+		27D1200D2BD27A950043DAD5 /* AddCarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarInteractor.swift; sourceTree = "<group>"; };
+		27D1200F2BD27A9C0043DAD5 /* AddCarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarPresenter.swift; sourceTree = "<group>"; };
+		27D120112BD27AA50043DAD5 /* AddCarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarModel.swift; sourceTree = "<group>"; };
+		27D120132BD27AAE0043DAD5 /* AddCarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarRouter.swift; sourceTree = "<group>"; };
+		27D120152BD27AB40043DAD5 /* AddCarProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarProtocols.swift; sourceTree = "<group>"; };
+		27D120172BD27ABD0043DAD5 /* AddCarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarAssembly.swift; sourceTree = "<group>"; };
+		27D1201B2BD27AE50043DAD5 /* AddCarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarState.swift; sourceTree = "<group>"; };
+		27D7A5952BDBB17F0054BC44 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		27D7A5992BDBE6330054BC44 /* JumpAvoidingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpAvoidingFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -454,7 +534,6 @@
 			children = (
 				272B52062B9C5127008F428E /* MoreViewController.swift */,
 				272B52082B9C513F008F428E /* MoreInteractor.swift */,
-				272B520A2B9C5150008F428E /* MoreWorker.swift */,
 				272B520C2B9C5162008F428E /* MorePresenter.swift */,
 				272B520E2B9C517A008F428E /* MoreModel.swift */,
 				272B52102B9C518C008F428E /* MoreRouter.swift */,
@@ -479,6 +558,35 @@
 				272B52252B9C5454008F428E /* MapAssembly.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		273162952BDA8B6900B47A1F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				273162972BDA8D3300B47A1F /* SettingsViewController.swift */,
+				273162992BDA8D3E00B47A1F /* SettingsInteractor.swift */,
+				2731629B2BDA8D4600B47A1F /* SettingsPresenter.swift */,
+				2731629D2BDA8D4F00B47A1F /* SettingsModel.swift */,
+				2731629F2BDA8D5800B47A1F /* SettingsRouter.swift */,
+				273162A12BDA8D6200B47A1F /* SettingsProtocols.swift */,
+				273162A32BDA8D6C00B47A1F /* SettingsAssembly.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		273162962BDA8B7800B47A1F /* FAQ */ = {
+			isa = PBXGroup;
+			children = (
+				27D7A5942BDBB1690054BC44 /* Views */,
+				273162A72BDA962300B47A1F /* FAQViewController.swift */,
+				273162A52BDA961700B47A1F /* FAQInteractor.swift */,
+				273162A92BDA962D00B47A1F /* FAQPresenter.swift */,
+				273162AB2BDA963400B47A1F /* FAQModel.swift */,
+				273162AD2BDA963B00B47A1F /* FAQRouter.swift */,
+				273162AF2BDA964700B47A1F /* FAQProtocols.swift */,
+				273162B12BDA965000B47A1F /* FAQAssembly.swift */,
+			);
+			path = FAQ;
 			sourceTree = "<group>";
 		};
 		273C909D2B7BCCB000C73FE8 = {
@@ -520,6 +628,7 @@
 				273E65D22B8489DE00567BD8 /* Networking */,
 				273C90C12B7BD14500C73FE8 /* Delegates */,
 				273C90C32B7BD17900C73FE8 /* Extensions */,
+				27D7A5972BDBE6040054BC44 /* Additions */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -546,10 +655,15 @@
 				272B52162B9C5341008F428E /* Map */,
 				2795FF3D2BC04CCC0031CEE8 /* ReservationCard */,
 				272B51F42B9C4FB5008F428E /* Profile */,
-				27535C762BA33F85000E48E6 /* UpdateCar */,
 				270020662BCFAA3900649D60 /* AccountDetails */,
 				270FDBBE2BCFD5E300286939 /* UpdateAccount */,
+				2755E2B72BD14B7900F709E0 /* AccountCars */,
+				27D1200A2BD27A460043DAD5 /* AddCar */,
+				27D11FFB2BD24ED20043DAD5 /* CarDetails */,
+				27535C762BA33F85000E48E6 /* UpdateCar */,
 				272B52052B9C5102008F428E /* More */,
+				273162952BDA8B6900B47A1F /* Settings */,
+				273162962BDA8B7800B47A1F /* FAQ */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -739,6 +853,30 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		2755E2B72BD14B7900F709E0 /* AccountCars */ = {
+			isa = PBXGroup;
+			children = (
+				2755E2C62BD14F0900F709E0 /* Enums */,
+				2771FE3D2BD175BE004E31D1 /* Views */,
+				2755E2B82BD14BBE00F709E0 /* AccountCarsViewController.swift */,
+				2755E2BA2BD14BD200F709E0 /* AccountCarsInteractor.swift */,
+				2755E2BC2BD14BDE00F709E0 /* AccountCarsPresenter.swift */,
+				2755E2BE2BD14BE900F709E0 /* AccountCarsModel.swift */,
+				2755E2C02BD14BF600F709E0 /* AccountCarsRouter.swift */,
+				2755E2C22BD14C0600F709E0 /* AccountCarsProtocols.swift */,
+				2755E2C42BD14C1000F709E0 /* AccountCarsAssembly.swift */,
+			);
+			path = AccountCars;
+			sourceTree = "<group>";
+		};
+		2755E2C62BD14F0900F709E0 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				2755E2C72BD14F1900F709E0 /* AccountCarsState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		275E0F062BC6796B00B6E1B3 /* Language */ = {
 			isa = PBXGroup;
 			children = (
@@ -754,6 +892,22 @@
 				275E0F0C2BC6872300B6E1B3 /* ThemeManager.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		276978512BD3E2B400987360 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				276978522BD3E2E100987360 /* CarDetailsState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		2771FE3D2BD175BE004E31D1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2771FE3E2BD175D6004E31D1 /* CarCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		27754BE22B99DA420065A14E /* Buildings */ = {
@@ -904,6 +1058,68 @@
 			path = RegistrationCar;
 			sourceTree = "<group>";
 		};
+		27D11FFB2BD24ED20043DAD5 /* CarDetails */ = {
+			isa = PBXGroup;
+			children = (
+				276978512BD3E2B400987360 /* Enums */,
+				27D11FFC2BD24F030043DAD5 /* CarDetailsViewController.swift */,
+				27D11FFE2BD24F100043DAD5 /* CarDetailsInteractor.swift */,
+				27D120002BD24F230043DAD5 /* CarDetailsPresenter.swift */,
+				27D120022BD24F2F0043DAD5 /* CarDetailsModel.swift */,
+				27D120042BD24F480043DAD5 /* CarDetailsRouter.swift */,
+				27D120062BD24F520043DAD5 /* CarDetailsProtocols.swift */,
+				27D120082BD24F5C0043DAD5 /* CarDetailsAssembly.swift */,
+			);
+			path = CarDetails;
+			sourceTree = "<group>";
+		};
+		27D1200A2BD27A460043DAD5 /* AddCar */ = {
+			isa = PBXGroup;
+			children = (
+				27D1201A2BD27AD70043DAD5 /* Enums */,
+				27D1200B2BD27A8B0043DAD5 /* AddCarViewController.swift */,
+				27D1200D2BD27A950043DAD5 /* AddCarInteractor.swift */,
+				27D1200F2BD27A9C0043DAD5 /* AddCarPresenter.swift */,
+				27D120112BD27AA50043DAD5 /* AddCarModel.swift */,
+				27D120132BD27AAE0043DAD5 /* AddCarRouter.swift */,
+				27D120152BD27AB40043DAD5 /* AddCarProtocols.swift */,
+				27D120172BD27ABD0043DAD5 /* AddCarAssembly.swift */,
+			);
+			path = AddCar;
+			sourceTree = "<group>";
+		};
+		27D1201A2BD27AD70043DAD5 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				27D1201B2BD27AE50043DAD5 /* AddCarState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		27D7A5942BDBB1690054BC44 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				27D7A5952BDBB17F0054BC44 /* QuestionCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		27D7A5972BDBE6040054BC44 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				27D7A5982BDBE6120054BC44 /* CollectionView */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		27D7A5982BDBE6120054BC44 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				27D7A5992BDBE6330054BC44 /* JumpAvoidingFlowLayout.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -976,6 +1192,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27D1200E2BD27A950043DAD5 /* AddCarInteractor.swift in Sources */,
+				27D1201C2BD27AE50043DAD5 /* AddCarState.swift in Sources */,
+				2755E2BF2BD14BE900F709E0 /* AccountCarsModel.swift in Sources */,
 				27535C7C2BA48515000E48E6 /* UpdateCarViewController.swift in Sources */,
 				277D6C392B9B0477000B36F9 /* OnCanvasCoordsModel.swift in Sources */,
 				2700206E2BCFAD6900649D60 /* AccountDetailsModel.swift in Sources */,
@@ -985,15 +1204,20 @@
 				2795FF5B2BC3F7A30031CEE8 /* Language.swift in Sources */,
 				27754C032B9AF13C0065A14E /* CanvasModel.swift in Sources */,
 				277B37B92BCAAA3A00B2A412 /* RegistrationCarState.swift in Sources */,
+				273162B02BDA964700B47A1F /* FAQProtocols.swift in Sources */,
+				273162AE2BDA963B00B47A1F /* FAQRouter.swift in Sources */,
 				27535C7A2BA47D5C000E48E6 /* SingleCardButton.swift in Sources */,
 				27848BEF2B80A70300542D8C /* HomeInteractor.swift in Sources */,
 				2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */,
+				276978532BD3E2E100987360 /* CarDetailsState.swift in Sources */,
 				27754BE12B99B7880065A14E /* ProfileLabelButton.swift in Sources */,
 				27535C882BA48555000E48E6 /* UpdateCarProtocols.swift in Sources */,
 				270FDBCC2BCFD64A00286939 /* UpdateAccountAssembly.swift in Sources */,
 				27C6245E2B7D0246002FFF48 /* RegistrationProtocols.swift in Sources */,
 				2795FF472BC04D620031CEE8 /* ReservationCardModel.swift in Sources */,
 				27C624472B7C8B7E002FFF48 /* LoginProtocols.swift in Sources */,
+				27D120032BD24F2F0043DAD5 /* CarDetailsModel.swift in Sources */,
+				27D120012BD24F230043DAD5 /* CarDetailsPresenter.swift in Sources */,
 				272B51F62B9C4FD8008F428E /* ProfileViewController.swift in Sources */,
 				273E65E82B84969F00567BD8 /* CarsEndPoint.swift in Sources */,
 				2795FF492BC04D6E0031CEE8 /* ReservationCardRouter.swift in Sources */,
@@ -1007,14 +1231,21 @@
 				275E0F0D2BC6872300B6E1B3 /* ThemeManager.swift in Sources */,
 				27754BE82B99DA870065A14E /* BuildingsWorker.swift in Sources */,
 				27848BED2B80A6F200542D8C /* HomeViewController.swift in Sources */,
+				27D120102BD27A9C0043DAD5 /* AddCarPresenter.swift in Sources */,
 				2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */,
+				2755E2C82BD14F1900F709E0 /* AccountCarsState.swift in Sources */,
 				272A22FE2BB1AABE0025880E /* BuildingsState.swift in Sources */,
+				2731629C2BDA8D4600B47A1F /* SettingsPresenter.swift in Sources */,
 				273E65FF2B88E94900567BD8 /* SplashViewController.swift in Sources */,
 				273E66012B88E95500567BD8 /* SplashInteractor.swift in Sources */,
 				27C624562B7D0217002FFF48 /* RegistrationPresenter.swift in Sources */,
 				273E660F2B89155000567BD8 /* AuthManager.swift in Sources */,
+				273162B22BDA965000B47A1F /* FAQAssembly.swift in Sources */,
 				273E65F32B86502600567BD8 /* AuthModel.swift in Sources */,
+				273162982BDA8D3300B47A1F /* SettingsViewController.swift in Sources */,
+				27D11FFF2BD24F100043DAD5 /* CarDetailsInteractor.swift in Sources */,
 				272B52002B9C5086008F428E /* ProfileRouter.swift in Sources */,
+				27D120182BD27ABD0043DAD5 /* AddCarAssembly.swift in Sources */,
 				27754BEC2B99DA990065A14E /* BuildingsModel.swift in Sources */,
 				272B520D2B9C5162008F428E /* MorePresenter.swift in Sources */,
 				27754BE42B99DA740065A14E /* BuildingsViewController.swift in Sources */,
@@ -1022,8 +1253,11 @@
 				27C6245A2B7D022E002FFF48 /* RegistrationRouter.swift in Sources */,
 				272B52222B9C542A008F428E /* MapRouter.swift in Sources */,
 				27C624492B7C8B88002FFF48 /* LoginAssembly.swift in Sources */,
+				2755E2C12BD14BF600F709E0 /* AccountCarsRouter.swift in Sources */,
 				27BA27D82BC7F66D008F3519 /* Colors.swift in Sources */,
 				272B51FA2B9C5021008F428E /* ProfileWorker.swift in Sources */,
+				2755E2BB2BD14BD200F709E0 /* AccountCarsInteractor.swift in Sources */,
+				27D120142BD27AAE0043DAD5 /* AddCarRouter.swift in Sources */,
 				272B52112B9C518C008F428E /* MoreRouter.swift in Sources */,
 				2700206A2BCFAD4000649D60 /* AccountDetailsInteractor.swift in Sources */,
 				272B52092B9C513F008F428E /* MoreInteractor.swift in Sources */,
@@ -1040,13 +1274,16 @@
 				270FDBC22BCFD61B00286939 /* UpdateAccountInteractor.swift in Sources */,
 				27C624432B7C8B63002FFF48 /* LoginModel.swift in Sources */,
 				273E66092B88E97900567BD8 /* SplashWorker.swift in Sources */,
+				273162A82BDA962300B47A1F /* FAQViewController.swift in Sources */,
 				27535C642BA2DD6E000E48E6 /* BuildingCell.swift in Sources */,
+				2755E2B92BD14BBE00F709E0 /* AccountCarsViewController.swift in Sources */,
 				2795FF432BC04D4C0031CEE8 /* ReservationCardPresenter.swift in Sources */,
 				27C0B7A62B9C38B600977074 /* ParkingLevelsEndPoint.swift in Sources */,
 				273E65E62B8490F500567BD8 /* Router.swift in Sources */,
 				27C624522B7D01EB002FFF48 /* RegistrationViewController.swift in Sources */,
 				27C6243D2B7C8B17002FFF48 /* LoginViewController.swift in Sources */,
 				27535C822BA48538000E48E6 /* UpdateCarPresenter.swift in Sources */,
+				2755E2C32BD14C0600F709E0 /* AccountCarsProtocols.swift in Sources */,
 				270020722BCFAD8D00649D60 /* AccountDetailsProtocols.swift in Sources */,
 				27BA27DC2BC80952008F3519 /* UITextField+borders.swift in Sources */,
 				273E65E42B84900800567BD8 /* NetworkRouter.swift in Sources */,
@@ -1055,8 +1292,9 @@
 				27848BFB2B80A74600542D8C /* HomeAssembly.swift in Sources */,
 				270020772BCFB48600649D60 /* DetailsCardButton.swift in Sources */,
 				27848BE42B80A47600542D8C /* RegistrationCarRouter.swift in Sources */,
+				2731629E2BDA8D4F00B47A1F /* SettingsModel.swift in Sources */,
 				273E66032B88E95E00567BD8 /* SplashPresenter.swift in Sources */,
-				272B520B2B9C5150008F428E /* MoreWorker.swift in Sources */,
+				2755E2C52BD14C1000F709E0 /* AccountCarsAssembly.swift in Sources */,
 				272B52042B9C50AD008F428E /* ProfileAssembly.swift in Sources */,
 				27C0B7AE2B9C44F900977074 /* BuildingModel.swift in Sources */,
 				27848BE82B80A48600542D8C /* RegistrationCarProtocols.swift in Sources */,
@@ -1064,6 +1302,7 @@
 				270FDBC82BCFD63900286939 /* UpdateAccountRouter.swift in Sources */,
 				272B521A2B9C53C5008F428E /* MapInteractor.swift in Sources */,
 				27C6245C2B7D0239002FFF48 /* RegistrationWorker.swift in Sources */,
+				273162A02BDA8D5800B47A1F /* SettingsRouter.swift in Sources */,
 				273E65DA2B848B2E00567BD8 /* HTTPMethod.swift in Sources */,
 				27848BE62B80A47E00542D8C /* RegistrationCarWorker.swift in Sources */,
 				27848BEA2B80A48E00542D8C /* RegistrationCarAssembly.swift in Sources */,
@@ -1083,12 +1322,18 @@
 				270FDBCF2BCFDA4C00286939 /* AccountDetailsState.swift in Sources */,
 				273E65F12B86449B00567BD8 /* AuthEndPoint.swift in Sources */,
 				27C6243F2B7C8B50002FFF48 /* LoginInteractor.swift in Sources */,
+				27D120072BD24F520043DAD5 /* CarDetailsProtocols.swift in Sources */,
 				27535C8E2BA48E94000E48E6 /* MultipleButtonsCardButton.swift in Sources */,
 				27535C7E2BA48525000E48E6 /* UpdateCarInteractor.swift in Sources */,
 				27848BF52B80A72A00542D8C /* HomeRouter.swift in Sources */,
 				27C624452B7C8B6F002FFF48 /* LoginRouter.swift in Sources */,
+				2771FE3F2BD175D6004E31D1 /* CarCell.swift in Sources */,
+				27D1200C2BD27A8B0043DAD5 /* AddCarViewController.swift in Sources */,
+				27D7A59A2BDBE6330054BC44 /* JumpAvoidingFlowLayout.swift in Sources */,
 				27848BE02B80A46300542D8C /* RegistrationCarPresenter.swift in Sources */,
 				273E66052B88E96800567BD8 /* SplashModel.swift in Sources */,
+				273162A22BDA8D6200B47A1F /* SettingsProtocols.swift in Sources */,
+				273162A62BDA961700B47A1F /* FAQInteractor.swift in Sources */,
 				270FDBC02BCFD60700286939 /* UpdateAccountViewController.swift in Sources */,
 				273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */,
 				2795FF3F2BC04CEB0031CEE8 /* ReservationCardViewController.swift in Sources */,
@@ -1096,11 +1341,14 @@
 				273E65ED2B849CBB00567BD8 /* NetworkManager.swift in Sources */,
 				27C624542B7D020C002FFF48 /* RegistrationInteractor.swift in Sources */,
 				272B52202B9C5418008F428E /* MapModel.swift in Sources */,
+				27D11FFD2BD24F030043DAD5 /* CarDetailsViewController.swift in Sources */,
+				27D7A5962BDBB17F0054BC44 /* QuestionCell.swift in Sources */,
 				2795FF452BC04D560031CEE8 /* ReservationCardWorker.swift in Sources */,
 				27848BF32B80A71A00542D8C /* HomeModel.swift in Sources */,
 				27754BF02B99DAAD0065A14E /* BuildingsProtocols.swift in Sources */,
 				27B2C5812BCE630000899713 /* Date+extract.swift in Sources */,
 				27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */,
+				2755E2BD2BD14BDE00F709E0 /* AccountCarsPresenter.swift in Sources */,
 				272B520F2B9C517A008F428E /* MoreModel.swift in Sources */,
 				27B2C57F2BCE5F7400899713 /* Date+iso8601.swift in Sources */,
 				27848BE22B80A46E00542D8C /* RegistrationCarModel.swift in Sources */,
@@ -1113,7 +1361,11 @@
 				279C533A2BCD2A3100AF6EF5 /* ReservationCardSpotState.swift in Sources */,
 				277B37BC2BCAAED700B2A412 /* UpdateCarState.swift in Sources */,
 				272B52022B9C5099008F428E /* ProfileProtocols.swift in Sources */,
+				27D120122BD27AA50043DAD5 /* AddCarModel.swift in Sources */,
+				273162AA2BDA962D00B47A1F /* FAQPresenter.swift in Sources */,
+				27D120052BD24F480043DAD5 /* CarDetailsRouter.swift in Sources */,
 				27C6244B2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift in Sources */,
+				27D120092BD24F5C0043DAD5 /* CarDetailsAssembly.swift in Sources */,
 				273E65E22B848F7E00567BD8 /* JSONParameterEncoder.swift in Sources */,
 				2795FF4D2BC04D850031CEE8 /* ReservationCardAssembly.swift in Sources */,
 				273E65D82B848A9500567BD8 /* EndPointType.swift in Sources */,
@@ -1127,6 +1379,7 @@
 				270020742BCFADA700649D60 /* AccountDetailsAssembly.swift in Sources */,
 				270020682BCFAA5800649D60 /* AccountDetailsViewController.swift in Sources */,
 				27754BE62B99DA7D0065A14E /* BuildingsInteractor.swift in Sources */,
+				273162AC2BDA963400B47A1F /* FAQModel.swift in Sources */,
 				27754BF52B99E33D0065A14E /* ReservationCell.swift in Sources */,
 				27754BEE2B99DAA40065A14E /* BuildingsRouter.swift in Sources */,
 				27848BF92B80A73D00542D8C /* HomeProtocols.swift in Sources */,
@@ -1136,7 +1389,10 @@
 				275E0F0B2BC686B200B6E1B3 /* Theme.swift in Sources */,
 				272B521E2B9C5408008F428E /* MapPresenter.swift in Sources */,
 				270020792BCFC9AC00649D60 /* EmployeesEndPoint.swift in Sources */,
+				27D120162BD27AB40043DAD5 /* AddCarProtocols.swift in Sources */,
 				27754BDD2B99A6200065A14E /* ReservationsEndPoint.swift in Sources */,
+				2731629A2BDA8D3E00B47A1F /* SettingsInteractor.swift in Sources */,
+				273162A42BDA8D6C00B47A1F /* SettingsAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

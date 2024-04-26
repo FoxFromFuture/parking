@@ -19,9 +19,11 @@ final class RegistrationCarViewController: UIViewController {
     private let router: RegistrationCarRoutingLogic
     private let titleLabel = UILabel()
     private let subTitleLabel = UILabel()
+    private let carModelTextField = UITextField()
     private let carRegistryNumberTextField = UITextField()
     private let continueButton = UIButton()
     private let carSetupFailureLabel = UILabel()
+    private var modelTextFieldBottomBorder = UIView()
     private var regNumTextFieldBottomBorder = UIView()
     private var currentState: RegistrationCarState = .stable {
         didSet {
@@ -59,6 +61,7 @@ final class RegistrationCarViewController: UIViewController {
         view.backgroundColor = Colors.background.uiColor
         configureTitleLabel()
         configureSubTitleLabel()
+        configureCarModelTextField()
         configureCarRegistryNumberTextFieldTextField()
         configureContinueButton()
         configureCarSetupFailureLabel()
@@ -87,13 +90,26 @@ final class RegistrationCarViewController: UIViewController {
         subTitleLabel.font = .systemFont(ofSize: 20, weight: .regular)
     }
     
+    private func configureCarModelTextField() {
+        self.view.addSubview(carModelTextField)
+        carModelTextField.attributedPlaceholder = NSAttributedString(string: "model".localize(), attributes: [NSAttributedString.Key.foregroundColor: Colors.secondaryText.uiColor])
+        carModelTextField.font = .systemFont(ofSize: 24, weight: .regular)
+        carModelTextField.textColor = Colors.mainText.uiColor
+        carModelTextField.textAlignment = .left
+        carModelTextField.pinTop(to: self.subTitleLabel.bottomAnchor, 60)
+        carModelTextField.pinLeft(to: self.view, 38)
+        carModelTextField.pinRight(to: self.view, 38)
+        carModelTextField.backgroundColor = .clear
+        self.modelTextFieldBottomBorder = carModelTextField.addBottomBorder(color: Colors.secondaryText.uiColor, thickness: 2)
+    }
+    
     private func configureCarRegistryNumberTextFieldTextField() {
         self.view.addSubview(carRegistryNumberTextField)
         carRegistryNumberTextField.attributedPlaceholder = NSAttributedString(string: "X000XX000", attributes: [NSAttributedString.Key.foregroundColor: Colors.secondaryText.uiColor])
         carRegistryNumberTextField.font = .systemFont(ofSize: 24, weight: .regular)
         carRegistryNumberTextField.textColor = Colors.mainText.uiColor
         carRegistryNumberTextField.textAlignment = .left
-        carRegistryNumberTextField.pinTop(to: self.subTitleLabel.bottomAnchor, 60)
+        carRegistryNumberTextField.pinTop(to: self.carModelTextField.bottomAnchor, 60)
         carRegistryNumberTextField.pinLeft(to: self.view, 38)
         carRegistryNumberTextField.pinRight(to: self.view, 38)
         carRegistryNumberTextField.backgroundColor = .clear
@@ -122,14 +138,15 @@ final class RegistrationCarViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func continueButtonWasTapped() {
-        if let carRegistryNumber = carRegistryNumberTextField.text {
-            interactor.loadHome(Model.Home.Request(carRegistryNumber: carRegistryNumber))
+        if let carRegistryNumber = carRegistryNumberTextField.text, let carModel = carModelTextField.text {
+            interactor.loadHome(Model.Home.Request(carModel: carModel, carRegistryNumber: carRegistryNumber))
         }
     }
     
     private func showStableState() {
         carSetupFailureLabel.removeFromSuperview()
         regNumTextFieldBottomBorder.backgroundColor = Colors.secondaryText.uiColor
+        modelTextFieldBottomBorder.backgroundColor = Colors.secondaryText.uiColor
     }
     
     private func showCarSetupFailure() {
@@ -138,6 +155,7 @@ final class RegistrationCarViewController: UIViewController {
         carSetupFailureLabel.pinLeft(to: self.view.leadingAnchor, 38)
         
         regNumTextFieldBottomBorder.backgroundColor = Colors.danger.uiColor
+        modelTextFieldBottomBorder.backgroundColor = Colors.danger.uiColor
     }
 }
 
@@ -155,6 +173,7 @@ extension RegistrationCarViewController: RegistrationCarDisplayLogic {
     
     func displayCarSetupFailure(_ viewModel: RegistrationCarModel.CarSetupFailure.ViewModel) {
         DispatchQueue.main.async { [weak self] in
+            self?.currentState = .stable
             self?.currentState = .carSetupFailure
         }
     }

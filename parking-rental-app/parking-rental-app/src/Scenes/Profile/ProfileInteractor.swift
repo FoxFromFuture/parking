@@ -33,8 +33,8 @@ extension ProfileInteractor: ProfileBusinessLogic {
         presenter.presentHome(Model.Home.Response())
     }
     
-    func loadUpdateCar(_ request: Model.UpdateCar.Request) {
-        presenter.presentUpdateCar(Model.UpdateCar.Response())
+    func loadAccountCars(_ request: Model.AccountCars.Request) {
+        presenter.presentAccountCars(Model.AccountCars.Response())
     }
     
     func loadLogin(_ request: Model.Login.Request) {

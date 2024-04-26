@@ -13,14 +13,18 @@ final class MorePresenter {
 // MARK: - PresentationLogic
 extension MorePresenter: MorePresentationLogic {
     func presentStart(_ response: Model.Start.Response) {
-        view?.displayStart(Model.Start.ViewModel(curTheme: response.curTheme))
+        view?.displayStart(Model.Start.ViewModel())
     }
     
     func presentHome(_ response: Model.Home.Response) {
         view?.displayHome(Model.Home.ViewModel())
     }
     
-    func presentNewTheme(_ response: Model.NewTheme.Response) {
-        view?.displayNewTheme(MoreModel.NewTheme.ViewModel(theme: response.theme))
+    func presentSettings(_ response: Model.Settings.Response) {
+        view?.displaySettings(MoreModel.Settings.ViewModel())
+    }
+    
+    func presentFAQ(_ response: Model.FAQ.Response) {
+        view?.displayFAQ(MoreModel.FAQ.ViewModel())
     }
 }

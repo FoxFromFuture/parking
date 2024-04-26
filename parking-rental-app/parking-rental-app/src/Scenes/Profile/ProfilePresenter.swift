@@ -24,8 +24,8 @@ extension ProfilePresenter: ProfilePresentationLogic {
         view?.displayHome(Model.Home.ViewModel())
     }
     
-    func presentUpdateCar(_ response: Model.UpdateCar.Response) {
-        view?.displayUpdateCar(Model.UpdateCar.ViewModel())
+    func presentAccountCars(_ response: Model.AccountCars.Response) {
+        view?.displayAccountCars(Model.AccountCars.ViewModel())
     }
     
     func presentLogin(_ response: Model.Login.Response) {

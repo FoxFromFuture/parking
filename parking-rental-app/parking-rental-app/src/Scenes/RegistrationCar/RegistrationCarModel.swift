@@ -17,6 +17,7 @@ enum RegistrationCarModel {
     
     enum Home {
         struct Request {
+            let carModel: String
             let carRegistryNumber: String
         }
         struct Response { }

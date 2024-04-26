@@ -106,9 +106,9 @@ final class ProfileViewController: UIViewController {
         self.view.addSubview(carSingleCardButton)
         carSingleCardButton.pinTop(to: self.accountSingleCardButton.bottomAnchor, 25)
         carSingleCardButton.pinHorizontal(to: self.view, 17)
-        carSingleCardButton.configure(title: "car".localize(), subtitle: "yourCarDetails".localize())
+        carSingleCardButton.configure(title: "cars".localize(), subtitle: "yourCarDetails".localize())
         carSingleCardButton.setAction { [weak self] in
-            self?.interactor.loadUpdateCar(Model.UpdateCar.Request())
+            self?.interactor.loadAccountCars(Model.AccountCars.Request())
         }
     }
     
@@ -161,8 +161,8 @@ extension ProfileViewController: ProfileDisplayLogic {
         self.router.routeToHome()
     }
     
-    func displayUpdateCar(_ viewModel: Model.UpdateCar.ViewModel) {
-        self.router.routeToUpdateCar()
+    func displayAccountCars(_ viewModel: Model.AccountCars.ViewModel) {
+        self.router.routeToAccountCars()
     }
     
     func displayLogin(_ viewModel: Model.Login.ViewModel) {

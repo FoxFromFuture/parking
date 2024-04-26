@@ -59,10 +59,10 @@ final class DetailsCardButton: UIView {
     private func configureRightIconImageView() {
         self.addSubview(rightIconImageView)
         rightIconImageView.pinCenterY(to: self.centerYAnchor)
-        rightIconImageView.pinCenterX(to: self.trailingAnchor, 30)
-        rightIconImageView.tintColor = Colors.secondaryText.uiColor
+        rightIconImageView.pinRight(to: self.trailingAnchor, 30)
+        rightIconImageView.tintColor = Colors.icon.uiColor
         rightIconImageView.backgroundColor = UIColor.clear
-        rightIconImageView.image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
+        rightIconImageView.image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(scale: .medium)) ?? UIImage()
     }
     
     private func configureTapAction() {
@@ -79,7 +79,7 @@ final class DetailsCardButton: UIView {
     }
     
     func setLeftIcon(icon: String) {
-        leftIconImageView.image = UIImage(systemName: "\(icon)") ?? UIImage()
+        leftIconImageView.image = UIImage(systemName: "\(icon)", withConfiguration: UIImage.SymbolConfiguration(scale: .large)) ?? UIImage()
     }
     
     func hideRightIcon() {

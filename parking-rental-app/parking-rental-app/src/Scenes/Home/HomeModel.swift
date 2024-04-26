@@ -32,7 +32,6 @@ enum HomeModel {
             let levelNumbers: [String]
             let buildingNames: [String]
             let reservationsIDx: [String]
-            let isReservationsLimit: Bool
         }
     }
     

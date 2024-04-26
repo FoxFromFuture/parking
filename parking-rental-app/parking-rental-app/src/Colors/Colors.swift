@@ -25,6 +25,7 @@ enum Colors {
     case notFreeSpot
     case notAvailableSpot
     case success
+    case FAQCell
     
     var uiColor: UIColor {
         switch self {
@@ -62,6 +63,8 @@ enum Colors {
             return UIColor(named: "NotAvailableSpot") ?? UIColor.lightGray
         case .success:
             return UIColor(named: "Success") ?? UIColor.systemGreen
+        case .FAQCell:
+            return UIColor(named: "FAQCell") ?? UIColor.lightGray
         }
     }
 }

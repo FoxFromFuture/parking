@@ -25,7 +25,8 @@ enum ReservationCardModel {
         }
         struct Response {
             let parkingSpot: ParkingSpot
-            let car: Car
+            let cars: [Car]
+            let reservationCar: Car?
             let reservationID: String?
             let reservationStartTime: String?
             let reservationEndTime: String?
@@ -37,8 +38,8 @@ enum ReservationCardModel {
         }
         struct ViewModel {
             let parkingLotNumber: String
-            let carID: String
-            let carRegistryNumber: String
+            let cars: [Car]
+            let reservationCarRegistryNum: String?
             let employeeID: String
             let reservationID: String?
             let reservationsLimitForTime: Bool
@@ -61,9 +62,11 @@ enum ReservationCardModel {
         }
         struct Response {
             let reservationID: String
+            let car: Car
         }
         struct ViewModel {
             let reservationID: String
+            let carRegistryNumber: String
         }
     }
     
@@ -71,8 +74,12 @@ enum ReservationCardModel {
         struct Request {
             let reservationID: String
         }
-        struct Response { }
-        struct ViewModel { }
+        struct Response {
+            let cars: [Car]
+        }
+        struct ViewModel {
+            let cars: [Car]
+        }
     }
     
     enum LoadingFailure {

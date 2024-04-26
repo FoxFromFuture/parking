@@ -12,10 +12,13 @@ final class ReservationCardInteractor {
     private let presenter: ReservationCardPresentationLogic
     private let worker: ReservationCardWorkerLogic
     private var spotState: ReservationCardSpotState?
-    private var parkingSpot: ParkingSpot?
-    private var car: Car?
+    private var curParkingSpot: ParkingSpot?
+    private var allParkingSpots: [ParkingSpot]?
+    private var allReservations: [Reservation]?
+    private var cars: [Car]?
     private var actualReservations: [Reservation]?
     private var reservationID: String?
+    private var reservationCar: Car?
     private var reservationStartTime: String?
     private var reservationEndTime: String?
     private var reservationsLimitForTime: Bool = false
@@ -23,6 +26,7 @@ final class ReservationCardInteractor {
     private var weekendLimit: Bool = false
     private var startTime: Date?
     private var endTime: Date?
+    private var wasDeleted: Bool = false
     private let dispatchGroup = DispatchGroup()
     private var calendar = Calendar(identifier: .gregorian)
     
@@ -40,6 +44,19 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
     }
     
     func loadReservationCardInfo(_ request: Model.ReservationCardInfo.Request) {
+        // clear old data
+        curParkingSpot = nil
+        allParkingSpots = nil
+        allReservations = nil
+        cars = nil
+        reservationCar = nil
+        actualReservations = nil
+        reservationID = nil
+        reservationStartTime = nil
+        reservationEndTime = nil
+        startTime = nil
+        endTime = nil
+        
         self.spotState = request.spotState
         
         let dateComponents = self.calendar.dateComponents([.year, .month, .day], from: request.date)
@@ -75,50 +92,31 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
         self.worker.getParkingSpot(parkingSpotID: request.parkingSpotID) { [weak self] parkingSpotData, error in
             if let error = error {
                 print(error)
-                /// failure
             } else if let parkingSpot = parkingSpotData {
-                self?.parkingSpot = parkingSpot
-                self?.dispatchGroup.enter()
-                self?.worker.getAllReservations(completion: { [weak self] reservationsData, error in
-                    if let error = error {
-                        print(error)
-                        /// failure
-                    } else if let reservations = reservationsData, !reservations.isEmpty {
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-                        self?.actualReservations = []
-                        for reservation in reservations {
-                            if let reservationEndTime = dateFormatter.date(from: reservation.endTime), reservationEndTime > Date() {
-                                self?.actualReservations?.append(reservation)
-                                
-                                if let limit = self?.reservationsLimitForTime, limit == false, let startTime = self?.startTime, let endTime = self?.endTime, let dateReserveStartTime = dateFormatter.date(from: reservation.startTime), let dateReserveEndTime = dateFormatter.date(from: reservation.endTime) {
-                                    if startTime >= dateReserveStartTime && startTime <= dateReserveEndTime || endTime >= dateReserveStartTime && endTime <= dateReserveEndTime || startTime <= dateReserveStartTime && endTime >= dateReserveEndTime || startTime >= dateReserveStartTime && endTime <= dateReserveEndTime {
-                                        self?.reservationsLimitForTime = true
-                                    }
-                                }
-                            }
-                        }
-                        
-                        if let actualReservations = self?.actualReservations, actualReservations.count == 5 {
-                            self?.reservationsLimit = true
-                        }
-                        
-                        if let spotState = self?.spotState, spotState == .reservedSpot, let parkingSpot = self?.parkingSpot, let actualReservations = self?.actualReservations {
-                            for reservation in actualReservations {
-                                if reservation.parkingSpotId == parkingSpot.id {
-                                    self?.reservationID = reservation.id
-                                    self?.reservationStartTime = "\(reservation.startTime)"
-                                    self?.reservationEndTime = "\(reservation.endTime)"
-                                    break
-                                }
-                            }
-                        }
-                    }
-                    self?.dispatchGroup.leave()
-                })
+                self?.curParkingSpot = parkingSpot
             }
             self?.dispatchGroup.leave()
         }
+        
+        self.dispatchGroup.enter()
+        self.worker.getAllParkingSpots(completion: { [weak self] parkingSpotsData, error in
+            if let error = error {
+                print(error)
+            } else if let parkingSpots = parkingSpotsData {
+                self?.allParkingSpots = parkingSpots
+            }
+            self?.dispatchGroup.leave()
+        })
+        
+        self.dispatchGroup.enter()
+        self.worker.getAllReservations(completion: { [weak self] reservationsData, error in
+            if let error = error {
+                print(error)
+            } else if let reservations = reservationsData {
+                self?.allReservations = reservations
+            }
+            self?.dispatchGroup.leave()
+        })
         
         self.dispatchGroup.enter()
         self.worker.getAllCars(completion: { [weak self] carsData, error in
@@ -126,20 +124,56 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
                 print(error)
                 /// failure
             } else if let cars = carsData, !cars.isEmpty {
-                self?.car = cars[0]
+                self?.cars = cars
             }
             self?.dispatchGroup.leave()
         })
         
         self.dispatchGroup.wait()
-        if let parkingSpot = self.parkingSpot, let car = self.car, let startTime = self.startTime, let endTime = self.endTime {
-            self.presenter.presentReservationCardInfo(Model.ReservationCardInfo.Response(parkingSpot: parkingSpot, car: car, reservationID: self.reservationID, reservationStartTime: self.reservationStartTime, reservationEndTime: self.reservationEndTime, reservationsLimitForTime: self.reservationsLimitForTime, reservationsLimit: self.reservationsLimit, weekendLimit: self.weekendLimit, startTime: startTime, endTime: endTime))
+        
+        if let reservations = self.allReservations, let allParkingSpots = self.allParkingSpots, let curParkingSpot = self.curParkingSpot {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            var actualBuildingReservations: [Reservation] = []
+            
+            for reservation in reservations {
+                for spot in allParkingSpots {
+                    if reservation.parkingSpotId == spot.id && spot.buildingId == curParkingSpot.buildingId, let cars = self.cars, let reservationEndTime = dateFormatter.date(from: reservation.endTime), reservationEndTime > Date() {
+                        actualBuildingReservations.append(reservation)
+                        
+                        if self.reservationsLimitForTime == false, let startTime = self.startTime, let endTime = self.endTime, let dateReserveStartTime = dateFormatter.date(from: reservation.startTime), let dateReserveEndTime = dateFormatter.date(from: reservation.endTime) {
+                            if startTime >= dateReserveStartTime && startTime <= dateReserveEndTime || endTime >= dateReserveStartTime && endTime <= dateReserveEndTime || startTime <= dateReserveStartTime && endTime >= dateReserveEndTime || startTime >= dateReserveStartTime && endTime <= dateReserveEndTime {
+                                self.reservationsLimitForTime = true
+                                self.reservationID = reservation.id
+                                self.reservationStartTime = "\(reservation.startTime)"
+                                self.reservationEndTime = "\(reservation.endTime)"
+                                for car in cars {
+                                    if car.id == reservation.carId {
+                                        self.reservationCar = car
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if actualBuildingReservations.count == 5 {
+                self.reservationsLimit = true
+            }
+        }
+        
+        if let parkingSpot = self.curParkingSpot, let cars = self.cars, let startTime = self.startTime, let endTime = self.endTime {
+            self.presenter.presentReservationCardInfo(Model.ReservationCardInfo.Response(parkingSpot: parkingSpot, cars: cars, reservationCar: self.reservationCar, reservationID: self.reservationID, reservationStartTime: self.reservationStartTime, reservationEndTime: self.reservationEndTime, reservationsLimitForTime: self.reservationsLimitForTime, reservationsLimit: self.reservationsLimit, weekendLimit: self.weekendLimit, startTime: startTime, endTime: endTime))
         } else {
             self.presenter.presentLoadingFailure(ReservationCardModel.LoadingFailure.Response())
         }
     }
     
     func loadCreateReservation(_ request: Model.CreateReservation.Request) {
+        self.reservationID = nil
+        self.reservationCar = nil
         
         let dateComponents = self.calendar.dateComponents([.year, .month, .day], from: request.date)
         let startTimeComponents = self.calendar.dateComponents([.hour, .minute, .second], from: request.startTime)
@@ -165,27 +199,68 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
         let endDate = self.calendar.date(from: endTimeComponentsForBuild)
         
         if let startDate = startDate, let endDate = endDate {
+            self.dispatchGroup.enter()
             self.worker.addNewReservation(carId: request.carID, employeeId: request.employeeID, parkingSpotId: request.parkingSpotID, startTime: startDate.getISO8601Str(), endTime: endDate.getISO8601Str()) { [weak self] reservationData, error in
                 if let error = error {
                     print(error)
                     /// failure
-                    self?.presenter.presentLoadingFailure(ReservationCardModel.LoadingFailure.Response())
                 } else if let reservation = reservationData {
-                    self?.presenter.presentCreateReservation(ReservationCardModel.CreateReservation.Response(reservationID: reservation.id))
+                    self?.reservationID = reservation.id
                 }
+                self?.dispatchGroup.leave()
             }
+            
+            self.dispatchGroup.enter()
+            self.worker.getCar(carID: request.carID) { [weak self] carData, error in
+                if let error = error {
+                    print(error)
+                    /// failure
+                } else if let car = carData {
+                    self?.reservationCar = car
+                }
+                self?.dispatchGroup.leave()
+            }
+        }
+        
+        self.dispatchGroup.wait()
+        if let reservationID = self.reservationID, let car = reservationCar {
+            self.presenter.presentCreateReservation(ReservationCardModel.CreateReservation.Response(reservationID: reservationID, car: car))
+        } else {
+            self.presenter.presentLoadingFailure(ReservationCardModel.LoadingFailure.Response())
         }
     }
     
     func loadCancelReservation(_ request: Model.CancelReservation.Request) {
+        self.cars = nil
+        self.wasDeleted = false
+        
+        self.dispatchGroup.enter()
         self.worker.deleteReservation(id: request.reservationID) { [weak self] error in
             if let error = error {
                 print(error)
                 /// failure
-                self?.presenter.presentLoadingFailure(ReservationCardModel.LoadingFailure.Response())
             } else {
-                self?.presenter.presentCancelReservation(ReservationCardModel.CancelReservation.Response())
+                self?.wasDeleted = true
             }
+            self?.dispatchGroup.leave()
+        }
+        
+        self.dispatchGroup.enter()
+        self.worker.getAllCars(completion: { [weak self] carsData, error in
+            if let error = error {
+                print(error)
+                /// failure
+            } else if let cars = carsData, !cars.isEmpty {
+                self?.cars = cars
+            }
+            self?.dispatchGroup.leave()
+        })
+        
+        self.dispatchGroup.wait()
+        if self.wasDeleted, let cars = self.cars {
+            self.presenter.presentCancelReservation(ReservationCardModel.CancelReservation.Response(cars: cars))
+        } else {
+            self.presenter.presentLoadingFailure(ReservationCardModel.LoadingFailure.Response())
         }
     }
 }

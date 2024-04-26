@@ -17,18 +17,18 @@ final class UpdateAccountViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: UpdateAccountBusinessLogic
     private let router: UpdateAccountRoutingLogic
-    private let tabBar                        = TabBar()
-    private let saveButton                    = UIButton()
-    private let titleLabel                    = UILabel()
-    private let subTitleLabel                 = UILabel()
-    private let nameTextField                 = UITextField()
-    private let emailTextField                = UITextField()
-    private let passwordTextField             = UITextField()
-    private var nameTextFieldBottomBorder     = UIView()
-    private var emailTextFieldBottomBorder    = UIView()
-    private var passwordTextFieldBottomBorder = UIView()
-    private let accountUpdateFailureLabel     = UILabel()
-    private let accountUpdateSuccessLabel     = UILabel()
+    private let tabBar                           = TabBar()
+    private let saveButton                       = UIButton()
+    private let titleLabel                       = UILabel()
+    private let subTitleLabel                    = UILabel()
+    private let nameTextField                    = UITextField()
+    private let emailTextField                   = UITextField()
+    private let passwordTextField                = UITextField()
+    private var nameTextFieldBottomBorder        = UIView()
+    private var emailTextFieldBottomBorder       = UIView()
+    private var passwordTextFieldBottomBorder    = UIView()
+    private let accountUpdateFailureLabel        = UILabel()
+    private let accountUpdateSuccessLabel        = UILabel()
     private var currentState: UpdateAccountState = .stable {
         didSet {
             updateUIForState(currentState)

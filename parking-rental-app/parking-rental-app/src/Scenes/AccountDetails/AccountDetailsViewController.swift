@@ -22,7 +22,7 @@ final class AccountDetailsViewController: UIViewController {
     private let emailDetailsCardButton = DetailsCardButton()
     private let deleteAccountButton = UIButton()
     private let deleteAccountAlert = UIAlertController()
-    private let UpdateDetailsButton = UIButton()
+    private let updateDetailsButton = UIButton()
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     private let loadingFailureLabel = UILabel()
     private let reloadButton = UIButton()
@@ -140,16 +140,16 @@ final class AccountDetailsViewController: UIViewController {
     }
     
     private func configureUpdateDetailsButton() {
-        self.view.addSubview(UpdateDetailsButton)
-        UpdateDetailsButton.pinBottom(to: self.deleteAccountButton.topAnchor, 20)
-        UpdateDetailsButton.setHeight(70)
-        UpdateDetailsButton.pinHorizontal(to: self.view, 17)
-        UpdateDetailsButton.backgroundColor = Colors.secondaryButton.uiColor
-        UpdateDetailsButton.layer.cornerRadius = 20
-        UpdateDetailsButton.setTitle("updateAccountDetails".localize(), for: .normal)
-        UpdateDetailsButton.setTitleColor(Colors.active.uiColor, for: .normal)
-        UpdateDetailsButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        UpdateDetailsButton.addTarget(self, action: #selector(UpdateDetailsButtonWasTapped), for: .touchDown)
+        self.view.addSubview(updateDetailsButton)
+        updateDetailsButton.pinBottom(to: self.deleteAccountButton.topAnchor, 20)
+        updateDetailsButton.setHeight(70)
+        updateDetailsButton.pinHorizontal(to: self.view, 17)
+        updateDetailsButton.backgroundColor = Colors.secondaryButton.uiColor
+        updateDetailsButton.layer.cornerRadius = 20
+        updateDetailsButton.setTitle("updateAccountDetails".localize(), for: .normal)
+        updateDetailsButton.setTitleColor(Colors.active.uiColor, for: .normal)
+        updateDetailsButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
+        updateDetailsButton.addTarget(self, action: #selector(updateDetailsButtonWasTapped), for: .touchDown)
     }
     
     private func configureLoadingIndicator() {
@@ -186,7 +186,7 @@ final class AccountDetailsViewController: UIViewController {
     }
     
     @objc
-    private func UpdateDetailsButtonWasTapped() {
+    private func updateDetailsButtonWasTapped() {
         self.interactor.loadUpdateAccount(AccountDetailsModel.UpdateAccount.Request())
     }
     

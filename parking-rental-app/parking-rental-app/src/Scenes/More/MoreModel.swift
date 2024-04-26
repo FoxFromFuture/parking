@@ -11,12 +11,8 @@ enum MoreModel {
     
     enum Start {
         struct Request { }
-        struct Response {
-            let curTheme: Theme
-        }
-        struct ViewModel {
-            let curTheme: Theme
-        }
+        struct Response { }
+        struct ViewModel { }
     }
     
     enum Home {
@@ -25,15 +21,15 @@ enum MoreModel {
         struct ViewModel { }
     }
     
-    enum NewTheme {
-        struct Request {
-            let theme: Theme
-        }
-        struct Response {
-            let theme: Theme
-        }
-        struct ViewModel {
-            let theme: Theme
-        }
+    enum Settings {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum FAQ {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
     }
 }

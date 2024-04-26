@@ -24,11 +24,31 @@ extension ReservationCardWorker: ReservationCardWorkerLogic {
         }
     }
     
+    func getAllParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ()) {
+        networkManager.getAllParkingSpots { parkingSpotsData, error in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = parkingSpotsData {
+                completion(data, nil)
+            }
+        }
+    }
+    
     func getAllCars(completion: @escaping (_ carsData: [Car]?, _ error: String?) -> ()) {
         networkManager.getAllCars { carsData, error in
             if let error = error {
                 completion(nil, error)
             } else if let data = carsData {
+                completion(data, nil)
+            }
+        }
+    }
+    
+    func getCar(carID: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
+        networkManager.getCar(carID: carID) { carData, error in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = carData {
                 completion(data, nil)
             }
         }
@@ -59,4 +79,6 @@ extension ReservationCardWorker: ReservationCardWorkerLogic {
             }
         }
     }
+    
+    
 }

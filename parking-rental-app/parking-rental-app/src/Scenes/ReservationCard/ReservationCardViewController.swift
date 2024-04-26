@@ -24,7 +24,7 @@ final class ReservationCardViewController: UIViewController {
     private let spotState: ReservationCardSpotState
     private let onUpdateAction: (() -> Void)
     private var employeeID: String?
-    private var carID: String?
+    private var curCarID: String?
     private var reservationID: String?
     private let ovalView = UIView()
     private let titleFirstLineLabel = UILabel()
@@ -34,6 +34,7 @@ final class ReservationCardViewController: UIViewController {
     private let parkingLotNumberLabel = UILabel()
     private let carLabel = UILabel()
     private let carRegistryNumberLabel = UILabel()
+    private let carRegistryNumberButton = UIButton()
     private let timeSlotLabel = UILabel()
     private let timeLabel = UILabel()
     private let dateLabel = UILabel()
@@ -93,6 +94,7 @@ final class ReservationCardViewController: UIViewController {
         configureParkingLotNumberLabel()
         configureCarLabel()
         configureCarRegistryNumberLabel()
+        configureCarRegistryNumberButton()
         configureTimeLabel()
         configureDateLabel()
         configureTimeSlotLabel()
@@ -183,12 +185,16 @@ final class ReservationCardViewController: UIViewController {
     }
     
     private func configureCarRegistryNumberLabel() {
-        self.view.addSubview(carRegistryNumberLabel)
-        carRegistryNumberLabel.pinTop(to: self.carLabel.bottomAnchor, 5)
-        carRegistryNumberLabel.pinLeft(to: self.reservationCardView.centerXAnchor, 5)
         carRegistryNumberLabel.textAlignment = .left
         carRegistryNumberLabel.textColor = Colors.mainText.uiColor
         carRegistryNumberLabel.font = .systemFont(ofSize: 18, weight: .bold)
+    }
+    
+    private func configureCarRegistryNumberButton() {
+//        carRegistryNumberButton.backgroundColor = Colors.secondaryButton.uiColor
+        carRegistryNumberButton.layer.cornerRadius = 10
+        carRegistryNumberButton.setTitleColor(Colors.active.uiColor, for: .normal)
+        carRegistryNumberButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
     }
     
     private func configureTimeLabel() {
@@ -240,8 +246,8 @@ final class ReservationCardViewController: UIViewController {
     @objc
     private func reserveLotButtonWasTapped() {
         self.currentState = .loading
-        if let employeeID = self.employeeID, let carID = self.carID {
-            self.interactor.loadCreateReservation(Model.CreateReservation.Request(employeeID: employeeID, carID: carID, parkingSpotID: self.parkingSpotID, date: self.date, startTime: self.startTime, endTime: self.endTime))
+        if let employeeID = self.employeeID, let curCarID = self.curCarID {
+            self.interactor.loadCreateReservation(Model.CreateReservation.Request(employeeID: employeeID, carID: curCarID, parkingSpotID: self.parkingSpotID, date: self.date, startTime: self.startTime, endTime: self.endTime))
         }
     }
     
@@ -266,11 +272,11 @@ final class ReservationCardViewController: UIViewController {
     private func showLoadingFailure() {
         view.addSubview(loadingFailureLabel)
         loadingFailureLabel.pinCenterX(to: self.reservationCardView.centerXAnchor)
-        loadingFailureLabel.pinTop(to: self.reservationCardView.topAnchor, self.reservationCardView.frame.height / 2.0 - 15)
+        loadingFailureLabel.pinBottom(to: self.reservationCardView.centerYAnchor, 5)
         
         view.addSubview(reloadButton)
-        reloadButton.pinTop(to: self.reservationCardView.topAnchor, self.reservationCardView.frame.height / 2.0 + 15)
         reloadButton.pinCenterX(to: self.reservationCardView.centerXAnchor)
+        reloadButton.pinTop(to: self.reservationCardView.centerYAnchor, 5)
     }
     
     private func showReservationsLimit() {
@@ -305,13 +311,30 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
         DispatchQueue.main.async { [weak self] in
             self?.currentState = .loaded
             self?.employeeID = viewModel.employeeID
-            self?.carID = viewModel.carID
             self?.reservationID = viewModel.reservationID
             self?.parkingLotNumberLabel.text = "\(viewModel.parkingLotNumber)"
-            self?.carRegistryNumberLabel.text = "\(viewModel.carRegistryNumber)"
             self?.timeLabel.text = "\(viewModel.startTime) - \(viewModel.endTime)"
             self?.dateLabel.text = "\(viewModel.date)"
             if self?.spotState == .freeSpot {
+                self?.titleFirstLineLabel.text = "reservationCardFreeFirstLineTitle".localize()
+                self?.reservationCardView.layer.borderColor = Colors.secondaryButton.uiColor.cgColor
+                if let button = self?.carRegistryNumberButton, let bottom = self?.carLabel.bottomAnchor, let centerX = self?.reservationCardView.centerXAnchor {
+                    self?.view.addSubview(button)
+                    button.pinTop(to: bottom, 5)
+                    button.pinLeft(to: centerX, 5)
+                    var actions: [UIAction] = []
+                    
+                    self?.curCarID = viewModel.cars[0].id
+                    for car in viewModel.cars {
+                        actions.append(UIAction(title: car.registryNumber, handler: { action in
+                            self?.curCarID = car.id
+                        }))
+                    }
+                    
+                    button.menu = UIMenu(children: actions)
+                    button.showsMenuAsPrimaryAction = true
+                    button.changesSelectionAsPrimaryAction = true
+                }
                 if viewModel.reservationsLimitForTime {
                     self?.currentState = .reservationsLimitForTime
                 } else if viewModel.weekendLimit {
@@ -319,14 +342,18 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
                 } else if viewModel.reservationsLimit {
                     self?.currentState = .reservationsLimit
                 } else {
-                    self?.titleFirstLineLabel.text = "reservationCardFreeFirstLineTitle".localize()
                     self?.reservationActionButton.setTitle("reserveLot".localize(), for: .normal)
                     self?.reservationActionButton.backgroundColor = Colors.accent.uiColor
                     self?.reservationActionButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
-                    self?.reservationCardView.layer.borderColor = Colors.secondaryButton.uiColor.cgColor
                     self?.reservationActionButton.addTarget(self, action: #selector(self?.reserveLotButtonWasTapped), for: .touchDown)
                 }
             } else if self?.spotState == .reservedSpot {
+                if let label = self?.carRegistryNumberLabel, let bottom = self?.carLabel.bottomAnchor, let centerX = self?.reservationCardView.centerXAnchor {
+                    self?.view.addSubview(label)
+                    self?.carRegistryNumberLabel.pinTop(to: bottom, 5)
+                    self?.carRegistryNumberLabel.pinLeft(to: centerX, 5)
+                }
+                self?.carRegistryNumberLabel.text = viewModel.reservationCarRegistryNum
                 self?.titleFirstLineLabel.text = "reservationCardReservedFirstLineTitle".localize()
                 self?.reservationActionButton.setTitle("cancelReservation".localize(), for: .normal)
                 self?.reservationActionButton.backgroundColor = Colors.secondaryButton.uiColor
@@ -340,6 +367,13 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
     func displayCreateReservation(_ viewModel: Model.CreateReservation.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             self?.currentState = .loaded
+            self?.carRegistryNumberButton.removeFromSuperview()
+            if let label = self?.carRegistryNumberLabel, let bottom = self?.carLabel.bottomAnchor, let centerX = self?.reservationCardView.centerXAnchor {
+                self?.view.addSubview(label)
+                self?.carRegistryNumberLabel.pinTop(to: bottom, 5)
+                self?.carRegistryNumberLabel.pinLeft(to: centerX, 5)
+            }
+            self?.carRegistryNumberLabel.text = viewModel.carRegistryNumber
             self?.reservationID = viewModel.reservationID
             self?.titleFirstLineLabel.text = "reservationCardReservedFirstLineTitle".localize()
             self?.reservationActionButton.setTitle("cancelReservation".localize(), for: .normal)
@@ -355,6 +389,24 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
     func displayCancelReservation(_ viewModel: Model.CancelReservation.ViewModel) {
         DispatchQueue.main.async { [weak self] in
             self?.currentState = .loaded
+            self?.carRegistryNumberLabel.removeFromSuperview()
+            if let button = self?.carRegistryNumberButton, let bottom = self?.carLabel.bottomAnchor, let centerX = self?.reservationCardView.centerXAnchor {
+                self?.view.addSubview(button)
+                button.pinTop(to: bottom, 5)
+                button.pinLeft(to: centerX, 5)
+                var actions: [UIAction] = []
+                
+                self?.curCarID = viewModel.cars[0].id
+                for car in viewModel.cars {
+                    actions.append(UIAction(title: car.registryNumber, handler: { action in
+                        self?.curCarID = car.id
+                    }))
+                }
+                
+                button.menu = UIMenu(children: actions)
+                button.showsMenuAsPrimaryAction = true
+                button.changesSelectionAsPrimaryAction = true
+            }
             self?.reservationID = nil
             self?.titleFirstLineLabel.text = "reservationCardFreeFirstLineTitle".localize()
             self?.reservationActionButton.setTitle("reserveLot".localize(), for: .normal)

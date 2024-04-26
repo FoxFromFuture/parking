@@ -67,7 +67,6 @@ enum MapModel {
             let curDate: Date
             let curStartTimeDate: Date
             let curEndTimeDate: Date
-            let hasReservationsForTime: Bool
         }
     }
     
@@ -95,7 +94,6 @@ enum MapModel {
             let minStartTimeDate: Date
             let minEndTimeDate: Date
             let curEndTimeDate: Date?
-            let hasReservationsForTime: Bool
         }
     }
     

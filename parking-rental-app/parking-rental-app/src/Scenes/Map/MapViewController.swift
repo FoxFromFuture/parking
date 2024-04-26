@@ -27,7 +27,6 @@ final class MapViewController: UIViewController {
     private let startTimeDatePicker = UIDatePicker()
     private let endTimeDatePicker = UIDatePicker()
     private var curFloorID: String?
-    private var hasReservationsForTime: Bool = false
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     private let loadingFailureLabel = UILabel()
     private let reloadButton = UIButton()
@@ -168,6 +167,8 @@ final class MapViewController: UIViewController {
         mapScrollView.maximumZoomScale = 1.2
         mapScrollView.clipsToBounds = true
         mapScrollView.delegate = self
+        mapScrollView.showsVerticalScrollIndicator = false
+        mapScrollView.showsHorizontalScrollIndicator = false
     }
     
     private func configureMapView(notAvailableParkingSpots: [ParkingSpot]?, notFreeParkingSpots: [ParkingSpot]?, freeParkingSpots: [ParkingSpot]?, reservedParkingSpot: ParkingSpot?, mapCanvas: Canvas) {
@@ -301,8 +302,6 @@ extension MapViewController: MapDisplayLogic {
             
             self?.showMapScrollView()
             
-            self?.hasReservationsForTime = viewModel.hasReservationsForTime
-            
             self?.configureMapView(notAvailableParkingSpots: viewModel.notAvailableParkingSpots, notFreeParkingSpots: viewModel.notFreeParkingSpots, freeParkingSpots: viewModel.freeParkingSpots, reservedParkingSpot: viewModel.reservedParkingSpot, mapCanvas: viewModel.parkingLevelCanvas)
             
             self?.datePicker.date = viewModel.curDate
@@ -377,8 +376,6 @@ extension MapViewController: MapDisplayLogic {
             
             self?.startTimeDatePicker.minimumDate = viewModel.minStartTimeDate
             self?.endTimeDatePicker.minimumDate = viewModel.minEndTimeDate
-
-            self?.hasReservationsForTime = viewModel.hasReservationsForTime
 
             self?.configureMapView(notAvailableParkingSpots: viewModel.notAvailableParkingSpots, notFreeParkingSpots: viewModel.notFreeParkingSpots, freeParkingSpots: viewModel.freeParkingSpots, reservedParkingSpot: viewModel.reservedParkingSpot, mapCanvas: viewModel.parkingLevelCanvas)
         }

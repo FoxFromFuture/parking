@@ -25,7 +25,6 @@ extension HomePresenter: HomePresentationLogic {
         var levelNumbers: [String] = []
         var buildingNames: [String] = []
         var reservationsIDx: [String] = []
-        var isReservationsLimit: Bool = false
     
         /// Retrieve "dates", "start times" and "end times" from reservations
         for reservation in response.reservations {
@@ -56,11 +55,7 @@ extension HomePresenter: HomePresentationLogic {
             }
         }
         
-        if reservationsIDx.count == 5 {
-            isReservationsLimit = true
-        }
-        
-        view?.displayReservations(Model.GetReservations.ViewModel(reservationsCount: response.reservations.count, dates: dates, startTimes: startTimes, endTimes: endTimes, lotNumbets: lotNumbers, levelNumbers: levelNumbers, buildingNames: buildingNames, reservationsIDx: reservationsIDx, isReservationsLimit: isReservationsLimit))
+        view?.displayReservations(Model.GetReservations.ViewModel(reservationsCount: response.reservations.count, dates: dates, startTimes: startTimes, endTimes: endTimes, lotNumbets: lotNumbers, levelNumbers: levelNumbers, buildingNames: buildingNames, reservationsIDx: reservationsIDx))
     }
     
     func presentBuildings(_ response: Model.Buildings.Response) {

@@ -35,6 +35,8 @@ enum UpdateCarModel {
     
     enum UpdateCarRequest {
         struct Request {
+            let carID: String
+            let newModel: String
             let newRegistryNumber: String
         }
         struct Response { }

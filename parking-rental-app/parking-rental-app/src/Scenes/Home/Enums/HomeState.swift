@@ -10,6 +10,4 @@ enum HomeState {
     case loaded
     case error
     case noData
-    case reservationsLimit
-    case active
 }

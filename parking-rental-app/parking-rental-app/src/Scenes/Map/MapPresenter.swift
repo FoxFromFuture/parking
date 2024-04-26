@@ -24,11 +24,6 @@ extension MapPresenter: MapPresentationLogic {
         var notFreeParkingSpots: [ParkingSpot]? = []
         var freeParkingSpotsForTime: [ParkingSpot]? = []
         var reservedParkingSpot: ParkingSpot?
-        var hasReservationsForTime = false
-        
-        if let _ = response.reservations {
-            hasReservationsForTime = true
-        }
         
         for freeSpot in response.freeParkingSpotsForTime {
             if freeSpot.isAvailable == false {
@@ -78,7 +73,7 @@ extension MapPresenter: MapPresentationLogic {
             curStartTimeDate = minStartTimeDate
         }
         
-        view?.displayParkingMap(MapModel.ParkingMap.ViewModel(notAvailableParkingSpots: notAvailableParkingSpots, notFreeParkingSpots: notFreeParkingSpots, freeParkingSpots: freeParkingSpotsForTime, reservedParkingSpot: reservedParkingSpot, parkingLevelCanvas: response.parkingLevelCanvas, buildingForDisplay: response.building, levelForDisplay: response.levelForDisplay, parkingLevels: response.parkingLevels, minStartTimeDate: minStartTimeDate, minEndTimeDate: minEndTimeDate, maxStartTimeDate: maxStartTimeDate, maxEndTimeDate: maxEndTimeDate, minDate: minDate, maxDate: maxDate, curDate: curDate, curStartTimeDate: curStartTimeDate, curEndTimeDate: curEndTimeDate, hasReservationsForTime: hasReservationsForTime))
+        view?.displayParkingMap(MapModel.ParkingMap.ViewModel(notAvailableParkingSpots: notAvailableParkingSpots, notFreeParkingSpots: notFreeParkingSpots, freeParkingSpots: freeParkingSpotsForTime, reservedParkingSpot: reservedParkingSpot, parkingLevelCanvas: response.parkingLevelCanvas, buildingForDisplay: response.building, levelForDisplay: response.levelForDisplay, parkingLevels: response.parkingLevels, minStartTimeDate: minStartTimeDate, minEndTimeDate: minEndTimeDate, maxStartTimeDate: maxStartTimeDate, maxEndTimeDate: maxEndTimeDate, minDate: minDate, maxDate: maxDate, curDate: curDate, curStartTimeDate: curStartTimeDate, curEndTimeDate: curEndTimeDate))
     }
     
     func presentHome(_ response: Model.Home.Response) {
@@ -98,11 +93,6 @@ extension MapPresenter: MapPresentationLogic {
         var notFreeParkingSpots: [ParkingSpot]? = []
         var freeParkingSpotsForTime: [ParkingSpot]? = []
         var reservedParkingSpot: ParkingSpot?
-        var hasReservationsForTime = false
-        
-        if let _ = response.reservations {
-            hasReservationsForTime = true
-        }
         
         for freeSpot in response.freeParkingSpotsForTime {
             if freeSpot.isAvailable == false {
@@ -138,7 +128,7 @@ extension MapPresenter: MapPresentationLogic {
             notAvailableParkingSpots = nil
         }
         
-        view?.displayReloadedMap(MapModel.ReloadMap.ViewModel(notAvailableParkingSpots: notAvailableParkingSpots, notFreeParkingSpots: notFreeParkingSpots, freeParkingSpots: freeParkingSpotsForTime, reservedParkingSpot: reservedParkingSpot, parkingLevelCanvas: response.parkingLevelCanvas, minStartTimeDate: response.minStartTime, minEndTimeDate: response.minEndTime, curEndTimeDate: response.curEndTime, hasReservationsForTime: hasReservationsForTime))
+        view?.displayReloadedMap(MapModel.ReloadMap.ViewModel(notAvailableParkingSpots: notAvailableParkingSpots, notFreeParkingSpots: notFreeParkingSpots, freeParkingSpots: freeParkingSpotsForTime, reservedParkingSpot: reservedParkingSpot, parkingLevelCanvas: response.parkingLevelCanvas, minStartTimeDate: response.minStartTime, minEndTimeDate: response.minEndTime, curEndTimeDate: response.curEndTime))
     }
     
     func presentReservationCard(_ response: Model.ReservationCard.Response) {

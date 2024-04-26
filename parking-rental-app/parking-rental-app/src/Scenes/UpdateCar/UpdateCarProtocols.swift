@@ -47,6 +47,6 @@ protocol UpdateCarRoutingLogic {
 // MARK: - WorkerLogic
 protocol UpdateCarWorkerLogic {
     typealias Model = UpdateCarModel
-    func updateCar(id: String, newRegistryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ())
+    func updateCar(id: String, newModel: String, newRegistryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ())
     func getAllCars(completion: @escaping (_ carsData: [Car]?, _ error: String?) -> ())
 }

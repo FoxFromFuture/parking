@@ -14,8 +14,8 @@ final class RegistrationCarWorker {
 
 // MARK: - WorkerLogic
 extension RegistrationCarWorker: RegistrationCarWorkerLogic {
-    func saveCarRegistryNumber(registryNumber: String, completion: @escaping (Car?, String?) -> ()) {
-        self.networkManager.addNewCar(registryNumber: registryNumber) { carData, error in
+    func saveCarRegistryNumber(model: String, registryNumber: String, completion: @escaping (Car?, String?) -> ()) {
+        self.networkManager.addNewCar(model: model, registryNumber: registryNumber) { carData, error in
             if let error = error {
                 completion(nil, error)
             } else if let data = carData {

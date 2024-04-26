@@ -44,16 +44,16 @@ extension ReservationCardPresenter: ReservationCardPresentationLogic {
         }
         
         if let startTime = startTime, let endTime = endTime, let date = date {
-            view?.displayReservationCardInfo(ReservationCardModel.ReservationCardInfo.ViewModel(parkingLotNumber: response.parkingSpot.parkingNumber, carID: response.car.id, carRegistryNumber: response.car.registryNumber, employeeID: response.car.ownerId, reservationID: response.reservationID, reservationsLimitForTime: response.reservationsLimitForTime, reservationsLimit: response.reservationsLimit, weekendLimit: response.weekendLimit, startTime: startTime, endTime: endTime, date: date))
+            view?.displayReservationCardInfo(ReservationCardModel.ReservationCardInfo.ViewModel(parkingLotNumber: response.parkingSpot.parkingNumber, cars: response.cars, reservationCarRegistryNum: response.reservationCar?.registryNumber, employeeID: response.cars[0].ownerId, reservationID: response.reservationID, reservationsLimitForTime: response.reservationsLimitForTime, reservationsLimit: response.reservationsLimit, weekendLimit: response.weekendLimit, startTime: startTime, endTime: endTime, date: date))
         }
     }
     
     func presentCreateReservation(_ response: Model.CreateReservation.Response) {
-        view?.displayCreateReservation(ReservationCardModel.CreateReservation.ViewModel(reservationID: response.reservationID))
+        view?.displayCreateReservation(ReservationCardModel.CreateReservation.ViewModel(reservationID: response.reservationID, carRegistryNumber: response.car.registryNumber))
     }
     
     func presentCancelReservation(_ response: Model.CancelReservation.Response) {
-        view?.displayCancelReservation(ReservationCardModel.CancelReservation.ViewModel())
+        view?.displayCancelReservation(ReservationCardModel.CancelReservation.ViewModel(cars: response.cars))
     }
     
     func presentLoadingFailure(_ response: Model.LoadingFailure.Response) {

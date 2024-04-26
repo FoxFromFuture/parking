@@ -22,8 +22,8 @@ extension ProfileRouter: ProfileRoutingLogic {
         view?.navigationController?.popViewController(animated: true)
     }
     
-    func routeToUpdateCar() {
-        view?.navigationController?.pushViewController(UpdateCarAssembly.build(), animated: true)
+    func routeToAccountCars() {
+        view?.navigationController?.pushViewController(AccountCarsAssembly.build(), animated: true)
     }
     
     func routeToLogin() {

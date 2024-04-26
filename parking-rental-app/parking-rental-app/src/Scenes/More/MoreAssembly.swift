@@ -11,8 +11,7 @@ enum MoreAssembly {
     static func build() -> UIViewController {
         let router: MoreRouter = MoreRouter()
         let presenter: MorePresenter = MorePresenter()
-        let worker: MoreWorker = MoreWorker()
-        let interactor: MoreInteractor = MoreInteractor(presenter: presenter, worker: worker)
+        let interactor: MoreInteractor = MoreInteractor(presenter: presenter)
         let viewController: MoreViewController = MoreViewController(
             router: router,
             interactor: interactor

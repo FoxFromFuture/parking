@@ -14,8 +14,8 @@ final class UpdateCarWorker {
 
 // MARK: - WorkerLogic
 extension UpdateCarWorker: UpdateCarWorkerLogic {
-    func updateCar(id: String, newRegistryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
-        self.networkManager.updateCar(id: id, registryNumber: newRegistryNumber) { carData, error in
+    func updateCar(id: String, newModel: String, newRegistryNumber: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ()) {
+        self.networkManager.updateCar(id: id, model: newModel, registryNumber: newRegistryNumber) { carData, error in
             if let error = error {
                 completion(nil, error)
             } else if let data = carData {
