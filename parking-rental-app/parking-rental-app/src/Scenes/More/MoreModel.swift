@@ -15,12 +15,6 @@ enum MoreModel {
         struct ViewModel { }
     }
     
-    enum Home {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum Settings {
         struct Request { }
         struct Response { }
@@ -28,6 +22,12 @@ enum MoreModel {
     }
     
     enum FAQ {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum ContactDevs {
         struct Request { }
         struct Response { }
         struct ViewModel { }

@@ -191,10 +191,16 @@ final class ReservationCardViewController: UIViewController {
     }
     
     private func configureCarRegistryNumberButton() {
-//        carRegistryNumberButton.backgroundColor = Colors.secondaryButton.uiColor
+        carRegistryNumberButton.backgroundColor = Colors.secondaryButton.uiColor
         carRegistryNumberButton.layer.cornerRadius = 10
         carRegistryNumberButton.setTitleColor(Colors.active.uiColor, for: .normal)
         carRegistryNumberButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        var config = UIButton.Configuration.filled()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+        config.baseBackgroundColor = Colors.secondaryButton.uiColor
+        config.baseForegroundColor = Colors.secondaryText.uiColor
+        config.cornerStyle = .large
+        carRegistryNumberButton.configuration = config
     }
     
     private func configureTimeLabel() {
@@ -345,7 +351,7 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
                     self?.reservationActionButton.setTitle("reserveLot".localize(), for: .normal)
                     self?.reservationActionButton.backgroundColor = Colors.accent.uiColor
                     self?.reservationActionButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
-                    self?.reservationActionButton.addTarget(self, action: #selector(self?.reserveLotButtonWasTapped), for: .touchDown)
+                    self?.reservationActionButton.addTarget(self, action: #selector(self?.reserveLotButtonWasTapped), for: .touchUpInside)
                 }
             } else if self?.spotState == .reservedSpot {
                 if let label = self?.carRegistryNumberLabel, let bottom = self?.carLabel.bottomAnchor, let centerX = self?.reservationCardView.centerXAnchor {
@@ -359,7 +365,7 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
                 self?.reservationActionButton.backgroundColor = Colors.secondaryButton.uiColor
                 self?.reservationActionButton.setTitleColor(Colors.danger.uiColor, for: .normal)
                 self?.reservationCardView.layer.borderColor = Colors.accent.uiColor.cgColor
-                self?.reservationActionButton.addTarget(self, action: #selector(self?.cancelReservationButtonWasTapped), for: .touchDown)
+                self?.reservationActionButton.addTarget(self, action: #selector(self?.cancelReservationButtonWasTapped), for: .touchUpInside)
             }
         }
     }
@@ -381,7 +387,7 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
             self?.reservationActionButton.setTitleColor(Colors.danger.uiColor, for: .normal)
             self?.reservationCardView.layer.borderColor = Colors.accent.uiColor.cgColor
             self?.reservationActionButton.removeTarget(nil, action: nil, for: .allEvents)
-            self?.reservationActionButton.addTarget(self, action: #selector(self?.cancelReservationButtonWasTapped), for: .touchDown)
+            self?.reservationActionButton.addTarget(self, action: #selector(self?.cancelReservationButtonWasTapped), for: .touchUpInside)
             self?.onUpdateAction()
         }
     }
@@ -414,7 +420,7 @@ extension ReservationCardViewController: ReservationCardDisplayLogic {
             self?.reservationActionButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
             self?.reservationCardView.layer.borderColor = Colors.secondaryButton.uiColor.cgColor
             self?.reservationActionButton.removeTarget(nil, action: nil, for: .allEvents)
-            self?.reservationActionButton.addTarget(self, action: #selector(self?.reserveLotButtonWasTapped), for: .touchDown)
+            self?.reservationActionButton.addTarget(self, action: #selector(self?.reserveLotButtonWasTapped), for: .touchUpInside)
             self?.onUpdateAction()
         }
     }

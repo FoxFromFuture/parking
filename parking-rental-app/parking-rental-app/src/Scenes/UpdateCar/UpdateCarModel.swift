@@ -21,18 +21,6 @@ enum UpdateCarModel {
         struct ViewModel { }
     }
     
-    enum More {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
-    enum Home {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum UpdateCarRequest {
         struct Request {
             let carID: String

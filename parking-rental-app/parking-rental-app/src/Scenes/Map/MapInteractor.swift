@@ -259,14 +259,6 @@ extension MapInteractor: MapBusinessLogic {
         }
     }
     
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(MapModel.Home.Response())
-    }
-    
-    func loadMore(_ request: Model.More.Request) {
-        presenter.presentMore(MapModel.More.Response())
-    }
-    
     func loadPreviousScene(_ request: Model.PreviousScene.Request) {
         presenter.presentPreviousScene(MapModel.PreviousScene.Response())
     }

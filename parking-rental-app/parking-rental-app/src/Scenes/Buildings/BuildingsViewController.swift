@@ -18,7 +18,6 @@ final class BuildingsViewController: UIViewController {
     private let interactor: BuildingsBusinessLogic
     private let router: BuildingsRoutingLogic
     private let availableBuildingsLabel = UILabel()
-    private let tabBar = TabBar()
     private let buildingsCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
@@ -68,7 +67,6 @@ final class BuildingsViewController: UIViewController {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
         configureAvailableBuildingsLabel()
-        configureTabBar()
         configureBuildingsCollectionView()
         configureLoadingIndicator()
         configureLoadingFailureLabel()
@@ -96,29 +94,16 @@ final class BuildingsViewController: UIViewController {
         availableBuildingsLabel.font = .systemFont(ofSize: 36, weight: .bold)
     }
     
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
-    }
-    
     private func configureBuildingsCollectionView() {
         self.view.addSubview(buildingsCollectionView)
         buildingsCollectionView.pinLeft(to: self.view.leadingAnchor)
         buildingsCollectionView.pinRight(to: self.view.trailingAnchor)
         buildingsCollectionView.pinTop(to: self.availableBuildingsLabel.bottomAnchor)
-        buildingsCollectionView.pinBottom(to: self.tabBar.topAnchor)
+        buildingsCollectionView.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor)
         buildingsCollectionView.dataSource = self
         buildingsCollectionView.delegate = self
         buildingsCollectionView.backgroundColor = .clear
+        buildingsCollectionView.showsVerticalScrollIndicator = false
         buildingsCollectionView.contentInset.bottom = 120
         buildingsCollectionView.contentInset.top = 35
         let layout = UICollectionViewFlowLayout()
@@ -194,10 +179,6 @@ extension BuildingsViewController: BuildingsDisplayLogic {
         }
         
         self.reloadCollectionViewData()
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
     }
     
     func displayHome(_ viewModel: Model.Home.ViewModel) {

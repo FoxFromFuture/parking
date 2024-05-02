@@ -14,10 +14,6 @@ final class SettingsRouter {
 
 // MARK: - RoutingLogic
 extension SettingsRouter: SettingsRoutingLogic {
-    func routeToHome() {
-        self.view?.navigationController?.pushViewController(HomeAssembly.build(), animated: false)
-    }
-    
     func routeToMore() {
         self.view?.navigationController?.popViewController(animated: true)
     }

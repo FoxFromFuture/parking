@@ -9,7 +9,6 @@
 protocol ProfileDisplayLogic: AnyObject {
     typealias Model = ProfileModel
     func displayStart(_ viewModel: Model.Start.ViewModel)
-    func displayMore(_ viewModel: Model.More.ViewModel)
     func displayHome(_ viewModel: Model.Home.ViewModel)
     func displayAccountCars(_ viewModel: Model.AccountCars.ViewModel)
     func displayLogin(_ viewModel: Model.Login.ViewModel)
@@ -20,7 +19,6 @@ protocol ProfileDisplayLogic: AnyObject {
 protocol ProfileBusinessLogic {
     typealias Model = ProfileModel
     func loadStart(_ request: Model.Start.Request)
-    func loadMore(_ request: Model.More.Request)
     func loadHome(_ request: Model.Home.Request)
     func loadAccountCars(_ request: Model.AccountCars.Request)
     func loadLogin(_ request: Model.Login.Request)
@@ -31,7 +29,6 @@ protocol ProfileBusinessLogic {
 protocol ProfilePresentationLogic {
     typealias Model = ProfileModel
     func presentStart(_ response: Model.Start.Response)
-    func presentMore(_ response: Model.More.Response)
     func presentHome(_ response: Model.Home.Response)
     func presentAccountCars(_ response: Model.AccountCars.Response)
     func presentLogin(_ response: Model.Login.Response)
@@ -40,7 +37,6 @@ protocol ProfilePresentationLogic {
 
 // MARK: - RoutingLogic
 protocol ProfileRoutingLogic {
-    func routeToMore()
     func routeToHome()
     func routeToAccountCars()
     func routeToLogin()

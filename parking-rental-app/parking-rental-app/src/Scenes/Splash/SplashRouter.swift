@@ -15,10 +15,10 @@ final class SplashRouter {
 // MARK: - RoutingLogic
 extension SplashRouter: SplashRoutingLogic {
     func routeToLogin() {
-        view?.navigationController?.pushViewController(LoginAssembly.build(), animated: true)
+        view?.navigationController?.pushViewController(NotAuthTabBarController(), animated: false)
     }
     
     func routeToHome() {
-        view?.navigationController?.pushViewController(HomeAssembly.build(), animated: true)
+        view?.navigationController?.pushViewController(TabBarController(), animated: false)
     }
 }

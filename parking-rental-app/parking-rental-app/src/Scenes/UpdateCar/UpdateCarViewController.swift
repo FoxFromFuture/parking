@@ -18,7 +18,6 @@ final class UpdateCarViewController: UIViewController {
     private let interactor: UpdateCarBusinessLogic
     private let router: UpdateCarRoutingLogic
     private let carID: String
-    private let tabBar = TabBar()
     private let titleLabel = UILabel()
     private let subTitleLabel = UILabel()
     private let carModelTextField = UITextField()
@@ -62,7 +61,6 @@ final class UpdateCarViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureTitleLabel()
         configureSubTitleLabel()
         configureCarModelTextField()
@@ -80,20 +78,6 @@ final class UpdateCarViewController: UIViewController {
             action: #selector(goBack)
         )
         navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
     }
     
     private func configureTitleLabel() {
@@ -155,7 +139,7 @@ final class UpdateCarViewController: UIViewController {
         saveButton.setTitle("save".localize(), for: .normal)
         saveButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
         saveButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        saveButton.addTarget(self, action: #selector(saveButtonWasTapped), for: .touchDown)
+        saveButton.addTarget(self, action: #selector(saveButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureCarUpdateFailureLabel() {
@@ -213,14 +197,6 @@ extension UpdateCarViewController: UpdateCarDisplayLogic {
     
     func displayProfile(_ viewModel: Model.Profile.ViewModel) {
         self.router.routeToProfile()
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
-    }
-    
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
     }
     
     func displayUpdateCarRequest(_ viewModel: Model.UpdateCarRequest.ViewModel) {

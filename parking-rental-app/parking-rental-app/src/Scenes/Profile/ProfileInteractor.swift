@@ -25,10 +25,6 @@ extension ProfileInteractor: ProfileBusinessLogic {
         presenter.presentStart(Model.Start.Response())
     }
     
-    func loadMore(_ request: Model.More.Request) {
-        presenter.presentMore(Model.More.Response())
-    }
-    
     func loadHome(_ request: Model.Home.Request) {
         presenter.presentHome(Model.Home.Response())
     }

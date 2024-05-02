@@ -23,10 +23,6 @@ extension FAQInteractor: FAQBusinessLogic {
         presenter.presentStart(Model.Start.Response())
     }
     
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(FAQModel.Home.Response())
-    }
-    
     func loadMore(_ request: Model.More.Request) {
         presenter.presentMore(FAQModel.More.Response())
     }

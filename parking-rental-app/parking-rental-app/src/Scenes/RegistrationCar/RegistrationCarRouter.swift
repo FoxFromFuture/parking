@@ -15,6 +15,6 @@ final class RegistrationCarRouter {
 // MARK: - RoutingLogic
 extension RegistrationCarRouter: RegistrationCarRoutingLogic {
     func routeToHome() {
-        view?.navigationController?.pushViewController(HomeAssembly.build(), animated: true)
+        view?.navigationController?.pushViewController(OnboardingAssembly.build(), animated: true)
     }
 }

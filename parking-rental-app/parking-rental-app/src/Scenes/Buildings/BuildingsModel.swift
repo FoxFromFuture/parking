@@ -28,12 +28,6 @@ enum BuildingsModel {
         }
     }
     
-    enum More {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum Home {
         struct Request { }
         struct Response { }

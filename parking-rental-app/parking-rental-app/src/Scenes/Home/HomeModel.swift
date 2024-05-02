@@ -62,12 +62,6 @@ enum HomeModel {
         struct ViewModel { }
     }
     
-    enum More {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum LoadingFailure {
         struct Request { }
         struct Response { }

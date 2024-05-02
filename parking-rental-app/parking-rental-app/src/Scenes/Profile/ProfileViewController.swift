@@ -17,7 +17,6 @@ final class ProfileViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: ProfileBusinessLogic
     private let router: ProfileRoutingLogic
-    private let tabBar = TabBar()
     private let titleLabel = UILabel()
     private let logOutButton = UIButton()
     private let carSingleCardButton = SingleCardButton()
@@ -49,7 +48,6 @@ final class ProfileViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureTitleLabel()
         configureAccountSingleCardButton()
         configureCarSingleCardButton()
@@ -65,20 +63,6 @@ final class ProfileViewController: UIViewController {
             action: #selector(goBack)
         )
         navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
     }
     
     private func configureTitleLabel() {
@@ -114,7 +98,7 @@ final class ProfileViewController: UIViewController {
     
     private func configureLogOutButton() {
         self.view.addSubview(logOutButton)
-        logOutButton.pinBottom(to: self.tabBar.topAnchor, 25)
+        logOutButton.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor, 25)
         logOutButton.setHeight(70)
         logOutButton.pinHorizontal(to: self.view, 17)
         logOutButton.backgroundColor = Colors.secondaryButton.uiColor
@@ -122,7 +106,7 @@ final class ProfileViewController: UIViewController {
         logOutButton.setTitle("logOut".localize(), for: .normal)
         logOutButton.setTitleColor(Colors.danger.uiColor, for: .normal)
         logOutButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        logOutButton.addTarget(self, action: #selector(logOutButtonWasTapped), for: .touchDown)
+        logOutButton.addTarget(self, action: #selector(logOutButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureLogOutAlert() {
@@ -152,11 +136,7 @@ extension ProfileViewController: ProfileDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
         self.configureUI()
     }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
-    }
-    
+
     func displayHome(_ viewModel: Model.Home.ViewModel) {
         self.router.routeToHome()
     }

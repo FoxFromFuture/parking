@@ -136,7 +136,7 @@ final class RegistrationViewController: UIViewController {
         registerButton.setTitle("register".localize(), for: .normal)
         registerButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
         registerButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        registerButton.addTarget(self, action: #selector(registerButtonWasTapped), for: .touchDown)
+        registerButton.addTarget(self, action: #selector(registerButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureRegistrationFailureLabel() {

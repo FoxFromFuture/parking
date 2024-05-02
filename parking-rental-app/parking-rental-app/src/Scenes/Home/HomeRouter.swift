@@ -25,8 +25,4 @@ extension HomeRouter: HomeRoutingLogic {
     func routeToProfile() {
         view?.navigationController?.pushViewController(ProfileAssembly.build(), animated: true)
     }
-    
-    func routeToMore() {
-        view?.navigationController?.pushViewController(MoreAssembly.build(), animated: false)
-    }
 }

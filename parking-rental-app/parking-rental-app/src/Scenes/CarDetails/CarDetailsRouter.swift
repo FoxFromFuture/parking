@@ -14,14 +14,6 @@ final class CarDetailsRouter {
 
 // MARK: - RoutingLogic
 extension CarDetailsRouter: CarDetailsRoutingLogic {
-    func routeToMore() {
-        view?.navigationController?.pushViewController(MoreAssembly.build(), animated: false)
-    }
-    
-    func routeToHome() {
-        view?.navigationController?.pushViewController(HomeAssembly.build(), animated: false)
-    }
-    
     func routeToAccountCars() {
         view?.navigationController?.popViewController(animated: true)
     }

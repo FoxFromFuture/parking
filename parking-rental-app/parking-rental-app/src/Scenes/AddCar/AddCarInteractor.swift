@@ -24,14 +24,6 @@ extension AddCarInteractor: AddCarBusinessLogic {
         presenter.presentStart(Model.Start.Response())
     }
     
-    func loadMore(_ request: Model.More.Request) {
-        presenter.presentMore(AddCarModel.More.Response())
-    }
-    
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentMore(AddCarModel.More.Response())
-    }
-    
     func loadAccountCars(_ request: Model.AccountCars.Request) {
         presenter.presentAccountCars(AddCarModel.AccountCars.Response())
     }

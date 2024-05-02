@@ -70,10 +70,6 @@ extension HomePresenter: HomePresentationLogic {
         view?.displayProfile(Model.Profile.ViewModel())
     }
     
-    func presentMore(_ response: Model.More.Response) {
-        view?.displayMore(Model.More.ViewModel())
-    }
-    
     func presentLoadingFailure(_ response: Model.LoadingFailure.Response) {
         view?.displayLoadingFailure(Model.LoadingFailure.ViewModel())
     }

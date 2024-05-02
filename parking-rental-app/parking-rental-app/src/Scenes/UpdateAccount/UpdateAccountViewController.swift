@@ -17,7 +17,6 @@ final class UpdateAccountViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: UpdateAccountBusinessLogic
     private let router: UpdateAccountRoutingLogic
-    private let tabBar                           = TabBar()
     private let saveButton                       = UIButton()
     private let titleLabel                       = UILabel()
     private let subTitleLabel                    = UILabel()
@@ -61,7 +60,6 @@ final class UpdateAccountViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureTitleLabel()
         configureSubTitleLabel()
         configureNameTextField()
@@ -80,20 +78,6 @@ final class UpdateAccountViewController: UIViewController {
             action: #selector(goBack)
         )
         navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
     }
     
     private func configureTitleLabel() {
@@ -168,7 +152,7 @@ final class UpdateAccountViewController: UIViewController {
         saveButton.setTitle("save".localize(), for: .normal)
         saveButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
         saveButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        saveButton.addTarget(self, action: #selector(saveButtonWasTapped), for: .touchDown)
+        saveButton.addTarget(self, action: #selector(saveButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureAccountUpdateFailureLabel() {
@@ -224,14 +208,6 @@ final class UpdateAccountViewController: UIViewController {
 extension UpdateAccountViewController: UpdateAccountDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
         self.configureUI()
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
-    }
-    
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
     }
     
     func displayAccountDetails(_ viewModel: Model.AccountDetails.ViewModel) {

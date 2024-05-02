@@ -15,7 +15,10 @@ final class RegistrationRouter {
 // MARK: - RoutingLogic
 extension RegistrationRouter: RegistrationRoutingLogic {
     func routeToRegistrationCar() {
-        view?.navigationController?.pushViewController(RegistrationCarAssembly.build(), animated: true)
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            fatalError("could not get scene delegate ")
+        }
+        sceneDelegate.navigationController.pushViewController(RegistrationCarAssembly.build(), animated: true)
     }
     
     func routeToLogin() {

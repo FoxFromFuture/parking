@@ -17,7 +17,6 @@ final class AccountCarsViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: AccountCarsBusinessLogic
     private let router: AccountCarsRoutingLogic
-    private let tabBar = TabBar()
     private let carsCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
@@ -71,7 +70,6 @@ final class AccountCarsViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureCarsCollectionView()
         configureAddNewCarButton()
         configureLoadingIndicator()
@@ -90,26 +88,12 @@ final class AccountCarsViewController: UIViewController {
         navigationItem.title = "cars".localize()
     }
     
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
-    }
-    
     private func configureCarsCollectionView() {
         self.view.addSubview(carsCollectionView)
         carsCollectionView.pinLeft(to: self.view.leadingAnchor)
         carsCollectionView.pinRight(to: self.view.trailingAnchor)
         carsCollectionView.pinTop(to: self.view.topAnchor)
-        carsCollectionView.pinBottom(to: self.tabBar.topAnchor)
+        carsCollectionView.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor)
         carsCollectionView.dataSource = self
         carsCollectionView.delegate = self
         carsCollectionView.backgroundColor = .clear
@@ -120,7 +104,7 @@ final class AccountCarsViewController: UIViewController {
     
     private func configureAddNewCarButton() {
         self.view.addSubview(addNewCarButton)
-        addNewCarButton.pinBottom(to: self.tabBar.topAnchor, 25)
+        addNewCarButton.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor, 25)
         addNewCarButton.setHeight(70)
         addNewCarButton.pinHorizontal(to: self.view, 17)
         addNewCarButton.backgroundColor = Colors.secondaryButton.uiColor
@@ -139,7 +123,7 @@ final class AccountCarsViewController: UIViewController {
     private func setAddNewCarButtonEnable() {
         addNewCarButton.backgroundColor = Colors.accent.uiColor
         addNewCarButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
-        addNewCarButton.addTarget(self, action: #selector(addNewCarButtonWasTapped), for: .touchDown)
+        addNewCarButton.addTarget(self, action: #selector(addNewCarButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureLoadingIndicator() {
@@ -210,14 +194,6 @@ final class AccountCarsViewController: UIViewController {
 extension AccountCarsViewController: AccountCarsDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
         self.configureUI()
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
-    }
-    
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
     }
     
     func displayProfile(_ viewModel: Model.Profile.ViewModel) {

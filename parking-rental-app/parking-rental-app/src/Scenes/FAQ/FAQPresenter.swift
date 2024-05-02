@@ -16,10 +16,6 @@ extension FAQPresenter: FAQPresentationLogic {
         view?.displayStart(Model.Start.ViewModel())
     }
     
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(FAQModel.Home.ViewModel())
-    }
-    
     func presentMore(_ response: Model.More.Response) {
         view?.displayMore(Model.More.ViewModel())
     }

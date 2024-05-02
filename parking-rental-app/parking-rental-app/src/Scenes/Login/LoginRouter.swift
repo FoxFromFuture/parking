@@ -15,7 +15,10 @@ final class LoginRouter {
 // MARK: - RoutingLogic
 extension LoginRouter: LoginRoutingLogic {
     func routeToHome() {
-        view?.navigationController?.pushViewController(HomeAssembly.build(), animated: true)
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            fatalError("could not get scene delegate ")
+        }
+        sceneDelegate.navigationController.pushViewController(TabBarController(), animated: false)
     }
     
     func routeToRegistration() {

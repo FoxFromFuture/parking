@@ -17,7 +17,6 @@ final class SettingsViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: SettingsBusinessLogic
     private let router: SettingsRoutingLogic
-    private let tabBar = TabBar()
     private let multipleButtonsCard = MultipleButtonsCard()
     private let languageChoiceAlert = UIAlertController(
         title: "changeLanguageAlert".localize(),
@@ -52,7 +51,6 @@ final class SettingsViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureMultipleButtonsCard()
         configureLanguageChoiceAlert()
         configureThemeChoiceAlert()
@@ -67,21 +65,6 @@ final class SettingsViewController: UIViewController {
         )
         navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
         navigationItem.title = "settings".localize()
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
-        tabBar.setMoreButtonActive()
     }
     
     private func configureLanguageChoiceAlert() {
@@ -116,6 +99,8 @@ final class SettingsViewController: UIViewController {
         multipleButtonsCard.addButton(title: "theme".localize(), activeValue: self.curTheme.str()) { [weak self] in
             self?.navigationController?.present(self?.themeChoiceAlert ?? UIAlertController(), animated: true)
         }
+        multipleButtonsCard.deleteTitle()
+        multipleButtonsCard.deleteBottomText()
     }
     
     // MARK: - Actions
@@ -132,10 +117,6 @@ extension SettingsViewController: SettingsDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
         self.curTheme = viewModel.curTheme
         self.configureUI()
-    }
-    
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
     }
     
     func displayMore(_ viewModel: Model.More.ViewModel) {

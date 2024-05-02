@@ -36,18 +36,6 @@ enum CarDetailsModel {
         struct ViewModel { }
     }
     
-    enum More {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
-    enum Home {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum AccountCars {
         struct Request { }
         struct Response { }

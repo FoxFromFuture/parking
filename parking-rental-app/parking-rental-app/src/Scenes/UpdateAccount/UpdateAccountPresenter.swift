@@ -16,14 +16,6 @@ extension UpdateAccountPresenter: UpdateAccountPresentationLogic {
         view?.displayStart(Model.Start.ViewModel())
     }
     
-    func presentMore(_ response: Model.More.Response) {
-        view?.displayMore(UpdateAccountModel.More.ViewModel())
-    }
-    
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(UpdateAccountModel.Home.ViewModel())
-    }
-    
     func presentAccountDetails(_ response: Model.AccountDetails.Response) {
         view?.displayAccountDetails(UpdateAccountModel.AccountDetails.ViewModel())
     }

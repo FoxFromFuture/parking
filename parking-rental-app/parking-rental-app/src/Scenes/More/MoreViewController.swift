@@ -17,10 +17,10 @@ final class MoreViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: MoreBusinessLogic
     private let router: MoreRoutingLogic
-    private let tabBar = TabBar()
     private let titleLabel = UILabel()
     private let settingsSingleCardButton = SingleCardButton()
     private let FAQSingleCardButton = SingleCardButton()
+    private let extrasView = MultipleButtonsCard()
     
     // MARK: - LifeCycle
     init(
@@ -49,29 +49,16 @@ final class MoreViewController: UIViewController {
     // MARK: - Configuration
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
-        configureTabBar()
         configureTitleLabel()
         configureSettingsSingleCardButton()
         configureFAQSingleCardButton()
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
-        tabBar.setMoreButtonActive()
+        configureExtrasView()
     }
     
     private func configureTitleLabel() {
         self.view.addSubview(titleLabel)
         titleLabel.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 40)
         titleLabel.pinLeft(to: self.view.leadingAnchor, 17)
-        titleLabel.setHeight(45)
         titleLabel.text = "more".localize()
         titleLabel.textAlignment = .left
         titleLabel.textColor = Colors.mainText.uiColor
@@ -98,6 +85,17 @@ final class MoreViewController: UIViewController {
         }
     }
     
+    private func configureExtrasView() {
+        self.view.addSubview(extrasView)
+        extrasView.pinHorizontal(to: self.view, 17)
+        extrasView.pinTop(to: self.FAQSingleCardButton.bottomAnchor, 40)
+        extrasView.addButton(title: "contactDevsButton".localize(), activeValue: "") { [weak self] in
+            self?.interactor.loadContactDevs(MoreModel.ContactDevs.Request())
+        }
+        extrasView.setTitle(title: "extras".localize())
+        extrasView.setBottomText(text: "version".localize())
+    }
+    
     // MARK: - Actions
 }
 
@@ -107,15 +105,15 @@ extension MoreViewController: MoreDisplayLogic {
         self.configureUI()
     }
     
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
-    }
-    
     func displaySettings(_ viewModel: Model.Settings.ViewModel) {
         self.router.routeToSettings()
     }
     
     func displayFAQ(_ viewModel: Model.FAQ.ViewModel) {
         self.router.routeToFAQ()
+    }
+    
+    func displayContactDevs(_ viewModel: Model.ContactDevs.ViewModel) {
+        self.router.routeToContactDevs()
     }
 }

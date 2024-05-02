@@ -17,7 +17,6 @@ final class HomeViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: HomeBusinessLogic
     private let router: HomeRoutingLogic
-    private let tabBar = TabBar()
     private let profileLabelButton = ProfileLabelButton()
     private let reserveLotButton = UIButton()
     private let reservationsCollectionView = UICollectionView(
@@ -80,7 +79,6 @@ final class HomeViewController: UIViewController {
     // MARK: - Configuration
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
-        configureTabBar()
         configureProfileLabelButton()
         configureReservationsCollectionView()
         configureReserveLotButton()
@@ -88,17 +86,6 @@ final class HomeViewController: UIViewController {
         configureLoadingFailureLabel()
         configureReloadButton()
         configureNoDataLabel()
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
     }
     
     private func configureProfileLabelButton() {
@@ -120,7 +107,7 @@ final class HomeViewController: UIViewController {
         reservationsCollectionView.pinLeft(to: self.view.leadingAnchor)
         reservationsCollectionView.pinRight(to: self.view.trailingAnchor)
         reservationsCollectionView.pinTop(to: self.profileLabelButton.bottomAnchor)
-        reservationsCollectionView.pinBottom(to: self.tabBar.topAnchor)
+        reservationsCollectionView.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor)
         reservationsCollectionView.dataSource = self
         reservationsCollectionView.delegate = self
         reservationsCollectionView.backgroundColor = .clear
@@ -134,7 +121,7 @@ final class HomeViewController: UIViewController {
     
     private func configureReserveLotButton() {
         self.view.addSubview(reserveLotButton)
-        reserveLotButton.pinBottom(to: self.tabBar.topAnchor, 25)
+        reserveLotButton.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor, 25)
         reserveLotButton.setHeight(70)
         reserveLotButton.pinHorizontal(to: self.view, 17)
         reserveLotButton.backgroundColor = Colors.accent.uiColor
@@ -142,7 +129,7 @@ final class HomeViewController: UIViewController {
         reserveLotButton.setTitle("reserveLot".localize(), for: .normal)
         reserveLotButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
         reserveLotButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        reserveLotButton.addTarget(self, action: #selector(reserveLotButtonWasTapped), for: .touchDown)
+        reserveLotButton.addTarget(self, action: #selector(reserveLotButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureLoadingIndicator() {
@@ -237,10 +224,6 @@ extension HomeViewController: HomeDisplayLogic {
     
     func displayProfile(_ viewModel: Model.Profile.ViewModel) {
         self.router.routeToProfile()
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
     }
     
     func displayLoadingFailure(_ viewModel: Model.LoadingFailure.ViewModel) {

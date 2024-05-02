@@ -126,7 +126,7 @@ final class RegistrationCarViewController: UIViewController {
         continueButton.setTitle("continue".localize(), for: .normal)
         continueButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
         continueButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        continueButton.addTarget(self, action: #selector(continueButtonWasTapped), for: .touchDown)
+        continueButton.addTarget(self, action: #selector(continueButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureCarSetupFailureLabel() {

@@ -17,7 +17,6 @@ final class FAQViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: FAQBusinessLogic
     private let router: FAQRoutingLogic
-    private let tabBar = TabBar()
     private let questionsCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: JumpAvoidingFlowLayout()
@@ -51,7 +50,6 @@ final class FAQViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureQuestionsCollectionView()
     }
     
@@ -66,32 +64,18 @@ final class FAQViewController: UIViewController {
         navigationItem.title = "FAQ".localize()
     }
     
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
-        tabBar.setMoreButtonActive()
-    }
-    
     private func configureQuestionsCollectionView() {
         self.view.addSubview(questionsCollectionView)
         questionsCollectionView.pinLeft(to: self.view.leadingAnchor)
         questionsCollectionView.pinRight(to: self.view.trailingAnchor)
         questionsCollectionView.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor)
-        questionsCollectionView.pinBottom(to: self.tabBar.topAnchor)
+        questionsCollectionView.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor)
         questionsCollectionView.dataSource = self
         questionsCollectionView.delegate = self
         questionsCollectionView.backgroundColor = .clear
         questionsCollectionView.showsVerticalScrollIndicator = false
         questionsCollectionView.allowsMultipleSelection = true
+        questionsCollectionView.alwaysBounceVertical = true
         questionsCollectionView.register(QuestionCell.self, forCellWithReuseIdentifier: "QuestionCell")
     }
     
@@ -108,10 +92,6 @@ final class FAQViewController: UIViewController {
 extension FAQViewController: FAQDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
         self.configureUI()
-    }
-    
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
     }
     
     func displayMore(_ viewModel: Model.More.ViewModel) {
@@ -156,7 +136,7 @@ extension FAQViewController: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 35, left: 17, bottom: 120, right: 17)
+        UIEdgeInsets(top: 35, left: 17, bottom: 35, right: 17)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -20,14 +20,6 @@ extension CarDetailsPresenter: CarDetailsPresentationLogic {
         view?.displayCarDetails(CarDetailsModel.CarDetails.ViewModel(model: response.car.model, registryNumber: response.car.registryNumber, isOnlyOneCarLasts: response.isOnlyOneCarLasts))
     }
     
-    func presentMore(_ response: Model.More.Response) {
-        view?.displayMore(CarDetailsModel.More.ViewModel())
-    }
-    
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(CarDetailsModel.Home.ViewModel())
-    }
-    
     func presentAccountCars(_ response: Model.AccountCars.Response) {
         view?.displayAccountCars(CarDetailsModel.AccountCars.ViewModel())
     }

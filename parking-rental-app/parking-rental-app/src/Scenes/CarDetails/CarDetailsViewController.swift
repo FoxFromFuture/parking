@@ -18,7 +18,6 @@ final class CarDetailsViewController: UIViewController {
     private let interactor: CarDetailsBusinessLogic
     private let router: CarDetailsRoutingLogic
     private let carIDForPresent: String
-    private let tabBar = TabBar()
     private let modelDetailsCardButton = DetailsCardButton()
     private let registryNumberDetailsCardButton = DetailsCardButton()
     private let deleteCarButton = UIButton()
@@ -69,7 +68,6 @@ final class CarDetailsViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureDeleteCarButton()
         configureDeleteCarAlert()
         configureUpdateDetailsButton()
@@ -87,20 +85,6 @@ final class CarDetailsViewController: UIViewController {
         )
         navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
         navigationItem.title = "carDetails".localize()
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
     }
     
     private func configureModelDetailsCardButton(model: String) {
@@ -123,7 +107,7 @@ final class CarDetailsViewController: UIViewController {
     
     private func configureDeleteCarButton() {
         self.view.addSubview(deleteCarButton)
-        deleteCarButton.pinBottom(to: self.tabBar.topAnchor, 25)
+        deleteCarButton.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor, 25)
         deleteCarButton.setHeight(70)
         deleteCarButton.pinHorizontal(to: self.view, 17)
         deleteCarButton.backgroundColor = Colors.secondaryButton.uiColor
@@ -140,7 +124,7 @@ final class CarDetailsViewController: UIViewController {
     
     private func setDeleteCarButtonEnable() {
         deleteCarButton.setTitleColor(Colors.danger.uiColor, for: .normal)
-        deleteCarButton.addTarget(self, action: #selector(deleteCarButtonWasTapped), for: .touchDown)
+        deleteCarButton.addTarget(self, action: #selector(deleteCarButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureDeleteCarAlert() {
@@ -161,7 +145,7 @@ final class CarDetailsViewController: UIViewController {
         updateDetailsButton.setTitle("updateCarDetails".localize(), for: .normal)
         updateDetailsButton.setTitleColor(Colors.active.uiColor, for: .normal)
         updateDetailsButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        updateDetailsButton.addTarget(self, action: #selector(updateDetailsButtonWasTapped), for: .touchDown)
+        updateDetailsButton.addTarget(self, action: #selector(updateDetailsButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureLoadingIndicator() {
@@ -248,14 +232,6 @@ extension CarDetailsViewController: CarDetailsDisplayLogic {
                 self?.currentState = .deleteCarActive
             }
         }
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
-    }
-    
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
     }
     
     func displayAccountCars(_ viewModel: Model.AccountCars.ViewModel) {

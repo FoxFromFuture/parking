@@ -29,14 +29,6 @@ extension UpdateCarInteractor: UpdateCarBusinessLogic {
         presenter.presentProfile(Model.Profile.Response())
     }
     
-    func loadMore(_ request: Model.More.Request) {
-        presenter.presentMore(Model.More.Response())
-    }
-    
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(Model.Home.Response())
-    }
-    
     func loadUpdateCarRequest(_ request: Model.UpdateCarRequest.Request) {
         self.worker.updateCar(id: request.carID, newModel: request.newModel, newRegistryNumber: request.newRegistryNumber) { [weak self] carData, error in
             if let error = error {

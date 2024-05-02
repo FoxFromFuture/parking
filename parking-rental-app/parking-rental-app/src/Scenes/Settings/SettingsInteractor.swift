@@ -25,10 +25,6 @@ extension SettingsInteractor: SettingsBusinessLogic {
         presenter.presentStart(Model.Start.Response(curTheme: curTheme))
     }
     
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(SettingsModel.Home.Response())
-    }
-    
     func loadMore(_ request: Model.More.Request) {
         presenter.presentMore(SettingsModel.More.Response())
     }

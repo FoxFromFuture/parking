@@ -14,14 +14,6 @@ final class MapRouter {
 
 // MARK: - RoutingLogic
 extension MapRouter: MapRoutingLogic {
-    func routeToHome() {
-        view?.navigationController?.pushViewController(HomeAssembly.build(), animated: false)
-    }
-    
-    func routeToMore() {
-        view?.navigationController?.pushViewController(MoreAssembly.build(), animated: false)
-    }
-    
     func routeToPreviousScene() {
         view?.navigationController?.popViewController(animated: true)
     }

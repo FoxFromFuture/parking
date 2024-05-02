@@ -76,14 +76,6 @@ extension MapPresenter: MapPresentationLogic {
         view?.displayParkingMap(MapModel.ParkingMap.ViewModel(notAvailableParkingSpots: notAvailableParkingSpots, notFreeParkingSpots: notFreeParkingSpots, freeParkingSpots: freeParkingSpotsForTime, reservedParkingSpot: reservedParkingSpot, parkingLevelCanvas: response.parkingLevelCanvas, buildingForDisplay: response.building, levelForDisplay: response.levelForDisplay, parkingLevels: response.parkingLevels, minStartTimeDate: minStartTimeDate, minEndTimeDate: minEndTimeDate, maxStartTimeDate: maxStartTimeDate, maxEndTimeDate: maxEndTimeDate, minDate: minDate, maxDate: maxDate, curDate: curDate, curStartTimeDate: curStartTimeDate, curEndTimeDate: curEndTimeDate))
     }
     
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(MapModel.Home.ViewModel()     )
-    }
-    
-    func presentMore(_ response: Model.More.Response) {
-        view?.displayMore(MapModel.More.ViewModel())
-    }
-    
     func presentPreviousScene(_ response: Model.PreviousScene.Response) {
         view?.displayPreviousScene(MapModel.PreviousScene.ViewModel())
     }

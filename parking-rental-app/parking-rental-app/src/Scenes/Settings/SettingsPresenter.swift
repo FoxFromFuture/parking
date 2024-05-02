@@ -15,11 +15,7 @@ extension SettingsPresenter: SettingsPresentationLogic {
     func presentStart(_ response: Model.Start.Response) {
         view?.displayStart(Model.Start.ViewModel(curTheme: response.curTheme))
     }
-    
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(Model.Home.ViewModel())
-    }
-    
+
     func presentMore(_ response: Model.More.Response) {
         view?.displayMore(SettingsModel.More.ViewModel())
     }

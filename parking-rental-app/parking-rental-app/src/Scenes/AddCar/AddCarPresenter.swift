@@ -15,15 +15,7 @@ extension AddCarPresenter: AddCarPresentationLogic {
     func presentStart(_ response: Model.Start.Response) {
         view?.displayStart(Model.Start.ViewModel())
     }
-    
-    func presentMore(_ response: Model.More.Response) {
-        view?.displayMore(AddCarModel.More.ViewModel())
-    }
-    
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(Model.Home.ViewModel())
-    }
-    
+
     func presentAccountCars(_ response: Model.AccountCars.Response) {
         view?.displayAccountCars(Model.AccountCars.ViewModel())
     }

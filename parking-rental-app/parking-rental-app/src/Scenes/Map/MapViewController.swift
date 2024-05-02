@@ -19,9 +19,12 @@ final class MapViewController: UIViewController {
     private let router: MapRoutingLogic
     private let initReservationID: String?
     private let initBuildingID: String?
-    private let tabBar = TabBar()
     private let mapScrollView = UIScrollView()
     private var mapView: MapView?
+    private let startTimeView = UIView()
+    private let startTimeLabel = UILabel()
+    private let endTimeView = UIView()
+    private let endTimeLabel = UILabel()
     private let floorButton = UIButton()
     private let datePicker = UIDatePicker()
     private let startTimeDatePicker = UIDatePicker()
@@ -67,8 +70,11 @@ final class MapViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureDatePicker()
+        configureStartTimeView()
+        configureStartTimeLabel()
+        configureEndTimeView()
+        configureEndTimeLabel()
         configureStartTimeDatePicker()
         configureFloorButton()
         configureEndTimeDatePicker()
@@ -88,24 +94,10 @@ final class MapViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
     }
     
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
-    }
-    
     private func configureDatePicker() {
         datePicker.calendar = Calendar.current
         datePicker.datePickerMode = .date
-        datePicker.backgroundColor = Colors.secondaryButton.uiColor
+        datePicker.backgroundColor = Colors.background.uiColor
         datePicker.layer.masksToBounds = true
         datePicker.layer.cornerRadius = 10
         datePicker.addTarget(self, action: #selector(datePickerValueWasChanged), for: .editingDidEnd)
@@ -119,22 +111,41 @@ final class MapViewController: UIViewController {
         floorButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
     }
     
+    private func configureStartTimeView() {
+        startTimeView.backgroundColor = Colors.secondaryButton.uiColor
+        startTimeView.layer.cornerRadius = 10
+    }
+    
+    private func configureStartTimeLabel() {
+        startTimeLabel.text = "startTime".localize()
+        startTimeLabel.textColor = Colors.mainText.uiColor
+        startTimeLabel.font = .systemFont(ofSize: 16, weight: .medium)
+    }
+    
     private func configureStartTimeDatePicker() {
         startTimeDatePicker.calendar = Calendar.current
         startTimeDatePicker.datePickerMode = .time
-        startTimeDatePicker.backgroundColor = Colors.secondaryButton.uiColor
         startTimeDatePicker.minuteInterval = 30
         startTimeDatePicker.layer.masksToBounds = true
         startTimeDatePicker.layer.cornerRadius = 10
-        startTimeDatePicker.layer.backgroundColor = UIColor.clear.cgColor
         startTimeDatePicker.addTarget(self, action: #selector(startTimeDatePickerValueWasChanged), for: .editingDidEnd)
+    }
+    
+    private func configureEndTimeView() {
+        endTimeView.backgroundColor = Colors.secondaryButton.uiColor
+        endTimeView.layer.cornerRadius = 10
+    }
+    
+    private func configureEndTimeLabel() {
+        endTimeLabel.text = "endTime".localize()
+        endTimeLabel.textColor = Colors.mainText.uiColor
+        endTimeLabel.font = .systemFont(ofSize: 16, weight: .medium)
     }
     
     private func configureEndTimeDatePicker() {
         endTimeDatePicker.calendar = Calendar.current
         endTimeDatePicker.datePickerMode = .time
         endTimeDatePicker.minuteInterval = 30
-        endTimeDatePicker.backgroundColor = Colors.secondaryButton.uiColor
         endTimeDatePicker.layer.masksToBounds = true
         endTimeDatePicker.layer.cornerRadius = 10
         endTimeDatePicker.addTarget(self, action: #selector(endTimeDatePickerValueWasChanged), for: .editingDidEnd)
@@ -198,13 +209,31 @@ final class MapViewController: UIViewController {
             floorButton.pinLeft(to: self.view.leadingAnchor, 17)
             floorButton.setWidth(90)
             
-            self.view.addSubview(startTimeDatePicker)
-            startTimeDatePicker.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 5)
-            startTimeDatePicker.pinRight(to: self.view.trailingAnchor, 17)
+            self.view.addSubview(startTimeView)
+            startTimeView.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor, 5)
+            startTimeView.pinRight(to: self.view.trailingAnchor, 17)
             
-            self.view.addSubview(endTimeDatePicker)
-            endTimeDatePicker.pinTop(to: self.startTimeDatePicker.bottomAnchor, 10)
-            endTimeDatePicker.pinRight(to: self.view.trailingAnchor, 17)
+            self.startTimeView.addSubview(startTimeDatePicker)
+            startTimeDatePicker.pinVertical(to: self.startTimeView, 5)
+            startTimeDatePicker.pinRight(to: self.startTimeView.trailingAnchor, 10)
+            
+            self.startTimeView.addSubview(startTimeLabel)
+            startTimeLabel.pinLeft(to: self.startTimeView.leadingAnchor, 10)
+            startTimeLabel.pinVertical(to: self.startTimeView, 5)
+            startTimeLabel.pinRight(to: self.startTimeDatePicker.leadingAnchor, 5)
+            
+            self.view.addSubview(endTimeView)
+            endTimeView.pinTop(to: self.startTimeDatePicker.bottomAnchor, 10)
+            endTimeView.pinRight(to: self.view.trailingAnchor, 17)
+            
+            self.endTimeView.addSubview(endTimeDatePicker)
+            endTimeDatePicker.pinVertical(to: self.endTimeView, 5)
+            endTimeDatePicker.pinRight(to: self.endTimeView.trailingAnchor, 10)
+            
+            self.endTimeView.addSubview(endTimeLabel)
+            endTimeLabel.pinLeft(to: self.endTimeView.leadingAnchor, 10)
+            endTimeLabel.pinVertical(to: self.endTimeView, 5)
+            endTimeLabel.pinRight(to: self.endTimeDatePicker.leadingAnchor, 5)
         }
     }
     
@@ -219,7 +248,7 @@ final class MapViewController: UIViewController {
     private func showMapScrollView() {
         view.addSubview(mapScrollView)
         mapScrollView.pinTop(to: self.view.safeAreaLayoutGuide.topAnchor)
-        mapScrollView.pinBottom(to: self.tabBar.topAnchor)
+        mapScrollView.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor)
         mapScrollView.pinHorizontal(to: self.view)
     }
     
@@ -349,14 +378,6 @@ extension MapViewController: MapDisplayLogic {
         }
     }
     
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
-    }
-    
     func displayPreviousScene(_ viewModel: Model.PreviousScene.ViewModel) {
         self.router.routeToPreviousScene()
     }
@@ -366,7 +387,11 @@ extension MapViewController: MapDisplayLogic {
             self?.currentState = .loaded
             self?.mapView?.removeFromSuperview()
             self?.datePicker.removeFromSuperview()
+            self?.startTimeView.removeFromSuperview()
+            self?.startTimeLabel.removeFromSuperview()
             self?.startTimeDatePicker.removeFromSuperview()
+            self?.endTimeView.removeFromSuperview()
+            self?.endTimeLabel.removeFromSuperview()
             self?.endTimeDatePicker.removeFromSuperview()
             self?.floorButton.removeFromSuperview()
             

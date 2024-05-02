@@ -18,16 +18,11 @@ extension AccountDetailsRouter: AccountDetailsRoutingLogic {
         view?.navigationController?.popViewController(animated: true)
     }
     
-    func routeToMore() {
-        view?.navigationController?.pushViewController(MoreAssembly.build(), animated: false)
-    }
-    
-    func routeToHome() {
-        view?.navigationController?.pushViewController(HomeAssembly.build(), animated: false)
-    }
-    
     func routeToLogin() {
-        view?.navigationController?.pushViewController(LoginAssembly.build(), animated: false)
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            fatalError("could not get scene delegate ")
+        }
+        sceneDelegate.navigationController.pushViewController(NotAuthTabBarController(), animated: false)
     }
     
     func routeToUpdateAccount() {

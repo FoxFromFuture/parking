@@ -14,10 +14,6 @@ final class FAQRouter {
 
 // MARK: - RoutingLogic
 extension FAQRouter: FAQRoutingLogic {
-    func routeToHome() {
-        self.view?.navigationController?.pushViewController(HomeAssembly.build(), animated: false)
-    }
-    
     func routeToMore() {
         self.view?.navigationController?.popViewController(animated: true)
     }

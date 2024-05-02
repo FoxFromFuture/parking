@@ -49,14 +49,6 @@ extension CarDetailsInteractor: CarDetailsBusinessLogic {
         })
     }
     
-    func loadMore(_ request: Model.More.Request) {
-        presenter.presentMore(CarDetailsModel.More.Response())
-    }
-    
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(CarDetailsModel.Home.Response())
-    }
-    
     func loadAccountCars(_ request: Model.AccountCars.Request) {
         presenter.presentAccountCars(CarDetailsModel.AccountCars.Response())
     }

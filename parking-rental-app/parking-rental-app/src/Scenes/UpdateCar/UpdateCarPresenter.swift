@@ -20,14 +20,6 @@ extension UpdateCarPresenter: UpdateCarPresentationLogic {
         view?.displayProfile(Model.Profile.ViewModel())
     }
     
-    func presentMore(_ response: Model.More.Response) {
-        view?.displayMore(Model.More.ViewModel())
-    }
-    
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(Model.Home.ViewModel())
-    }
-    
     func presentUpdateCarRequest(_ response: Model.UpdateCarRequest.Response) {
         view?.displayUpdateCarRequest(UpdateCarModel.UpdateCarRequest.ViewModel())
     }

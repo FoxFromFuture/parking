@@ -25,6 +25,13 @@
 		270FDBCC2BCFD64A00286939 /* UpdateAccountAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBCB2BCFD64A00286939 /* UpdateAccountAssembly.swift */; };
 		270FDBCF2BCFDA4C00286939 /* AccountDetailsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBCE2BCFDA4C00286939 /* AccountDetailsState.swift */; };
 		270FDBD22BCFEB1600286939 /* UpdateAccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270FDBD12BCFEB1600286939 /* UpdateAccountState.swift */; };
+		2721BD0A2BE2684D00AC961E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721BD092BE2684D00AC961E /* OnboardingViewController.swift */; };
+		2721BD0C2BE2685B00AC961E /* OnboardingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721BD0B2BE2685B00AC961E /* OnboardingInteractor.swift */; };
+		2721BD0E2BE2686600AC961E /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721BD0D2BE2686600AC961E /* OnboardingPresenter.swift */; };
+		2721BD102BE2686D00AC961E /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721BD0F2BE2686D00AC961E /* OnboardingModel.swift */; };
+		2721BD122BE2687500AC961E /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721BD112BE2687500AC961E /* OnboardingRouter.swift */; };
+		2721BD142BE2687C00AC961E /* OnboardingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721BD132BE2687C00AC961E /* OnboardingProtocols.swift */; };
+		2721BD162BE2688400AC961E /* OnboardingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721BD152BE2688400AC961E /* OnboardingAssembly.swift */; };
 		272A22F82BB06A750025880E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22F72BB06A750025880E /* MapView.swift */; };
 		272A22FB2BB1A3380025880E /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22FA2BB1A3380025880E /* HomeState.swift */; };
 		272A22FE2BB1AABE0025880E /* BuildingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A22FD2BB1AABE0025880E /* BuildingsState.swift */; };
@@ -65,6 +72,13 @@
 		273162AE2BDA963B00B47A1F /* FAQRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162AD2BDA963B00B47A1F /* FAQRouter.swift */; };
 		273162B02BDA964700B47A1F /* FAQProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162AF2BDA964700B47A1F /* FAQProtocols.swift */; };
 		273162B22BDA965000B47A1F /* FAQAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273162B12BDA965000B47A1F /* FAQAssembly.swift */; };
+		273771482BDD357B006617E7 /* ContactDevsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273771472BDD357B006617E7 /* ContactDevsViewController.swift */; };
+		2737714A2BDD358F006617E7 /* ContactDevsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273771492BDD358F006617E7 /* ContactDevsInteractor.swift */; };
+		2737714C2BDD359D006617E7 /* ContactDevsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2737714B2BDD359D006617E7 /* ContactDevsPresenter.swift */; };
+		2737714E2BDD35A5006617E7 /* ContactDevsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2737714D2BDD35A5006617E7 /* ContactDevsModel.swift */; };
+		273771502BDD35AE006617E7 /* ContactDevsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2737714F2BDD35AE006617E7 /* ContactDevsRouter.swift */; };
+		273771522BDD35B8006617E7 /* ContactDevsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273771512BDD35B8006617E7 /* ContactDevsProtocols.swift */; };
+		273771542BDD35C2006617E7 /* ContactDevsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273771532BDD35C2006617E7 /* ContactDevsAssembly.swift */; };
 		273C90AA2B7BCCB000C73FE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C90A92B7BCCB000C73FE8 /* AppDelegate.swift */; };
 		273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273C90AB2B7BCCB000C73FE8 /* SceneDelegate.swift */; };
 		273C90B32B7BCCB200C73FE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273C90B22B7BCCB200C73FE8 /* Assets.xcassets */; };
@@ -154,8 +168,7 @@
 		27848BF72B80A73400542D8C /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BF62B80A73400542D8C /* HomeWorker.swift */; };
 		27848BF92B80A73D00542D8C /* HomeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BF82B80A73D00542D8C /* HomeProtocols.swift */; };
 		27848BFB2B80A74600542D8C /* HomeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27848BFA2B80A74600542D8C /* HomeAssembly.swift */; };
-		2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD962B8D2C9A00C02FF3 /* TabBar.swift */; };
-		2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */; };
+		2795FD9A2B8DA9C100C02FF3 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FD992B8DA9C100C02FF3 /* ImageButton.swift */; };
 		2795FF3F2BC04CEB0031CEE8 /* ReservationCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF3E2BC04CEB0031CEE8 /* ReservationCardViewController.swift */; };
 		2795FF412BC04D3E0031CEE8 /* ReservationCardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF402BC04D3E0031CEE8 /* ReservationCardInteractor.swift */; };
 		2795FF432BC04D4C0031CEE8 /* ReservationCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF422BC04D4C0031CEE8 /* ReservationCardPresenter.swift */; };
@@ -169,6 +182,22 @@
 		2795FF5B2BC3F7A30031CEE8 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2795FF5A2BC3F7A30031CEE8 /* Language.swift */; };
 		279C53382BCD0FE900AF6EF5 /* ReservationCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C53372BCD0FE900AF6EF5 /* ReservationCardState.swift */; };
 		279C533A2BCD2A3100AF6EF5 /* ReservationCardSpotState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C53392BCD2A3100AF6EF5 /* ReservationCardSpotState.swift */; };
+		27AF87482BE10C85009222E6 /* NotAuthSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87472BE10C85009222E6 /* NotAuthSettingsViewController.swift */; };
+		27AF874A2BE10C8D009222E6 /* NotAuthSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87492BE10C8D009222E6 /* NotAuthSettingsInteractor.swift */; };
+		27AF874C2BE10C94009222E6 /* NotAuthSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF874B2BE10C94009222E6 /* NotAuthSettingsPresenter.swift */; };
+		27AF874E2BE10C9A009222E6 /* NotAuthSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF874D2BE10C9A009222E6 /* NotAuthSettingsModel.swift */; };
+		27AF87502BE10CA2009222E6 /* NotAuthSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF874F2BE10CA2009222E6 /* NotAuthSettingsRouter.swift */; };
+		27AF87522BE10CAA009222E6 /* NotAuthSettingsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87512BE10CAA009222E6 /* NotAuthSettingsProtocols.swift */; };
+		27AF87542BE10CB2009222E6 /* NotAuthSettingsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87532BE10CB2009222E6 /* NotAuthSettingsAssembly.swift */; };
+		27AF87572BE11B22009222E6 /* NotAuthContactDevsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87562BE11B22009222E6 /* NotAuthContactDevsViewController.swift */; };
+		27AF87592BE11B2D009222E6 /* NotAuthContactDevsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87582BE11B2D009222E6 /* NotAuthContactDevsInteractor.swift */; };
+		27AF875B2BE11B33009222E6 /* NotAuthContactDevsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF875A2BE11B33009222E6 /* NotAuthContactDevsPresenter.swift */; };
+		27AF875D2BE11B3A009222E6 /* NotAuthContactDevsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF875C2BE11B3A009222E6 /* NotAuthContactDevsModel.swift */; };
+		27AF875F2BE11B41009222E6 /* NotAuthContactDevsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF875E2BE11B41009222E6 /* NotAuthContactDevsRouter.swift */; };
+		27AF87612BE11B48009222E6 /* NotAuthContactDevsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87602BE11B48009222E6 /* NotAuthContactDevsProtocols.swift */; };
+		27AF87632BE11B50009222E6 /* NotAuthContactDevsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87622BE11B50009222E6 /* NotAuthContactDevsAssembly.swift */; };
+		27AF87692BE125A9009222E6 /* NotAuthTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF87682BE125A9009222E6 /* NotAuthTabBarController.swift */; };
+		27AF876B2BE162E3009222E6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF876A2BE162E3009222E6 /* TabBarController.swift */; };
 		27B2C57F2BCE5F7400899713 /* Date+iso8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2C57E2BCE5F7400899713 /* Date+iso8601.swift */; };
 		27B2C5812BCE630000899713 /* Date+extract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2C5802BCE630000899713 /* Date+extract.swift */; };
 		27BA27D82BC7F66D008F3519 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA27D72BC7F66D008F3519 /* Colors.swift */; };
@@ -211,6 +240,13 @@
 		27D1201C2BD27AE50043DAD5 /* AddCarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1201B2BD27AE50043DAD5 /* AddCarState.swift */; };
 		27D7A5962BDBB17F0054BC44 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D7A5952BDBB17F0054BC44 /* QuestionCell.swift */; };
 		27D7A59A2BDBE6330054BC44 /* JumpAvoidingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D7A5992BDBE6330054BC44 /* JumpAvoidingFlowLayout.swift */; };
+		27ECC8FA2BDFEA9C00E91502 /* NotAuthMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC8F92BDFEA9C00E91502 /* NotAuthMoreViewController.swift */; };
+		27ECC8FC2BDFEAC500E91502 /* NotAuthMoreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC8FB2BDFEAC500E91502 /* NotAuthMoreInteractor.swift */; };
+		27ECC8FE2BDFEACD00E91502 /* NotAuthMorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC8FD2BDFEACD00E91502 /* NotAuthMorePresenter.swift */; };
+		27ECC9002BDFEAD600E91502 /* NotAuthMoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC8FF2BDFEAD600E91502 /* NotAuthMoreModel.swift */; };
+		27ECC9022BDFEADC00E91502 /* NotAuthMoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC9012BDFEADC00E91502 /* NotAuthMoreRouter.swift */; };
+		27ECC9042BDFEAE700E91502 /* NotAuthMoreProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC9032BDFEAE700E91502 /* NotAuthMoreProtocols.swift */; };
+		27ECC9062BDFEAEF00E91502 /* NotAuthMoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC9052BDFEAEF00E91502 /* NotAuthMoreAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -232,6 +268,13 @@
 		270FDBCB2BCFD64A00286939 /* UpdateAccountAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountAssembly.swift; sourceTree = "<group>"; };
 		270FDBCE2BCFDA4C00286939 /* AccountDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsState.swift; sourceTree = "<group>"; };
 		270FDBD12BCFEB1600286939 /* UpdateAccountState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAccountState.swift; sourceTree = "<group>"; };
+		2721BD092BE2684D00AC961E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		2721BD0B2BE2685B00AC961E /* OnboardingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInteractor.swift; sourceTree = "<group>"; };
+		2721BD0D2BE2686600AC961E /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
+		2721BD0F2BE2686D00AC961E /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
+		2721BD112BE2687500AC961E /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
+		2721BD132BE2687C00AC961E /* OnboardingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProtocols.swift; sourceTree = "<group>"; };
+		2721BD152BE2688400AC961E /* OnboardingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAssembly.swift; sourceTree = "<group>"; };
 		272A22F72BB06A750025880E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		272A22FA2BB1A3380025880E /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
 		272A22FD2BB1AABE0025880E /* BuildingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsState.swift; sourceTree = "<group>"; };
@@ -272,6 +315,13 @@
 		273162AD2BDA963B00B47A1F /* FAQRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQRouter.swift; sourceTree = "<group>"; };
 		273162AF2BDA964700B47A1F /* FAQProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQProtocols.swift; sourceTree = "<group>"; };
 		273162B12BDA965000B47A1F /* FAQAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQAssembly.swift; sourceTree = "<group>"; };
+		273771472BDD357B006617E7 /* ContactDevsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDevsViewController.swift; sourceTree = "<group>"; };
+		273771492BDD358F006617E7 /* ContactDevsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDevsInteractor.swift; sourceTree = "<group>"; };
+		2737714B2BDD359D006617E7 /* ContactDevsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDevsPresenter.swift; sourceTree = "<group>"; };
+		2737714D2BDD35A5006617E7 /* ContactDevsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDevsModel.swift; sourceTree = "<group>"; };
+		2737714F2BDD35AE006617E7 /* ContactDevsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDevsRouter.swift; sourceTree = "<group>"; };
+		273771512BDD35B8006617E7 /* ContactDevsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDevsProtocols.swift; sourceTree = "<group>"; };
+		273771532BDD35C2006617E7 /* ContactDevsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDevsAssembly.swift; sourceTree = "<group>"; };
 		273C90A62B7BCCB000C73FE8 /* parking-rental-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "parking-rental-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		273C90A92B7BCCB000C73FE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		273C90AB2B7BCCB000C73FE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -364,8 +414,7 @@
 		27848BF62B80A73400542D8C /* HomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
 		27848BF82B80A73D00542D8C /* HomeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProtocols.swift; sourceTree = "<group>"; };
 		27848BFA2B80A74600542D8C /* HomeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAssembly.swift; sourceTree = "<group>"; };
-		2795FD962B8D2C9A00C02FF3 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
+		2795FD992B8DA9C100C02FF3 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		2795FF3E2BC04CEB0031CEE8 /* ReservationCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardViewController.swift; sourceTree = "<group>"; };
 		2795FF402BC04D3E0031CEE8 /* ReservationCardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardInteractor.swift; sourceTree = "<group>"; };
 		2795FF422BC04D4C0031CEE8 /* ReservationCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardPresenter.swift; sourceTree = "<group>"; };
@@ -381,6 +430,22 @@
 		2795FF5A2BC3F7A30031CEE8 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		279C53372BCD0FE900AF6EF5 /* ReservationCardState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardState.swift; sourceTree = "<group>"; };
 		279C53392BCD2A3100AF6EF5 /* ReservationCardSpotState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCardSpotState.swift; sourceTree = "<group>"; };
+		27AF87472BE10C85009222E6 /* NotAuthSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthSettingsViewController.swift; sourceTree = "<group>"; };
+		27AF87492BE10C8D009222E6 /* NotAuthSettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthSettingsInteractor.swift; sourceTree = "<group>"; };
+		27AF874B2BE10C94009222E6 /* NotAuthSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthSettingsPresenter.swift; sourceTree = "<group>"; };
+		27AF874D2BE10C9A009222E6 /* NotAuthSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthSettingsModel.swift; sourceTree = "<group>"; };
+		27AF874F2BE10CA2009222E6 /* NotAuthSettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthSettingsRouter.swift; sourceTree = "<group>"; };
+		27AF87512BE10CAA009222E6 /* NotAuthSettingsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthSettingsProtocols.swift; sourceTree = "<group>"; };
+		27AF87532BE10CB2009222E6 /* NotAuthSettingsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthSettingsAssembly.swift; sourceTree = "<group>"; };
+		27AF87562BE11B22009222E6 /* NotAuthContactDevsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthContactDevsViewController.swift; sourceTree = "<group>"; };
+		27AF87582BE11B2D009222E6 /* NotAuthContactDevsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthContactDevsInteractor.swift; sourceTree = "<group>"; };
+		27AF875A2BE11B33009222E6 /* NotAuthContactDevsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthContactDevsPresenter.swift; sourceTree = "<group>"; };
+		27AF875C2BE11B3A009222E6 /* NotAuthContactDevsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthContactDevsModel.swift; sourceTree = "<group>"; };
+		27AF875E2BE11B41009222E6 /* NotAuthContactDevsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthContactDevsRouter.swift; sourceTree = "<group>"; };
+		27AF87602BE11B48009222E6 /* NotAuthContactDevsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthContactDevsProtocols.swift; sourceTree = "<group>"; };
+		27AF87622BE11B50009222E6 /* NotAuthContactDevsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthContactDevsAssembly.swift; sourceTree = "<group>"; };
+		27AF87682BE125A9009222E6 /* NotAuthTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthTabBarController.swift; sourceTree = "<group>"; };
+		27AF876A2BE162E3009222E6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		27B2C57E2BCE5F7400899713 /* Date+iso8601.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+iso8601.swift"; sourceTree = "<group>"; };
 		27B2C5802BCE630000899713 /* Date+extract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extract.swift"; sourceTree = "<group>"; };
 		27BA27D72BC7F66D008F3519 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -423,6 +488,13 @@
 		27D1201B2BD27AE50043DAD5 /* AddCarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarState.swift; sourceTree = "<group>"; };
 		27D7A5952BDBB17F0054BC44 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		27D7A5992BDBE6330054BC44 /* JumpAvoidingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpAvoidingFlowLayout.swift; sourceTree = "<group>"; };
+		27ECC8F92BDFEA9C00E91502 /* NotAuthMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMoreViewController.swift; sourceTree = "<group>"; };
+		27ECC8FB2BDFEAC500E91502 /* NotAuthMoreInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMoreInteractor.swift; sourceTree = "<group>"; };
+		27ECC8FD2BDFEACD00E91502 /* NotAuthMorePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMorePresenter.swift; sourceTree = "<group>"; };
+		27ECC8FF2BDFEAD600E91502 /* NotAuthMoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMoreModel.swift; sourceTree = "<group>"; };
+		27ECC9012BDFEADC00E91502 /* NotAuthMoreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMoreRouter.swift; sourceTree = "<group>"; };
+		27ECC9032BDFEAE700E91502 /* NotAuthMoreProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMoreProtocols.swift; sourceTree = "<group>"; };
+		27ECC9052BDFEAEF00E91502 /* NotAuthMoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMoreAssembly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,6 +560,20 @@
 				277B37BD2BCAB88500B2A412 /* MapState.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		2721BD082BE2681E00AC961E /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				2721BD092BE2684D00AC961E /* OnboardingViewController.swift */,
+				2721BD0B2BE2685B00AC961E /* OnboardingInteractor.swift */,
+				2721BD0D2BE2686600AC961E /* OnboardingPresenter.swift */,
+				2721BD0F2BE2686D00AC961E /* OnboardingModel.swift */,
+				2721BD112BE2687500AC961E /* OnboardingRouter.swift */,
+				2721BD132BE2687C00AC961E /* OnboardingProtocols.swift */,
+				2721BD152BE2688400AC961E /* OnboardingAssembly.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		272A22F62BB067490025880E /* Views */ = {
@@ -589,6 +675,20 @@
 			path = FAQ;
 			sourceTree = "<group>";
 		};
+		273771462BDD3557006617E7 /* ContactDevs */ = {
+			isa = PBXGroup;
+			children = (
+				273771472BDD357B006617E7 /* ContactDevsViewController.swift */,
+				273771492BDD358F006617E7 /* ContactDevsInteractor.swift */,
+				2737714B2BDD359D006617E7 /* ContactDevsPresenter.swift */,
+				2737714D2BDD35A5006617E7 /* ContactDevsModel.swift */,
+				2737714F2BDD35AE006617E7 /* ContactDevsRouter.swift */,
+				273771512BDD35B8006617E7 /* ContactDevsProtocols.swift */,
+				273771532BDD35C2006617E7 /* ContactDevsAssembly.swift */,
+			);
+			path = ContactDevs;
+			sourceTree = "<group>";
+		};
 		273C909D2B7BCCB000C73FE8 = {
 			isa = PBXGroup;
 			children = (
@@ -619,16 +719,17 @@
 			isa = PBXGroup;
 			children = (
 				273C90BF2B7BD11F00C73FE8 /* Scenes */,
+				27AF87672BE12590009222E6 /* Controllers */,
 				27535C772BA47BF7000E48E6 /* Views */,
 				273E65F42B88B3E400567BD8 /* Keychain */,
 				275E0F062BC6796B00B6E1B3 /* Language */,
 				275E0F092BC6869D00B6E1B3 /* Theme */,
-				273E65E92B8499BF00567BD8 /* Model */,
 				27BA27D62BC7F65A008F3519 /* Colors */,
+				273E65E92B8499BF00567BD8 /* Model */,
 				273E65D22B8489DE00567BD8 /* Networking */,
-				273C90C12B7BD14500C73FE8 /* Delegates */,
 				273C90C32B7BD17900C73FE8 /* Extensions */,
 				27D7A5972BDBE6040054BC44 /* Additions */,
+				273C90C12B7BD14500C73FE8 /* Delegates */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -648,8 +749,12 @@
 				273C90C02B7BD13600C73FE8 /* Launch */,
 				273E65FD2B88E91900567BD8 /* Splash */,
 				273C90C22B7BD16400C73FE8 /* Login */,
+				27ECC8F82BDFEA6800E91502 /* NotAuthMore */,
+				27AF87462BE10C55009222E6 /* NotAuthSettings */,
+				27AF87552BE11AF6009222E6 /* NotAuthContactDevs */,
 				27C624502B7D01D2002FFF48 /* Registration */,
 				27C624622B7D0532002FFF48 /* RegistrationCar */,
+				2721BD082BE2681E00AC961E /* Onboarding */,
 				27848BEB2B80A68B00542D8C /* Home */,
 				27754BE22B99DA420065A14E /* Buildings */,
 				272B52162B9C5341008F428E /* Map */,
@@ -664,6 +769,7 @@
 				272B52052B9C5102008F428E /* More */,
 				273162952BDA8B6900B47A1F /* Settings */,
 				273162962BDA8B7800B47A1F /* FAQ */,
+				273771462BDD3557006617E7 /* ContactDevs */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -837,7 +943,6 @@
 			children = (
 				27535C782BA47C0A000E48E6 /* Buttons */,
 				27535C8B2BA48C77000E48E6 /* MultipleButtonsCard.swift */,
-				2795FD962B8D2C9A00C02FF3 /* TabBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -846,7 +951,7 @@
 			isa = PBXGroup;
 			children = (
 				270020762BCFB48600649D60 /* DetailsCardButton.swift */,
-				2795FD992B8DA9C100C02FF3 /* TabBarButton.swift */,
+				2795FD992B8DA9C100C02FF3 /* ImageButton.swift */,
 				27535C792BA47D5C000E48E6 /* SingleCardButton.swift */,
 				27535C8D2BA48E94000E48E6 /* MultipleButtonsCardButton.swift */,
 			);
@@ -1018,6 +1123,43 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		27AF87462BE10C55009222E6 /* NotAuthSettings */ = {
+			isa = PBXGroup;
+			children = (
+				27AF87472BE10C85009222E6 /* NotAuthSettingsViewController.swift */,
+				27AF87492BE10C8D009222E6 /* NotAuthSettingsInteractor.swift */,
+				27AF874B2BE10C94009222E6 /* NotAuthSettingsPresenter.swift */,
+				27AF874D2BE10C9A009222E6 /* NotAuthSettingsModel.swift */,
+				27AF874F2BE10CA2009222E6 /* NotAuthSettingsRouter.swift */,
+				27AF87512BE10CAA009222E6 /* NotAuthSettingsProtocols.swift */,
+				27AF87532BE10CB2009222E6 /* NotAuthSettingsAssembly.swift */,
+			);
+			path = NotAuthSettings;
+			sourceTree = "<group>";
+		};
+		27AF87552BE11AF6009222E6 /* NotAuthContactDevs */ = {
+			isa = PBXGroup;
+			children = (
+				27AF87562BE11B22009222E6 /* NotAuthContactDevsViewController.swift */,
+				27AF87582BE11B2D009222E6 /* NotAuthContactDevsInteractor.swift */,
+				27AF875A2BE11B33009222E6 /* NotAuthContactDevsPresenter.swift */,
+				27AF875C2BE11B3A009222E6 /* NotAuthContactDevsModel.swift */,
+				27AF875E2BE11B41009222E6 /* NotAuthContactDevsRouter.swift */,
+				27AF87602BE11B48009222E6 /* NotAuthContactDevsProtocols.swift */,
+				27AF87622BE11B50009222E6 /* NotAuthContactDevsAssembly.swift */,
+			);
+			path = NotAuthContactDevs;
+			sourceTree = "<group>";
+		};
+		27AF87672BE12590009222E6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				27AF87682BE125A9009222E6 /* NotAuthTabBarController.swift */,
+				27AF876A2BE162E3009222E6 /* TabBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		27BA27D62BC7F65A008F3519 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
@@ -1120,6 +1262,20 @@
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
+		27ECC8F82BDFEA6800E91502 /* NotAuthMore */ = {
+			isa = PBXGroup;
+			children = (
+				27ECC8F92BDFEA9C00E91502 /* NotAuthMoreViewController.swift */,
+				27ECC8FB2BDFEAC500E91502 /* NotAuthMoreInteractor.swift */,
+				27ECC8FD2BDFEACD00E91502 /* NotAuthMorePresenter.swift */,
+				27ECC8FF2BDFEAD600E91502 /* NotAuthMoreModel.swift */,
+				27ECC9012BDFEADC00E91502 /* NotAuthMoreRouter.swift */,
+				27ECC9032BDFEAE700E91502 /* NotAuthMoreProtocols.swift */,
+				27ECC9052BDFEAEF00E91502 /* NotAuthMoreAssembly.swift */,
+			);
+			path = NotAuthMore;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1199,27 +1355,33 @@
 				277D6C392B9B0477000B36F9 /* OnCanvasCoordsModel.swift in Sources */,
 				2700206E2BCFAD6900649D60 /* AccountDetailsModel.swift in Sources */,
 				27C624602B7D0251002FFF48 /* RegistrationAssembly.swift in Sources */,
+				27AF875F2BE11B41009222E6 /* NotAuthContactDevsRouter.swift in Sources */,
 				277B37B32BCA98D300B2A412 /* LoginState.swift in Sources */,
 				272B521C2B9C53D9008F428E /* MapWorker.swift in Sources */,
 				2795FF5B2BC3F7A30031CEE8 /* Language.swift in Sources */,
 				27754C032B9AF13C0065A14E /* CanvasModel.swift in Sources */,
 				277B37B92BCAAA3A00B2A412 /* RegistrationCarState.swift in Sources */,
 				273162B02BDA964700B47A1F /* FAQProtocols.swift in Sources */,
+				2721BD0E2BE2686600AC961E /* OnboardingPresenter.swift in Sources */,
 				273162AE2BDA963B00B47A1F /* FAQRouter.swift in Sources */,
 				27535C7A2BA47D5C000E48E6 /* SingleCardButton.swift in Sources */,
 				27848BEF2B80A70300542D8C /* HomeInteractor.swift in Sources */,
-				2795FD9A2B8DA9C100C02FF3 /* TabBarButton.swift in Sources */,
+				2795FD9A2B8DA9C100C02FF3 /* ImageButton.swift in Sources */,
+				27AF87482BE10C85009222E6 /* NotAuthSettingsViewController.swift in Sources */,
 				276978532BD3E2E100987360 /* CarDetailsState.swift in Sources */,
 				27754BE12B99B7880065A14E /* ProfileLabelButton.swift in Sources */,
 				27535C882BA48555000E48E6 /* UpdateCarProtocols.swift in Sources */,
 				270FDBCC2BCFD64A00286939 /* UpdateAccountAssembly.swift in Sources */,
+				27AF87632BE11B50009222E6 /* NotAuthContactDevsAssembly.swift in Sources */,
 				27C6245E2B7D0246002FFF48 /* RegistrationProtocols.swift in Sources */,
 				2795FF472BC04D620031CEE8 /* ReservationCardModel.swift in Sources */,
+				273771482BDD357B006617E7 /* ContactDevsViewController.swift in Sources */,
 				27C624472B7C8B7E002FFF48 /* LoginProtocols.swift in Sources */,
 				27D120032BD24F2F0043DAD5 /* CarDetailsModel.swift in Sources */,
 				27D120012BD24F230043DAD5 /* CarDetailsPresenter.swift in Sources */,
 				272B51F62B9C4FD8008F428E /* ProfileViewController.swift in Sources */,
 				273E65E82B84969F00567BD8 /* CarsEndPoint.swift in Sources */,
+				27ECC8FE2BDFEACD00E91502 /* NotAuthMorePresenter.swift in Sources */,
 				2795FF492BC04D6E0031CEE8 /* ReservationCardRouter.swift in Sources */,
 				273E660B2B88E98200567BD8 /* SplashProtocols.swift in Sources */,
 				27535C862BA4854E000E48E6 /* UpdateCarRouter.swift in Sources */,
@@ -1232,13 +1394,14 @@
 				27754BE82B99DA870065A14E /* BuildingsWorker.swift in Sources */,
 				27848BED2B80A6F200542D8C /* HomeViewController.swift in Sources */,
 				27D120102BD27A9C0043DAD5 /* AddCarPresenter.swift in Sources */,
-				2795FD972B8D2C9A00C02FF3 /* TabBar.swift in Sources */,
 				2755E2C82BD14F1900F709E0 /* AccountCarsState.swift in Sources */,
 				272A22FE2BB1AABE0025880E /* BuildingsState.swift in Sources */,
 				2731629C2BDA8D4600B47A1F /* SettingsPresenter.swift in Sources */,
 				273E65FF2B88E94900567BD8 /* SplashViewController.swift in Sources */,
+				2721BD102BE2686D00AC961E /* OnboardingModel.swift in Sources */,
 				273E66012B88E95500567BD8 /* SplashInteractor.swift in Sources */,
 				27C624562B7D0217002FFF48 /* RegistrationPresenter.swift in Sources */,
+				27AF87542BE10CB2009222E6 /* NotAuthSettingsAssembly.swift in Sources */,
 				273E660F2B89155000567BD8 /* AuthManager.swift in Sources */,
 				273162B22BDA965000B47A1F /* FAQAssembly.swift in Sources */,
 				273E65F32B86502600567BD8 /* AuthModel.swift in Sources */,
@@ -1257,6 +1420,8 @@
 				27BA27D82BC7F66D008F3519 /* Colors.swift in Sources */,
 				272B51FA2B9C5021008F428E /* ProfileWorker.swift in Sources */,
 				2755E2BB2BD14BD200F709E0 /* AccountCarsInteractor.swift in Sources */,
+				2737714E2BDD35A5006617E7 /* ContactDevsModel.swift in Sources */,
+				27AF875D2BE11B3A009222E6 /* NotAuthContactDevsModel.swift in Sources */,
 				27D120142BD27AAE0043DAD5 /* AddCarRouter.swift in Sources */,
 				272B52112B9C518C008F428E /* MoreRouter.swift in Sources */,
 				2700206A2BCFAD4000649D60 /* AccountDetailsInteractor.swift in Sources */,
@@ -1268,23 +1433,30 @@
 				27848BF12B80A71100542D8C /* HomePresenter.swift in Sources */,
 				27C624412B7C8B59002FFF48 /* LoginPresenter.swift in Sources */,
 				272B52182B9C539B008F428E /* MapViewController.swift in Sources */,
+				2721BD122BE2687500AC961E /* OnboardingRouter.swift in Sources */,
 				273E65FC2B88C14800567BD8 /* KeychainManager.swift in Sources */,
 				273E66072B88E96E00567BD8 /* SplashRouter.swift in Sources */,
 				277B37BE2BCAB88500B2A412 /* MapState.swift in Sources */,
+				27ECC8FA2BDFEA9C00E91502 /* NotAuthMoreViewController.swift in Sources */,
 				270FDBC22BCFD61B00286939 /* UpdateAccountInteractor.swift in Sources */,
 				27C624432B7C8B63002FFF48 /* LoginModel.swift in Sources */,
 				273E66092B88E97900567BD8 /* SplashWorker.swift in Sources */,
 				273162A82BDA962300B47A1F /* FAQViewController.swift in Sources */,
+				2721BD0C2BE2685B00AC961E /* OnboardingInteractor.swift in Sources */,
+				27AF874A2BE10C8D009222E6 /* NotAuthSettingsInteractor.swift in Sources */,
 				27535C642BA2DD6E000E48E6 /* BuildingCell.swift in Sources */,
 				2755E2B92BD14BBE00F709E0 /* AccountCarsViewController.swift in Sources */,
 				2795FF432BC04D4C0031CEE8 /* ReservationCardPresenter.swift in Sources */,
 				27C0B7A62B9C38B600977074 /* ParkingLevelsEndPoint.swift in Sources */,
 				273E65E62B8490F500567BD8 /* Router.swift in Sources */,
+				27AF875B2BE11B33009222E6 /* NotAuthContactDevsPresenter.swift in Sources */,
 				27C624522B7D01EB002FFF48 /* RegistrationViewController.swift in Sources */,
+				27AF87502BE10CA2009222E6 /* NotAuthSettingsRouter.swift in Sources */,
 				27C6243D2B7C8B17002FFF48 /* LoginViewController.swift in Sources */,
 				27535C822BA48538000E48E6 /* UpdateCarPresenter.swift in Sources */,
 				2755E2C32BD14C0600F709E0 /* AccountCarsProtocols.swift in Sources */,
 				270020722BCFAD8D00649D60 /* AccountDetailsProtocols.swift in Sources */,
+				27AF874E2BE10C9A009222E6 /* NotAuthSettingsModel.swift in Sources */,
 				27BA27DC2BC80952008F3519 /* UITextField+borders.swift in Sources */,
 				273E65E42B84900800567BD8 /* NetworkRouter.swift in Sources */,
 				273E65DC2B848B8300567BD8 /* HTTPTask.swift in Sources */,
@@ -1297,16 +1469,20 @@
 				2755E2C52BD14C1000F709E0 /* AccountCarsAssembly.swift in Sources */,
 				272B52042B9C50AD008F428E /* ProfileAssembly.swift in Sources */,
 				27C0B7AE2B9C44F900977074 /* BuildingModel.swift in Sources */,
+				273771502BDD35AE006617E7 /* ContactDevsRouter.swift in Sources */,
 				27848BE82B80A48600542D8C /* RegistrationCarProtocols.swift in Sources */,
 				272B51F82B9C5006008F428E /* ProfileInteractor.swift in Sources */,
 				270FDBC82BCFD63900286939 /* UpdateAccountRouter.swift in Sources */,
 				272B521A2B9C53C5008F428E /* MapInteractor.swift in Sources */,
+				27AF876B2BE162E3009222E6 /* TabBarController.swift in Sources */,
 				27C6245C2B7D0239002FFF48 /* RegistrationWorker.swift in Sources */,
 				273162A02BDA8D5800B47A1F /* SettingsRouter.swift in Sources */,
 				273E65DA2B848B2E00567BD8 /* HTTPMethod.swift in Sources */,
 				27848BE62B80A47E00542D8C /* RegistrationCarWorker.swift in Sources */,
 				27848BEA2B80A48E00542D8C /* RegistrationCarAssembly.swift in Sources */,
 				270FDBCA2BCFD64100286939 /* UpdateAccountProtocols.swift in Sources */,
+				27AF87592BE11B2D009222E6 /* NotAuthContactDevsInteractor.swift in Sources */,
+				2721BD0A2BE2684D00AC961E /* OnboardingViewController.swift in Sources */,
 				273C90C52B7BD19900C73FE8 /* UIView+pin.swift in Sources */,
 				272B52072B9C5127008F428E /* MoreViewController.swift in Sources */,
 				273E65E02B848D6100567BD8 /* URLParameterEncoder.swift in Sources */,
@@ -1314,6 +1490,7 @@
 				27848BF72B80A73400542D8C /* HomeWorker.swift in Sources */,
 				273E65EB2B8499FE00567BD8 /* CarsModel.swift in Sources */,
 				27535C842BA48542000E48E6 /* UpdateCarModel.swift in Sources */,
+				27AF87572BE11B22009222E6 /* NotAuthContactDevsViewController.swift in Sources */,
 				272B52132B9C51A6008F428E /* MoreProtocols.swift in Sources */,
 				270020702BCFAD7D00649D60 /* AccountDetailsRouter.swift in Sources */,
 				272B52262B9C5454008F428E /* MapAssembly.swift in Sources */,
@@ -1335,8 +1512,10 @@
 				273162A22BDA8D6200B47A1F /* SettingsProtocols.swift in Sources */,
 				273162A62BDA961700B47A1F /* FAQInteractor.swift in Sources */,
 				270FDBC02BCFD60700286939 /* UpdateAccountViewController.swift in Sources */,
+				27AF87522BE10CAA009222E6 /* NotAuthSettingsProtocols.swift in Sources */,
 				273C90AC2B7BCCB000C73FE8 /* SceneDelegate.swift in Sources */,
 				2795FF3F2BC04CEB0031CEE8 /* ReservationCardViewController.swift in Sources */,
+				273771522BDD35B8006617E7 /* ContactDevsProtocols.swift in Sources */,
 				272B52152B9C51B9008F428E /* MoreAssembly.swift in Sources */,
 				273E65ED2B849CBB00567BD8 /* NetworkManager.swift in Sources */,
 				27C624542B7D020C002FFF48 /* RegistrationInteractor.swift in Sources */,
@@ -1346,10 +1525,12 @@
 				2795FF452BC04D560031CEE8 /* ReservationCardWorker.swift in Sources */,
 				27848BF32B80A71A00542D8C /* HomeModel.swift in Sources */,
 				27754BF02B99DAAD0065A14E /* BuildingsProtocols.swift in Sources */,
+				2721BD162BE2688400AC961E /* OnboardingAssembly.swift in Sources */,
 				27B2C5812BCE630000899713 /* Date+extract.swift in Sources */,
 				27754C012B9AF0710065A14E /* ParkingSpotsModel.swift in Sources */,
 				2755E2BD2BD14BDE00F709E0 /* AccountCarsPresenter.swift in Sources */,
 				272B520F2B9C517A008F428E /* MoreModel.swift in Sources */,
+				2737714C2BDD359D006617E7 /* ContactDevsPresenter.swift in Sources */,
 				27B2C57F2BCE5F7400899713 /* Date+iso8601.swift in Sources */,
 				27848BE22B80A46E00542D8C /* RegistrationCarModel.swift in Sources */,
 				270FDBC42BCFD62600286939 /* UpdateAccountPresenter.swift in Sources */,
@@ -1363,6 +1544,7 @@
 				272B52022B9C5099008F428E /* ProfileProtocols.swift in Sources */,
 				27D120122BD27AA50043DAD5 /* AddCarModel.swift in Sources */,
 				273162AA2BDA962D00B47A1F /* FAQPresenter.swift in Sources */,
+				2737714A2BDD358F006617E7 /* ContactDevsInteractor.swift in Sources */,
 				27D120052BD24F480043DAD5 /* CarDetailsRouter.swift in Sources */,
 				27C6244B2B7C8CC1002FFF48 /* UIViewController+hideKeyboardOnTapAround.swift in Sources */,
 				27D120092BD24F5C0043DAD5 /* CarDetailsAssembly.swift in Sources */,
@@ -1370,25 +1552,35 @@
 				2795FF4D2BC04D850031CEE8 /* ReservationCardAssembly.swift in Sources */,
 				273E65D82B848A9500567BD8 /* EndPointType.swift in Sources */,
 				27C0B7A82B9C3AEC00977074 /* ParkingLevelsModel.swift in Sources */,
+				27ECC9022BDFEADC00E91502 /* NotAuthMoreRouter.swift in Sources */,
 				27754BF22B99DAB60065A14E /* BuildingsAssembly.swift in Sources */,
 				273E660D2B88E98B00567BD8 /* SplashAssembly.swift in Sources */,
 				272B51FE2B9C5055008F428E /* ProfileModel.swift in Sources */,
 				27C624582B7D0223002FFF48 /* RegistrationModel.swift in Sources */,
+				27AF87612BE11B48009222E6 /* NotAuthContactDevsProtocols.swift in Sources */,
 				27535C8A2BA4855D000E48E6 /* UpdateCarAssembly.swift in Sources */,
+				27ECC9042BDFEAE700E91502 /* NotAuthMoreProtocols.swift in Sources */,
 				273E65DE2B848C5C00567BD8 /* ParameterEncoding.swift in Sources */,
+				27ECC9002BDFEAD600E91502 /* NotAuthMoreModel.swift in Sources */,
 				270020742BCFADA700649D60 /* AccountDetailsAssembly.swift in Sources */,
 				270020682BCFAA5800649D60 /* AccountDetailsViewController.swift in Sources */,
 				27754BE62B99DA7D0065A14E /* BuildingsInteractor.swift in Sources */,
+				27AF87692BE125A9009222E6 /* NotAuthTabBarController.swift in Sources */,
 				273162AC2BDA963400B47A1F /* FAQModel.swift in Sources */,
+				273771542BDD35C2006617E7 /* ContactDevsAssembly.swift in Sources */,
 				27754BF52B99E33D0065A14E /* ReservationCell.swift in Sources */,
 				27754BEE2B99DAA40065A14E /* BuildingsRouter.swift in Sources */,
+				27ECC9062BDFEAEF00E91502 /* NotAuthMoreAssembly.swift in Sources */,
+				27AF874C2BE10C94009222E6 /* NotAuthSettingsPresenter.swift in Sources */,
 				27848BF92B80A73D00542D8C /* HomeProtocols.swift in Sources */,
+				2721BD142BE2687C00AC961E /* OnboardingProtocols.swift in Sources */,
 				27BA27DA2BC7FDE8008F3519 /* UIColor+themeColors.swift in Sources */,
 				27754BDF2B99AEF70065A14E /* ReservationsModel.swift in Sources */,
 				27848BDE2B80A45700542D8C /* RegistrationCarInteractor.swift in Sources */,
 				275E0F0B2BC686B200B6E1B3 /* Theme.swift in Sources */,
 				272B521E2B9C5408008F428E /* MapPresenter.swift in Sources */,
 				270020792BCFC9AC00649D60 /* EmployeesEndPoint.swift in Sources */,
+				27ECC8FC2BDFEAC500E91502 /* NotAuthMoreInteractor.swift in Sources */,
 				27D120162BD27AB40043DAD5 /* AddCarProtocols.swift in Sources */,
 				27754BDD2B99A6200065A14E /* ReservationsEndPoint.swift in Sources */,
 				2731629A2BDA8D3E00B47A1F /* SettingsInteractor.swift in Sources */,

@@ -45,14 +45,6 @@ extension AccountDetailsInteractor: AccountDetailsBusinessLogic {
         }
     }
     
-    func loadMore(_ request: Model.More.Request) {
-        presenter.presentMore(AccountDetailsModel.More.Response())
-    }
-    
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(AccountDetailsModel.Home.Response())
-    }
-    
     func loadLogin(_ request: Model.Login.Request) {
         self.networkManager.deleteEmployee { [weak self] error in
             if let error = error {

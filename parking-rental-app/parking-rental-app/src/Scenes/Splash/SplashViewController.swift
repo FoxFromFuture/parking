@@ -38,12 +38,9 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         interactor.loadStart(Model.Start.Request())
         interactor.loadLogin(Model.Login.Request())
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Configuration

@@ -14,15 +14,17 @@ final class MoreRouter {
 
 // MARK: - RoutingLogic
 extension MoreRouter: MoreRoutingLogic {
-    func routeToHome() {
-        view?.navigationController?.pushViewController(HomeAssembly.build(), animated: false)
-    }
-    
     func routeToSettings() {
         view?.navigationController?.pushViewController(SettingsAssembly.build(), animated: true)
     }
     
     func routeToFAQ() {
         view?.navigationController?.pushViewController(FAQAssembly.build(), animated: true)
+    }
+    
+    func routeToContactDevs() {
+        let vc = ContactDevsAssembly.build()
+        vc.modalPresentationStyle = .overFullScreen
+        view?.navigationController?.present(vc, animated: true)
     }
 }

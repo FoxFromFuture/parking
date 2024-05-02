@@ -13,7 +13,6 @@ protocol HomeDisplayLogic: AnyObject {
     func displayBuildings(_ viewModel: Model.Buildings.ViewModel)
     func displayMap(_ viewModel: Model.Map.ViewModel)
     func displayProfile(_ viewModel: Model.Profile.ViewModel)
-    func displayMore(_ viewModel: Model.More.ViewModel)
     func displayLoadingFailure(_ viewModel: Model.LoadingFailure.ViewModel)
     func displayNoData(_ viewModel: Model.NoData.ViewModel)
 }
@@ -26,7 +25,6 @@ protocol HomeBusinessLogic {
     func loadBuildings(_ request: Model.Buildings.Request)
     func loadMap(_ request: Model.Map.Request)
     func loadProfile(_ request: Model.Profile.Request)
-    func loadMore(_ request: Model.More.Request)
 }
 
 // MARK: - PresentationLogic
@@ -37,7 +35,6 @@ protocol HomePresentationLogic {
     func presentBuildings(_ response: Model.Buildings.Response)
     func presentMap(_ response: Model.Map.Response)
     func presentProfile(_ response: Model.Profile.Response)
-    func presentMore(_ response: Model.More.Response)
     func presentLoadingFailure(_ response: Model.LoadingFailure.Response)
     func presentNoData(_ response: Model.NoData.Response)
 }
@@ -48,7 +45,6 @@ protocol HomeRoutingLogic {
     func routeToBuildings()
     func routeToMap(_ routeData: Model.Map.RouteData)
     func routeToProfile()
-    func routeToMore()
 }
 
 // MARK: - WorkerLogic

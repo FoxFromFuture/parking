@@ -10,8 +10,6 @@ protocol UpdateCarDisplayLogic: AnyObject {
     typealias Model = UpdateCarModel
     func displayStart(_ viewModel: Model.Start.ViewModel)
     func displayProfile(_ viewModel: Model.Profile.ViewModel)
-    func displayMore(_ viewModel: Model.More.ViewModel)
-    func displayHome(_ viewModel: Model.Home.ViewModel)
     func displayUpdateCarRequest(_ viewModel: Model.UpdateCarRequest.ViewModel)
     func displayUpdateCarFailure(_ viewModel: Model.CarUpdateFailure.ViewModel)
 }
@@ -21,8 +19,6 @@ protocol UpdateCarBusinessLogic {
     typealias Model = UpdateCarModel
     func loadStart(_ request: Model.Start.Request)
     func loadProfile(_ request: Model.Profile.Request)
-    func loadMore(_ request: Model.More.Request)
-    func loadHome(_ request: Model.Home.Request)
     func loadUpdateCarRequest(_ request: Model.UpdateCarRequest.Request)
 }
 
@@ -31,8 +27,6 @@ protocol UpdateCarPresentationLogic {
     typealias Model = UpdateCarModel
     func presentStart(_ response: Model.Start.Response)
     func presentProfile(_ response: Model.Profile.Response)
-    func presentMore(_ response: Model.More.Response)
-    func presentHome(_ response: Model.Home.Response)
     func presentUpdateCarRequest(_ response: Model.UpdateCarRequest.Response)
     func presentUpdateCarFailure(_ response: Model.CarUpdateFailure.Response)
 }
@@ -40,8 +34,6 @@ protocol UpdateCarPresentationLogic {
 // MARK: - RoutingLogic
 protocol UpdateCarRoutingLogic {
     func routeToProfile()
-    func routeToMore()
-    func routeToHome()
 }
 
 // MARK: - WorkerLogic

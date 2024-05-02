@@ -32,18 +32,6 @@ enum AccountDetailsModel {
         }
     }
     
-    enum More {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
-    enum Home {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum Login {
         struct Request { }
         struct Response { }

@@ -14,14 +14,6 @@ final class UpdateAccountRouter {
 
 // MARK: - RoutingLogic
 extension UpdateAccountRouter: UpdateAccountRoutingLogic {
-    func routeToMore() {
-        view?.navigationController?.pushViewController(MoreAssembly.build(), animated: false)
-    }
-    
-    func routeToHome() {
-        view?.navigationController?.pushViewController(HomeAssembly.build(), animated: false)
-    }
-    
     func routeToAccountDetails() {
         view?.navigationController?.popViewController(animated: true)
     }

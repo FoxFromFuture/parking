@@ -19,12 +19,6 @@ enum SettingsModel {
         }
     }
     
-    enum Home {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum More {
         struct Request { }
         struct Response { }

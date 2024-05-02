@@ -10,8 +10,6 @@ protocol MapDisplayLogic: AnyObject {
     typealias Model = MapModel
     func displayStart(_ viewModel: Model.Start.ViewModel)
     func displayParkingMap(_ viewModel: Model.ParkingMap.ViewModel)
-    func displayHome(_ viewModel: Model.Home.ViewModel)
-    func displayMore(_ viewModel: Model.More.ViewModel)
     func displayPreviousScene(_ viewModel: Model.PreviousScene.ViewModel)
     func displayReloadedMap(_ viewModel: Model.ReloadMap.ViewModel)
     func displayReservationCard(_ viewModel: Model.ReservationCard.ViewModel)
@@ -24,8 +22,6 @@ protocol MapBusinessLogic {
     typealias Model = MapModel
     func loadStart(_ request: Model.Start.Request)
     func loadParkingMap(_ request: Model.ParkingMap.Request)
-    func loadHome(_ request: Model.Home.Request)
-    func loadMore(_ request: Model.More.Request)
     func loadPreviousScene(_ request: Model.PreviousScene.Request)
     func loadReloadedMap(_ request: Model.ReloadMap.Request)
     func loadReservationCard(_ request: Model.ReservationCard.Request)
@@ -36,8 +32,6 @@ protocol MapPresentationLogic {
     typealias Model = MapModel
     func presentStart(_ response: Model.Start.Response)
     func presentParkingMap(_ response: Model.ParkingMap.Response)
-    func presentHome(_ response: Model.Home.Response)
-    func presentMore(_ response: Model.More.Response)
     func presentPreviousScene(_ response: Model.PreviousScene.Response)
     func presentReloadedMap(_ response: Model.ReloadMap.Response)
     func presentReservationCard(_ response: Model.ReservationCard.Response)
@@ -48,8 +42,6 @@ protocol MapPresentationLogic {
 // MARK: - RoutingLogic
 protocol MapRoutingLogic {
     typealias Model = MapModel
-    func routeToHome()
-    func routeToMore()
     func routeToPreviousScene()
     func routeToReservationCard(_ routeData: Model.ReservationCard.RouteData)
 }

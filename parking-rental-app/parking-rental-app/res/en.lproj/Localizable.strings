@@ -23,8 +23,8 @@
 "more" = "More";
 "availableBuildings" = "Available Buildings";
 "date" = "Date";
-"startTime" = "Start Time";
-"endTime" = "End Time";
+"startTime" = "Start Time:";
+"endTime" = "End Time:";
 "reservationCardFreeFirstLineTitle" = "Book your car";
 "reservationCardReservedFirstLineTitle" = "Your reserved car";
 "reservationCardSecondLineTitle" = "Parking";
@@ -88,6 +88,14 @@
 "question_1" = "How to reserve a parking space?";
 "question_2" = "How many parking lots can I book in total?";
 "question_3" = "How many cars I can have in my account?";
-"answer_1" = "1. Open main screen\n2. Press \"Reserve Lot\" button\n3. Select building\n4. Select date/time/floor\n5. Press \"Reserve Lot\" button\n\nThat's it, the space is reserved!";
-"answer_2" = "You may reserve a maximum of 5 lots in each building.";
+"answer_1" = "1. Open main screen\n2. Press \"Reserve Lot\" button\n3. Select building\n4. Select date/time/floor\n5. Select parking lot\n6. Select car\n7. Press \"Reserve Lot\" button\n\nThat's it, the space is reserved!";
+"answer_2" = "You can reserve a maximum of 5 lots in each building.";
 "answer_3" = "You can have a maximum of 3 cars.";
+"extras" = "Extras";
+"version" = "version 1.0";
+"contactDevsButton" = "Contact developers";
+"contactDevsTitle" = "Contact Developers";
+"close" = "Close";
+"letsGo" = "Let's Go";
+"welcome" = "Welcome!";
+"onboardingDescription" = "Welcome to Parking!\nRent parking spaces in the fastest and most convenient way possible.\n\nAnd have fun!";

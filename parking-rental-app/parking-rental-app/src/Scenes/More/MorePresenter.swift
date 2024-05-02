@@ -16,15 +16,15 @@ extension MorePresenter: MorePresentationLogic {
         view?.displayStart(Model.Start.ViewModel())
     }
     
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(Model.Home.ViewModel())
-    }
-    
     func presentSettings(_ response: Model.Settings.Response) {
         view?.displaySettings(MoreModel.Settings.ViewModel())
     }
     
     func presentFAQ(_ response: Model.FAQ.Response) {
         view?.displayFAQ(MoreModel.FAQ.ViewModel())
+    }
+    
+    func presentContactDevs(_ response: Model.ContactDevs.Response) {
+        view?.displayContactDevs(MoreModel.ContactDevs.ViewModel())
     }
 }

@@ -32,10 +32,6 @@ extension BuildingsPresenter: BuildingsPresentationLogic {
         view?.displayBuildings(BuildingsModel.GetBuildings.ViewModel(buildingsCount: response.buildings.count, buildingNames: buildingNames, buildingAddresses: buildingAddresses, buildingsIDx: buildingsIDx))
     }
     
-    func presentMore(_ response: Model.More.Response) {
-        view?.displayMore(Model.More.ViewModel())
-    }
-    
     func presentHome(_ response: Model.Home.Response) {
         view?.displayHome(Model.Home.ViewModel())
     }

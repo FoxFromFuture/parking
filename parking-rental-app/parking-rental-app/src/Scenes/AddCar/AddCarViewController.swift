@@ -17,7 +17,6 @@ final class AddCarViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: AddCarBusinessLogic
     private let router: AddCarRoutingLogic
-    private let tabBar = TabBar()
     private let titleLabel = UILabel()
     private let subTitleLabel = UILabel()
     private let carModelTextField = UITextField()
@@ -57,7 +56,6 @@ final class AddCarViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureTitleLabel()
         configureSubTitleLabel()
         configureCarModelTextField()
@@ -74,20 +72,6 @@ final class AddCarViewController: UIViewController {
             action: #selector(goBack)
         )
         navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
     }
     
     private func configureTitleLabel() {
@@ -149,7 +133,7 @@ final class AddCarViewController: UIViewController {
         saveButton.setTitle("save".localize(), for: .normal)
         saveButton.setTitleColor(Colors.mainText.uiColor.light, for: .normal)
         saveButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        saveButton.addTarget(self, action: #selector(saveButtonWasTapped), for: .touchDown)
+        saveButton.addTarget(self, action: #selector(saveButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureCarSetupFailureLabel() {
@@ -193,14 +177,6 @@ final class AddCarViewController: UIViewController {
 extension AddCarViewController: AddCarDisplayLogic {
     func displayStart(_ viewModel: Model.Start.ViewModel) {
         self.configureUI()
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
-    }
-    
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
     }
     
     func displayAccountCars(_ viewModel: Model.AccountCars.ViewModel) {

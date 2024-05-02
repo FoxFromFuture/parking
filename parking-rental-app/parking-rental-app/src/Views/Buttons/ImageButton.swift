@@ -1,5 +1,5 @@
 //
-//  TabBarButton.swift
+//  ImageButton.swift
 //  parking-rental-app
 //
 //  Created by Никита Лисунов on 2/27/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarButton: UIView {
+class ImageButton: UIView {
     
     public var pressAction: (() -> Void)?
     
@@ -36,10 +36,14 @@ class TabBarButton: UIView {
         textLabel.font = font
     }
     
-    func setIcon(_ image: UIImage, _ tintColor: UIColor) {
+    func setIcon(_ image: UIImage, _ tintColor: UIColor, height: Double? = nil, width: Double? = nil) {
         iconView.image = image
         iconView.tintColor = tintColor
         iconView.backgroundColor = UIColor.clear
+        if let height = height, let width = width {
+            iconView.setHeight(height)
+            iconView.setWidth(width)
+        }
     }
     
     func configureUI() {

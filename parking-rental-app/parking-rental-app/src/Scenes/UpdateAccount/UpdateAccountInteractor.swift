@@ -32,14 +32,6 @@ extension UpdateAccountInteractor: UpdateAccountBusinessLogic {
         presenter.presentStart(Model.Start.Response())
     }
     
-    func loadMore(_ request: Model.More.Request) {
-        presenter.presentMore(UpdateAccountModel.More.Response())
-    }
-    
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(UpdateAccountModel.Home.Response())
-    }
-    
     func loadAccountDetails(_ request: Model.AccountDetails.Request) {
         presenter.presentAccountDetails(UpdateAccountModel.AccountDetails.Response())
     }

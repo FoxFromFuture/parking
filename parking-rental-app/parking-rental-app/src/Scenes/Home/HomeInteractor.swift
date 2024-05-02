@@ -117,8 +117,4 @@ extension HomeInteractor: HomeBusinessLogic {
     func loadProfile(_ request: Model.Profile.Request) {
         self.presenter.presentProfile(Model.Profile.Response())
     }
-    
-    func loadMore(_ request: Model.More.Request) {
-        self.presenter.presentMore(Model.More.Response())
-    }
 }

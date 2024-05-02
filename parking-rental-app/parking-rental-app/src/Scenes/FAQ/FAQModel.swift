@@ -15,12 +15,6 @@ enum FAQModel {
         struct ViewModel { }
     }
     
-    enum Home {
-        struct Request { }
-        struct Response { }
-        struct ViewModel { }
-    }
-    
     enum More {
         struct Request { }
         struct Response { }

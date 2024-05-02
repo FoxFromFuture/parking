@@ -24,14 +24,6 @@ extension AccountDetailsPresenter: AccountDetailsPresentationLogic {
         view?.displayUserDetails(AccountDetailsModel.UserDetails.ViewModel(name: response.user.name, email: response.user.email))
     }
     
-    func presentMore(_ response: Model.More.Response) {
-        view?.displayMore(AccountDetailsModel.More.ViewModel())
-    }
-    
-    func presentHome(_ response: Model.Home.Response) {
-        view?.displayHome(AccountDetailsModel.Home.ViewModel())
-    }
-    
     func presentLogin(_ response: Model.Login.Response) {
         view?.displayLogin(AccountDetailsModel.Login.ViewModel())
     }

@@ -17,7 +17,6 @@ final class AccountDetailsViewController: UIViewController {
     // MARK: - Private Properties
     private let interactor: AccountDetailsBusinessLogic
     private let router: AccountDetailsRoutingLogic
-    private let tabBar = TabBar()
     private let nameDetailsCardButton = DetailsCardButton()
     private let emailDetailsCardButton = DetailsCardButton()
     private let deleteAccountButton = UIButton()
@@ -66,7 +65,6 @@ final class AccountDetailsViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Colors.background.uiColor
         configureNavigationBar()
-        configureTabBar()
         configureDeleteAccountButton()
         configureDeleteAccountAlert()
         configureUpdateDetailsButton()
@@ -84,20 +82,6 @@ final class AccountDetailsViewController: UIViewController {
         )
         navigationItem.leftBarButtonItem?.tintColor = Colors.active.uiColor
         navigationItem.title = "accountDetails".localize()
-    }
-    
-    private func configureTabBar() {
-        view.addSubview(tabBar)
-        tabBar.pinBottom(to: self.view.bottomAnchor)
-        tabBar.pinLeft(to: self.view.leadingAnchor)
-        tabBar.pinRight(to: self.view.trailingAnchor)
-        tabBar.setHeight(92)
-        tabBar.setMoreButtonAction { [weak self] in
-            self?.interactor.loadMore(Model.More.Request())
-        }
-        tabBar.setHomeButtonAction { [weak self] in
-            self?.interactor.loadHome(Model.Home.Request())
-        }
     }
     
     private func configureNameDetailsCardButton(name: String) {
@@ -120,7 +104,7 @@ final class AccountDetailsViewController: UIViewController {
     
     private func configureDeleteAccountButton() {
         self.view.addSubview(deleteAccountButton)
-        deleteAccountButton.pinBottom(to: self.tabBar.topAnchor, 25)
+        deleteAccountButton.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor, 25)
         deleteAccountButton.setHeight(70)
         deleteAccountButton.pinHorizontal(to: self.view, 17)
         deleteAccountButton.backgroundColor = Colors.secondaryButton.uiColor
@@ -128,7 +112,7 @@ final class AccountDetailsViewController: UIViewController {
         deleteAccountButton.setTitle("deleteAccount".localize(), for: .normal)
         deleteAccountButton.setTitleColor(Colors.danger.uiColor, for: .normal)
         deleteAccountButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        deleteAccountButton.addTarget(self, action: #selector(deleteAccountButtonWasTapped), for: .touchDown)
+        deleteAccountButton.addTarget(self, action: #selector(deleteAccountButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureDeleteAccountAlert() {
@@ -149,7 +133,7 @@ final class AccountDetailsViewController: UIViewController {
         updateDetailsButton.setTitle("updateAccountDetails".localize(), for: .normal)
         updateDetailsButton.setTitleColor(Colors.active.uiColor, for: .normal)
         updateDetailsButton.titleLabel?.font = .systemFont(ofSize: 26, weight: .regular)
-        updateDetailsButton.addTarget(self, action: #selector(updateDetailsButtonWasTapped), for: .touchDown)
+        updateDetailsButton.addTarget(self, action: #selector(updateDetailsButtonWasTapped), for: .touchUpInside)
     }
     
     private func configureLoadingIndicator() {
@@ -227,14 +211,6 @@ extension AccountDetailsViewController: AccountDetailsDisplayLogic {
             self?.configureNameDetailsCardButton(name: viewModel.name)
             self?.configureEmailDetailsCardButton(email: viewModel.email)
         }
-    }
-    
-    func displayMore(_ viewModel: Model.More.ViewModel) {
-        self.router.routeToMore()
-    }
-    
-    func displayHome(_ viewModel: Model.Home.ViewModel) {
-        self.router.routeToHome()
     }
     
     func displayLogin(_ viewModel: Model.Login.ViewModel) {

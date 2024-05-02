@@ -10,7 +10,6 @@ import UIKit
 final class MoreInteractor {
     // MARK: - Private Properties
     private let presenter: MorePresentationLogic
-    private let themeManager = ThemeManager()
     
     // MARK: - Initializers
     init(presenter: MorePresentationLogic) {
@@ -24,15 +23,15 @@ extension MoreInteractor: MoreBusinessLogic {
         presenter.presentStart(Model.Start.Response())
     }
     
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(Model.Home.Response())
-    }
-    
     func loadSettings(_ request: Model.Settings.Request) {
         presenter.presentSettings(MoreModel.Settings.Response())
     }
     
     func loadFAQ(_ request: Model.FAQ.Request) {
         presenter.presentFAQ(MoreModel.FAQ.Response())
+    }
+    
+    func loadContactDevs(_ request: Model.ContactDevs.Request) {
+        presenter.presentContactDevs(MoreModel.ContactDevs.Response())
     }
 }

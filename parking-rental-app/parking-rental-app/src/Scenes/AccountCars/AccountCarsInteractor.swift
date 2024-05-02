@@ -24,14 +24,6 @@ extension AccountCarsInteractor: AccountCarsBusinessLogic {
         presenter.presentStart(Model.Start.Response())
     }
     
-    func loadMore(_ request: Model.More.Request) {
-        presenter.presentMore(Model.More.Response())
-    }
-    
-    func loadHome(_ request: Model.Home.Request) {
-        presenter.presentHome(Model.Home.Response())
-    }
-    
     func loadProfile(_ request: Model.Profile.Request) {
         presenter.presentProfile(Model.Profile.Response())
     }
