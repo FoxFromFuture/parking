@@ -10,12 +10,11 @@ import UIKit
 final class BuildingsInteractor {
     // MARK: - Private Properties
     private let presenter: BuildingsPresentationLogic
-    private let worker: BuildingsWorkerLogic
+    private let networkManager = NetworkManager()
     
     // MARK: - Initializers
-    init(presenter: BuildingsPresentationLogic, worker: BuildingsWorkerLogic) {
+    init(presenter: BuildingsPresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
     }
 }
 
@@ -27,14 +26,14 @@ extension BuildingsInteractor: BuildingsBusinessLogic {
     
     func loadBuildings(_ request: Model.GetBuildings.Request) {
         /// Fetch all buildings data
-        self.worker.getAllBuildings(completion: { [weak self] buildingsData, error in
+        self.networkManager.getAllBuildings { [weak self] buildingsData, error in
             if let error = error {
                 print(error)
                 self?.presenter.presentLoadingFailure(BuildingsModel.LoadingFailure.Response())
             } else if let buildings = buildingsData, !buildings.isEmpty {
                 self?.presenter.presentBuildings(BuildingsModel.GetBuildings.Response(buildings: buildings))
             }
-        })
+        }
     }
     
     func loadHome(_ request: Model.Home.Request) {

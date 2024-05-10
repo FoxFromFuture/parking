@@ -42,9 +42,3 @@ protocol ProfileRoutingLogic {
     func routeToLogin()
     func routeToAccountDetails()
 }
-
-// MARK: - WorkerLogic
-protocol ProfileWorkerLogic {
-    typealias Model = ProfileModel
-    func clearUserData()
-}

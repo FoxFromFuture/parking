@@ -19,7 +19,7 @@ extension NotAuthContactDevsRouter: NotAuthContactDevsRoutingLogic {
     }
     
     func routeToGitHubLink() {
-        guard let gitUrl = URL(string: "https://github.com/FoxFromFuture/the-fripp-app") else { return }
+        guard let gitUrl = URL(string: "https://github.com/FoxFromFuture/parking") else { return }
         UIApplication.shared.open(gitUrl)
     }
 }

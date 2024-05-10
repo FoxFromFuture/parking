@@ -10,12 +10,11 @@ import UIKit
 final class UpdateCarInteractor {
     // MARK: - Private Properties
     private let presenter: UpdateCarPresentationLogic
-    private let worker: UpdateCarWorkerLogic
+    private let networkManager = NetworkManager()
     
     // MARK: - Initializers
-    init(presenter: UpdateCarPresentationLogic, worker: UpdateCarWorkerLogic) {
+    init(presenter: UpdateCarPresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
     }
 }
 
@@ -30,7 +29,7 @@ extension UpdateCarInteractor: UpdateCarBusinessLogic {
     }
     
     func loadUpdateCarRequest(_ request: Model.UpdateCarRequest.Request) {
-        self.worker.updateCar(id: request.carID, newModel: request.newModel, newRegistryNumber: request.newRegistryNumber) { [weak self] carData, error in
+        self.networkManager.updateCar(id: request.carID, model: request.newModel, registryNumber: request.newRegistryNumber) { [weak self] carData, error in
             if let error = error {
                 print(error)
                 self?.presenter.presentUpdateCarFailure(UpdateCarModel.CarUpdateFailure.Response())

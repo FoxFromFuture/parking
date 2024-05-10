@@ -10,12 +10,11 @@ import UIKit
 final class RegistrationCarInteractor {
     // MARK: - Private Properties
     private let presenter: RegistrationCarPresentationLogic
-    private let worker: RegistrationCarWorkerLogic
+    private let networkManager = NetworkManager()
     
     // MARK: - Initializers
-    init(presenter: RegistrationCarPresentationLogic, worker: RegistrationCarWorkerLogic) {
+    init(presenter: RegistrationCarPresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
     }
 }
 
@@ -26,7 +25,7 @@ extension RegistrationCarInteractor: RegistrationCarBusinessLogic {
     }
     
     func loadHome(_ request: RegistrationCarModel.Home.Request) {
-        worker.saveCarRegistryNumber(model: request.carModel, registryNumber: request.carRegistryNumber) { [weak self] carData, error in
+        self.networkManager.addNewCar(model: request.carModel, registryNumber: request.carRegistryNumber) { [weak self] carData, error in
             if let error = error {
                 print(error)
                 self?.presenter.presentCarSetupFailure(RegistrationCarModel.CarSetupFailure.Response())

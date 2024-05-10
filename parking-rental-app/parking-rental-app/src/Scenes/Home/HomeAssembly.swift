@@ -11,8 +11,7 @@ enum HomeAssembly {
     static func build() -> UIViewController {
         let router: HomeRouter = HomeRouter()
         let presenter: HomePresenter = HomePresenter()
-        let worker: HomeWorker = HomeWorker()
-        let interactor: HomeInteractor = HomeInteractor(presenter: presenter, worker: worker)
+        let interactor: HomeInteractor = HomeInteractor(presenter: presenter)
         let viewController: HomeViewController = HomeViewController(
             router: router,
             interactor: interactor

@@ -46,12 +46,3 @@ protocol HomeRoutingLogic {
     func routeToMap(_ routeData: Model.Map.RouteData)
     func routeToProfile()
 }
-
-// MARK: - WorkerLogic
-protocol HomeWorkerLogic {
-    typealias Model = HomeModel
-    func getAllReservations(completion: @escaping (_ reservationsData: [Reservation]?, _ error: String?) -> ())
-    func getAllParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ())
-    func getAllParkingLevels(completion: @escaping (_ parkingLevelsData: [ParkingLevel]?, _ error: String?) -> ())
-    func getAllBuildings(completion: @escaping (_ buildingsData: [Building]?, _ error: String?) -> ())
-}

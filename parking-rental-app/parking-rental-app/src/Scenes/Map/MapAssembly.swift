@@ -11,8 +11,7 @@ enum MapAssembly {
     static func build(reservationID: String?, buildingID: String?) -> UIViewController {
         let router: MapRouter = MapRouter()
         let presenter: MapPresenter = MapPresenter()
-        let worker: MapWorker = MapWorker()
-        let interactor: MapInteractor = MapInteractor(presenter: presenter, worker: worker)
+        let interactor: MapInteractor = MapInteractor(presenter: presenter)
         let viewController: MapViewController = MapViewController(
             router: router,
             interactor: interactor,

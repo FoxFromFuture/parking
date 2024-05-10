@@ -10,7 +10,7 @@ import UIKit
 final class ReservationCardInteractor {
     // MARK: - Private Properties
     private let presenter: ReservationCardPresentationLogic
-    private let worker: ReservationCardWorkerLogic
+    private let networkManager = NetworkManager()
     private var spotState: ReservationCardSpotState?
     private var curParkingSpot: ParkingSpot?
     private var allParkingSpots: [ParkingSpot]?
@@ -31,9 +31,8 @@ final class ReservationCardInteractor {
     private var calendar = Calendar(identifier: .gregorian)
     
     // MARK: - Initializers
-    init(presenter: ReservationCardPresentationLogic, worker: ReservationCardWorkerLogic) {
+    init(presenter: ReservationCardPresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
     }
 }
 
@@ -89,7 +88,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
         }
         
         self.dispatchGroup.enter()
-        self.worker.getParkingSpot(parkingSpotID: request.parkingSpotID) { [weak self] parkingSpotData, error in
+        self.networkManager.getParkingSpot(parkingSpotID: request.parkingSpotID) { [weak self] parkingSpotData, error in
             if let error = error {
                 print(error)
             } else if let parkingSpot = parkingSpotData {
@@ -99,27 +98,27 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
         }
         
         self.dispatchGroup.enter()
-        self.worker.getAllParkingSpots(completion: { [weak self] parkingSpotsData, error in
+        self.networkManager.getAllParkingSpots { [weak self] parkingSpotsData, error in
             if let error = error {
                 print(error)
             } else if let parkingSpots = parkingSpotsData {
                 self?.allParkingSpots = parkingSpots
             }
             self?.dispatchGroup.leave()
-        })
+        }
         
         self.dispatchGroup.enter()
-        self.worker.getAllReservations(completion: { [weak self] reservationsData, error in
+        self.networkManager.getAllReservations { [weak self] reservationsData, error in
             if let error = error {
                 print(error)
             } else if let reservations = reservationsData {
                 self?.allReservations = reservations
             }
             self?.dispatchGroup.leave()
-        })
+        }
         
         self.dispatchGroup.enter()
-        self.worker.getAllCars(completion: { [weak self] carsData, error in
+        self.networkManager.getAllCars { [weak self] carsData, error in
             if let error = error {
                 print(error)
                 /// failure
@@ -127,7 +126,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
                 self?.cars = cars
             }
             self?.dispatchGroup.leave()
-        })
+        }
         
         self.dispatchGroup.wait()
         
@@ -200,7 +199,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
         
         if let startDate = startDate, let endDate = endDate {
             self.dispatchGroup.enter()
-            self.worker.addNewReservation(carId: request.carID, employeeId: request.employeeID, parkingSpotId: request.parkingSpotID, startTime: startDate.getISO8601Str(), endTime: endDate.getISO8601Str()) { [weak self] reservationData, error in
+            self.networkManager.addNewReservation(carId: request.carID, employeeId: request.employeeID, parkingSpotId: request.parkingSpotID, startTime: startDate.getISO8601Str(), endTime: endDate.getISO8601Str()) { [weak self] reservationData, error in
                 if let error = error {
                     print(error)
                     /// failure
@@ -211,7 +210,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
             }
             
             self.dispatchGroup.enter()
-            self.worker.getCar(carID: request.carID) { [weak self] carData, error in
+            self.networkManager.getCar(carID: request.carID) { [weak self] carData, error in
                 if let error = error {
                     print(error)
                     /// failure
@@ -235,7 +234,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
         self.wasDeleted = false
         
         self.dispatchGroup.enter()
-        self.worker.deleteReservation(id: request.reservationID) { [weak self] error in
+        self.networkManager.deleteReservation(id: request.reservationID) { [weak self] error in
             if let error = error {
                 print(error)
                 /// failure
@@ -246,7 +245,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
         }
         
         self.dispatchGroup.enter()
-        self.worker.getAllCars(completion: { [weak self] carsData, error in
+        self.networkManager.getAllCars { [weak self] carsData, error in
             if let error = error {
                 print(error)
                 /// failure
@@ -254,7 +253,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
                 self?.cars = cars
             }
             self?.dispatchGroup.leave()
-        })
+        }
         
         self.dispatchGroup.wait()
         if self.wasDeleted, let cars = self.cars {

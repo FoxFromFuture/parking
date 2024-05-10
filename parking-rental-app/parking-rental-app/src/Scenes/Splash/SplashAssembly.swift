@@ -11,8 +11,7 @@ enum SplashAssembly {
     static func build() -> UIViewController {
         let router: SplashRouter = SplashRouter()
         let presenter: SplashPresenter = SplashPresenter()
-        let worker: SplashWorker = SplashWorker()
-        let interactor: SplashInteractor = SplashInteractor(presenter: presenter, worker: worker)
+        let interactor: SplashInteractor = SplashInteractor(presenter: presenter)
         let viewController: SplashViewController = SplashViewController(
             router: router,
             interactor: interactor

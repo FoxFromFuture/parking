@@ -10,12 +10,18 @@ import UIKit
 final class RegistrationInteractor {
     // MARK: - Private Properties
     private let presenter: RegistrationPresentationLogic
-    private let worker: RegistrationWorkerLogic
+    private let networkManager = NetworkManager()
+    private let authManager = AuthManager()
     
     // MARK: - Initializers
-    init(presenter: RegistrationPresentationLogic, worker: RegistrationWorkerLogic) {
+    init(presenter: RegistrationPresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
+    }
+    
+    // MARK: - Private Methods
+    func saveAuthTokens(refreshToken: String, accessToken: String) {
+        self.authManager.saveTokens(refreshToken: refreshToken, accessToken: accessToken)
+        self.authManager.setRefreshTokenLastUpdateDate(date: Date.now)
     }
 }
 
@@ -26,12 +32,12 @@ extension RegistrationInteractor: RegistrationBusinessLogic {
     }
     
     func loadRegistrationCar(_ request: RegistrationModel.RegistrationCar.Request) {
-        worker.signUp(request) { [weak self] authData, error in
+        networkManager.signup(name: request.name, email: request.email, password: request.password) { [weak self] authData, error in
             if let error = error {
                 print(error)
                 self?.presenter.presentRegistrationFailure(RegistrationModel.RegistrationFailure.Response())
             } else if let authData = authData {
-                self?.worker.saveAuthTokens(refreshToken: authData.refreshToken, accessToken: authData.accessToken)
+                self?.saveAuthTokens(refreshToken: authData.refreshToken, accessToken: authData.accessToken)
                 self?.presenter.presentRegistrationCar(Model.RegistrationCar.Response())
             }
         }

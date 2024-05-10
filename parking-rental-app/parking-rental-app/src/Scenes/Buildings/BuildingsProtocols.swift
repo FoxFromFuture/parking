@@ -40,9 +40,3 @@ protocol BuildingsRoutingLogic {
     func routeToHome()
     func routeToMap(_ routeData: Model.Map.RouteData)
 }
-
-// MARK: - WorkerLogic
-protocol BuildingsWorkerLogic {
-    typealias Model = BuildingsModel
-    func getAllBuildings(completion: @escaping (_ buildingsData: [Building]?, _ error: String?) -> ())
-}

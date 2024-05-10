@@ -11,8 +11,7 @@ enum BuildingsAssembly {
     static func build() -> UIViewController {
         let router: BuildingsRouter = BuildingsRouter()
         let presenter: BuildingsPresenter = BuildingsPresenter()
-        let worker: BuildingsWorker = BuildingsWorker()
-        let interactor: BuildingsInteractor = BuildingsInteractor(presenter: presenter, worker: worker)
+        let interactor: BuildingsInteractor = BuildingsInteractor(presenter: presenter)
         let viewController: BuildingsViewController = BuildingsViewController(
             router: router,
             interactor: interactor

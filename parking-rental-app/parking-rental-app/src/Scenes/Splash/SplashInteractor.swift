@@ -10,14 +10,19 @@ import UIKit
 final class SplashInteractor {
     // MARK: - Private Properties
     private let presenter: SplashPresentationLogic
-    private let worker: SplashWorkerLogic
     private let twoWeeksInSec: Double = 1209600.0
     private let authManager = AuthManager()
+    private let networkManager = NetworkManager()
     
     // MARK: - Initializers
-    init(presenter: SplashPresentationLogic, worker: SplashWorkerLogic) {
+    init(presenter: SplashPresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
+    }
+    
+    // MARK: - Private Methods
+    private func wasUserLogined() -> Bool {
+        guard let _ = authManager.getRefreshToken() else { return false }
+        return true
     }
 }
 
@@ -28,11 +33,15 @@ extension SplashInteractor: SplashBusinessLogic {
     }
     
     func loadLogin(_ request: Model.Login.Request) {
-        if self.worker.wasUserLogined() {
+        if self.wasUserLogined() {
             if let date = authManager.getRefreshTokenLastUpdateDate(), date.timeIntervalSinceNow >= twoWeeksInSec {
-                self.worker.tryUpdateRefreshToken { [weak self] authData, error in
-                    if authData != nil {
-                        self?.presenter.presentHome(Model.Home.Response())
+                self.networkManager.updateRefreshToken { [weak self] authData, error in
+                    if let data = authData {
+                        if !(self?.authManager.updateToken(token: data.refreshToken, tokenType: .refresh) ?? false) {
+                            self?.presenter.presentLogin(Model.Login.Response())
+                        } else {
+                            self?.presenter.presentHome(Model.Home.Response())
+                        }
                     } else {
                         if let error = error {
                             print(error)

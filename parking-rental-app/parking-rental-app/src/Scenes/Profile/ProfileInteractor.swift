@@ -10,12 +10,18 @@ import UIKit
 final class ProfileInteractor {
     // MARK: - Private Properties
     private let presenter: ProfilePresentationLogic
-    private let worker: ProfileWorkerLogic
+    private let authManager = AuthManager()
     
     // MARK: - Initializers
-    init(presenter: ProfilePresentationLogic, worker: ProfileWorkerLogic) {
+    init(presenter: ProfilePresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
+    }
+    
+    // MARK: - Private Methods
+    private func clearUserData() {
+        self.authManager.deleteRefreshTokenLastUpdateDate()
+        self.authManager.deleteToken(tokenType: .access)
+        self.authManager.deleteToken(tokenType: .refresh)
     }
 }
 
@@ -34,7 +40,7 @@ extension ProfileInteractor: ProfileBusinessLogic {
     }
     
     func loadLogin(_ request: Model.Login.Request) {
-        self.worker.clearUserData()
+        self.clearUserData()
         presenter.presentLogin(Model.Login.Response())
     }
     

@@ -33,10 +33,3 @@ protocol SplashRoutingLogic {
     func routeToLogin()
     func routeToHome()
 }
-
-// MARK: - WorkerLogic
-protocol SplashWorkerLogic {
-    typealias Model = SplashModel
-    func wasUserLogined() -> Bool
-    func tryUpdateRefreshToken(completion: @escaping (AuthApiResponse?, String?) -> ())
-}

@@ -10,7 +10,7 @@ import UIKit
 final class HomeInteractor {
     // MARK: - Private Properties
     private let presenter: HomePresentationLogic
-    private let worker: HomeWorkerLogic
+    private let networkManager = NetworkManager()
     private var reservations: [Reservation]?
     private var parkingSpots: [ParkingSpot]?
     private var parkingLevels: [ParkingLevel]?
@@ -19,9 +19,8 @@ final class HomeInteractor {
     private let dispatchGroup = DispatchGroup()
     
     // MARK: - Initializers
-    init(presenter: HomePresentationLogic, worker: HomeWorkerLogic) {
+    init(presenter: HomePresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
     }
 }
 
@@ -40,7 +39,7 @@ extension HomeInteractor: HomeBusinessLogic {
         
         self.dispatchGroup.enter()
         /// Fetch user's reservations data
-        self.worker.getAllReservations() { [weak self] reservationsData, error in
+        self.networkManager.getAllReservations { [weak self] reservationsData, error in
             if let error = error {
                 print(error)
             } else if let reservations = reservationsData, !reservations.isEmpty {
@@ -59,7 +58,7 @@ extension HomeInteractor: HomeBusinessLogic {
         
         self.dispatchGroup.enter()
         /// Fetch all parking spots data
-        self.worker.getAllParkingSpots(completion: { [weak self] parkingSpotsData, error in
+        self.networkManager.getAllParkingSpots { [weak self] parkingSpotsData, error in
             if let error = error {
                 print(error)
             } else if let parkingSpots = parkingSpotsData {
@@ -67,11 +66,11 @@ extension HomeInteractor: HomeBusinessLogic {
                 self?.parkingSpots = parkingSpots
             }
             self?.dispatchGroup.leave()
-        })
+        }
         
         self.dispatchGroup.enter()
         /// Fetch all parking levels data
-        self.worker.getAllParkingLevels(completion: { [weak self] parkingLevelsData, error in
+        networkManager.getAllParkingLevels { [weak self] parkingLevelsData, error in
             if let error = error {
                 print(error)
             } else if let parkingLevels = parkingLevelsData {
@@ -79,11 +78,11 @@ extension HomeInteractor: HomeBusinessLogic {
                 self?.parkingLevels = parkingLevels
             }
             self?.dispatchGroup.leave()
-        })
+        }
         
         self.dispatchGroup.enter()
         /// Fetch all buildings data
-        self.worker.getAllBuildings(completion: { [weak self] buildingsData, error in
+        networkManager.getAllBuildings { [weak self] buildingsData, error in
             if let error = error {
                 print(error)
             } else if let buildings = buildingsData {
@@ -91,7 +90,7 @@ extension HomeInteractor: HomeBusinessLogic {
                 self?.buildings = buildings
             }
             self?.dispatchGroup.leave()
-        })
+        }
         
         self.dispatchGroup.wait()
         /// Present reservations if all data was retrieved from server

@@ -11,8 +11,7 @@ enum ProfileAssembly {
     static func build() -> UIViewController {
         let router: ProfileRouter = ProfileRouter()
         let presenter: ProfilePresenter = ProfilePresenter()
-        let worker: ProfileWorker = ProfileWorker()
-        let interactor: ProfileInteractor = ProfileInteractor(presenter: presenter, worker: worker)
+        let interactor: ProfileInteractor = ProfileInteractor(presenter: presenter)
         let viewController: ProfileViewController = ProfileViewController(
             router: router,
             interactor: interactor

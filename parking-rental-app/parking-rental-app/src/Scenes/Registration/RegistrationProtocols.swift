@@ -36,10 +36,3 @@ protocol RegistrationRoutingLogic {
     func routeToRegistrationCar()
     func routeToLogin()
 }
-
-// MARK: - WorkerLogic
-protocol RegistrationWorkerLogic {
-    typealias Model = RegistrationModel
-    func signUp(_ request: RegistrationModel.RegistrationCar.Request, completion: @escaping (_ authData: AuthApiResponse?, _ error: String?) -> ())
-    func saveAuthTokens(refreshToken: String, accessToken: String)
-}

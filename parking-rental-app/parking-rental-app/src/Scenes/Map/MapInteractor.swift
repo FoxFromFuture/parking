@@ -10,7 +10,7 @@ import UIKit
 final class MapInteractor {
     // MARK: - Private Properties
     private let presenter: MapPresentationLogic
-    private let worker: MapWorkerLogic
+    private let networkManager = NetworkManager()
     private var buildingID: String?
     private var reservationID: String?
     private var startTime: Date?
@@ -28,9 +28,8 @@ final class MapInteractor {
     private let dispatchGroup = DispatchGroup()
     
     // MARK: - Initializers
-    init(presenter: MapPresentationLogic, worker: MapWorkerLogic) {
+    init(presenter: MapPresentationLogic) {
         self.presenter = presenter
-        self.worker = worker
     }
 }
 
@@ -79,7 +78,7 @@ extension MapInteractor: MapBusinessLogic {
             
             if let buildingID = self.buildingID {
                 self.dispatchGroup.enter()
-                self.worker.getBuilding(buildingID: buildingID) { [weak self] buildingData, error in
+                self.networkManager.getBuilding(buildingID: buildingID) { [weak self] buildingData, error in
                     if let error = error {
                         print(error)
                         /// failure to get data for that building
@@ -90,7 +89,7 @@ extension MapInteractor: MapBusinessLogic {
                 }
                 
                 self.dispatchGroup.enter()
-                self.worker.getAllBuildingLevels(buildingID: buildingID) { [weak self] levelsData, error in
+                self.networkManager.getAllBuildingLevels(buildingID: buildingID) { [weak self] levelsData, error in
                     if let error = error {
                         print(error)
                         /// failure to get data for that building
@@ -100,7 +99,7 @@ extension MapInteractor: MapBusinessLogic {
                         
                         if let startTime = self?.startTime, let endTime = self?.endTime {
                             self?.dispatchGroup.enter()
-                            self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevels[0].id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str(), completion: { [weak self] parkingSpotsData, error in
+                            self?.networkManager.getAllLevelFreeSpots(parkingLevelID: parkingLevels[0].id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str()) { [weak self] parkingSpotsData, error in
                                 if let error = error {
                                     print(error)
                                     /// failure to get data for that building/level
@@ -108,14 +107,14 @@ extension MapInteractor: MapBusinessLogic {
                                     self?.freeParkingSpotsForTime = parkingSpots
                                 }
                                 self?.dispatchGroup.leave()
-                            })
+                            }
                         }
                     }
                     self?.dispatchGroup.leave()
                 }
                 
                 self.dispatchGroup.enter()
-                self.worker.getAllReservations(completion: { [weak self] reservationsData, error in
+                self.networkManager.getAllReservations { [weak self] reservationsData, error in
                     if let error = error {
                         print(error)
                         /// failure to get data for that building/level
@@ -137,7 +136,7 @@ extension MapInteractor: MapBusinessLogic {
                         }
                     }
                     self?.dispatchGroup.leave()
-                })
+                }
                 
                 self.dispatchGroup.wait()
                 if let parkingLevels = self.parkingLevels, let startTime = self.startTime, let endTime = self.endTime, let building = self.building, let levelForDisplay = self.levelForDisplay, let minStartTime = self.minStartTime, let freeParkingSpotsForTime = self.freeParkingSpotsForTime {
@@ -161,7 +160,7 @@ extension MapInteractor: MapBusinessLogic {
             
             if let _ = self.reservationID {
                 self.dispatchGroup.enter()
-                self.worker.getAllReservations(completion: { [weak self] reservationsData, error in
+                self.networkManager.getAllReservations { [weak self] reservationsData, error in
                     if let error = error {
                         print(error)
                     } else if let reservations = reservationsData {
@@ -192,14 +191,14 @@ extension MapInteractor: MapBusinessLogic {
                         }
                         
                         self?.dispatchGroup.enter()
-                        self?.worker.getParkingSpot(parkingSpotID: reservation.parkingSpotId, completion: { [weak self] parkingSpotData, error in
+                        self?.networkManager.getParkingSpot(parkingSpotID: reservation.parkingSpotId) { [weak self] parkingSpotData, error in
                             if let error = error {
                                 print(error)
                             } else if let parkingSpot = parkingSpotData {
                                 self?.reservedParkingSpot = parkingSpot
                                 
                                 self?.dispatchGroup.enter()
-                                self?.worker.getBuilding(buildingID: parkingSpot.buildingId) { [weak self] buildingData, error in
+                                self?.networkManager.getBuilding(buildingID: parkingSpot.buildingId) { [weak self] buildingData, error in
                                     if let error = error {
                                         print(error)
                                         /// failure to get data for that building
@@ -207,7 +206,7 @@ extension MapInteractor: MapBusinessLogic {
                                         self?.building = building
                                         
                                         self?.dispatchGroup.enter()
-                                        self?.worker.getAllBuildingLevels(buildingID: building.id) { [weak self] levelsData, error in
+                                        self?.networkManager.getAllBuildingLevels(buildingID: building.id) { [weak self] levelsData, error in
                                             if let error = error {
                                                 print(error)
                                                 /// failure to get data for that building/level
@@ -221,7 +220,7 @@ extension MapInteractor: MapBusinessLogic {
                                 }
                                 
                                 self?.dispatchGroup.enter()
-                                self?.worker.getParkingLevel(parkingLevelID: parkingSpot.levelId, completion: { [weak self] parkingLevelData, error in
+                                self?.networkManager.getParkingLevel(parkingLevelID: parkingSpot.levelId) { [weak self] parkingLevelData, error in
                                     if let error = error {
                                         print(error)
                                     } else if let parkingLevel = parkingLevelData {
@@ -229,7 +228,7 @@ extension MapInteractor: MapBusinessLogic {
                                         
                                         if let startTime = self?.startTime, let endTime = self?.endTime {
                                             self?.dispatchGroup.enter()
-                                            self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevel.id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str(), completion: { [weak self] parkingSpotsData, error in
+                                            self?.networkManager.getAllLevelFreeSpots(parkingLevelID: parkingLevel.id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str()) { [weak self] parkingSpotsData, error in
                                                 if let error = error {
                                                     print(error)
                                                     /// failure to get data for that building/level
@@ -237,17 +236,17 @@ extension MapInteractor: MapBusinessLogic {
                                                     self?.freeParkingSpotsForTime = parkingSpots
                                                 }
                                                 self?.dispatchGroup.leave()
-                                            })
+                                            }
                                         }
                                     }
                                     self?.dispatchGroup.leave()
-                                })
+                                }
                             }
                             self?.dispatchGroup.leave()
-                        })
+                        }
                     }
                     self?.dispatchGroup.leave()
-                })
+                }
                 
                 self.dispatchGroup.wait()
                 if let reservations = self.reservations, let parkingLevels = self.parkingLevels, let startTime = self.startTime, let endTime = self.endTime, let building = self.building, let levelForDisplay = self.levelForDisplay, let minStartTime = self.minStartTime, let freeParkingSpotsForTime = self.freeParkingSpotsForTime {
@@ -322,7 +321,7 @@ extension MapInteractor: MapBusinessLogic {
         }
         
         self.dispatchGroup.enter()
-        self.worker.getParkingLevel(parkingLevelID: request.floorID) { [weak self] parkingLevelData, error in
+        self.networkManager.getParkingLevel(parkingLevelID: request.floorID) { [weak self] parkingLevelData, error in
             if let error = error {
                 print(error)
                 /// failure to get data for that level
@@ -331,7 +330,7 @@ extension MapInteractor: MapBusinessLogic {
                 
                 if let startTime = self?.startTime, let endTime = self?.endTime {
                     self?.dispatchGroup.enter()
-                    self?.worker.getAllLevelFreeSpots(parkingLevelID: parkingLevel.id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str(), completion: { [weak self] parkingSpotsData, error in
+                    self?.networkManager.getAllLevelFreeSpots(parkingLevelID: parkingLevel.id, startTime: startTime.getISO8601Str(), endTime: endTime.getISO8601Str()) { [weak self] parkingSpotsData, error in
                         if let error = error {
                             print(error)
                             /// failure to get data for that building/level
@@ -339,14 +338,14 @@ extension MapInteractor: MapBusinessLogic {
                             self?.freeParkingSpotsForTime = parkingSpots
                         }
                         self?.dispatchGroup.leave()
-                    })
+                    }
                 }
             }
             self?.dispatchGroup.leave()
         }
         
         self.dispatchGroup.enter()
-        self.worker.getAllReservations(completion: { [weak self] reservationsData, error in
+        self.networkManager.getAllReservations { [weak self] reservationsData, error in
             if let error = error {
                 print(error)
                 /// failure to get data for that building/level
@@ -369,7 +368,7 @@ extension MapInteractor: MapBusinessLogic {
                 }
             }
             self?.dispatchGroup.leave()
-        })
+        }
         
         self.dispatchGroup.wait()
         if let freeParkingSpotsForTime = self.freeParkingSpotsForTime, let levelForDisplay = self.levelForDisplay, let minStartTime = self.minStartTime, let minEndTime = self.minEndTime {

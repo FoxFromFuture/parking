@@ -32,9 +32,3 @@ protocol RegistrationCarPresentationLogic {
 protocol RegistrationCarRoutingLogic {
     func routeToHome()
 }
-
-// MARK: - WorkerLogic
-protocol RegistrationCarWorkerLogic {
-    typealias Model = RegistrationCarModel
-    func saveCarRegistryNumber(model: String, registryNumber: String, completion: @escaping (Car?, String?) -> ())
-}

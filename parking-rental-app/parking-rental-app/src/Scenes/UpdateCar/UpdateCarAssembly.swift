@@ -11,8 +11,7 @@ enum UpdateCarAssembly {
     static func build(carID: String) -> UIViewController {
         let router: UpdateCarRouter = UpdateCarRouter()
         let presenter: UpdateCarPresenter = UpdateCarPresenter()
-        let worker: UpdateCarWorker = UpdateCarWorker()
-        let interactor: UpdateCarInteractor = UpdateCarInteractor(presenter: presenter, worker: worker)
+        let interactor: UpdateCarInteractor = UpdateCarInteractor(presenter: presenter)
         let viewController: UpdateCarViewController = UpdateCarViewController(
             router: router,
             interactor: interactor,

@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "sbtuitesttunnel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Subito-it/SBTUITestTunnel",
+      "state" : {
+        "branch" : "master",
+        "revision" : "2409cb81f3c8716e52df5876e348d5e326e600a3"
+      }
+    }
+  ],
+  "version" : 2
+}

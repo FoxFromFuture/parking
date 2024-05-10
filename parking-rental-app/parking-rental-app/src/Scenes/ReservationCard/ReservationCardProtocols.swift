@@ -38,15 +38,3 @@ protocol ReservationCardPresentationLogic {
 protocol ReservationCardRoutingLogic {
     
 }
-
-// MARK: - WorkerLogic
-protocol ReservationCardWorkerLogic {
-    typealias Model = ReservationCardModel
-    func getParkingSpot(parkingSpotID: String, completion: @escaping (_ parkingSpotData: ParkingSpot?, _ error: String?) -> ())
-    func getAllParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ())
-    func getAllCars(completion: @escaping (_ carsData: [Car]?, _ error: String?) -> ())
-    func getCar(carID: String, completion: @escaping (_ carData: Car?, _ error: String?) -> ())
-    func addNewReservation(carId: String, employeeId: String, parkingSpotId: String, startTime: String, endTime: String, completion: @escaping (_ reservationData: Reservation?, _ error: String?) -> ())
-    func deleteReservation(id: String, completion: @escaping (_ error: String?) -> ())
-    func getAllReservations(completion: @escaping (_ reservationsData: [Reservation]?, _ error: String?) -> ())
-}

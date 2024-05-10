@@ -45,16 +45,3 @@ protocol MapRoutingLogic {
     func routeToPreviousScene()
     func routeToReservationCard(_ routeData: Model.ReservationCard.RouteData)
 }
-
-// MARK: - WorkerLogic
-protocol MapWorkerLogic {
-    typealias Model = MapModel
-    func getAllBuildingLevels(buildingID: String, completion: @escaping (_ levelsData: [ParkingLevel]?, _ error: String?) -> ())
-    func getAllLevelSpots(parkingLevelID: String, completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ())
-    func getAllLevelFreeSpots(parkingLevelID: String, startTime: String, endTime: String, completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: String?) -> ())
-    func getAllReservations(completion: @escaping (_ reservationsData: [Reservation]?, _ error: String?) -> ())
-    func getBuilding(buildingID: String, completion: @escaping (_ buildingData: Building?, _ error: String?) -> ())
-    func getReservation(reservationID: String, completion: @escaping (_ reservationData: Reservation?, _ error: String?) -> ())
-    func getParkingSpot(parkingSpotID: String, completion: @escaping (_ parkingSpotData: ParkingSpot?, _ error: String?) -> ())
-    func getParkingLevel(parkingLevelID: String, completion: @escaping (_ parkingLevelData: ParkingLevel?, _ error: String?) -> ())
-}
