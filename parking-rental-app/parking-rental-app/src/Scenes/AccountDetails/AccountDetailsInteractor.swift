@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Logging
 
 final class AccountDetailsInteractor {
     // MARK: - Private Properties
     private let presenter: AccountDetailsPresentationLogic
     private let networkManager = NetworkManager()
     private let authManager = AuthManager()
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.accountDetails")
     
     // MARK: - Initializers
     init(presenter: AccountDetailsPresentationLogic) {
@@ -38,7 +40,7 @@ extension AccountDetailsInteractor: AccountDetailsBusinessLogic {
     func loadUserDetails(_ request: Model.UserDetails.Request) {
         self.networkManager.whoami { [weak self] authData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Load user details error: \(error.rawValue)")
             } else if let user = authData {
                 self?.presenter.presentUserDetails(AccountDetailsModel.UserDetails.Response(user: user))
             }
@@ -48,7 +50,7 @@ extension AccountDetailsInteractor: AccountDetailsBusinessLogic {
     func loadLogin(_ request: Model.Login.Request) {
         self.networkManager.deleteEmployee { [weak self] error in
             if let error = error {
-                print(error)
+                self?.logger.error("Delete user error: \(error.rawValue)")
                 self?.presenter.presentUpdateAccountFailure(AccountDetailsModel.UpdateAccountFailure.Response())
             } else {
                 self?.clearUserData()

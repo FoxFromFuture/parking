@@ -242,6 +242,7 @@
 		27ECC9022BDFEADC00E91502 /* NotAuthMoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC9012BDFEADC00E91502 /* NotAuthMoreRouter.swift */; };
 		27ECC9042BDFEAE700E91502 /* NotAuthMoreProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC9032BDFEAE700E91502 /* NotAuthMoreProtocols.swift */; };
 		27ECC9062BDFEAEF00E91502 /* NotAuthMoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC9052BDFEAEF00E91502 /* NotAuthMoreAssembly.swift */; };
+		27EEDBEF2BF4EE05004B72A2 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 27EEDBEE2BF4EE05004B72A2 /* Logging */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -514,6 +515,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27EEDBEF2BF4EE05004B72A2 /* Logging in Frameworks */,
 				277398982BEE1B1C0091F27E /* SBTUITestTunnelServer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1317,6 +1319,7 @@
 			name = "parking-rental-app";
 			packageProductDependencies = (
 				277398972BEE1B1C0091F27E /* SBTUITestTunnelServer */,
+				27EEDBEE2BF4EE05004B72A2 /* Logging */,
 			);
 			productName = "parking-rental-app";
 			productReference = 273C90A62B7BCCB000C73FE8 /* parking-rental-app.app */;
@@ -1376,6 +1379,7 @@
 			mainGroup = 273C909D2B7BCCB000C73FE8;
 			packageReferences = (
 				277398942BEE1B1C0091F27E /* XCRemoteSwiftPackageReference "SBTUITestTunnel" */,
+				27EEDBED2BF4EE05004B72A2 /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 273C90A72B7BCCB000C73FE8 /* Products */;
 			projectDirPath = "";
@@ -1957,6 +1961,14 @@
 				kind = branch;
 			};
 		};
+		27EEDBED2BF4EE05004B72A2 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1969,6 +1981,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 277398942BEE1B1C0091F27E /* XCRemoteSwiftPackageReference "SBTUITestTunnel" */;
 			productName = SBTUITestTunnelServer;
+		};
+		27EEDBEE2BF4EE05004B72A2 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27EEDBED2BF4EE05004B72A2 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

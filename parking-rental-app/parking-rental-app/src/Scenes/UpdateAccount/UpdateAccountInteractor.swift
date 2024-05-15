@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Logging
 
 final class UpdateAccountInteractor {
     // MARK: - Private Properties
     private let presenter: UpdateAccountPresentationLogic
     private let networkManager = NetworkManager()
     private let authManager = AuthManager()
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.updateAccount")
     
     // MARK: - Initializers
     init(presenter: UpdateAccountPresentationLogic) {
@@ -39,7 +41,7 @@ extension UpdateAccountInteractor: UpdateAccountBusinessLogic {
     func loadUpdateAccountRequest(_ request: Model.UpdateAccountRequest.Request) {
         self.networkManager.updateEmployee(name: request.name, email: request.email, password: request.password) { [weak self] authData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Update user error: \(error.rawValue)")
                 self?.presenter.presentUpdateAccountFailure(Model.UpdateAccountFailure.Response())
             } else if let authData = authData {
                 self?.updateAuthTokens(refreshToken: authData.refreshToken, accessToken: authData.accessToken)

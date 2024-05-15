@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Logging
 
 enum ParkingSpotType {
     case notAvailable
@@ -16,6 +17,8 @@ enum ParkingSpotType {
 
 class MapView: UIView {
     // MARK: - Properties
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.mapView")
+    
     private var notAvailableParkingSpots: [ParkingSpot]?
     private var notFreeParkingSpots: [ParkingSpot]?
     private var freeParkingSpots: [ParkingSpot]?
@@ -150,7 +153,7 @@ class MapView: UIView {
                         if let id = freeParkingSpots?[idx].id {
                             self.freeSpotPressAction?(id)
                         }
-                        print("freeSpot: \(self.freeParkingSpots?[idx].parkingNumber ?? "-")")
+                        self.logger.info("freeSpot: \(self.freeParkingSpots?[idx].parkingNumber ?? "-")")
                         break
                     }
                 }
@@ -160,7 +163,7 @@ class MapView: UIView {
                     if let id = reservedParkingSpot?.id {
                         self.reservedSpotPressAction?(id)
                     }
-                    print("reservedSpot: \(self.reservedParkingSpot?.parkingNumber ?? "-")")
+                    self.logger.info("reservedSpot: \(self.reservedParkingSpot?.parkingNumber ?? "-")")
                 }
             }
         }

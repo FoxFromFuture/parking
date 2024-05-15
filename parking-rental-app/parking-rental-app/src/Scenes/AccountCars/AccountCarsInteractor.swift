@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Logging
 
 final class AccountCarsInteractor {
     // MARK: - Private Properties
     private let presenter: AccountCarsPresentationLogic
     private let networkManager = NetworkManager()
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.accountCars")
     
     // MARK: - Initializers
     init(presenter: AccountCarsPresentationLogic) {
@@ -31,7 +33,7 @@ extension AccountCarsInteractor: AccountCarsBusinessLogic {
     func loadAccountCarsRequest(_ request: Model.AccountCarsRequest.Request) {
         self.networkManager.getAllCars { [weak self] carsData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Get all cars error: \(error.rawValue)")
                 self?.presenter.presentAccountCarsFailure(AccountCarsModel.AccountCarsFailure.Response())
             } else if let cars = carsData {
                 let isLimit = cars.count == 3

@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Logging
 
 final class BuildingsInteractor {
     // MARK: - Private Properties
     private let presenter: BuildingsPresentationLogic
     private let networkManager = NetworkManager()
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.buildings")
     
     // MARK: - Initializers
     init(presenter: BuildingsPresentationLogic) {
@@ -28,7 +30,7 @@ extension BuildingsInteractor: BuildingsBusinessLogic {
         /// Fetch all buildings data
         self.networkManager.getAllBuildings { [weak self] buildingsData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Get all buildings error: \(error.rawValue)")
                 self?.presenter.presentLoadingFailure(BuildingsModel.LoadingFailure.Response())
             } else if let buildings = buildingsData, !buildings.isEmpty {
                 self?.presenter.presentBuildings(BuildingsModel.GetBuildings.Response(buildings: buildings))

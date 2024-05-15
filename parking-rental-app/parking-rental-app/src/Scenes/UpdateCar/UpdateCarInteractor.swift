@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Logging
 
 final class UpdateCarInteractor {
     // MARK: - Private Properties
     private let presenter: UpdateCarPresentationLogic
     private let networkManager = NetworkManager()
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.updateCar")
     
     // MARK: - Initializers
     init(presenter: UpdateCarPresentationLogic) {
@@ -31,7 +33,7 @@ extension UpdateCarInteractor: UpdateCarBusinessLogic {
     func loadUpdateCarRequest(_ request: Model.UpdateCarRequest.Request) {
         self.networkManager.updateCar(id: request.carID, model: request.newModel, registryNumber: request.newRegistryNumber) { [weak self] carData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Update car error: \(error.rawValue)")
                 self?.presenter.presentUpdateCarFailure(UpdateCarModel.CarUpdateFailure.Response())
             } else if let _ = carData {
                 self?.presenter.presentUpdateCarRequest(UpdateCarModel.UpdateCarRequest.Response())

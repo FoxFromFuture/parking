@@ -113,6 +113,7 @@ final class UpdateAccountViewController: UIViewController {
         nameTextField.pinLeft(to: self.view, 38)
         nameTextField.pinRight(to: self.view, 38)
         nameTextField.backgroundColor = .clear
+        nameTextField.textContentType = .username
         self.nameTextFieldBottomBorder = nameTextField.addBottomBorder(color: Colors.secondaryText.uiColor, thickness: 2)
     }
     
@@ -126,6 +127,8 @@ final class UpdateAccountViewController: UIViewController {
         emailTextField.pinLeft(to: self.view, 38)
         emailTextField.pinRight(to: self.view, 38)
         emailTextField.backgroundColor = .clear
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.textContentType = .emailAddress
         self.emailTextFieldBottomBorder = emailTextField.addBottomBorder(color: Colors.secondaryText.uiColor, thickness: 2)
     }
     
@@ -139,6 +142,8 @@ final class UpdateAccountViewController: UIViewController {
         passwordTextField.pinLeft(to: self.view, 38)
         passwordTextField.pinRight(to: self.view, 38)
         passwordTextField.backgroundColor = .clear
+        passwordTextField.textContentType = .newPassword
+        passwordTextField.isSecureTextEntry = true
         self.passwordTextFieldBottomBorder = passwordTextField.addBottomBorder(color: Colors.secondaryText.uiColor, thickness: 2)
     }
     

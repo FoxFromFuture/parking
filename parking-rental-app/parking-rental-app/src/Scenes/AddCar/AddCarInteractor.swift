@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Logging
 
 final class AddCarInteractor {
     // MARK: - Private Properties
     private let presenter: AddCarPresentationLogic
     private let networkManager = NetworkManager()
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.addCar")
     
     // MARK: - Initializers
     init(presenter: AddCarPresentationLogic) {
@@ -31,7 +33,7 @@ extension AddCarInteractor: AddCarBusinessLogic {
     func loadAddCarRequest(_ request: Model.AddCarRequest.Request) {
         self.networkManager.addNewCar(model: request.model, registryNumber: request.registryNumber) { [weak self] carData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Add new car error: \(error.rawValue)")
                 self?.presenter.presentAddCarFailure(AddCarModel.AddCarFailure.Response())
             } else if let _ = carData {
                 self?.presenter.presentAddCarRequest(AddCarModel.AddCarRequest.Response())

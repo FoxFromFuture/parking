@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Logging
 
 final class SplashInteractor {
     // MARK: - Private Properties
@@ -13,6 +14,7 @@ final class SplashInteractor {
     private let twoWeeksInSec: Double = 1209600.0
     private let authManager = AuthManager()
     private let networkManager = NetworkManager()
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.splash")
     
     // MARK: - Initializers
     init(presenter: SplashPresentationLogic) {
@@ -44,7 +46,7 @@ extension SplashInteractor: SplashBusinessLogic {
                         }
                     } else {
                         if let error = error {
-                            print(error)
+                            self?.logger.error("Update refresh token error: \(error.rawValue)")
                         }
                         self?.presenter.presentLogin(Model.Login.Response())
                     }

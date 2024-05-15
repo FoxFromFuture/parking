@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Logging
 
 final class CarDetailsInteractor {
     // MARK: - Private Properties
     private let presenter: CarDetailsPresentationLogic
     private let networkManager = NetworkManager()
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.carDetails")
     private var carID: String?
     
     // MARK: - Initializers
@@ -29,8 +31,7 @@ extension CarDetailsInteractor: CarDetailsBusinessLogic {
         self.carID = request.carID
         self.networkManager.getAllCars(completion: { [weak self] carsData, error in
             if let error = error {
-                print(error)
-                // TODO: - Present Failure
+                self?.logger.error("Get all cars error: \(error.rawValue)")
             } else if let cars = carsData {
                 var curCar: Car?
                 if let carID = self?.carID {
@@ -60,7 +61,7 @@ extension CarDetailsInteractor: CarDetailsBusinessLogic {
     func loadDeleteCar(_ request: Model.DeleteCar.Request) {
         self.networkManager.deleteCar(carID: request.carID) { [weak self] error in
             if let error = error {
-                print(error)
+                self?.logger.error("Delete car error: \(error.rawValue)")
                 self?.presenter.presentCarDetailsFailure(CarDetailsModel.CarDetailsFailure.Response())
             } else {
                 self?.presenter.presentDeleteCar(CarDetailsModel.DeleteCar.Response())

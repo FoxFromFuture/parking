@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Logging
 
 final class HomeInteractor {
     // MARK: - Private Properties
@@ -15,6 +16,7 @@ final class HomeInteractor {
     private var parkingSpots: [ParkingSpot]?
     private var parkingLevels: [ParkingLevel]?
     private var buildings: [Building]?
+    private let logger = Logger(label: "com.foxfromfuture.parking-rental-app.home")
     
     private let dispatchGroup = DispatchGroup()
     
@@ -41,7 +43,7 @@ extension HomeInteractor: HomeBusinessLogic {
         /// Fetch user's reservations data
         self.networkManager.getAllReservations { [weak self] reservationsData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Get all reservations error: \(error.rawValue)")
             } else if let reservations = reservationsData, !reservations.isEmpty {
                 /// Save fetched reservations
                 let timeDateFormatter = DateFormatter()
@@ -60,7 +62,7 @@ extension HomeInteractor: HomeBusinessLogic {
         /// Fetch all parking spots data
         self.networkManager.getAllParkingSpots { [weak self] parkingSpotsData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Get all parking spots error: \(error.rawValue)")
             } else if let parkingSpots = parkingSpotsData {
                 /// Save fetched parking spots
                 self?.parkingSpots = parkingSpots
@@ -72,7 +74,7 @@ extension HomeInteractor: HomeBusinessLogic {
         /// Fetch all parking levels data
         networkManager.getAllParkingLevels { [weak self] parkingLevelsData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Get all parking levels error: \(error.rawValue)")
             } else if let parkingLevels = parkingLevelsData {
                 /// Save fetched parking levels
                 self?.parkingLevels = parkingLevels
@@ -84,7 +86,7 @@ extension HomeInteractor: HomeBusinessLogic {
         /// Fetch all buildings data
         networkManager.getAllBuildings { [weak self] buildingsData, error in
             if let error = error {
-                print(error)
+                self?.logger.error("Get all buildings error: \(error.rawValue)")
             } else if let buildings = buildingsData {
                 /// Save fetched buildings
                 self?.buildings = buildings
@@ -92,16 +94,17 @@ extension HomeInteractor: HomeBusinessLogic {
             self?.dispatchGroup.leave()
         }
         
-        self.dispatchGroup.wait()
-        /// Present reservations if all data was retrieved from server
-        if let reservations = self.reservations {
-            if let parkingSpots = self.parkingSpots, let parkingLevels = self.parkingLevels, let buildings = self.buildings {
-                self.presenter.presentReservations(Model.GetReservations.Response(reservations: reservations, parkingSpots: parkingSpots, parkingLevels: parkingLevels, buildings: buildings))
+        self.dispatchGroup.notify(queue: .main) { [weak self] in
+            /// Present reservations if all data was retrieved from server
+            if let reservations = self?.reservations {
+                if let parkingSpots = self?.parkingSpots, let parkingLevels = self?.parkingLevels, let buildings = self?.buildings {
+                    self?.presenter.presentReservations(Model.GetReservations.Response(reservations: reservations, parkingSpots: parkingSpots, parkingLevels: parkingLevels, buildings: buildings))
+                } else {
+                    self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
+                }
             } else {
-                self.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
+                self?.presenter.presentNoData(HomeModel.NoData.Response())
             }
-        } else {
-            self.presenter.presentNoData(HomeModel.NoData.Response())
         }
     }
     
