@@ -7,17 +7,26 @@
 
 import Foundation
 
+protocol KeychainManagerProtocol {
+    func save(key: String, data: Data) throws
+    func get(key: String) throws -> Data?
+    func delete(key: String) throws
+    func update(key: String, data: Data) throws
+}
+
 enum KeychainError: Error {
     case unknown(status: OSStatus)
 }
 
-final class KeychainManager {
-    private static let service = "parking-rental-app"
-    
-    static func save(key: String, data: Data) throws {
+enum KeychainKeys: String {
+    case service = "parking-rental-app"
+}
+
+final class KeychainManager: KeychainManagerProtocol {
+    func save(key: String, data: Data) throws {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrService: service,
+            kSecAttrService: KeychainKeys.service.rawValue,
             kSecAttrAccount: key,
             kSecValueData: data
         ]
@@ -29,10 +38,10 @@ final class KeychainManager {
         }
     }
     
-    static func get(key: String) throws -> Data? {
+    func get(key: String) throws -> Data? {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrService: service,
+            kSecAttrService: KeychainKeys.service.rawValue,
             kSecAttrAccount: key,
             kSecReturnData: kCFBooleanTrue as Any,
             kSecMatchLimit: kSecMatchLimitOne
@@ -48,10 +57,10 @@ final class KeychainManager {
         return result as? Data
     }
     
-    static func delete(key: String) throws {
+    func delete(key: String) throws {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrService: service,
+            kSecAttrService: KeychainKeys.service.rawValue,
             kSecAttrAccount: key
         ]
         
@@ -62,10 +71,10 @@ final class KeychainManager {
         }
     }
     
-    static func update(key: String, data: Data) throws {
+    func update(key: String, data: Data) throws {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrService: service,
+            kSecAttrService: KeychainKeys.service.rawValue,
             kSecAttrAccount: key
         ]
         

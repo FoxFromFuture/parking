@@ -7,13 +7,24 @@
 
 import Foundation
 
-final class ThemeManager {
+protocol ThemeManagerProtocol {
+    var theme: Theme { get set }
+}
+
+final class ThemeManager: ThemeManagerProtocol {
+    
+    private var storage: UserDefaultsServiceProtocol!
+    
+    init(storage: UserDefaultsServiceProtocol = UserDefaultsService()) {
+        self.storage = storage
+    }
+    
     var theme: Theme {
         get {
-            Theme(rawValue: UserDefaults.standard.integer(forKey: "theme")) ?? .device
+            Theme(rawValue: self.storage.theme) ?? .device
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: "theme")
+            self.storage.theme = newValue.rawValue
         }
     }
 }

@@ -36,9 +36,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "27D992E72BE52AB600256C6D"
-               BuildableName = "parking-rental-app-UITests.xctest"
-               BlueprintName = "parking-rental-app-UITests"
+               BlueprintIdentifier = "27EEDBF32BF5558C004B72A2"
+               BuildableName = "parking-rental-app-UnitTests.xctest"
+               BlueprintName = "parking-rental-app-UnitTests"
                ReferencedContainer = "container:parking-rental-app.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -66,6 +66,18 @@
             ReferencedContainer = "container:parking-rental-app.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "IMAGE_DIFF_DIR"
+            value = "$(SOURCE_ROOT)/$(PROJECT_NAME)-Tests/FailureDiffs"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "FB_REFERENCE_IMAGE_DIR"
+            value = "$(SOURCE_ROOT)/$(PROJECT_NAME)-Tests/ReferenceImages"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

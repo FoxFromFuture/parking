@@ -8,9 +8,9 @@
 import Foundation
 
 public enum BuildingsApi {
-    case getBuilding(buildingID: String)
-    case getAllBuildings
-    case getAllBuildingLevels(buildingID: String)
+    case getBuilding(buildingID: String, accessToken: String)
+    case getAllBuildings(accessToken: String)
+    case getAllBuildingLevels(buildingID: String, accessToken: String)
 }
 
 extension BuildingsApi: EndPointType {
@@ -27,11 +27,11 @@ extension BuildingsApi: EndPointType {
     
     var path: String {
         switch self {
-        case .getBuilding(let buildingID):
+        case .getBuilding(let buildingID, _):
             return "\(buildingID)"
         case .getAllBuildings:
             return ""
-        case .getAllBuildingLevels(let buildingID):
+        case .getAllBuildingLevels(let buildingID, _):
             return "\(buildingID)/levels"
         }
     }
@@ -59,6 +59,13 @@ extension BuildingsApi: EndPointType {
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
+        switch self {
+        case .getBuilding(_, let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .getAllBuildings(let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .getAllBuildingLevels(_, let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        }
     }
 }

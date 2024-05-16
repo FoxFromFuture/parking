@@ -8,10 +8,10 @@
 import Foundation
 
 public enum ReservationsApi {
-    case getAllReservations
-    case addNewReservation(carId: String, employeeId: String, parkingSpotId: String, startTime: String, endTime: String)
-    case deleteReservation(id: String)
-    case getReservation(reservationID: String)
+    case getAllReservations(accessToken: String)
+    case addNewReservation(carId: String, employeeId: String, parkingSpotId: String, startTime: String, endTime: String, accessToken: String)
+    case deleteReservation(id: String, accessToken: String)
+    case getReservation(reservationID: String, accessToken: String)
 }
 
 extension ReservationsApi: EndPointType {
@@ -32,9 +32,9 @@ extension ReservationsApi: EndPointType {
             return "employee"
         case .addNewReservation:
             return "employee"
-        case .deleteReservation(let id):
+        case .deleteReservation(let id, _):
             return "\(id)/employee"
-        case .getReservation(let reservationID):
+        case .getReservation(let reservationID, _):
             return "\(reservationID)"
         }
     }
@@ -56,7 +56,7 @@ extension ReservationsApi: EndPointType {
         switch self {
         case .getAllReservations:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
-        case .addNewReservation(let carId, let employeeId, let parkingSpotId, let startTime, let endTime):
+        case .addNewReservation(let carId, let employeeId, let parkingSpotId, let startTime, let endTime, _):
             return .requestParametersAndHeaders(bodyParameters: ["carId": carId, "employeeId": employeeId, "parkingSpotId": parkingSpotId, "startTime": startTime, "endTime": endTime], urlParameters: nil, additionHeaders: self.headers)
         case .deleteReservation:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
@@ -66,6 +66,15 @@ extension ReservationsApi: EndPointType {
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
+        switch self {
+        case .getAllReservations(let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .addNewReservation(_, _, _, _, _, let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .deleteReservation(_, let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .getReservation(_, let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        }
     }
 }

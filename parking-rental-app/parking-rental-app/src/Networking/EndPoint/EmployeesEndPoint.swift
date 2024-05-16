@@ -8,8 +8,8 @@
 import Foundation
 
 public enum EmployeesApi {
-    case deleteEmployee
-    case updateEmployee(name: String, email: String, password: String)
+    case deleteEmployee(accessToken: String)
+    case updateEmployee(name: String, email: String, password: String, accessToken: String)
 }
 
 extension EmployeesApi: EndPointType {
@@ -46,12 +46,17 @@ extension EmployeesApi: EndPointType {
         switch self {
         case .deleteEmployee:
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
-        case .updateEmployee(let name, let email, let password):
+        case .updateEmployee(let name, let email, let password, _):
             return .requestParametersAndHeaders(bodyParameters: ["name": name, "email": email, "password": password], urlParameters: nil, additionHeaders: self.headers)
         }
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
+        switch self {
+        case .deleteEmployee(let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .updateEmployee(_, _, _, let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        }
     }
 }

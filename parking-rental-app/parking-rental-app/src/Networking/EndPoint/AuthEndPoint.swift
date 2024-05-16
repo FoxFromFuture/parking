@@ -8,11 +8,11 @@
 import Foundation
 
 public enum AuthApi {
-    case whoami
+    case whoami(accessToken: String)
     case login(email: String, password: String)
     case signUp(name: String, email: String, password: String)
     case updateAccessToken(refreshToken: String)
-    case updateRefreshToken(refreshToken: String)
+    case updateRefreshToken(refreshToken: String, accessToken: String)
 }
 
 extension AuthApi: EndPointType {
@@ -67,12 +67,19 @@ extension AuthApi: EndPointType {
             return .requestParameters(bodyParameters: ["name": name, "email": email, "password": password, "roles": ["APP_USER"]], urlParameters: nil)
         case .updateAccessToken(let refreshToken):
             return .requestParameters(bodyParameters: ["refreshToken": refreshToken], urlParameters: nil)
-        case .updateRefreshToken(let refreshToken):
+        case .updateRefreshToken(let refreshToken, _):
             return .requestParametersAndHeaders(bodyParameters: ["refreshToken": refreshToken], urlParameters: nil, additionHeaders: self.headers)
         }
     }
     
     var headers: HTTPHeaders? {
-        return ["Authorization": "Bearer \(AuthManager().getAccessToken() ?? "")"]
+        switch self {
+        case .whoami(let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        case .updateRefreshToken(_, let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
+        default:
+            return nil
+        }
     }
 }

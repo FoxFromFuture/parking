@@ -14,7 +14,12 @@ enum NetworkEnvironment {
 
 final class NetworkManager {
     static let environment: NetworkEnvironment = .production
-    private let authManager = AuthManager()
+    private var authManager: AuthManagerProtocol!
+    private var accessToken: String {
+        get {
+            self.authManager.getAccessToken() ?? ""
+        }
+    }
     private let carsRouter = Router<CarsApi>()
     private let authRouter = Router<AuthApi>()
     private let reservationsRouter = Router<ReservationsApi>()
@@ -41,6 +46,10 @@ final class NetworkManager {
     enum Result<String> {
         case success
         case failure(String)
+    }
+    
+    init(authManager: AuthManagerProtocol = AuthManager()) {
+        self.authManager = authManager
     }
     
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<NetworkResponse> {
@@ -154,26 +163,14 @@ final class NetworkManager {
         }
     }
     
-    private func authRequestCompletion<TResponse: Decodable>(_ data: TResponse?, _ error: NetworkResponse?, _ completion: @escaping (_ data: TResponse?, _ error: NetworkResponse?) -> ()) {
-        if let error = error {
-            completion(nil, error)
-        } else if let data = data {
-            completion(data, nil)
-        }
-    }
-    
-    private func authRequestNoDataCompletion(_ error: NetworkResponse?, _ completion: @escaping (_ error: NetworkResponse?) -> ()) {
-        completion(error)
-    }
-    
     // MARK: - Tokens Processing
     public func updateRefreshToken(completion: @escaping (_ authData: AuthApiResponse?, _ error: NetworkResponse?) -> ()) {
         guard let oldRefreshToken = self.authManager.getRefreshToken() else {
             completion(nil, NetworkResponse.noRefreshToken)
             return
         }
-        authRequestDataResponse(router: authRouter, task: .updateRefreshToken(refreshToken: oldRefreshToken), responseType: AuthApiResponse.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: authRouter, task: .updateRefreshToken(refreshToken: oldRefreshToken, accessToken: self.accessToken), responseType: AuthApiResponse.self) { data, error in
+            completion(data, error)
         }
     }
     
@@ -204,134 +201,134 @@ final class NetworkManager {
     }
     
     func whoami(completion: @escaping (_ authData: AuthWhoamiApiResponse?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: authRouter, task: .whoami, responseType: AuthWhoamiApiResponse.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: authRouter, task: .whoami(accessToken: self.accessToken), responseType: AuthWhoamiApiResponse.self) { data, error in
+            completion(data, error)
         }
     }
     
     // MARK: - Reservations API
     func getAllReservations(completion: @escaping (_ reservationsData: [Reservation]?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: reservationsRouter, task: .getAllReservations, responseType: [Reservation].self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: reservationsRouter, task: .getAllReservations(accessToken: self.accessToken), responseType: [Reservation].self) { data, error in
+            completion(data, error)
         }
     }
     
     func getReservation(reservationID: String, completion: @escaping (_ reservationData: Reservation?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: reservationsRouter, task: .getReservation(reservationID: reservationID), responseType: Reservation.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: reservationsRouter, task: .getReservation(reservationID: reservationID, accessToken: self.accessToken), responseType: Reservation.self) { data, error in
+            completion(data, error)
         }
     }
     
     func addNewReservation(carId: String, employeeId: String, parkingSpotId: String, startTime: String, endTime: String, completion: @escaping (_ reservationData: Reservation?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: reservationsRouter, task: .addNewReservation(carId: carId, employeeId: employeeId, parkingSpotId: parkingSpotId, startTime: startTime, endTime: endTime), responseType: Reservation.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: reservationsRouter, task: .addNewReservation(carId: carId, employeeId: employeeId, parkingSpotId: parkingSpotId, startTime: startTime, endTime: endTime, accessToken: self.accessToken), responseType: Reservation.self) { data, error in
+            completion(data, error)
         }
     }
     
     func deleteReservation(id: String, completion: @escaping (_ error: NetworkResponse?) -> ()) {
-        authRequestNoDataResponse(router: reservationsRouter, task: .deleteReservation(id: id)) { [weak self] error in
-            self?.authRequestNoDataCompletion(error, completion)
+        authRequestNoDataResponse(router: reservationsRouter, task: .deleteReservation(id: id, accessToken: self.accessToken)) { error in
+            completion(error)
         }
     }
     
     // MARK: - ParkingSpots API
     func getAllParkingSpots(completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: parkingSpotsRouter, task: .getAllParkingSpots, responseType: [ParkingSpot].self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: parkingSpotsRouter, task: .getAllParkingSpots(accessToken: self.accessToken), responseType: [ParkingSpot].self) { data, error in
+            completion(data, error)
         }
     }
     
     func getParkingSpot(parkingSpotID: String, completion: @escaping (_ parkingSpotData: ParkingSpot?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: parkingSpotsRouter, task: .getParkingSpot(parkingSpotID: parkingSpotID), responseType: ParkingSpot.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: parkingSpotsRouter, task: .getParkingSpot(parkingSpotID: parkingSpotID, accessToken: self.accessToken), responseType: ParkingSpot.self) { data, error in
+            completion(data, error)
         }
     }
     
     // MARK: - ParkingLevels API
     func getAllParkingLevels(completion: @escaping (_ parkingLevelsData: [ParkingLevel]?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: parkingLevelsRouter, task: .getAllParkingLevels, responseType: [ParkingLevel].self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: parkingLevelsRouter, task: .getAllParkingLevels(accessToken: self.accessToken), responseType: [ParkingLevel].self) { data, error in
+            completion(data, error)
         }
     }
     
     func getAllLevelSpots(parkingLevelID: String, completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: parkingLevelsRouter, task: .getAllLevelSpots(parkingLevelID: parkingLevelID), responseType: [ParkingSpot].self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: parkingLevelsRouter, task: .getAllLevelSpots(parkingLevelID: parkingLevelID, accessToken: self.accessToken), responseType: [ParkingSpot].self) { data, error in
+            completion(data, error)
         }
     }
     
     func getParkingLevel(parkingLevelID: String, completion: @escaping (_ parkingLevelData: ParkingLevel?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: parkingLevelsRouter, task: .getParkingLevel(parkingLevelID: parkingLevelID), responseType: ParkingLevel.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: parkingLevelsRouter, task: .getParkingLevel(parkingLevelID: parkingLevelID, accessToken: self.accessToken), responseType: ParkingLevel.self) { data, error in
+            completion(data, error)
         }
     }
     
     func getAllLevelFreeSpots(parkingLevelID: String, startTime: String, endTime: String, completion: @escaping (_ parkingSpotsData: [ParkingSpot]?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: parkingLevelsRouter, task: .getAllLevelFreeSpots(parkingLevelID: parkingLevelID, startTime: startTime, endTime: endTime), responseType: [ParkingSpot].self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: parkingLevelsRouter, task: .getAllLevelFreeSpots(parkingLevelID: parkingLevelID, startTime: startTime, endTime: endTime, accessToken: self.accessToken), responseType: [ParkingSpot].self) { data, error in
+            completion(data, error)
         }
     }
     
     // MARK: - Buildings API
     func getAllBuildings(completion: @escaping (_ buildingsData: [Building]?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: buildingsRouter, task: .getAllBuildings, responseType: [Building].self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: buildingsRouter, task: .getAllBuildings(accessToken: self.accessToken), responseType: [Building].self) { data, error in
+            completion(data, error)
         }
     }
     
     func getAllBuildingLevels(buildingID: String, completion: @escaping (_ levelsData: [ParkingLevel]?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: buildingsRouter, task: .getAllBuildingLevels(buildingID: buildingID), responseType: [ParkingLevel].self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: buildingsRouter, task: .getAllBuildingLevels(buildingID: buildingID, accessToken: self.accessToken), responseType: [ParkingLevel].self) { data, error in
+            completion(data, error)
         }
     }
     
     func getBuilding(buildingID: String, completion: @escaping (_ buildingData: Building?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: buildingsRouter, task: .getBuilding(buildingID: buildingID), responseType: Building.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: buildingsRouter, task: .getBuilding(buildingID: buildingID, accessToken: self.accessToken), responseType: Building.self) { data, error in
+            completion(data, error)
         }
     }
     
     // MARK: - Cars API
     func addNewCar(model: String, registryNumber: String, completion: @escaping (_ carData: Car?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: carsRouter, task: .addNewCar(model: model, lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber), responseType: Car.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: carsRouter, task: .addNewCar(model: model, lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber, accessToken: self.accessToken), responseType: Car.self) { data, error in
+            completion(data, error)
         }
     }
     
     func updateCar(id: String, model: String, registryNumber: String, completion: @escaping (_ carData: Car?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: carsRouter, task: .updateCar(id: id, model: model, lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber), responseType: Car.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: carsRouter, task: .updateCar(id: id, model: model, lengthMeters: 1.0, weightTons: 1.0, registryNumber: registryNumber, accessToken: self.accessToken), responseType: Car.self) { data, error in
+            completion(data, error)
         }
     }
     
     func getAllCars(completion: @escaping (_ carsData: [Car]?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: carsRouter, task: .getAllCars, responseType: [Car].self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: carsRouter, task: .getAllCars(accessToken: self.accessToken), responseType: [Car].self) { data, error in
+            completion(data, error)
         }
     }
     
     func getCar(carID: String, completion: @escaping (_ carData: Car?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: carsRouter, task: .getCar(carID: carID), responseType: Car.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: carsRouter, task: .getCar(carID: carID, accessToken: self.accessToken), responseType: Car.self) { data, error in
+            completion(data, error)
         }
     }
     
     func deleteCar(carID: String, completion: @escaping (_ error: NetworkResponse?) -> ()) {
-        authRequestNoDataResponse(router: carsRouter, task: .deleteCar(id: carID)) { [weak self] error in
-            self?.authRequestNoDataCompletion(error, completion)
+        authRequestNoDataResponse(router: carsRouter, task: .deleteCar(id: carID, accessToken: self.accessToken)) { error in
+            completion(error)
         }
     }
     
     // MARK: - Employees API
     func deleteEmployee(completion: @escaping (_ error: NetworkResponse?) -> ()) {
-        authRequestNoDataResponse(router: emplyeesRouter, task: .deleteEmployee) { [weak self] error in
-            self?.authRequestNoDataCompletion(error, completion)
+        authRequestNoDataResponse(router: emplyeesRouter, task: .deleteEmployee(accessToken: self.accessToken)) { error in
+            completion(error)
         }
     }
     
     func updateEmployee(name: String, email: String, password: String, completion: @escaping (_ authData: AuthApiResponse?, _ error: NetworkResponse?) -> ()) {
-        authRequestDataResponse(router: emplyeesRouter, task: .updateEmployee(name: name, email: email, password: password), responseType: AuthApiResponse.self) { [weak self] data, error in
-            self?.authRequestCompletion(data, error, completion)
+        authRequestDataResponse(router: emplyeesRouter, task: .updateEmployee(name: name, email: email, password: password, accessToken: self.accessToken), responseType: AuthApiResponse.self) { data, error in
+            completion(data, error)
         }
     }
 }

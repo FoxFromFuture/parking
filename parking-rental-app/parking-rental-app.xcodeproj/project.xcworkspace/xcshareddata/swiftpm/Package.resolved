@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "sbtuitesttunnel",
+      "identity" : "ios-snapshot-test-case",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Subito-it/SBTUITestTunnel",
+      "location" : "https://github.com/uber/ios-snapshot-test-case",
       "state" : {
-        "branch" : "master",
-        "revision" : "2409cb81f3c8716e52df5876e348d5e326e600a3"
+        "revision" : "7b10770333a961be6e5a41c9ce04b8c6d3990126",
+        "version" : "8.0.0"
       }
     },
     {

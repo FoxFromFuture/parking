@@ -48,6 +48,7 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.accessibilityIdentifier = "Login"
         interactor.loadStart(Model.Start.Request())
         self.hideKeyboardWhenTappedAround()
     }
