@@ -223,9 +223,15 @@ extension AccountDetailsViewController: AccountDetailsDisplayLogic {
         self.router.routeToUpdateAccount()
     }
     
-    func displayUpdateAccountFailure(_ viewModel: Model.UpdateAccountFailure.ViewModel) {
-        DispatchQueue.main.async {
-            self.currentState = .error
+    func displayDeleteAccountFailure(_ viewModel: Model.DeleteAccountFailure.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.currentState = .error
+        }
+    }
+    
+    func displayGetUserDetailsFailure(_ viewModel: Model.GetUserDetailsFailure.ViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.currentState = .error
         }
     }
 }

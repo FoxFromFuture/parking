@@ -44,7 +44,13 @@ enum AccountDetailsModel {
         struct ViewModel { }
     }
     
-    enum UpdateAccountFailure {
+    enum DeleteAccountFailure {
+        struct Request { }
+        struct Response { }
+        struct ViewModel { }
+    }
+    
+    enum GetUserDetailsFailure {
         struct Request { }
         struct Response { }
         struct ViewModel { }

@@ -32,7 +32,11 @@ extension AccountDetailsPresenter: AccountDetailsPresentationLogic {
         view?.displayUpdateAccount(AccountDetailsModel.UpdateAccount.ViewModel())
     }
     
-    func presentUpdateAccountFailure(_ response: Model.UpdateAccountFailure.Response) {
-        view?.displayUpdateAccountFailure(AccountDetailsModel.UpdateAccountFailure.ViewModel())
+    func presentDeleteAccountFailure(_ response: Model.DeleteAccountFailure.Response) {
+        view?.displayDeleteAccountFailure(AccountDetailsModel.DeleteAccountFailure.ViewModel())
+    }
+    
+    func presentGetUserDetailsFailure(_ response: Model.GetUserDetailsFailure.Response) {
+        view?.displayGetUserDetailsFailure(AccountDetailsModel.GetUserDetailsFailure.ViewModel())
     }
 }

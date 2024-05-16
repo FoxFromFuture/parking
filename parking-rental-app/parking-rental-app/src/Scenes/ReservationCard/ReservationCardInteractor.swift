@@ -31,6 +31,7 @@ final class ReservationCardInteractor {
     private var wasDeleted: Bool = false
     private let dispatchGroup = DispatchGroup()
     private var calendar = Calendar(identifier: .gregorian)
+    private var carID: String?
     
     // MARK: - Initializers
     init(presenter: ReservationCardPresentationLogic) {
@@ -174,6 +175,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
     func loadCreateReservation(_ request: Model.CreateReservation.Request) {
         self.reservationID = nil
         self.reservationCar = nil
+        self.carID = request.carID
         
         let dateComponents = self.calendar.dateComponents([.year, .month, .day], from: request.date)
         let startTimeComponents = self.calendar.dateComponents([.hour, .minute, .second], from: request.startTime)
@@ -202,7 +204,7 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
             self.dispatchGroup.enter()
             self.networkManager.addNewReservation(carId: request.carID, employeeId: request.employeeID, parkingSpotId: request.parkingSpotID, startTime: startDate.getISO8601Str(), endTime: endDate.getISO8601Str()) { [weak self] reservationData, error in
                 if let error = error {
-                    self?.logger.error("\(error.rawValue)")
+                    self?.logger.error("Add new reservation error: \(error.rawValue)")
                 } else if let reservation = reservationData {
                     self?.reservationID = reservation.id
                 }
@@ -210,14 +212,21 @@ extension ReservationCardInteractor: ReservationCardBusinessLogic {
             }
             
             self.dispatchGroup.enter()
-            self.networkManager.getCar(carID: request.carID) { [weak self] carData, error in
+            self.networkManager.getAllCars(completion: { [weak self] carsData, error in
                 if let error = error {
-                    self?.logger.error("Get car error: \(error.rawValue)")
-                } else if let car = carData {
-                    self?.reservationCar = car
+                    self?.logger.error("Get all cars error: \(error.rawValue)")
+                } else if let cars = carsData {
+                    if let carID = self?.carID {
+                        for car in cars {
+                            if car.id == carID {
+                                self?.reservationCar = car
+                                break
+                            }
+                        }
+                    }
                 }
                 self?.dispatchGroup.leave()
-            }
+            })
         }
         
         self.dispatchGroup.notify(queue: .main) { [weak self] in

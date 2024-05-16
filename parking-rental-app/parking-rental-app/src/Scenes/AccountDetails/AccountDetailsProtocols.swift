@@ -13,7 +13,8 @@ protocol AccountDetailsDisplayLogic: AnyObject {
     func displayUserDetails(_ viewModel: Model.UserDetails.ViewModel)
     func displayLogin(_ viewModel: Model.Login.ViewModel)
     func displayUpdateAccount(_ viewModel: Model.UpdateAccount.ViewModel)
-    func displayUpdateAccountFailure(_ viewModel: Model.UpdateAccountFailure.ViewModel)
+    func displayDeleteAccountFailure(_ viewModel: Model.DeleteAccountFailure.ViewModel)
+    func displayGetUserDetailsFailure(_ viewModel: Model.GetUserDetailsFailure.ViewModel)
 }
 
 // MARK: - BusinessLogic
@@ -34,7 +35,8 @@ protocol AccountDetailsPresentationLogic {
     func presentUserDetails(_ response: Model.UserDetails.Response)
     func presentLogin(_ response: Model.Login.Response)
     func presentUpdateAccount(_ response: Model.UpdateAccount.Response)
-    func presentUpdateAccountFailure(_ response: Model.UpdateAccountFailure.Response)
+    func presentDeleteAccountFailure(_ response: Model.DeleteAccountFailure.Response)
+    func presentGetUserDetailsFailure(_ response: Model.GetUserDetailsFailure.Response)
 }
 
 // MARK: - RoutingLogic

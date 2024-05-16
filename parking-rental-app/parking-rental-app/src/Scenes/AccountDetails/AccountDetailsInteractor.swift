@@ -41,6 +41,7 @@ extension AccountDetailsInteractor: AccountDetailsBusinessLogic {
         self.networkManager.whoami { [weak self] authData, error in
             if let error = error {
                 self?.logger.error("Load user details error: \(error.rawValue)")
+                self?.presenter.presentGetUserDetailsFailure(AccountDetailsModel.GetUserDetailsFailure.Response())
             } else if let user = authData {
                 self?.presenter.presentUserDetails(AccountDetailsModel.UserDetails.Response(user: user))
             }
@@ -51,7 +52,7 @@ extension AccountDetailsInteractor: AccountDetailsBusinessLogic {
         self.networkManager.deleteEmployee { [weak self] error in
             if let error = error {
                 self?.logger.error("Delete user error: \(error.rawValue)")
-                self?.presenter.presentUpdateAccountFailure(AccountDetailsModel.UpdateAccountFailure.Response())
+                self?.presenter.presentDeleteAccountFailure(AccountDetailsModel.DeleteAccountFailure.Response())
             } else {
                 self?.clearUserData()
                 self?.presenter.presentLogin(AccountDetailsModel.Login.Response())

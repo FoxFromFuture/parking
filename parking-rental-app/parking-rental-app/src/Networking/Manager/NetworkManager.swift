@@ -121,6 +121,7 @@ final class NetworkManager {
                         }
                         if !(self?.authManager.updateToken(token: newAccessToken, tokenType: .access) ?? false) {
                             completion(nil, NetworkResponse.updateTokenFailure)
+                            return
                         }
                         router.request(task) { [weak self] data, response, error in
                             let responseDecoder = self?.responseDataDecoder(data: data, dataType: responseType, response: response, error: error)
@@ -150,6 +151,7 @@ final class NetworkManager {
                         }
                         if !(self?.authManager.updateToken(token: newAccessToken, tokenType: .access) ?? false) {
                             completion(NetworkResponse.updateTokenFailure)
+                            return
                         }
                         router.request(task) { [weak self] data, response, error in
                             let responseDecoder = self?.responseNoDataDecoder(response: response, error: error)
