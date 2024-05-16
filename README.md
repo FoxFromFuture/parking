@@ -7,8 +7,8 @@
 
 Parking App is an application for renting parking spaces in office buildings for iOS.
 
-![login](https://github.com/d-kv/parking/blob/main/.res/login.png?raw=true)
-![reservation-card](https://github.com/d-kv/parking/blob/main/.res/reservation-card.png?raw=true)
+![login-mockup](https://github.com/d-kv/parking/blob/main/.res/login-mockup.png?raw=true)
+![reservation-card-mockup](https://github.com/d-kv/parking/blob/main/.res/reservation-card-mockup.png?raw=true)
 
 ## Installation
 
