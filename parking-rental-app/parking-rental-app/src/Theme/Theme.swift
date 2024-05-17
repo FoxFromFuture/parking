@@ -8,9 +8,9 @@
 import UIKit
 
 enum Theme: Int {
-    case device
-    case light
-    case dark
+    case device = 0
+    case light = 1
+    case dark = 2
     
     func getUserInterfaceStyle() -> UIUserInterfaceStyle {
         switch self {

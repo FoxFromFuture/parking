@@ -1,5 +1,5 @@
 //
-//  AuthServiceUnitTests.swift
+//  AuthManagerUnitTests.swift
 //  parking-rental-app-Tests
 //
 //  Created by Никита Лисунов on 5/15/24.
@@ -8,21 +8,23 @@
 import XCTest
 @testable import parking_rental_app
 
-final class AuthServiceUnitTests: XCTestCase {
+final class AuthManagerUnitTests: XCTestCase {
     
     var authManager: AuthManager!
-    var storage: UserDefaultsServiceProtocol!
+    var storage: UserDefaultsContainer!
     var keychain: KeychainManagerProtocol!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        storage = UserDefaultsService(userDefaultsContainer: MockUserDefaultsContainer())
+        storage = MockUserDefaultsService()
         keychain = MockKeychainManager()
         authManager = AuthManager(storage: storage, keychain: keychain)
     }
 
     override func tearDownWithError() throws {
         authManager = nil
+        storage = nil
+        keychain = nil
         try super.tearDownWithError()
     }
 

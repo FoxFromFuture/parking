@@ -44,7 +44,7 @@ final class ScenesSnapshotTests: FBSnapshotTestCase {
     
     func testSplashView() {
         // Arrange
-        var splashVC = SplashAssembly.build()
+        let splashVC = SplashAssembly.build()
         
         // Assert
         FBSnapshotVerifyView(splashVC.view)
@@ -52,7 +52,7 @@ final class ScenesSnapshotTests: FBSnapshotTestCase {
     
     func testNotAuthMoreView() {
         // Arrange
-        var notAuthMoreVC = NotAuthMoreAssembly.build()
+        let notAuthMoreVC = NotAuthMoreAssembly.build()
         
         // Assert
         FBSnapshotVerifyView(notAuthMoreVC.view)
@@ -60,7 +60,7 @@ final class ScenesSnapshotTests: FBSnapshotTestCase {
     
     func testNotAuthSettingsView() {
         // Arrange
-        var notAuthSettingsVC = NotAuthSettingsAssembly.build()
+        let notAuthSettingsVC = NotAuthSettingsAssembly.build()
         
         // Assert
         FBSnapshotVerifyView(notAuthSettingsVC.view)
@@ -68,7 +68,7 @@ final class ScenesSnapshotTests: FBSnapshotTestCase {
     
     func testNotAuthContactDevsView() {
         // Arrange
-        var notAuthContactDevs = NotAuthContactDevsAssembly.build()
+        let notAuthContactDevs = NotAuthContactDevsAssembly.build()
         
         // Assert
         FBSnapshotVerifyView(notAuthContactDevs.view)

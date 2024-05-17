@@ -12,7 +12,7 @@ enum NetworkEnvironment {
     case production
 }
 
-final class NetworkManager {
+final class NetworkManager: NetworkManagerProtocol {
     static let environment: NetworkEnvironment = .production
     private var authManager: AuthManagerProtocol!
     private var accessToken: String {
@@ -27,21 +27,6 @@ final class NetworkManager {
     private let parkingLevelsRouter = Router<ParkingLevelsApi>()
     private let buildingsRouter = Router<BuildingsApi>()
     private let emplyeesRouter = Router<EmployeesApi>()
-    
-    enum NetworkResponse: String {
-        case success
-        case connectionFailure = "Please check your network connection."
-        case authenticationError = "You need to be authenticated first."
-        case badRequest = "Bad request."
-        case outdated = "The url you requested is outdated."
-        case failed = "Network request failed."
-        case noData = "Response returned with no data to decode."
-        case unableToDecode = "We could not decode the response."
-        case noResponse = "No response."
-        case getTokenFailure = "Get Token Error."
-        case updateTokenFailure = "Update Token Error."
-        case noRefreshToken = "Refresh token doesn't exist."
-    }
     
     enum Result<String> {
         case success

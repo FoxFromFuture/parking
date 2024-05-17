@@ -7,33 +7,32 @@
 
 import Foundation
 
-protocol UserDefaultsServiceProtocol {
+enum UserDefaultsKeys: String {
+    case refreshTokenLastUpdateDate = "refreshTokenLastUpdateDate"
+    case theme = "theme"
+}
+
+protocol UserDefaultsContainer {
     var date: Date? { get set }
     var theme: Int { get set }
 }
 
-class UserDefaultsService: UserDefaultsServiceProtocol {
-    private var userDefaultsContainer: UserDefaultsContainerProtocol
-
-    init(userDefaultsContainer: UserDefaultsContainerProtocol = UserDefaultsContainer()) {
-        self.userDefaultsContainer = userDefaultsContainer
-    }
-
+class UserDefaultsService: UserDefaultsContainer {
     var date: Date? {
         get {
-            return userDefaultsContainer.date
+            return UserDefaults.standard.object(forKey: UserDefaultsKeys.refreshTokenLastUpdateDate.rawValue) as? Date
         }
         set {
-            userDefaultsContainer.date = newValue
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.refreshTokenLastUpdateDate.rawValue)
         }
     }
     
     var theme: Int {
         get {
-            return userDefaultsContainer.theme
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.theme.rawValue)
         }
         set {
-            userDefaultsContainer.theme = newValue
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.theme.rawValue)
         }
     }
 }

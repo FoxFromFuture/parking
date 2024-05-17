@@ -13,9 +13,9 @@ protocol ThemeManagerProtocol {
 
 final class ThemeManager: ThemeManagerProtocol {
     
-    private var storage: UserDefaultsServiceProtocol!
+    private var storage: UserDefaultsContainer!
     
-    init(storage: UserDefaultsServiceProtocol = UserDefaultsService()) {
+    init(storage: UserDefaultsContainer = UserDefaultsService()) {
         self.storage = storage
     }
     

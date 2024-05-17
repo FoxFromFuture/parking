@@ -26,10 +26,10 @@ public protocol AuthManagerProtocol {
 
 final class AuthManager: AuthManagerProtocol {
     
-    private var storage: UserDefaultsServiceProtocol!
+    private var storage: UserDefaultsContainer!
     private var keychain: KeychainManagerProtocol!
     
-    init(storage: UserDefaultsServiceProtocol = UserDefaultsService(), keychain: KeychainManagerProtocol = KeychainManager()) {
+    init(storage: UserDefaultsContainer = UserDefaultsService(), keychain: KeychainManagerProtocol = KeychainManager()) {
         self.storage = storage
         self.keychain = keychain
     }

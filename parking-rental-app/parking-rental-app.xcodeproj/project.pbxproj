@@ -239,14 +239,15 @@
 		27ECC9042BDFEAE700E91502 /* NotAuthMoreProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC9032BDFEAE700E91502 /* NotAuthMoreProtocols.swift */; };
 		27ECC9062BDFEAEF00E91502 /* NotAuthMoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27ECC9052BDFEAEF00E91502 /* NotAuthMoreAssembly.swift */; };
 		27EEDBEF2BF4EE05004B72A2 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 27EEDBEE2BF4EE05004B72A2 /* Logging */; };
-		27EEDBF72BF5558C004B72A2 /* AuthServiceUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDBF62BF5558C004B72A2 /* AuthServiceUnitTests.swift */; };
-		27EEDC0F2BF60E00004B72A2 /* UserDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDC0E2BF60E00004B72A2 /* UserDefaultsContainer.swift */; };
+		27EEDBF72BF5558C004B72A2 /* AuthManagerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDBF62BF5558C004B72A2 /* AuthManagerUnitTests.swift */; };
 		27EEDC152BF61605004B72A2 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDC142BF61605004B72A2 /* UserDefaultsService.swift */; };
-		27EEDC172BF616F1004B72A2 /* MockUserDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDC162BF616F1004B72A2 /* MockUserDefaultsContainer.swift */; };
+		27EEDC172BF616F1004B72A2 /* MockUserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDC162BF616F1004B72A2 /* MockUserDefaultsService.swift */; };
 		27EEDC192BF61DD1004B72A2 /* MockKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDC182BF61DD1004B72A2 /* MockKeychainManager.swift */; };
 		27EEDC332BF63F8B004B72A2 /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 27EEDC322BF63F8B004B72A2 /* iOSSnapshotTestCase */; };
 		27EEDC352BF63F8B004B72A2 /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 27EEDC322BF63F8B004B72A2 /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		27EEDC3B2BF6405B004B72A2 /* ScenesSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDC3A2BF6405B004B72A2 /* ScenesSnapshotTests.swift */; };
+		27EEDC3D2BF69385004B72A2 /* ThemeManagerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDC3C2BF69385004B72A2 /* ThemeManagerUnitTests.swift */; };
+		27EEDC432BF74BBE004B72A2 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEDC422BF74BBE004B72A2 /* NetworkManagerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -511,12 +512,13 @@
 		27ECC9032BDFEAE700E91502 /* NotAuthMoreProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMoreProtocols.swift; sourceTree = "<group>"; };
 		27ECC9052BDFEAEF00E91502 /* NotAuthMoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAuthMoreAssembly.swift; sourceTree = "<group>"; };
 		27EEDBF42BF5558C004B72A2 /* parking-rental-app-UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "parking-rental-app-UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		27EEDBF62BF5558C004B72A2 /* AuthServiceUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceUnitTests.swift; sourceTree = "<group>"; };
-		27EEDC0E2BF60E00004B72A2 /* UserDefaultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsContainer.swift; sourceTree = "<group>"; };
+		27EEDBF62BF5558C004B72A2 /* AuthManagerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerUnitTests.swift; sourceTree = "<group>"; };
 		27EEDC142BF61605004B72A2 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
-		27EEDC162BF616F1004B72A2 /* MockUserDefaultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsContainer.swift; sourceTree = "<group>"; };
+		27EEDC162BF616F1004B72A2 /* MockUserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsService.swift; sourceTree = "<group>"; };
 		27EEDC182BF61DD1004B72A2 /* MockKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainManager.swift; sourceTree = "<group>"; };
 		27EEDC3A2BF6405B004B72A2 /* ScenesSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScenesSnapshotTests.swift; path = "parking-rental-app-Tests/SnapshotTests/ScenesSnapshotTests.swift"; sourceTree = SOURCE_ROOT; };
+		27EEDC3C2BF69385004B72A2 /* ThemeManagerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManagerUnitTests.swift; sourceTree = "<group>"; };
+		27EEDC422BF74BBE004B72A2 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -879,7 +881,7 @@
 		273E65D42B848A1600567BD8 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				273E65EC2B849CBB00567BD8 /* NetworkManager.swift */,
+				27EEDC442BF74CC7004B72A2 /* NetworkManager */,
 				273E660E2B89155000567BD8 /* AuthManager.swift */,
 			);
 			path = Manager;
@@ -1312,7 +1314,7 @@
 		27EEDC052BF605C2004B72A2 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				27EEDC162BF616F1004B72A2 /* MockUserDefaultsContainer.swift */,
+				27EEDC162BF616F1004B72A2 /* MockUserDefaultsService.swift */,
 				27EEDC182BF61DD1004B72A2 /* MockKeychainManager.swift */,
 			);
 			path = Mocks;
@@ -1330,7 +1332,6 @@
 		27EEDC0D2BF60DC2004B72A2 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				27EEDC0E2BF60E00004B72A2 /* UserDefaultsContainer.swift */,
 				27EEDC142BF61605004B72A2 /* UserDefaultsService.swift */,
 			);
 			path = UserDefaults;
@@ -1340,7 +1341,8 @@
 			isa = PBXGroup;
 			children = (
 				27EEDC052BF605C2004B72A2 /* Mocks */,
-				27EEDBF62BF5558C004B72A2 /* AuthServiceUnitTests.swift */,
+				27EEDBF62BF5558C004B72A2 /* AuthManagerUnitTests.swift */,
+				27EEDC3C2BF69385004B72A2 /* ThemeManagerUnitTests.swift */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -1351,6 +1353,15 @@
 				27EEDC3A2BF6405B004B72A2 /* ScenesSnapshotTests.swift */,
 			);
 			path = SnapshotTests;
+			sourceTree = "<group>";
+		};
+		27EEDC442BF74CC7004B72A2 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				27EEDC422BF74BBE004B72A2 /* NetworkManagerProtocol.swift */,
+				273E65EC2B849CBB00567BD8 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1524,8 +1535,8 @@
 				27D11FFF2BD24F100043DAD5 /* CarDetailsInteractor.swift in Sources */,
 				272B52002B9C5086008F428E /* ProfileRouter.swift in Sources */,
 				27D120182BD27ABD0043DAD5 /* AddCarAssembly.swift in Sources */,
+				27EEDC432BF74BBE004B72A2 /* NetworkManagerProtocol.swift in Sources */,
 				27754BEC2B99DA990065A14E /* BuildingsModel.swift in Sources */,
-				27EEDC0F2BF60E00004B72A2 /* UserDefaultsContainer.swift in Sources */,
 				272B520D2B9C5162008F428E /* MorePresenter.swift in Sources */,
 				27754BE42B99DA740065A14E /* BuildingsViewController.swift in Sources */,
 				2795FF412BC04D3E0031CEE8 /* ReservationCardInteractor.swift in Sources */,
@@ -1703,9 +1714,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27EEDC172BF616F1004B72A2 /* MockUserDefaultsContainer.swift in Sources */,
+				27EEDC172BF616F1004B72A2 /* MockUserDefaultsService.swift in Sources */,
 				27EEDC192BF61DD1004B72A2 /* MockKeychainManager.swift in Sources */,
-				27EEDBF72BF5558C004B72A2 /* AuthServiceUnitTests.swift in Sources */,
+				27EEDC3D2BF69385004B72A2 /* ThemeManagerUnitTests.swift in Sources */,
+				27EEDBF72BF5558C004B72A2 /* AuthManagerUnitTests.swift in Sources */,
 				27EEDC3B2BF6405B004B72A2 /* ScenesSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
