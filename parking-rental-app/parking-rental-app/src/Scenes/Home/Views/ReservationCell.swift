@@ -98,6 +98,14 @@ final class ReservationCell: UICollectionViewCell {
         buildingLabel.text = nil
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13.0, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                self.layer.shadowColor = Colors.cardViewShadow.uiColor.cgColor
+            }
+        }
+    }
+    
     // MARK: - Internal Methods
     func configure(lotNumber: String, date: String, floor: String, building: String) {
         lotNumberLabel.text = lotNumber

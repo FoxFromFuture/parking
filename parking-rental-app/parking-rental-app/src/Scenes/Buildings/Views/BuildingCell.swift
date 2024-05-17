@@ -97,6 +97,14 @@ final class BuildingCell: UICollectionViewCell {
         addressLabel.text = nil
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13.0, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                self.layer.shadowColor = Colors.cardViewShadow.uiColor.cgColor
+            }
+        }
+    }
+    
     // MARK: - Internal Methods
     func configure(buildingName: String, workHours: String, address: String) {
         buildingNameLabel.text = buildingName

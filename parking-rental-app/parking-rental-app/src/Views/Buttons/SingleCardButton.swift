@@ -88,6 +88,15 @@ final class SingleCardButton: UIView {
         self.tapAction = action
     }
     
+    // MARK: - Override Methods
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13.0, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                self.layer.shadowColor = Colors.cardViewShadow.uiColor.cgColor
+            }
+        }
+    }
+    
     // MARK: - Actions
     @objc
     private func SingleCardButtonWasPressed(
