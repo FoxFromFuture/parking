@@ -8,10 +8,10 @@
 import Foundation
 
 public enum ReservationsApi {
-    case getAllReservations(accessToken: String)
-    case addNewReservation(carId: String, employeeId: String, parkingSpotId: String, startTime: String, endTime: String, accessToken: String)
-    case deleteReservation(id: String, accessToken: String)
-    case getReservation(reservationID: String, accessToken: String)
+    case getAllReservations
+    case addNewReservation(carId: String, employeeId: String, parkingSpotId: String, startTime: String, endTime: String)
+    case deleteReservation(id: String)
+    case getReservation(reservationID: String)
 }
 
 extension ReservationsApi: EndPointType {
@@ -32,9 +32,9 @@ extension ReservationsApi: EndPointType {
             return "employee"
         case .addNewReservation:
             return "employee"
-        case .deleteReservation(let id, _):
+        case .deleteReservation(let id):
             return "\(id)/employee"
-        case .getReservation(let reservationID, _):
+        case .getReservation(let reservationID):
             return "\(reservationID)"
         }
     }
@@ -55,26 +55,17 @@ extension ReservationsApi: EndPointType {
     var task: HTTPTask {
         switch self {
         case .getAllReservations:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
-        case .addNewReservation(let carId, let employeeId, let parkingSpotId, let startTime, let endTime, _):
-            return .requestParametersAndHeaders(bodyParameters: ["carId": carId, "employeeId": employeeId, "parkingSpotId": parkingSpotId, "startTime": startTime, "endTime": endTime], urlParameters: nil, additionHeaders: self.headers)
+            return .request
+        case .addNewReservation(let carId, let employeeId, let parkingSpotId, let startTime, let endTime):
+            return .requestParameters(bodyParameters: ["carId": carId, "employeeId": employeeId, "parkingSpotId": parkingSpotId, "startTime": startTime, "endTime": endTime], urlParameters: nil)
         case .deleteReservation:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         case .getReservation:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         }
     }
     
     var headers: HTTPHeaders? {
-        switch self {
-        case .getAllReservations(let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .addNewReservation(_, _, _, _, _, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .deleteReservation(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .getReservation(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        }
+        return nil
     }
 }

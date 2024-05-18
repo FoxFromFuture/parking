@@ -8,10 +8,10 @@
 import Foundation
 
 public enum ParkingLevelsApi {
-    case getParkingLevel(parkingLevelID: String, accessToken: String)
-    case getAllParkingLevels(accessToken: String)
-    case getAllLevelSpots(parkingLevelID: String, accessToken: String)
-    case getAllLevelFreeSpots(parkingLevelID: String, startTime: String, endTime: String, accessToken: String)
+    case getParkingLevel(parkingLevelID: String)
+    case getAllParkingLevels
+    case getAllLevelSpots(parkingLevelID: String)
+    case getAllLevelFreeSpots(parkingLevelID: String, startTime: String, endTime: String)
 }
 
 extension ParkingLevelsApi: EndPointType {
@@ -28,13 +28,13 @@ extension ParkingLevelsApi: EndPointType {
     
     var path: String {
         switch self {
-        case .getParkingLevel(let parkingLevelID, _):
+        case .getParkingLevel(let parkingLevelID):
             return "\(parkingLevelID)"
         case .getAllParkingLevels:
             return ""
-        case .getAllLevelSpots(let parkingLevelID, _):
+        case .getAllLevelSpots(let parkingLevelID):
             return "\(parkingLevelID)/spots"
-        case .getAllLevelFreeSpots(let parkingLevelID, _, _, _):
+        case .getAllLevelFreeSpots(let parkingLevelID, _, _):
             return "\(parkingLevelID)/freeSpotsInInterval"
         }
     }
@@ -55,26 +55,17 @@ extension ParkingLevelsApi: EndPointType {
     var task: HTTPTask {
         switch self {
         case .getParkingLevel:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         case .getAllParkingLevels:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         case .getAllLevelSpots:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
-        case .getAllLevelFreeSpots(_, let startTime, let endTime, _):
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: ["startTime": startTime, "endTime": endTime], additionHeaders: self.headers)
+            return .request
+        case .getAllLevelFreeSpots(_, let startTime, let endTime):
+            return .requestParameters(bodyParameters: nil, urlParameters: ["startTime": startTime, "endTime": endTime])
         }
     }
     
     var headers: HTTPHeaders? {
-        switch self {
-        case .getParkingLevel(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .getAllParkingLevels(let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .getAllLevelSpots(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .getAllLevelFreeSpots(_, _, _, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        }
+        return nil
     }
 }

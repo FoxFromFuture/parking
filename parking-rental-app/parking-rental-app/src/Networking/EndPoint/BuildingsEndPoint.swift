@@ -8,9 +8,9 @@
 import Foundation
 
 public enum BuildingsApi {
-    case getBuilding(buildingID: String, accessToken: String)
-    case getAllBuildings(accessToken: String)
-    case getAllBuildingLevels(buildingID: String, accessToken: String)
+    case getBuilding(buildingID: String)
+    case getAllBuildings
+    case getAllBuildingLevels(buildingID: String)
 }
 
 extension BuildingsApi: EndPointType {
@@ -27,11 +27,11 @@ extension BuildingsApi: EndPointType {
     
     var path: String {
         switch self {
-        case .getBuilding(let buildingID, _):
+        case .getBuilding(let buildingID):
             return "\(buildingID)"
         case .getAllBuildings:
             return ""
-        case .getAllBuildingLevels(let buildingID, _):
+        case .getAllBuildingLevels(let buildingID):
             return "\(buildingID)/levels"
         }
     }
@@ -50,22 +50,15 @@ extension BuildingsApi: EndPointType {
     var task: HTTPTask {
         switch self {
         case .getBuilding:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         case .getAllBuildings:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         case .getAllBuildingLevels:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         }
     }
     
     var headers: HTTPHeaders? {
-        switch self {
-        case .getBuilding(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .getAllBuildings(let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .getAllBuildingLevels(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        }
+        return nil
     }
 }

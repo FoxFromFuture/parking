@@ -8,11 +8,11 @@
 import Foundation
 
 public enum CarsApi {
-    case getCar(carID: String, accessToken: String)
-    case getAllCars(accessToken: String)
-    case addNewCar(model: String, lengthMeters: Double, weightTons: Double, registryNumber: String, accessToken: String)
-    case updateCar(id: String, model: String, lengthMeters: Double, weightTons: Double, registryNumber: String, accessToken: String)
-    case deleteCar(id: String, accessToken: String)
+    case getCar(carID: String)
+    case getAllCars
+    case addNewCar(model: String, lengthMeters: Double, weightTons: Double, registryNumber: String)
+    case updateCar(id: String, model: String, lengthMeters: Double, weightTons: Double, registryNumber: String)
+    case deleteCar(id: String)
 }
 
 extension CarsApi: EndPointType {
@@ -29,15 +29,15 @@ extension CarsApi: EndPointType {
     
     var path: String {
         switch self {
-        case .getCar(let carID, _):
+        case .getCar(let carID):
             return "\(carID)"
         case .getAllCars:
             return "employee"
         case .addNewCar:
             return "employee"
-        case .updateCar(let id, _, _, _, _, _):
+        case .updateCar(let id, _, _, _, _):
             return "\(id)/employee"
-        case .deleteCar(let id, _):
+        case .deleteCar(let id):
             return "\(id)/employee"
         }
     }
@@ -60,30 +60,19 @@ extension CarsApi: EndPointType {
     var task: HTTPTask {
         switch self {
         case .getCar:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         case .getAllCars:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
-        case .addNewCar(let model, let lengthMeters, let weightTons, let registryNumber, _):
-            return .requestParametersAndHeaders(bodyParameters: ["model": model, "lengthMeters": lengthMeters, "weightTons": weightTons, "registryNumber": registryNumber], urlParameters: nil, additionHeaders: self.headers)
-        case .updateCar(_, let model, let lengthMeters, let weightTons, let registryNumber, _):
-            return .requestParametersAndHeaders(bodyParameters: ["model": model, "lengthMeters": lengthMeters, "weightTons": weightTons, "registryNumber": registryNumber], urlParameters: nil, additionHeaders: self.headers)
+            return .request
+        case .addNewCar(let model, let lengthMeters, let weightTons, let registryNumber):
+            return .requestParameters(bodyParameters: ["model": model, "lengthMeters": lengthMeters, "weightTons": weightTons, "registryNumber": registryNumber], urlParameters: nil)
+        case .updateCar(_, let model, let lengthMeters, let weightTons, let registryNumber):
+            return .requestParameters(bodyParameters: ["model": model, "lengthMeters": lengthMeters, "weightTons": weightTons, "registryNumber": registryNumber], urlParameters: nil)
         case .deleteCar:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         }
     }
     
     var headers: HTTPHeaders? {
-        switch self {
-        case .getCar(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .getAllCars(let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .addNewCar(_, _, _, _, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .updateCar(_, _, _, _, _, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .deleteCar(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        }
+        return nil
     }
 }

@@ -34,7 +34,7 @@ final class SingleCardButton: UIView {
         self.layer.shadowColor = Colors.cardViewShadow.uiColor.cgColor
         self.layer.shadowOpacity = 0.15
         self.layer.shadowOffset = .zero
-        self.layer.shadowRadius = 20
+        self.layer.shadowRadius = 15
         self.layer.cornerRadius = 30
         self.setHeight(110)
         configureTitleLabel()

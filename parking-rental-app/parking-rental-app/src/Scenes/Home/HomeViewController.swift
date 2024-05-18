@@ -106,11 +106,13 @@ final class HomeViewController: UIViewController {
         self.view.addSubview(reservationsCollectionView)
         reservationsCollectionView.pinLeft(to: self.view.leadingAnchor)
         reservationsCollectionView.pinRight(to: self.view.trailingAnchor)
-        reservationsCollectionView.pinTop(to: self.profileLabelButton.bottomAnchor)
+        reservationsCollectionView.pinTop(to: self.profileLabelButton.bottomAnchor, 5)
         reservationsCollectionView.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor)
         reservationsCollectionView.dataSource = self
         reservationsCollectionView.delegate = self
         reservationsCollectionView.backgroundColor = .clear
+        reservationsCollectionView.alwaysBounceVertical = true
+        reservationsCollectionView.showsVerticalScrollIndicator = false
         reservationsCollectionView.contentInset.bottom = 120
         reservationsCollectionView.contentInset.top = 35
         let layout = UICollectionViewFlowLayout()
@@ -260,7 +262,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width - 34, height: 175)
+        return CGSize(width: self.view.frame.width - 34, height: 180)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -8,11 +8,11 @@
 import Foundation
 
 public enum AuthApi {
-    case whoami(accessToken: String)
+    case whoami
     case login(email: String, password: String)
     case signUp(name: String, email: String, password: String)
     case updateAccessToken(refreshToken: String)
-    case updateRefreshToken(refreshToken: String, accessToken: String)
+    case updateRefreshToken(refreshToken: String)
 }
 
 extension AuthApi: EndPointType {
@@ -60,26 +60,19 @@ extension AuthApi: EndPointType {
     var task: HTTPTask {
         switch self {
         case .whoami:
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionHeaders: self.headers)
+            return .request
         case .login(let email, let password):
             return .requestParameters(bodyParameters: ["email": email, "password": password], urlParameters: nil)
         case .signUp(let name, let email, let password):
             return .requestParameters(bodyParameters: ["name": name, "email": email, "password": password, "roles": ["APP_USER"]], urlParameters: nil)
         case .updateAccessToken(let refreshToken):
             return .requestParameters(bodyParameters: ["refreshToken": refreshToken], urlParameters: nil)
-        case .updateRefreshToken(let refreshToken, _):
-            return .requestParametersAndHeaders(bodyParameters: ["refreshToken": refreshToken], urlParameters: nil, additionHeaders: self.headers)
+        case .updateRefreshToken(let refreshToken):
+            return .requestParameters(bodyParameters: ["refreshToken": refreshToken], urlParameters: nil)
         }
     }
     
     var headers: HTTPHeaders? {
-        switch self {
-        case .whoami(let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        case .updateRefreshToken(_, let accessToken):
-            return ["Authorization": "Bearer \(accessToken)"]
-        default:
-            return nil
-        }
+        return nil
     }
 }

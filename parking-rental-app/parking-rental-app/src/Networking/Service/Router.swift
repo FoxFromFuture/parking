@@ -30,7 +30,11 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         }
     }
     
-    fileprivate func buildRequest(from route: EndPoint) throws -> URLRequest {
+    fileprivate func addAuthHeader(with token: String, request: inout URLRequest) {
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    }
+    
+    fileprivate func buildRequest(from route: EndPoint, with token: String? = nil) throws -> URLRequest {
         var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
         request.httpMethod = route.httpMethod.rawValue
         do {
@@ -43,16 +47,17 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
                 self.addAdditionalHeaders(additionalHeaders, request: &request)
                 try self.configureParameters(bodyParameters: bodyParameters, urlParameters: urlParameters, request: &request)
             }
+            if let token = token { self.addAuthHeader(with: token, request: &request) }
             return request
         } catch {
             throw error
         }
     }
     
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
+    func request(_ route: EndPoint, with token: String? = nil, completion: @escaping NetworkRouterCompletion) {
         let session = URLSession.shared
         do {
-            let request = try self.buildRequest(from: route)
+            let request = try self.buildRequest(from: route, with: token)
             task = session.dataTask(with: request, completionHandler: { data, response, error in
                 completion(data, response, error)
             })

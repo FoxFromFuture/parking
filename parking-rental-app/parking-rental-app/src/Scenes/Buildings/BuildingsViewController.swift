@@ -98,12 +98,13 @@ final class BuildingsViewController: UIViewController {
         self.view.addSubview(buildingsCollectionView)
         buildingsCollectionView.pinLeft(to: self.view.leadingAnchor)
         buildingsCollectionView.pinRight(to: self.view.trailingAnchor)
-        buildingsCollectionView.pinTop(to: self.availableBuildingsLabel.bottomAnchor)
+        buildingsCollectionView.pinTop(to: self.availableBuildingsLabel.bottomAnchor, 5)
         buildingsCollectionView.pinBottom(to: self.view.safeAreaLayoutGuide.bottomAnchor)
         buildingsCollectionView.dataSource = self
         buildingsCollectionView.delegate = self
         buildingsCollectionView.backgroundColor = .clear
         buildingsCollectionView.showsVerticalScrollIndicator = false
+        buildingsCollectionView.alwaysBounceVertical = true
         buildingsCollectionView.contentInset.bottom = 120
         buildingsCollectionView.contentInset.top = 35
         let layout = UICollectionViewFlowLayout()
