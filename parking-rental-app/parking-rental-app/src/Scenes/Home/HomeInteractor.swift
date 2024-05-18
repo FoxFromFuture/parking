@@ -103,7 +103,11 @@ extension HomeInteractor: HomeBusinessLogic {
                     self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
                 }
             } else {
-                self?.presenter.presentNoData(HomeModel.NoData.Response())
+                if let _ = self?.parkingSpots, let _ = self?.parkingLevels, let _ = self?.buildings {
+                    self?.presenter.presentNoData(HomeModel.NoData.Response())
+                } else {
+                    self?.presenter.presentLoadingFailure(HomeModel.LoadingFailure.Response())
+                }
             }
         }
     }
