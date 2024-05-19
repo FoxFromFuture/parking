@@ -32,6 +32,7 @@ extension CarDetailsInteractor: CarDetailsBusinessLogic {
         self.networkManager.getAllCars(completion: { [weak self] carsData, error in
             if let error = error {
                 self?.logger.error("Get all cars error: \(error.rawValue)")
+                self?.presenter.presentCarDetailsFailure(CarDetailsModel.CarDetailsFailure.Response())
             } else if let cars = carsData {
                 var curCar: Car?
                 if let carID = self?.carID {
